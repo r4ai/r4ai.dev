@@ -1,9 +1,13 @@
 ---
+import NavBar from "../components/NavBar.astro";
+import { ViewTransitions } from "astro:transitions";
+import "@/styles/globals.css";
+
 interface Props {
   title: string;
 }
 
-const title = `${Astro.props} | r4ai.dev`;
+const title = `${Astro.props.title} | r4ai.dev`;
 ---
 
 <!DOCTYPE html>
@@ -15,9 +19,11 @@ const title = `${Astro.props} | r4ai.dev`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
+    <NavBar id="navBar" />
     <slot />
+    <style is:global></style>
   </body>
 </html>
-<style is:global></style>
