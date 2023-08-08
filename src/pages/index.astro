@@ -3,62 +3,50 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="About Me">
-  <main>
-    <h1>Hi, I'm Rai</h1>
-    <p>スーパーハカー</p>
-    <p>最近は WASM に興味があります。</p>
-    <div>
-      <p>
-        <b> ※ このサイトは現在制作中です。</b><br />
-        以前のサイト：<a href="https://r4ai.github.io">r4ai.github.io</a>
+  <main
+    class="grid grid-cols-4 sm:grid-cols-8 gap-12 gap-y-0 max-w-2xl mx-auto my-12 px-8 text-foreground"
+  >
+    <img
+      class="col-start-1 sm:col-span-4 col-span-3 w-full max-w-xs mx-auto"
+      src="/icon_blobs.png"
+      alt="Me"
+    />
+    <section class="sm:col-start-5 sm:col-end-9 col-span-4 my-auto">
+      <h1 class="sm:text-6xl text-5xl font-black text-foreground font-serif">
+        Hi,<br />I'm Rai
+      </h1>
+      <p
+        class="mt-4 text-lg font-medium font-mono italic dark:text-stone-400 text-stone-700"
+      >
+        Jisyo super hacker.
       </p>
-    </div>
-    <p>
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
-      SAMPLE<br />
+    </section>
+    <h2
+      class="sm:col-span-8 col-span-4 font-mono font-semibold text-2xl mb-6 sm:mt-12 mt-8"
+    >
+      自己紹介
+    </h2>
+    <p class="sm:col-span-5 col-span-4 font-mono text-base">
+      CS専攻なとある大学生です。普段はWeb開発をしています。また、最近はWASMを使ったゲーム開発に興味があります。
     </p>
+    <h2
+      class="sm:col-span-8 col-span-4 font-mono font-semibold text-2xl mt-16 mb-6"
+    >
+      使える技術
+    </h2>
+    <div class="sm:col-span-5 col-span-4 font-mono text-base text-foreground">
+      <p class="leading-7 [&:not(:first-child)]:mt-6">言語:</p>
+      <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
+        <li>JavaScript/TypeScript</li>
+        <li>Rust</li>
+        <li>Python</li>
+      </ul>
+      <p class="leading-7 [&:not(:first-child)]:mt-6">Webフレームワーク:</p>
+      <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
+        <li>React</li>
+        <li>Next.js</li>
+        <li>Svelte</li>
+      </ul>
+    </div>
   </main>
 </Layout>
-
-<style>
-  main {
-    margin: 0 auto;
-    padding: 1rem;
-    max-width: 800px;
-  }
-</style>

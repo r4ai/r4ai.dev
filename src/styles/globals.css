@@ -4,65 +4,74 @@
 
 @layer base {
   :root {
+    /* shadcn-ui */
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
-
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
-
-    --primary: 24 9.8% 10%;
-    --primary-foreground: 60 9.1% 97.8%;
-
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
-
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
-
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 20 14.3% 4.1%;
-
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
     --radius: 0.5rem;
+
+    /* stone */
+    --stone-1: 242 243 243;
+    --stone-2: 226 228 228;
+    --stone-3: 212 216 216;
+    --stone-4: 196 202 202;
+    --stone-5: 164 173 173;
+    --stone-6: 132 144 144;
+    --stone-7: 104 115 115;
+    --stone-8: 78 86 86;
+    --stone-9: 53 59 59;
+    --stone-10: 29 32 32;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
-
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
-
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
-
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
-
+    /* shadcn-ui */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
 
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 24 5.7% 82.9%;
+    /* stone */
+    --stone-1: 17 19 19;
+    --stone-2: 29 32 32;
+    --stone-3: 39 43 43;
+    --stone-4: 51 56 56;
+    --stone-5: 63 70 70;
+    --stone-6: 75 83 83;
+    --stone-7: 87 96 96;
+    --stone-8: 99 110 110;
+    --stone-9: 148 158 158;
+    --stone-10: 199 204 204;
   }
 }
 

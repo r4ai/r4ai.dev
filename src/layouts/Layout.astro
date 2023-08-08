@@ -10,7 +10,31 @@ interface Props {
 const title = `${Astro.props.title} | r4ai.dev`;
 ---
 
-<!DOCTYPE html>
+<script is:inline>
+const theme = (() => {
+  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+    return localStorage.getItem("theme");
+  }
+  return "system";
+})();
+switch (theme) {
+  case "dark":
+    document.documentElement.classList.add("dark");
+    break;
+  case "light":
+    document.documentElement.classList.remove("dark");
+    break;
+  case "system":
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    break;
+}
+window.localStorage.setItem("theme", theme);
+</script>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,8 +46,13 @@ const title = `${Astro.props.title} | r4ai.dev`;
     <ViewTransitions />
   </head>
   <body>
-    <NavBar id="navBar" />
+    <NavBar />
     <slot />
     <style is:global></style>
+    <footer>
+      <p class="text-center mb-2">
+        Copyright &copy; 2023 rai - All right reserved
+      </p>
+    </footer>
   </body>
 </html>

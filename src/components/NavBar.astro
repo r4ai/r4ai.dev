@@ -1,23 +1,33 @@
 ---
-import { BeakerIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Button } from "@/components/ui/button";
 ---
 
-<div class="navBar">
-  <ul>
+<div class="flex mx-auto max-w-fit sticky top-4">
+  <ul
+    class="flex flex-row justify-center items-center gap-6 rounded-full backdrop-blur-xl bg-stone-1/60 text-card-foreground text-base border px-6 py-2"
+  >
     <li><a href="/">About</a></li>
     <li><a href="/works">Works</a></li>
-    <li><BeakerIcon /></li>
+    <li><a href="/Posts">Posts</a></li>
+    <li></li>
+    <li class="flex">
+      <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          ></path>
+        </svg>
+      </button>
+    </li>
   </ul>
 </div>
-
-<style>
-  div.navBar {
-    display: flex;
-    width: 15.875rem;
-    padding: 0.75rem 2.3125rem;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
-  }
-</style>
