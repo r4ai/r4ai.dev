@@ -14,7 +14,7 @@ const { href, icon, title, alt, shouldInvert = false } = Astro.props;
 
 <a {href} aria-label={title} class="inline-block">
   <div
-    class="transition-colors flex flex-row py-3 px-3 gap-3 rounded-md shadow-sm border dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-200 hover:underline"
+    class="flex flex-row gap-3 rounded-md border px-3 py-3 shadow-sm transition-colors hover:bg-neutral-50 hover:underline dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-900 dark:hover:text-neutral-200"
   >
     <Image
       src={icon}

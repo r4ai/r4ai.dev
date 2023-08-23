@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: [
-    './src/**/*.{astro,js,jsx,ts,tsx,html,mdx}',
-  ],
+  content: ["./src/**/*.{astro,js,jsx,ts,tsx,html,mdx}"],
   theme: {
     container: {
       center: true,
@@ -58,7 +56,7 @@ module.exports = {
           8: "rgb(var(--stone-8) / <alpha-value>)",
           9: "rgb(var(--stone-9) / <alpha-value>)",
           10: "rgb(var(--stone-10) / <alpha-value>)",
-        }
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -82,4 +80,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-}
+};

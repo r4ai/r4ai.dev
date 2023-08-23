@@ -11,34 +11,34 @@ import { CubeCanvas } from "@/components/Cube";
 
 <Layout title="About Me">
   <main
-    class="grid grid-cols-4 sm:grid-cols-8 grid-flow-row gap-12 gap-y-0 max-w-2xl mx-auto my-12 px-8 text-foreground"
+    class="mx-auto my-12 grid max-w-2xl grid-flow-row grid-cols-4 gap-12 gap-y-0 px-8 text-foreground sm:grid-cols-8"
   >
     <Image
-      class="col-start-1 col-span-3 sm:col-span-4 w-full max-w-xs mx-auto"
+      class="col-span-3 col-start-1 mx-auto w-full max-w-xs sm:col-span-4"
       src={IconBrobs}
       alt="Me"
     />
-    <section class="col-span-4 sm:col-start-5 sm:col-end-9 my-auto">
-      <h1 class="sm:text-6xl text-5xl font-black text-foreground font-serif">
+    <section class="col-span-4 my-auto sm:col-start-5 sm:col-end-9">
+      <h1 class="font-serif text-5xl font-black text-foreground sm:text-6xl">
         Hi,<br />I'm Rai
       </h1>
       <p
-        class="mt-4 text-lg font-medium font-mono italic dark:text-stone-400 text-stone-700"
+        class="mt-4 font-mono text-lg font-medium italic text-stone-700 dark:text-stone-400"
       >
         nemui desu.
       </p>
     </section>
     <h2
-      class="sm:col-span-8 col-span-4 font-mono font-semibold text-2xl mb-6 mt-12"
+      class="col-span-4 mb-6 mt-12 font-mono text-2xl font-semibold sm:col-span-8"
     >
       自己紹介
     </h2>
-    <div class="col-start-1 col-span-4 sm:col-span-4">
-      <p class="col-span-4 sm:col-span-4 font-mono text-base">
+    <div class="col-span-4 col-start-1 sm:col-span-4">
+      <p class="col-span-4 font-mono text-base sm:col-span-4">
         とあるCS専攻な大学生です。普段はWeb開発をしています。最近はWASMを使ったゲーム開発に興味があります。
       </p>
       <div
-        class="font-mono text-base mt-6 space-y-3 flex flex-col sm:inline-block"
+        class="mt-6 flex flex-col space-y-3 font-mono text-base sm:inline-block"
       >
         <LinkCard
           title="@r4ai"
@@ -65,11 +65,11 @@ import { CubeCanvas } from "@/components/Cube";
       <CubeCanvas client:only="react" />
     </div>
     <h2
-      class="sm:col-span-8 col-span-4 font-mono font-semibold text-2xl mt-16 mb-6"
+      class="col-span-4 mb-6 mt-16 font-mono text-2xl font-semibold sm:col-span-8"
     >
       使える技術
     </h2>
-    <div class="sm:col-span-5 col-span-4 font-mono text-base text-foreground">
+    <div class="col-span-4 font-mono text-base text-foreground sm:col-span-5">
       <p class="leading-7 [&:not(:first-child)]:mt-6">言語:</p>
       <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
         <li>JavaScript/TypeScript</li>
