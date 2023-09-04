@@ -1,0 +1,17 @@
+<span class="tooltip relative transition">
+  <span
+    class="tooltip-content invisible absolute left-1/2 -translate-x-1/2 whitespace-nowrap"
+  >
+    <slot name="content" />
+  </span>
+  <span class="tooltip-trigger">
+    <slot name="trigger" />
+  </span>
+</span>
+
+<style>
+  .tooltip:hover .tooltip-content {
+    visibility: visible;
+    z-index: 40;
+  }
+</style>

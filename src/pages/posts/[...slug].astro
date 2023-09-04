@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import "@/styles/katex.css";
+import Tooltip from "@/components/Tooltip.astro";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("posts");
+  return blogEntries
+    .filter((entry) => !entry.data.draft)
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+---
+
+<Layout title={entry.data.title}>
+  <main class="container my-20 flex flex-col gap-16">
+    <div class="flex flex-col items-center justify-center">
+      <span class="icon-[fluent-emoji-flat--robot] text-8xl"></span>
+      <h1 class="mb-6 mt-4 text-5xl font-black">{entry.data.title}</h1>
+      <div class="flex flex-col items-center justify-center gap-4">
+        <div class="flex flex-row gap-1 text-gray-500">
+          <p class="flex flex-row items-center gap-1">
+            <span class="icon-[lucide--calendar-days] text-xl"></span>
+            <span>{formatDate(entry.data.publishedAt)} に公開</span>
+          </p>
+           ・
+          <div>
+            <Tooltip>
+              <p slot="trigger" class="flex flex-row items-center gap-1">
+                <span class="icon-[lucide--refresh-ccw] text-lg"></span>
+                <span>{formatDate(entry.data.updatedAt)}</span>
+              </p>
+              <p
+                slot="content"
+                class="mt-7 rounded-lg bg-neutral-800 px-2 py-1 text-sm text-neutral-200"
+              >
+                最終更新日
+              </p>
+            </Tooltip>
+          </div>
+        </div>
+        <div
+          class="flex flex-row gap-1 text-gray-500 transition hover:text-gray-700 dark:hover:text-gray-400"
+        >
+          <a class="underline hover:cursor-pointer" href={`raw/${entry.slug}`}>
+            Markdownファイル
+            <span class="icon-[lucide--external-link]"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="prose prose-lg mx-auto dark:prose-invert">
+      <Content />
+    </div>
+  </main>
+</Layout>

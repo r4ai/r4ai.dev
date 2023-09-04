@@ -1,0 +1,19 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    // key名がtwで始まるものをtailwindのクラスとして認識する
+    // e.g. twColor: text-red-500;
+    // > https://github.com/tailwindlabs/tailwindcss-intellisense/issues/270
+    "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,"
+  ],
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets",
+    "relative": true
+  },
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "posts",
+      "path": "[[workspace]]/src/content/posts"
+    }
+  ],
+  "[markdown]": {}
+}

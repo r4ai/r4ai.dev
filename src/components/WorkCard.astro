@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  tags: string[];
+  href: string;
+  icon: ImageMetadata;
+  alt: string;
+  shouldInvert?: boolean;
+}
+
+const { title, tags, href, icon, alt, shouldInvert } = Astro.props;
+---
+
+<a {href} class="inline-block">
+  <div
+    class="dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-900 dark:hover:text-neutral-200"
+  >
+    <Image
+      src={icon}
+      alt={alt}
+      class={`h-5 w-5 ${shouldInvert ? "invert" : ""} dark:invert-0`}
+    />
+    <div>
+      <div>
+        {title}
+      </div>
+      <div>
+        {
+          tags.map((tag) => (
+            <span class="text-sm text-neutral-500 dark:text-neutral-400">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</a>
