@@ -1,6 +1,6 @@
-<span class="tooltip relative transition">
+<span class="tooltip relative">
   <span
-    class="tooltip-content invisible absolute left-1/2 -translate-x-1/2 whitespace-nowrap"
+    class="tooltip-content absolute left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 transition"
   >
     <slot name="content" />
   </span>
@@ -11,7 +11,7 @@
 
 <style>
   .tooltip:hover .tooltip-content {
-    visibility: visible;
+    opacity: 1;
     z-index: 40;
   }
 </style>

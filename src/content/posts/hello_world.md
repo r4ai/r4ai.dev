@@ -1,8 +1,9 @@
 ---
 title: "Hello, World!"
 tags:
-  - astro
+  - markdown
 icon: fluent-emoji:robot
+genre: article
 draft: false
 publishedAt: 2023-09-04
 updatedAt: 2023-09-05

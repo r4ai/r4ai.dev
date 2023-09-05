@@ -1,8 +1,9 @@
 ---
-title: "Hello, World!"
+title: "Astro Hydration について調べてみた"
 tags:
   - astro
-icon: logos:astro-icon
+icon: simple-icons:astro
+genre: article
 draft: false
 publishedAt: 2023-09-04
 updatedAt: 2023-09-05

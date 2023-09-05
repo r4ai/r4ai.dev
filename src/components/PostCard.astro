@@ -1,0 +1,42 @@
+---
+import Icon from "@/components/Icon.astro";
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+  title: string;
+  tags: string[];
+  href: string;
+  icon: string;
+  alt: string;
+  shouldInvert?: boolean;
+}
+
+const { title, tags, href, icon, alt, shouldInvert } = Astro.props;
+---
+
+<a {href} class="w-full font-mono">
+  <div
+    class="flex w-full flex-row gap-2 rounded-lg border border-transparent transition hover:border-neutral-200/50 hover:bg-neutral-50 hover:shadow dark:text-neutral-300 dark:hover:border-transparent dark:hover:bg-neutral-900 dark:hover:text-neutral-200"
+  >
+    <Icon
+      icon={icon}
+      alt={alt}
+      class={twMerge(
+        "w-20 p-4 dark:invert-0 flex-none self-center",
+        shouldInvert ? "invert" : "",
+      )}
+    />
+    <div class="flex-shrink flex-grow py-4 pr-4">
+      <h2 class="text-xl" set:html={title} />
+      <div>
+        {
+          tags.map((tag) => (
+            <span class="mr-1 text-sm text-neutral-500 dark:text-neutral-400">
+              #{tag}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</a>
