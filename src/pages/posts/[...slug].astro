@@ -1,21 +1,17 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import "@/styles/katex.css";
 import Tooltip from "@/components/Tooltip.astro";
+import { getPostEntries } from "@/lib/posts";
+import Toc from "@/components/Toc.astro";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("posts");
-  return blogEntries
-    .filter((entry) => !entry.data.draft)
-    .map((entry) => ({
-      params: { slug: entry.slug },
-      props: { entry },
-    }));
+  const posts = await getPostEntries();
+  return posts;
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 const formatDate = (date: string) =>
   new Date(date).toLocaleDateString("ja-JP", {
@@ -62,8 +58,13 @@ const formatDate = (date: string) =>
         </div>
       </div>
     </div>
-    <div class="prose prose-lg mx-auto dark:prose-invert">
-      <Content />
+    <div class="mx-auto flex flex-row gap-16">
+      <div class="prose prose-lg mx-auto dark:prose-invert">
+        <Content />
+      </div>
+      <div class="relative">
+        <Toc headings={headings} class="sticky top-20" client:idle />
+      </div>
     </div>
   </main>
 </Layout>

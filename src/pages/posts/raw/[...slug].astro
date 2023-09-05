@@ -1,22 +1,17 @@
 ---
-import { getCollection } from "astro:content";
 import Code from "@/components/Code.astro";
+import { getPostEntries } from "@/lib/posts";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("posts");
-  return blogEntries
-    .filter((entry) => !entry.data.draft)
-    .map((entry) => ({
-      params: { slug: entry.slug },
-      props: { entry },
-    }));
+  return await getPostEntries();
 }
 
 const { entry } = Astro.props;
 ---
 
 <Code
-  code={`${entry.data.title}
+  code={`# ${entry.data.title}
+
 ${entry.body}`}
   lang="markdown"
   theme="material-theme-darker"

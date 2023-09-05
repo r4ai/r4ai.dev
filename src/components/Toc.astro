@@ -1,0 +1,75 @@
+---
+import { twMerge } from "tailwind-merge";
+type Heading = {
+  depth: number;
+  slug: string;
+  text: string;
+};
+interface Props {
+  headings: Heading[];
+  class?: string;
+}
+const props = Astro.props;
+const getMargin = (depth: number) => {
+  switch (depth) {
+    case 2:
+      return "ml-0";
+    case 3:
+      return "ml-4";
+    case 4:
+      return "ml-8";
+    default:
+      return "ml-12";
+  }
+};
+---
+
+<script>
+  let activeElement: Element | null = null;
+  const observer = new IntersectionObserver((entries) => {
+    const entry = entries.reduce((prev, current) => {
+      return current.intersectionRatio > prev.intersectionRatio
+        ? current
+        : prev;
+    });
+    if (entry.intersectionRatio > 0) {
+      const id = entry.target.getAttribute("id");
+      const active = document.querySelector(`a[href="#${id}"]`);
+      activeElement?.classList.remove("text-gray-900", "dark:text-gray-200");
+      active?.classList.add("text-gray-900", "dark:text-gray-200");
+      activeElement = active;
+    }
+  });
+  document.querySelectorAll("h2[id], h3[id], h4[id], h5[id]").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
+<nav
+  class={twMerge(
+    props.class,
+    "pt-2 pb-4 px-4 border rounded-xl min-w-[180px] max-w-[240px]",
+  )}
+>
+  <h2 class="mb-2 text-lg font-bold">目次</h2>
+  <ol class="space-y-1">
+    {
+      props.headings.map((heading) => {
+        const { depth, slug, text } = heading;
+        return (
+          <li class="block">
+            <a
+              class={twMerge(
+                "text-gray-400/80 transition hover:text-gray-900 dark:hover:text-gray-200",
+                getMargin(depth),
+                depth === 2 && "font-bold",
+              )}
+              href={`#${slug}`}
+            >
+              {text}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
