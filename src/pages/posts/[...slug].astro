@@ -4,7 +4,7 @@ import "@/styles/katex.css";
 import Tooltip from "@/components/Tooltip.astro";
 import { getPostEntries } from "@/lib/posts";
 import Toc from "@/components/Toc.astro";
-import { twMerge } from "tailwind-merge";
+import Icon from "@/components/Icon.astro";
 
 export async function getStaticPaths() {
   const posts = await getPostEntries();
@@ -25,7 +25,7 @@ const formatDate = (date: string) =>
 <Layout title={entry.data.title}>
   <main class="container my-20 flex flex-col gap-16">
     <div class="flex flex-col items-center justify-center">
-      <span class={twMerge("text-8xl", entry.data.icon)}></span>
+      <Icon class="w-24" icon={entry.data.icon} />
       <h1 class="mb-6 mt-4 text-5xl font-black">{entry.data.title}</h1>
       <div class="flex flex-col items-center justify-center gap-4">
         <div class="flex flex-row gap-1 text-gray-500">

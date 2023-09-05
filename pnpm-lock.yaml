@@ -17,6 +17,9 @@ dependencies:
   "@hookform/resolvers":
     specifier: ^3.3.0
     version: 3.3.0(react-hook-form@7.45.4)
+  "@iconify/iconify":
+    specifier: ^3.1.1
+    version: 3.1.1
   "@iconify/json":
     specifier: ^2.2.111
     version: 2.2.111
@@ -1317,6 +1320,15 @@ packages:
         integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==,
       }
     dev: true
+
+  /@iconify/iconify@3.1.1:
+    resolution:
+      {
+        integrity: sha512-1nemfyD/OJzh9ALepH7YfuuP8BdEB24Skhd8DXWh0hzcOxImbb1ZizSZkpCzAwSZSGcJFmscIBaBQu+yLyWaxQ==,
+      }
+    dependencies:
+      "@iconify/types": 2.0.0
+    dev: false
 
   /@iconify/json@2.2.111:
     resolution:
