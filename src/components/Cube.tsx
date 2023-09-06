@@ -8,7 +8,7 @@ interface Props {}
 const Cube: FC = () => {
   const meshRef = useRef<Mesh>(null!);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     meshRef.current.rotation.x += delta / 1.5;
     meshRef.current.rotation.y += delta / 1.5;
   });

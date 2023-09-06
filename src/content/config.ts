@@ -1,5 +1,4 @@
 import { z, defineCollection } from "astro:content";
-import { tagsSchema } from "./tags";
 
 export const postSchema = z
   .object({
@@ -8,7 +7,7 @@ export const postSchema = z
     icon: z.string(),
     draft: z.boolean(),
     publishedAt: z.date(),
-    tags: tagsSchema.optional(),
+    tags: z.array(z.string()).optional(),
     ogImage: z.string().optional(),
     updatedAt: z.date().optional(),
     link: z.string().optional(),

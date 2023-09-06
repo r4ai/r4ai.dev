@@ -118,9 +118,6 @@ devDependencies:
   "@iconify/tailwind":
     specifier: ^0.1.3
     version: 0.1.3
-  "@squoosh/cli":
-    specifier: ^0.7.3
-    version: 0.7.3
   "@typescript-eslint/eslint-plugin":
     specifier: ^6.4.1
     version: 6.4.1(@typescript-eslint/parser@6.4.1)(eslint@8.47.0)(typescript@5.2.2)
@@ -2173,32 +2170,6 @@ packages:
       zustand: 3.7.2(react@18.2.0)
     dev: false
 
-  /@squoosh/cli@0.7.3:
-    resolution:
-      {
-        integrity: sha512-mU/iWbVWqLXX+gJJa4RBl5U4LdKYaiD9cmxW7bjyw8EEFAuMXFDGAQcq7hEvUZwoP5Em5s7sjimBPirSBJQ87g==,
-      }
-    engines: { node: " ^12.20.2 || ^14.13.1 || ^16.0.0 " }
-    hasBin: true
-    dependencies:
-      "@squoosh/lib": 0.4.0
-      commander: 7.2.0
-      json5: 2.2.3
-      kleur: 4.1.5
-      ora: 5.4.1
-    dev: true
-
-  /@squoosh/lib@0.4.0:
-    resolution:
-      {
-        integrity: sha512-O1LyugWLZjMI4JZeZMA5vzfhfPjfMZXH5/HmVkRagP8B70wH3uoR7tjxfGNdSavey357MwL8YJDxbGwBBdHp7Q==,
-      }
-    engines: { node: " ^12.5.0 || ^14.0.0 || ^16.0.0 " }
-    dependencies:
-      wasm-feature-detect: 1.5.1
-      web-streams-polyfill: 3.2.1
-    dev: true
-
   /@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.4.5)(svelte@4.2.0)(vite@4.4.9):
     resolution:
       {
@@ -3548,16 +3519,6 @@ packages:
     engines: { node: ">=10" }
     dev: false
 
-  /cli-cursor@3.1.0:
-    resolution:
-      {
-        integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==,
-      }
-    engines: { node: ">=8" }
-    dependencies:
-      restore-cursor: 3.1.0
-    dev: true
-
   /cli-cursor@4.0.0:
     resolution:
       {
@@ -3573,6 +3534,7 @@ packages:
         integrity: sha512-4/aL9X3Wh0yiMQlE+eeRhWP6vclO3QRtw1JHKIT0FFUs5FjpFmESqtMvYZ0+lbzBw900b95mS0hohy+qn2VK/g==,
       }
     engines: { node: ">=6" }
+    dev: false
 
   /cli-truncate@3.1.0:
     resolution:
@@ -3595,14 +3557,6 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
-    dev: true
-
-  /clone@1.0.4:
-    resolution:
-      {
-        integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==,
-      }
-    engines: { node: ">=0.8" }
     dev: true
 
   /clsx@2.0.0:
@@ -3705,14 +3659,6 @@ packages:
       }
     engines: { node: ">= 6" }
     dev: false
-
-  /commander@7.2.0:
-    resolution:
-      {
-        integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==,
-      }
-    engines: { node: ">= 10" }
-    dev: true
 
   /commander@8.3.0:
     resolution:
@@ -3884,15 +3830,6 @@ packages:
       default-browser-id: 3.0.0
       execa: 7.2.0
       titleize: 3.0.0
-    dev: true
-
-  /defaults@1.0.4:
-    resolution:
-      {
-        integrity: sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A==,
-      }
-    dependencies:
-      clone: 1.0.4
     dev: true
 
   /define-lazy-prop@3.0.0:
@@ -5406,14 +5343,6 @@ packages:
       is-docker: 3.0.0
     dev: true
 
-  /is-interactive@1.0.0:
-    resolution:
-      {
-        integrity: sha512-2HvIEKRoqS62guEC+qBjpvRubdX910WCMuJTZ+I9yvqKU2/12eSL549HMwtabb4oupdj2sMP50k+XJfB/8JE6w==,
-      }
-    engines: { node: ">=8" }
-    dev: true
-
   /is-interactive@2.0.0:
     resolution:
       {
@@ -5535,14 +5464,6 @@ packages:
     engines: { node: ">= 0.4" }
     dependencies:
       which-typed-array: 1.1.11
-    dev: true
-
-  /is-unicode-supported@0.1.0:
-    resolution:
-      {
-        integrity: sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==,
-      }
-    engines: { node: ">=10" }
     dev: true
 
   /is-unicode-supported@1.3.0:
@@ -5671,6 +5592,7 @@ packages:
       }
     engines: { node: ">=6" }
     hasBin: true
+    dev: false
 
   /jsonc-parser@2.3.1:
     resolution:
@@ -5916,17 +5838,6 @@ packages:
         integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==,
       }
     dev: false
-
-  /log-symbols@4.1.0:
-    resolution:
-      {
-        integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==,
-      }
-    engines: { node: ">=10" }
-    dependencies:
-      chalk: 4.1.2
-      is-unicode-supported: 0.1.0
-    dev: true
 
   /log-symbols@5.1.0:
     resolution:
@@ -6953,24 +6864,6 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /ora@5.4.1:
-    resolution:
-      {
-        integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==,
-      }
-    engines: { node: ">=10" }
-    dependencies:
-      bl: 4.1.0
-      chalk: 4.1.2
-      cli-cursor: 3.1.0
-      cli-spinners: 2.9.0
-      is-interactive: 1.0.0
-      is-unicode-supported: 0.1.0
-      log-symbols: 4.1.0
-      strip-ansi: 6.0.1
-      wcwidth: 1.0.1
-    dev: true
-
   /ora@7.0.1:
     resolution:
       {
@@ -7893,17 +7786,6 @@ packages:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: false
-
-  /restore-cursor@3.1.0:
-    resolution:
-      {
-        integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==,
-      }
-    engines: { node: ">=8" }
-    dependencies:
-      onetime: 5.1.2
-      signal-exit: 3.0.7
-    dev: true
 
   /restore-cursor@4.0.0:
     resolution:
@@ -9512,36 +9394,12 @@ packages:
       }
     dev: true
 
-  /wasm-feature-detect@1.5.1:
-    resolution:
-      {
-        integrity: sha512-GHr23qmuehNXHY4902/hJ6EV5sUANIJC3R/yMfQ7hWDg3nfhlcJfnIL96R2ohpIwa62araN6aN4bLzzzq5GXkg==,
-      }
-    dev: true
-
-  /wcwidth@1.0.1:
-    resolution:
-      {
-        integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==,
-      }
-    dependencies:
-      defaults: 1.0.4
-    dev: true
-
   /web-namespaces@2.0.1:
     resolution:
       {
         integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==,
       }
     dev: false
-
-  /web-streams-polyfill@3.2.1:
-    resolution:
-      {
-        integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==,
-      }
-    engines: { node: ">= 8" }
-    dev: true
 
   /webgl-constants@1.1.1:
     resolution:

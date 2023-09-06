@@ -17,3 +17,6 @@ export const getPostEntries = async () => {
       },
     }));
 };
+
+const posts = await getPostEntries();
+export type Post = (typeof posts)[0];
