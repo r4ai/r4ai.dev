@@ -8,10 +8,6 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: {
-    viewTransitions: true,
-    assets: true
-  },
   integrations: [tailwind({
     applyBaseStyles: false
   }), react(), svelte()],

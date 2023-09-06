@@ -12,28 +12,35 @@ const title = `${Astro.props.title} | r4ai.dev`;
 ---
 
 <script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    return "system";
-  })();
-  switch (theme) {
-    case "dark":
-      document.documentElement.classList.add("dark");
-      break;
-    case "light":
-      document.documentElement.classList.remove("dark");
-      break;
-    case "system":
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
+  const setupTheme = () => {
+    const theme = (() => {
+      if (typeof localStorage !== "undefined") {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark" || theme === "light" || theme === "system") {
+          return theme;
+        }
       }
-      break;
-  }
-  window.localStorage.setItem("theme", theme);
+      return "system";
+    })();
+    switch (theme) {
+      case "dark":
+        document.documentElement.classList.add("dark");
+        break;
+      case "light":
+        document.documentElement.classList.remove("dark");
+        break;
+      case "system":
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        break;
+    }
+    localStorage.setItem("theme", theme);
+  };
+  setupTheme();
+  document.addEventListener("astro:after-swap", setupTheme);
 </script>
 
 <html lang="ja">
@@ -47,9 +54,9 @@ const title = `${Astro.props.title} | r4ai.dev`;
     <ViewTransitions />
   </head>
   <body class="flex h-full flex-col">
-    <NavBar />
+    <NavBar transition:persist />
     <slot />
-    <footer>
+    <footer transition:persist>
       <p class="mb-8 text-center">
         Copyright &copy; 2023 rai - All right reserved
       </p>

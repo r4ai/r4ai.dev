@@ -25,30 +25,40 @@ const getMargin = (depth: number) => {
 ---
 
 <script>
-  let activeElement: Element | null = null;
-  const observer = new IntersectionObserver((entries) => {
-    const entry = entries.reduce((prev, current) => {
-      return current.intersectionRatio > prev.intersectionRatio
-        ? current
-        : prev;
+  const init = () => {
+    let activeElement: Element | null = null;
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries.reduce((prev, current) => {
+        return current.intersectionRatio > prev.intersectionRatio
+          ? current
+          : prev;
+      });
+      if (entry.intersectionRatio > 0) {
+        const id = entry.target.getAttribute("id");
+        const active = document.querySelector(`a[href="#${id}"]`);
+        activeElement?.classList.remove(
+          "text-gray-900",
+          "dark:text-gray-200",
+          "font-bold",
+        );
+        activeElement?.classList.add("text-gray-500", "dark:text-gray-400/80");
+        active?.classList.remove("text-gray-500", "dark:text-gray-400/80");
+        active?.classList.add(
+          "text-gray-900",
+          "dark:text-gray-200",
+          "font-bold",
+        );
+        activeElement = active;
+      }
     });
-    if (entry.intersectionRatio > 0) {
-      const id = entry.target.getAttribute("id");
-      const active = document.querySelector(`a[href="#${id}"]`);
-      activeElement?.classList.remove(
-        "text-gray-900",
-        "dark:text-gray-200",
-        "font-bold",
-      );
-      activeElement?.classList.add("text-gray-500", "dark:text-gray-400/80");
-      active?.classList.remove("text-gray-500", "dark:text-gray-400/80");
-      active?.classList.add("text-gray-900", "dark:text-gray-200", "font-bold");
-      activeElement = active;
-    }
-  });
-  document.querySelectorAll("h2[id], h3[id], h4[id], h5[id]").forEach((el) => {
-    observer.observe(el);
-  });
+    document
+      .querySelectorAll("h2[id], h3[id], h4[id], h5[id]")
+      .forEach((el) => {
+        observer.observe(el);
+      });
+  };
+  document.addEventListener("astro:after-swap", init);
+  init();
 </script>
 <nav
   class={twMerge(
