@@ -25,7 +25,10 @@ const formatDate = (date: Date) =>
 ---
 
 <Layout title={entry.data.title}>
-  <main class="mx-auto my-20 flex w-full max-w-5xl flex-col gap-16 px-6">
+  <main
+    class="mx-auto my-20 flex w-full max-w-5xl flex-col gap-16 px-6"
+    transition:name={`post-/posts/${entry.slug}`}
+  >
     <div class="flex flex-col items-center justify-center">
       <Icon class="w-24" icon={entry.data.icon} />
       <h1

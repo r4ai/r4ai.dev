@@ -11,10 +11,10 @@ interface Props {
   shouldInvert?: boolean;
 }
 
-const { title, tags, href, icon, alt, shouldInvert } = Astro.props;
+const { title, tags, href, icon, alt, shouldInvert, ...props } = Astro.props;
 ---
 
-<a {href} class="w-full font-mono">
+<a {href} class="w-full font-mono" {...props}>
   <div
     class="flex w-full flex-row gap-2 rounded-lg border border-transparent transition hover:border-neutral-200/50 hover:bg-neutral-50 hover:shadow dark:text-neutral-300 dark:hover:border-transparent dark:hover:bg-neutral-900 dark:hover:text-neutral-200"
   >
