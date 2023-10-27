@@ -61,7 +61,7 @@
     "eslint-plugin-astro": "^0.29.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.0.0",
     "lucide-react": "^0.290.0",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0",
