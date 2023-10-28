@@ -5,8 +5,7 @@ tags:
 icon: ph:graph
 genre: article
 draft: false
-publishedAt: 2023-09-04
-updatedAt: 2023-09-05
+publishedAt: 2023-10-28
 ---
 
 ## vscode.dev を使う方法
