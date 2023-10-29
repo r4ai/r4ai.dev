@@ -5,6 +5,8 @@ import Tooltip from "@/components/Tooltip.astro";
 import { getPostEntries, type Post } from "@/lib/posts";
 import Toc from "@/components/Toc.astro";
 import Icon from "@/components/Icon.astro";
+import Callout from "@/components/callouts/Callout.astro";
+import { isDev } from "@/lib/dev";
 
 export async function getStaticPaths() {
   const posts = await getPostEntries();
@@ -82,6 +84,13 @@ const formatDate = (date: Date) =>
       <div
         class="prose order-2 max-w-none flex-shrink flex-grow overflow-auto dark:prose-invert"
       >
+        {
+          entry.data.draft && isDev() && (
+            <Callout type="warning" title="この記事はドラフトです">
+              現在、ドラフトの記事を表示しています。プロダクションビルドには含まれません。
+            </Callout>
+          )
+        }
         <Content />
       </div>
       <div class="order-1 w-full md:order-2 md:w-fit">

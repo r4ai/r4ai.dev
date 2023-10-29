@@ -1,9 +1,10 @@
 import { getCollection } from "astro:content";
+import { isDev } from "./dev";
 
 export const getPostEntries = async () => {
   const postEntries = await getCollection("posts");
   return postEntries
-    .filter((entry) => !entry.data.draft)
+    .filter((entry) => (isDev() ? true : !entry.data.draft))
     .map((entry) => ({
       params: { slug: entry.slug },
       props: {
