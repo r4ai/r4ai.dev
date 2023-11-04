@@ -1,0 +1,37 @@
+div[data-theme="light"],
+pre[data-theme="light"],
+code[data-theme="light"] {
+  @apply dark:hidden;
+}
+
+div[data-theme="dark"],
+pre[data-theme="dark"],
+code[data-theme="dark"] {
+  @apply hidden dark:block;
+}
+
+div[data-rehype-pretty-code-fragment] {
+  & {
+    @apply my-6 rounded-lg border;
+  }
+
+  & > div[data-rehype-pretty-code-title] {
+    @apply border-b px-4 py-2 font-mono text-foreground/80 text-base;
+  }
+
+  & > pre {
+    @apply m-0;
+  }
+}
+
+pre {
+  background-color: transparent !important;
+}
+
+div[data-rehype-pretty-code-fragment] {
+  background-color: hsl(0, 0%, 98%) !important;
+}
+
+.dark div[data-rehype-pretty-code-fragment] {
+  background-color: hsl(0, 0%, 8%) !important;
+}
