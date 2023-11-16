@@ -1,0 +1,65 @@
+---
+import NavBar from "../components/NavBar.astro";
+import { ViewTransitions } from "astro:transitions";
+import { Toaster } from "@/components/ui/toaster";
+
+export interface Props {
+  title: string;
+}
+
+const title = `${Astro.props.title} | r4ai.dev`;
+---
+
+<script is:inline>
+  const setupTheme = () => {
+    const theme = (() => {
+      if (typeof localStorage !== "undefined") {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark" || theme === "light" || theme === "system") {
+          return theme;
+        }
+      }
+      return "system";
+    })();
+    switch (theme) {
+      case "dark":
+        document.documentElement.classList.add("dark");
+        break;
+      case "light":
+        document.documentElement.classList.remove("dark");
+        break;
+      case "system":
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        break;
+    }
+    localStorage.setItem("theme", theme);
+  };
+  setupTheme();
+  document.addEventListener("astro:after-swap", setupTheme);
+</script>
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body class="flex h-full flex-col">
+    <NavBar transition:persist />
+    <slot />
+    <footer transition:persist>
+      <p class="mb-8 text-center">
+        Copyright &copy; 2023 rai - All right reserved
+      </p>
+    </footer>
+    <Toaster client:only="react" />
+  </body>
+</html>

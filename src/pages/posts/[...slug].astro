@@ -1,13 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import "@/styles/katex.css";
-import "@/styles/code.css";
 import Tooltip from "@/components/Tooltip.astro";
 import { getPostEntries, type Post } from "@/lib/posts";
 import Toc from "@/components/Toc.astro";
 import Icon from "@/components/Icon.astro";
 import Callout from "@/components/callouts/Callout.astro";
 import { isDev } from "@/lib/dev";
+import PostLayout from "@/layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
   const posts = await getPostEntries();
@@ -27,7 +25,7 @@ const formatDate = (date: Date) =>
   });
 ---
 
-<Layout title={entry.data.title}>
+<PostLayout title={entry.data.title}>
   <main
     class="mx-auto my-20 flex w-full max-w-5xl flex-col gap-16 px-6"
     transition:name={`post-/posts/${entry.slug}`}
@@ -99,4 +97,4 @@ const formatDate = (date: Date) =>
       </div>
     </div>
   </main>
-</Layout>
+</PostLayout>
