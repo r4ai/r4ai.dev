@@ -6,8 +6,11 @@ import rehypeKatex from "rehype-katex";
 import svelte from "@astrojs/svelte";
 
 import mdx from "@astrojs/mdx";
-import type { AstroIntegration, RehypePlugins } from "astro";
-import { rehypeBeautyCode, type RehypeBeautyOptions } from "rehype-beauty-code";
+import type { AstroIntegration } from "astro";
+import {
+  rehypeCustomCode,
+  type RehypeCustomCodeOptions,
+} from "rehype-custom-code";
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,14 +27,16 @@ export default defineConfig({
     rehypePlugins: [
       rehypeKatex,
       [
-        rehypeBeautyCode,
+        rehypeCustomCode,
         {
-          themes: {
-            light: "github-light",
-            dark: "one-dark-pro",
+          shiki: {
+            themes: {
+              light: "github-light",
+              dark: "one-dark-pro",
+            },
           },
-        } satisfies RehypeBeautyOptions,
-      ] as unknown as RehypePlugins[number],
+        } satisfies RehypeCustomCodeOptions,
+      ],
     ],
     syntaxHighlight: false,
   },

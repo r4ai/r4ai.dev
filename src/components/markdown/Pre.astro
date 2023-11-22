@@ -1,11 +1,24 @@
 ---
 import { Pre as PreComponent } from "./Pre";
 
-const props = Astro.props;
-props.className = props.class ?? "";
-props.tabIndex = props.tabindex;
+export type PreProps = {
+  code: string;
+  title: string;
+  lang: string;
+  range: number[];
+  showLineNumbers: boolean;
+};
+
+console.log(Astro.props);
+const props = Object.entries(Astro.props)
+  .map(([key, value]) => {
+    if (key === "tabindex") return ["tabIndex", value];
+    if (key === "show-line-numbers") return ["showLineNumbers", value];
+    return [key, value];
+  })
+  .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}) as PreProps;
 ---
 
-<PreComponent {...Astro.props}>
+<PreComponent {...props}>
   <slot />
 </PreComponent>

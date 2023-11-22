@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { type FC } from "react";
 import { twMerge } from "tailwind-merge";
+import type { PreProps } from "./Pre.astro";
 
-export const Pre: FC<JSX.IntrinsicElements["pre"]> = ({
+type Props = JSX.IntrinsicElements["pre"] & PreProps;
+
+export const Pre: FC<Props> = ({
   children,
+  code = "",
+  title,
+  lang,
+  range,
+  showLineNumbers,
   ...props
 }) => {
   return (
