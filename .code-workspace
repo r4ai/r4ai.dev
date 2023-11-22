@@ -3,10 +3,6 @@
     {
       "name": "r4ai.dev",
       "path": "."
-    },
-    {
-      "name": "rehype-beauty-code",
-      "path": "./packages/rehype-beauty-code"
     }
   ]
 }
