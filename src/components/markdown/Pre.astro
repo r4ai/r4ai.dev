@@ -1,5 +1,9 @@
 ---
 import { Pre as PreComponent } from "./Pre";
+
+const props = Astro.props;
+props.className = props.class ?? "";
+props.tabIndex = props.tabindex;
 ---
 
 <PreComponent {...Astro.props}>

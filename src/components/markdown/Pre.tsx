@@ -6,10 +6,13 @@ export const Pre: FC<JSX.IntrinsicElements["pre"]> = ({
   ...props
 }) => {
   return (
-    <div className="prose-none my-6 rounded-lg border bg-neutral-900/75">
+    <div className="prose-none my-6 rounded-xl border bg-neutral-50 dark:bg-neutral-900/75">
       <pre
         {...props}
-        className={twMerge("shiki not-prose m-4 flex", props.className)}
+        className={twMerge(
+          "shiki not-prose flex overflow-auto p-4",
+          props.className,
+        )}
       >
         {children}
       </pre>
