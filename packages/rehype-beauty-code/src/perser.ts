@@ -1,59 +1,73 @@
 import rangeParser from "parse-numeric-range";
 
-export type Meta = {
-  title: string;
-  highlightLines: number[];
+type RequiredMeta = {
+  range: number[];
   showLineNumbers: boolean;
-  live: boolean;
 };
+
+type OptionalMeta = {
+  [key: string]: string | boolean | number[];
+};
+
+export type Meta = Omit<OptionalMeta, keyof RequiredMeta> & RequiredMeta;
+
+export const defaultMeta = {
+  range: [],
+  showLineNumbers: false,
+} satisfies Meta;
 
 type Group = {
-  titleStr: string;
-  title: string;
-  lines: string;
-  showLineNumbers: string;
-  live: string;
-};
-
-export const defaultMeta: Meta = {
-  title: "",
-  highlightLines: [],
-  showLineNumbers: false,
-  live: false,
+  range?: string;
+  kv?: string;
+  kvKey?: string;
+  kvValue?: string;
+  kvDoubleQuote?: string;
+  kvDoubleQuoteKey?: string;
+  kvDoubleQuoteValue?: string;
+  kvSingleQuote?: string;
+  kvSingleQuoteKey?: string;
+  kvSingleQuoteValue?: string;
+  boolValue?: string;
 };
 
 const parseRegex =
-  /\{(?<lines>.*?)\}|(?<showLineNumbers>showLineNumbers)|(?<live>live)|(?:title=(?:"(?<titleStr>.*?)"))|(?:title=(?<title>.*?)(?:$|\s))/g;
+  /\{(?<range>.*?)\}|(?<kv>(?<kvKey>[^\s]+?)\s*=\s*(?<kvValue>[^\s"']+?))(?=\s|$)|(?<kvDoubleQuote>(?<kvDoubleQuoteKey>[^\s]+?)\s*=\s*"(?<kvDoubleQuoteValue>.*?)(?<!\\)")|(?<kvSingleQuote>(?<kvSingleQuoteKey>[^\s]+?)\s*=\s*'(?<kvSingleQuoteValue>.*?)(?<!\\)')|(?<=\s|^)(?<boolValue>[^\s=]+?)(?=\s|$)/g;
 
 export const parseMeta = (meta: string) => {
   const matches = meta.matchAll(parseRegex);
 
-  const metaObj = { ...defaultMeta } as Meta;
+  const metaObj: Meta = { ...defaultMeta };
   for (const match of matches) {
     const groups = match.groups as Group;
-    if (groups.lines) {
-      const range = rangeParser(groups.lines);
-      metaObj.highlightLines = [...metaObj.highlightLines, ...range];
-      continue;
+    if (groups.range) {
+      const range = rangeParser(groups.range);
+      metaObj.range = [...metaObj.range, ...range];
     }
-    if (groups.live) {
-      metaObj.live = true;
-      continue;
+    if (groups.kvKey && groups.kvValue) {
+      metaObj[groups.kvKey] = retrieveEscapedString(groups.kvValue);
     }
-    if (groups.showLineNumbers) {
-      metaObj.showLineNumbers = true;
-      continue;
+    if (groups.kvDoubleQuoteKey && groups.kvDoubleQuoteValue) {
+      metaObj[groups.kvDoubleQuoteKey] = retrieveEscapedString(
+        groups.kvDoubleQuoteValue,
+      );
     }
-    if (groups.title) {
-      metaObj.title = groups.title;
-      continue;
+    if (groups.kvSingleQuoteKey && groups.kvSingleQuoteValue) {
+      metaObj[groups.kvSingleQuoteKey] = retrieveEscapedString(
+        groups.kvSingleQuoteValue,
+      );
     }
-    if (groups.titleStr) {
-      metaObj.title = groups.titleStr;
-      continue;
+    if (groups.boolValue) {
+      metaObj[groups.boolValue] = true;
     }
   }
-  metaObj.highlightLines = Array.from(new Set(metaObj.highlightLines)); // 重複削除
+  metaObj.range = removeDuplicateAndSort(metaObj.range);
 
   return metaObj;
+};
+
+export const retrieveEscapedString = (str: string) =>
+  str.replace(/\\(.)/g, "$1");
+
+export const removeDuplicateAndSort = (arr: number[]) => {
+  return Array.from(new Set(arr)).sort((a, b) => a - b);
 };
