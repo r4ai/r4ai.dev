@@ -6,12 +6,12 @@ import rehypeKatex from "rehype-katex";
 import svelte from "@astrojs/svelte";
 
 import mdx from "@astrojs/mdx";
-import type { AstroIntegration } from "astro";
+import type { AstroIntegration, RemarkPlugins } from "astro";
 import {
   rehypeCustomCode,
   type RehypeCustomCodeOptions,
 } from "rehype-custom-code";
-import { remarkMeta } from "./src//lib/remarkMeta";
+import remarkMetaString from "remark-meta-string";
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,20 +24,44 @@ export default defineConfig({
     mdx() as AstroIntegration,
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkMeta],
+    remarkPlugins: [
+      remarkMath,
+      remarkMetaString as unknown as RemarkPlugins[number],
+    ],
     rehypePlugins: [
       rehypeKatex,
       [
         rehypeCustomCode,
         {
+          propsPrefix: "",
+          shouldExportCodeAsProps: true,
           shiki: {
             themes: {
               light: "github-light",
               dark: "one-dark-pro",
             },
+            transformers(meta) {
+              return [
+                {
+                  line(hast, line) {
+                    if (hast.children.length > 0) {
+                      hast.properties["data-line"] = line;
+                    }
+                    if (meta.range?.includes(line)) {
+                      hast.properties["data-highlighted-line"] = true;
+                    }
+                  },
+                  code(hast) {
+                    if (meta.showLineNumbers) {
+                      hast.properties["data-line-numbers"] = true;
+                    }
+                  },
+                },
+              ];
+            },
           },
         } satisfies RehypeCustomCodeOptions,
-      ],
+      ] as unknown as RemarkPlugins[number],
     ],
     syntaxHighlight: false,
   },
