@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, type FC, useMemo } from "react";
+import { useState, type FC } from "react";
 import { twMerge } from "tailwind-merge";
 import type { PreProps } from "./Pre.astro";
-import { ClipboardCheckIcon, ClipboardIcon, File } from "lucide-react";
+import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -17,8 +16,11 @@ export const Pre: FC<Props> = ({
   children,
   code = "",
   title,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   lang,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   range,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showLineNumbers,
   icon,
   ...props
