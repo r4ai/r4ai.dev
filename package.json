@@ -57,6 +57,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.3.0",
     "@iconify/tailwind": "^0.1.3",
+    "@types/mdast": "^4.0.3",
     "@types/node": "^20.8.9",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
@@ -74,10 +75,13 @@
     "rehype": "^13.0.1",
     "rehype-custom-code": "^0.2.1",
     "remark": "^15.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.0.0",
     "sharp": "^0.32.6",
     "shikiji": "^0.7.0",
     "typescript": "^5.2.2",
     "unified": "^11.0.4",
+    "unist-util-visit": "^5.0.0",
     "vite": "^5.0.2"
   },
   "packageManager": "pnpm@8.10.0"

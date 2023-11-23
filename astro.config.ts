@@ -11,6 +11,7 @@ import {
   rehypeCustomCode,
   type RehypeCustomCodeOptions,
 } from "rehype-custom-code";
+import { remarkMeta } from "./src//lib/remarkMeta";
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,7 +24,7 @@ export default defineConfig({
     mdx() as AstroIntegration,
   ],
   markdown: {
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkMeta],
     rehypePlugins: [
       rehypeKatex,
       [
