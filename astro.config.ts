@@ -4,18 +4,14 @@ import react from "@astrojs/react";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import svelte from "@astrojs/svelte";
-import rehypePrettyCode, {
-  type Options as rehypePrettyCodeOptions,
-} from "rehype-pretty-code";
 
 import mdx from "@astrojs/mdx";
-import type { AstroIntegration } from "astro";
-import type { Theme } from "shiki";
-
-type ShikiThemes = {
-  light: Theme;
-  dark: Theme;
-};
+import type { AstroIntegration, RemarkPlugins } from "astro";
+import {
+  rehypeCustomCode,
+  type RehypeCustomCodeOptions,
+} from "rehype-custom-code";
+import remarkMetaString from "remark-meta-string";
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,19 +24,44 @@ export default defineConfig({
     mdx() as AstroIntegration,
   ],
   markdown: {
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [
+      remarkMath,
+      remarkMetaString as unknown as RemarkPlugins[number],
+    ],
     rehypePlugins: [
       rehypeKatex,
       [
-        rehypePrettyCode,
+        rehypeCustomCode,
         {
-          theme: {
-            light: "github-light",
-            dark: "one-dark-pro",
-          } satisfies ShikiThemes,
-          keepBackground: false,
-        } satisfies rehypePrettyCodeOptions,
-      ],
+          propsPrefix: "",
+          shouldExportCodeAsProps: true,
+          shiki: {
+            themes: {
+              light: "github-light",
+              dark: "one-dark-pro",
+            },
+            transformers(meta) {
+              return [
+                {
+                  line(hast, line) {
+                    if (hast.children.length > 0) {
+                      hast.properties["data-line"] = line;
+                    }
+                    if (meta.range?.includes(line)) {
+                      hast.properties["data-highlighted-line"] = true;
+                    }
+                  },
+                  code(hast) {
+                    if (meta.showLineNumbers) {
+                      hast.properties["data-line-numbers"] = true;
+                    }
+                  },
+                },
+              ];
+            },
+          },
+        } satisfies RehypeCustomCodeOptions,
+      ] as unknown as RemarkPlugins[number],
     ],
     syntaxHighlight: false,
   },

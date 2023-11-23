@@ -10,38 +10,27 @@
     --highlighted-line-bg-color: theme(colors.neutral.600 / 25%);
     --highlighted-chars-bg-color: theme(colors.neutral.600 / 40%);
   }
+
+  .shiki {
+    background-color: transparent !important;
+  }
+
+  .dark {
+    .shiki,
+    .shiki span {
+      color: var(--shiki-dark) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
 }
 
+/* OLD */
 @layer components {
-  div[data-theme="light"],
-  pre[data-theme="light"],
-  code[data-theme="light"] {
-    @apply dark:hidden;
-  }
-
-  div[data-theme="dark"],
-  pre[data-theme="dark"],
-  code[data-theme="dark"] {
-    @apply hidden dark:inline-block;
-  }
-
-  code {
-    @apply inline-block;
-  }
-
-  div[data-rehype-pretty-code-fragment] {
-    & {
-      background-color: var(--code-block-bg-color);
-      @apply my-6 rounded-lg border px-0;
-    }
-
-    & > pre {
-      background-color: transparent;
-      @apply m-0 w-full overflow-auto rounded-t-none px-0;
-    }
-
+  pre {
     & code {
-      @apply grid text-[0.9rem];
+      @apply grid w-full text-[0.9rem];
     }
 
     & span[data-line] {
@@ -64,7 +53,7 @@
     /* 行ハイライト */
     & span[data-highlighted-line] {
       background-color: var(--highlighted-line-bg-color);
-      @apply border-l-blue-400;
+      @apply border-l-blue-400 bg-neutral-500/10 dark:bg-neutral-600/20;
     }
 
     /* 単語ハイライト */
@@ -72,11 +61,6 @@
       @apply rounded;
       background-color: var(--highlighted-chars-bg-color);
       box-shadow: 0 0 0px 4px var(--highlighted-chars-bg-color);
-    }
-
-    /* Code title */
-    & > div[data-rehype-pretty-code-title] {
-      @apply border-b px-4 py-3 font-mono text-sm text-foreground/80 md:text-base;
     }
   }
 }

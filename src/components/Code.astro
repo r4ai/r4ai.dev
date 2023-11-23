@@ -1,24 +1,19 @@
 ---
-import { renderToHtml, type Lang, type Theme } from "shiki";
+import { type BuiltinLanguage, type BuiltinTheme } from "shikiji";
 import { highlighter } from "@/lib/shiki";
 
 type Props = {
   code: string;
-  lang: Lang;
-  theme: Theme;
+  lang: BuiltinLanguage;
+  theme: BuiltinTheme;
   class?: string;
 };
 const props = Astro.props;
 
-const tokens = highlighter.codeToThemedTokens(
-  props.code,
-  props.lang,
-  props.theme,
-);
-const html = renderToHtml(tokens, {
-  bg: "transparent",
-  fg: "transparent",
+const html = highlighter.codeToHtml(props.code, {
+  lang: props.lang,
+  theme: props.theme,
 });
 ---
 
-<div set:html={html} class={props.class} />
+<Fragment set:html={html} class={props.class} />

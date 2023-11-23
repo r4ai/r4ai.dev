@@ -5,15 +5,8 @@
     // > https://github.com/tailwindlabs/tailwindcss-intellisense/issues/270
     "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,"
   ],
-  "frontMatter.content.publicFolder": {
-    "path": "src/assets",
-    "relative": true
+  "files.associations": {
+    "*.css": "tailwindcss"
   },
-  "frontMatter.content.pageFolders": [
-    {
-      "title": "posts",
-      "path": "[[workspace]]/src/content/posts"
-    }
-  ],
-  "[markdown]": {}
+  "mdx.server.enable": true
 }

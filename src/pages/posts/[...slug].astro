@@ -6,6 +6,7 @@ import Icon from "@/components/Icon.astro";
 import Callout from "@/components/callouts/Callout.astro";
 import { isDev } from "@/lib/dev";
 import PostLayout from "@/layouts/PostLayout.astro";
+import PreComponent from "@/components/markdown/Pre.astro";
 
 export async function getStaticPaths() {
   const posts = await getPostEntries();
@@ -90,7 +91,11 @@ const formatDate = (date: Date) =>
             </Callout>
           )
         }
-        <Content />
+        <Content
+          components={{
+            pre: PreComponent,
+          }}
+        />
       </div>
       <div class="order-1 w-full md:order-2 md:w-fit">
         <Toc headings={headings} class="sticky top-20" />

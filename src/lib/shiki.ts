@@ -1,5 +1,6 @@
-import { getHighlighter } from "shiki";
+import { getHighlighter } from "shikiji";
 
 export const highlighter = await getHighlighter({
-  themes: ["github-light", "material-theme-darker"],
+  themes: ["material-theme-darker", "github-light"],
+  langs: ["markdown", "mdx"],
 });
