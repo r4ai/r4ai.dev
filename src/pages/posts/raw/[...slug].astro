@@ -9,16 +9,16 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 ---
 
+<style is:inline>
+  * {
+    background-color: black !important;
+  }
+</style>
+
 <Code
   code={`# ${entry.data.title}
 
 ${entry.body}`}
-  lang="markdown"
+  lang="mdx"
   theme="material-theme-darker"
 />
-
-<style>
-  body {
-    background-color: black;
-  }
-</style>

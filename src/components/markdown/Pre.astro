@@ -21,7 +21,6 @@ const props = Object.entries(Astro.props)
     return [camelCase(key.replace("data", "")), value];
   })
   .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}) as PreProps;
-console.log(props);
 
 const transformLang = (lang: string) => {
   const icons = skillIcons(true);
