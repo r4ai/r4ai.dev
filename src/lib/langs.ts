@@ -112,4 +112,4 @@ export const skillIcons = (isDark: boolean) => ({
   tailwindcss: isDark ? "tailwindcss-dark" : "tailwindcss-light",
   zig: isDark ? "zig-dark" : "zig-light",
   linux: isDark ? "linux-dark" : "linux-light",
-});
+})

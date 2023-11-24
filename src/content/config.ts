@@ -1,4 +1,4 @@
-import { z, defineCollection } from "astro:content";
+import { z, defineCollection } from "astro:content"
 
 export const postSchema = z
   .object({
@@ -12,13 +12,13 @@ export const postSchema = z
     updatedAt: z.date().optional(),
     link: z.string().optional(),
   })
-  .strict();
+  .strict()
 
 const postCollection = defineCollection({
   type: "content",
   schema: postSchema,
-});
+})
 
 export const collections = {
   posts: postCollection,
-};
+}

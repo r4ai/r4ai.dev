@@ -1,6 +1,6 @@
-import { type Plugin } from "unified";
-import type { Root } from "mdast";
-import { visit } from "unist-util-visit";
+import { type Plugin } from "unified"
+import type { Root } from "mdast"
+import { visit } from "unist-util-visit"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const remarkMeta: Plugin<[{}?], Root> = () => {
@@ -12,7 +12,7 @@ export const remarkMeta: Plugin<[{}?], Root> = () => {
           ...node.data?.hProperties,
           meta: node.meta,
         },
-      };
-    });
-  };
-};
+      }
+    })
+  }
+}

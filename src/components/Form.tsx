@@ -1,8 +1,8 @@
-import { useState, type FC } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Loader2 } from "lucide-react";
+import { useState, type FC } from "react"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { Loader2 } from "lucide-react"
 import {
   Form,
   FormControl,
@@ -10,26 +10,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { useToast } from "./ui/use-toast";
+} from "@/components/ui/form"
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
+import { Textarea } from "./ui/textarea"
+import { useToast } from "./ui/use-toast"
 
 const schema = z.object({
   name: z.string().nonempty(),
   email: z.string().email(),
   title: z.string().nonempty(),
   message: z.string().nonempty(),
-});
+})
 
 type ResponseSchema = {
-  status: number;
-  message: string;
-};
+  status: number
+  message: string
+}
 
 export const ContactForm: FC = () => {
-  const { toast } = useToast();
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -39,42 +39,42 @@ export const ContactForm: FC = () => {
       title: "",
       message: "",
     },
-  });
+  })
 
-  const [isSending, setIsSending] = useState(false);
+  const [isSending, setIsSending] = useState(false)
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
-    setIsSending(true);
+    setIsSending(true)
     try {
       const response = await fetch("https://api.r4ai.dev/sendmail", {
         method: "POST",
         body: JSON.stringify(data),
         mode: "cors",
-      });
-      const body: ResponseSchema = await response.json();
+      })
+      const body: ResponseSchema = await response.json()
       if (response.ok) {
         toast({
           title: "メッセージを送信しました。",
           description: "お問い合わせありがとうございます。",
           variant: "default",
-        });
-        form.reset();
+        })
+        form.reset()
       } else {
         toast({
           title: `${body.status} メッセージの送信に失敗しました。`,
           description: body.message,
           variant: "destructive",
-        });
+        })
       }
     } catch (e) {
       toast({
         title: "メッセージの送信に失敗しました。",
         description: "通信エラーが発生しました。再度お試しください。",
         variant: "destructive",
-      });
+      })
     }
-    setIsSending(false);
-  };
+    setIsSending(false)
+  }
 
   return (
     <Form {...form}>
@@ -143,5 +143,5 @@ export const ContactForm: FC = () => {
         </Button>
       </form>
     </Form>
-  );
-};
+  )
+}

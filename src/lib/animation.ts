@@ -1,11 +1,11 @@
-import { type TransitionDirectionalAnimations } from "astro";
+import { type TransitionDirectionalAnimations } from "astro"
 
-const EASE_IN_OUT_QUART = "cubic-bezier(0.76, 0, 0.24, 1)";
+const EASE_IN_OUT_QUART = "cubic-bezier(0.76, 0, 0.24, 1)"
 
 export const mainSlide = ({
   duration,
 }: {
-  duration?: string | number;
+  duration?: string | number
 } = {}): TransitionDirectionalAnimations => ({
   forwards: {
     old: [
@@ -29,12 +29,12 @@ export const mainSlide = ({
     old: [{ name: "astroSlideToRight" }],
     new: [{ name: "astroSlideFromLeft" }],
   },
-});
+})
 
 export const mainSlideRev = ({
   duration,
 }: {
-  duration?: string | number;
+  duration?: string | number
 } = {}): TransitionDirectionalAnimations => ({
   forwards: {
     old: [
@@ -58,4 +58,4 @@ export const mainSlideRev = ({
     old: [{ name: "astroSlideToRight" }],
     new: [{ name: "astroSlideFromLeft" }],
   },
-});
+})

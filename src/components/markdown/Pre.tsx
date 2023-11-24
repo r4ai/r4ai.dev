@@ -1,16 +1,16 @@
-import { useState, type FC } from "react";
-import { twMerge } from "tailwind-merge";
-import type { PreProps } from "./Pre.astro";
-import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react";
+import { useState, type FC } from "react"
+import { twMerge } from "tailwind-merge"
+import type { PreProps } from "./Pre.astro"
+import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useHotkeys } from "react-hotkeys-hook";
+} from "@/components/ui/tooltip"
+import { useHotkeys } from "react-hotkeys-hook"
 
-type Props = JSX.IntrinsicElements["pre"] & PreProps;
+type Props = JSX.IntrinsicElements["pre"] & PreProps
 
 export const Pre: FC<Props> = ({
   children,
@@ -51,49 +51,49 @@ export const Pre: FC<Props> = ({
         className={twMerge(
           "shiki not-prose flex overflow-auto pb-4",
           title ? "pt-2" : "pt-4",
-          props.className,
+          props.className
         )}
       >
         {children}
       </pre>
     </div>
-  );
-};
+  )
+}
 
 const CopyButton: FC<{ code: string }> = ({ code }) => {
-  const [hasCopied, setHasCopied] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [hasCopied, setHasCopied] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
 
-  let id: NodeJS.Timeout | undefined = undefined;
+  let id: NodeJS.Timeout | undefined = undefined
 
   const setHovering = () => {
-    clearTimeout(id);
+    clearTimeout(id)
     id = setTimeout(() => {
-      setIsHovering(true);
-    }, 150);
-  };
+      setIsHovering(true)
+    }, 150)
+  }
 
   const clearHovering = () => {
-    clearTimeout(id);
+    clearTimeout(id)
     id = setTimeout(() => {
-      setIsHovering(false);
-    }, 100);
-  };
+      setIsHovering(false)
+    }, 100)
+  }
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(code);
-    setHasCopied(true);
-  };
+    await navigator.clipboard.writeText(code)
+    setHasCopied(true)
+  }
 
   useHotkeys("esc", () => {
-    if (isHovering) setIsHovering(false);
-  });
+    if (isHovering) setIsHovering(false)
+  })
   useHotkeys("space", () => {
-    if (isHovering) setIsHovering(false);
-  });
+    if (isHovering) setIsHovering(false)
+  })
   useHotkeys("enter", () => {
-    if (isHovering) setIsHovering(false);
-  });
+    if (isHovering) setIsHovering(false)
+  })
 
   return (
     <Tooltip open={isHovering}>
@@ -121,5 +121,5 @@ const CopyButton: FC<{ code: string }> = ({ code }) => {
         <span>{hasCopied ? "Copied!" : "Copy to clipboard"}</span>
       </TooltipContent>
     </Tooltip>
-  );
-};
+  )
+}

@@ -11,4 +11,4 @@ export type CalloutType =
   | "danger"
   | "bug"
   | "example"
-  | "quote";
+  | "quote"

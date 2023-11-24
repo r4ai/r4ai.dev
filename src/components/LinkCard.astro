@@ -1,15 +1,15 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from "astro:assets"
 
 interface Props {
-  href: string;
-  icon: ImageMetadata;
-  title: string;
-  alt: string;
-  shouldInvert?: boolean;
+  href: string
+  icon: ImageMetadata
+  title: string
+  alt: string
+  shouldInvert?: boolean
 }
 
-const { href, icon, title, alt, shouldInvert = false } = Astro.props;
+const { href, icon, title, alt, shouldInvert = false } = Astro.props
 ---
 
 <a {href} aria-label={title} class="inline-block">

@@ -1,45 +1,45 @@
 ---
-import NavBar from "../components/NavBar.astro";
-import { ViewTransitions } from "astro:transitions";
-import { Toaster } from "@/components/ui/toaster";
+import NavBar from "../components/NavBar.astro"
+import { ViewTransitions } from "astro:transitions"
+import { Toaster } from "@/components/ui/toaster"
 
 export interface Props {
-  title: string;
+  title: string
 }
 
-const title = `${Astro.props.title} | r4ai.dev`;
+const title = `${Astro.props.title} | r4ai.dev`
 ---
 
 <script is:inline>
   const setupTheme = () => {
     const theme = (() => {
       if (typeof localStorage !== "undefined") {
-        const theme = localStorage.getItem("theme");
+        const theme = localStorage.getItem("theme")
         if (theme === "dark" || theme === "light" || theme === "system") {
-          return theme;
+          return theme
         }
       }
-      return "system";
-    })();
+      return "system"
+    })()
     switch (theme) {
       case "dark":
-        document.documentElement.classList.add("dark");
-        break;
+        document.documentElement.classList.add("dark")
+        break
       case "light":
-        document.documentElement.classList.remove("dark");
-        break;
+        document.documentElement.classList.remove("dark")
+        break
       case "system":
         if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          document.documentElement.classList.add("dark");
+          document.documentElement.classList.add("dark")
         } else {
-          document.documentElement.classList.remove("dark");
+          document.documentElement.classList.remove("dark")
         }
-        break;
+        break
     }
-    localStorage.setItem("theme", theme);
-  };
-  setupTheme();
-  document.addEventListener("astro:after-swap", setupTheme);
+    localStorage.setItem("theme", theme)
+  }
+  setupTheme()
+  document.addEventListener("astro:after-swap", setupTheme)
 </script>
 
 <html lang="ja">

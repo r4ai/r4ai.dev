@@ -1,19 +1,19 @@
 ---
-import { type BuiltinLanguage, type BuiltinTheme } from "shikiji";
-import { highlighter } from "@/lib/shiki";
+import { type BuiltinLanguage, type BuiltinTheme } from "shikiji"
+import { highlighter } from "@/lib/shiki"
 
 type Props = {
-  code: string;
-  lang: BuiltinLanguage;
-  theme: BuiltinTheme;
-  class?: string;
-};
-const props = Astro.props;
+  code: string
+  lang: BuiltinLanguage
+  theme: BuiltinTheme
+  class?: string
+}
+const props = Astro.props
 
 const html = highlighter.codeToHtml(props.code, {
   lang: props.lang,
   theme: props.theme,
-});
+})
 ---
 
 <Fragment set:html={html} class={props.class} />

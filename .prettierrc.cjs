@@ -5,6 +5,8 @@ module.exports = {
   printWidth: 80,
   tabWidth: 2,
   plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  semi: false,
+  trailingComma: "es5",
   overrides: [
     {
       files: "*.astro",
@@ -13,4 +15,4 @@ module.exports = {
       },
     },
   ],
-};
+}

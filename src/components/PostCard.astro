@@ -1,17 +1,17 @@
 ---
-import Icon from "@/components/Icon.astro";
-import { twMerge } from "tailwind-merge";
+import Icon from "@/components/Icon.astro"
+import { twMerge } from "tailwind-merge"
 
 interface Props {
-  title: string;
-  tags: string[];
-  href: string;
-  icon: string;
-  alt: string;
-  shouldInvert?: boolean;
+  title: string
+  tags: string[]
+  href: string
+  icon: string
+  alt: string
+  shouldInvert?: boolean
 }
 
-const { title, tags, href, icon, alt, shouldInvert, ...props } = Astro.props;
+const { title, tags, href, icon, alt, shouldInvert, ...props } = Astro.props
 ---
 
 <a {href} class="w-full font-mono" {...props}>
@@ -23,7 +23,7 @@ const { title, tags, href, icon, alt, shouldInvert, ...props } = Astro.props;
       alt={alt}
       class={twMerge(
         "w-20 p-4 dark:invert-0 flex-none self-center",
-        shouldInvert ? "invert" : "",
+        shouldInvert ? "invert" : ""
       )}
     />
     <div class="flex-shrink flex-grow py-4 pr-4">

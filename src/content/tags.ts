@@ -1,13 +1,13 @@
-import { z } from "zod";
+import { z } from "zod"
 
 const tagSchema = z.object({
   name: z.string(),
   twColor: z.string(),
-});
+})
 
-type Tag = z.infer<typeof tagSchema>;
+type Tag = z.infer<typeof tagSchema>
 
-export const tagsSchema = z.array(z.string());
+export const tagsSchema = z.array(z.string())
 
 export const tags = [
   {
@@ -26,4 +26,4 @@ export const tags = [
     name: "slide",
     twColor: "text-yellow-500",
   },
-] as const satisfies readonly Tag[];
+] as const satisfies readonly Tag[]

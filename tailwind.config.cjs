@@ -1,4 +1,4 @@
-const { addDynamicIconSelectors } = require("@iconify/tailwind");
+const { addDynamicIconSelectors } = require("@iconify/tailwind")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -86,4 +86,4 @@ module.exports = {
     require("@tailwindcss/typography"),
     addDynamicIconSelectors(),
   ],
-};
+}

@@ -1,9 +1,9 @@
 ---
-import PostCard from "@/components/PostCard.astro";
-import Layout from "@/layouts/Layout.astro";
-import { getPostEntries } from "@/lib/posts";
+import PostCard from "@/components/PostCard.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getPostEntries } from "@/lib/posts"
 
-const posts = await getPostEntries();
+const posts = await getPostEntries()
 ---
 
 <Layout title="Posts">

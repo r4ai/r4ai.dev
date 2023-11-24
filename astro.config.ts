@@ -1,17 +1,17 @@
-import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import svelte from "@astrojs/svelte";
+import { defineConfig } from "astro/config"
+import tailwind from "@astrojs/tailwind"
+import react from "@astrojs/react"
+import remarkMath from "remark-math"
+import rehypeKatex from "rehype-katex"
+import svelte from "@astrojs/svelte"
 
-import mdx from "@astrojs/mdx";
-import type { AstroIntegration, RemarkPlugins } from "astro";
+import mdx from "@astrojs/mdx"
+import type { AstroIntegration, RemarkPlugins } from "astro"
 import {
   rehypeCustomCode,
   type RehypeCustomCodeOptions,
-} from "rehype-custom-code";
-import remarkMetaString from "remark-meta-string";
+} from "rehype-custom-code"
+import remarkMetaString from "remark-meta-string"
 
 // https://astro.build/config
 export default defineConfig({
@@ -45,19 +45,19 @@ export default defineConfig({
                 {
                   line(hast, line) {
                     if (hast.children.length > 0) {
-                      hast.properties["data-line"] = line;
+                      hast.properties["data-line"] = line
                     }
                     if (meta.range?.includes(line)) {
-                      hast.properties["data-highlighted-line"] = true;
+                      hast.properties["data-highlighted-line"] = true
                     }
                   },
                   code(hast) {
                     if (meta.showLineNumbers) {
-                      hast.properties["data-line-numbers"] = true;
+                      hast.properties["data-line-numbers"] = true
                     }
                   },
                 },
-              ];
+              ]
             },
           },
         } satisfies RehypeCustomCodeOptions,
@@ -65,4 +65,4 @@ export default defineConfig({
     ],
     syntaxHighlight: false,
   },
-});
+})

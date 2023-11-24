@@ -1,25 +1,25 @@
-import type { Mesh } from "three";
-import { Suspense, type FC, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as Drei from "@react-three/drei";
+import type { Mesh } from "three"
+import { Suspense, type FC, useRef } from "react"
+import { Canvas, useFrame } from "@react-three/fiber"
+import * as Drei from "@react-three/drei"
 
 interface Props {}
 
 const Cube: FC = () => {
-  const meshRef = useRef<Mesh>(null!);
+  const meshRef = useRef<Mesh>(null!)
 
   useFrame((_, delta) => {
-    meshRef.current.rotation.x += delta / 1.5;
-    meshRef.current.rotation.y += delta / 1.5;
-  });
+    meshRef.current.rotation.x += delta / 1.5
+    meshRef.current.rotation.y += delta / 1.5
+  })
 
   return (
     <mesh ref={meshRef}>
       <boxGeometry args={[1, 1, 1]} />
       <meshBasicMaterial wireframe color="gray" />
     </mesh>
-  );
-};
+  )
+}
 
 export const CubeCanvas: FC<Props> = () => {
   return (
@@ -32,5 +32,5 @@ export const CubeCanvas: FC<Props> = () => {
         <Cube />
       </Canvas>
     </Suspense>
-  );
-};
+  )
+}

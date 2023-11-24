@@ -1,46 +1,46 @@
 ---
-import type { ReactNode } from "react";
-import Icon from "../Icon.astro";
-import { Pre as PreComponent } from "./Pre";
-import { camelCase } from "scule";
-import Iconify from "@iconify/iconify/dist/iconify.js";
-import { skillIcons } from "@/lib/langs";
+import type { ReactNode } from "react"
+import Icon from "../Icon.astro"
+import { Pre as PreComponent } from "./Pre"
+import { camelCase } from "scule"
+import Iconify from "@iconify/iconify/dist/iconify.js"
+import { skillIcons } from "@/lib/langs"
 
 export type PreProps = {
-  code: string;
-  title: string;
-  lang: string;
-  range: number[];
-  showLineNumbers: boolean;
-  icon: ReactNode;
-};
+  code: string
+  title: string
+  lang: string
+  range: number[]
+  showLineNumbers: boolean
+  icon: ReactNode
+}
 
 const props = Object.entries(Astro.props)
   .map(([key, value]) => {
-    if (key === "tabindex") return ["tabIndex", value];
-    return [camelCase(key.replace("data", "")), value];
+    if (key === "tabindex") return ["tabIndex", value]
+    return [camelCase(key.replace("data", "")), value]
   })
-  .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}) as PreProps;
+  .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}) as PreProps
 
 const transformLang = (lang: string) => {
-  const icons = skillIcons(true);
-  return icons[lang as keyof typeof icons] ?? lang;
-};
+  const icons = skillIcons(true)
+  return icons[lang as keyof typeof icons] ?? lang
+}
 
 const skillIcon = async (lang: string) => {
-  const iconName = `skill-icons:${transformLang(lang)}`;
+  const iconName = `skill-icons:${transformLang(lang)}`
   try {
-    await Iconify.loadIcon(iconName);
+    await Iconify.loadIcon(iconName)
     if (Iconify.iconExists(iconName)) {
-      return iconName;
+      return iconName
     } else {
-      return "radix-icons:file";
+      return "radix-icons:file"
     }
   } catch {
-    return "radix-icons:file";
+    return "radix-icons:file"
   }
-};
-const iconName = await skillIcon(props.lang);
+}
+const iconName = await skillIcon(props.lang)
 ---
 
 <PreComponent {...props} client:visible>

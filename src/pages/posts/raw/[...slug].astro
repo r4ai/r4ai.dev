@@ -1,12 +1,12 @@
 ---
-import Code from "@/components/Code.astro";
-import { getPostEntries } from "@/lib/posts";
+import Code from "@/components/Code.astro"
+import { getPostEntries } from "@/lib/posts"
 
 export async function getStaticPaths() {
-  return await getPostEntries();
+  return await getPostEntries()
 }
 
-const { entry } = Astro.props;
+const { entry } = Astro.props
 ---
 
 <style is:inline>

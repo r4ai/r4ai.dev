@@ -1,8 +1,8 @@
-import { getCollection } from "astro:content";
-import { isDev } from "./dev";
+import { getCollection } from "astro:content"
+import { isDev } from "./dev"
 
 export const getPostEntries = async () => {
-  const postEntries = await getCollection("posts");
+  const postEntries = await getCollection("posts")
   return postEntries
     .filter((entry) => (isDev() ? true : !entry.data.draft))
     .map((entry) => ({
@@ -16,8 +16,8 @@ export const getPostEntries = async () => {
           },
         },
       },
-    }));
-};
+    }))
+}
 
-const posts = await getPostEntries();
-export type Post = (typeof posts)[0];
+const posts = await getPostEntries()
+export type Post = (typeof posts)[0]
