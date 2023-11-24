@@ -1,7 +1,21 @@
 ---
 import { twMerge } from "tailwind-merge"
-import type { CalloutType } from "./type"
 import Icon from "../Icon.astro"
+
+export type CalloutType =
+  | "note"
+  | "abstract"
+  | "info"
+  | "todo"
+  | "tip"
+  | "success"
+  | "question"
+  | "warning"
+  | "failure"
+  | "danger"
+  | "bug"
+  | "example"
+  | "quote"
 
 interface Props {
   className?: string

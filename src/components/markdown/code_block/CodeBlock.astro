@@ -1,12 +1,12 @@
 ---
 import type { ReactNode } from "react"
-import Icon from "../Icon.astro"
-import { Pre as PreComponent } from "./Pre"
+import Icon from "../../Icon.astro"
+import { CodeBlock as CodeBlockComponent } from "./CodeBlock"
 import { camelCase } from "scule"
 import Iconify from "@iconify/iconify/dist/iconify.js"
 import { skillIcons } from "@/lib/langs"
 
-export type PreProps = {
+export type CodeBlockProps = {
   code: string
   title: string
   lang: string
@@ -20,7 +20,10 @@ const props = Object.entries(Astro.props)
     if (key === "tabindex") return ["tabIndex", value]
     return [camelCase(key.replace("data", "")), value]
   })
-  .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}) as PreProps
+  .reduce(
+    (acc, [key, value]) => ({ ...acc, [key]: value }),
+    {}
+  ) as CodeBlockProps
 
 const transformLang = (lang: string) => {
   const icons = skillIcons(true)
@@ -43,11 +46,11 @@ const skillIcon = async (lang: string) => {
 const iconName = await skillIcon(props.lang)
 ---
 
-<PreComponent {...props} client:visible>
+<CodeBlockComponent {...props} client:visible>
   <Icon
     icon={iconName}
     class="h-4 w-4 brightness-90 contrast-75 filter"
     slot="icon"
   />
   <slot />
-</PreComponent>
+</CodeBlockComponent>
