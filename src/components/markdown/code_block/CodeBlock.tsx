@@ -36,7 +36,7 @@ export const CodeBlock: FC<Props> = ({
         </div>
       ) : (
         <TooltipProvider>
-          <div className="absolute right-0 top-0 flex items-center p-4 pb-8 pl-8 opacity-0 transition hover:opacity-100">
+          <div className="absolute right-0 top-0 z-10 flex items-center p-4 pb-8 pl-8 opacity-0 transition hover:opacity-100">
             <CopyButton code={code} />
           </div>
         </TooltipProvider>
