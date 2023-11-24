@@ -2,20 +2,10 @@
 import { twMerge } from "tailwind-merge"
 import Icon from "../Icon.astro"
 
-export type CalloutType =
-  | "note"
-  | "abstract"
-  | "info"
-  | "todo"
-  | "tip"
-  | "success"
-  | "question"
-  | "warning"
-  | "failure"
-  | "danger"
-  | "bug"
-  | "example"
-  | "quote"
+// Astro compiler doesn't support multi-line union types
+// @see https://github.com/withastro/compiler/issues/554
+// prettier-ignore
+export type CalloutType = "note" | "abstract" | "info" | "todo" | "tip" | "success" | "question" | "warning" | "failure" | "danger" | "bug" | "example" | "quote"
 
 interface Props {
   className?: string

@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 import type { CodeBlockProps } from "./CodeBlock.astro"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { CopyButton } from "./CopyButton"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 type Props = JSX.IntrinsicElements["pre"] & CodeBlockProps
 
@@ -25,7 +26,7 @@ export const CodeBlock: FC<Props> = ({
         <div className="flex flex-row justify-between border-b px-4 py-2">
           <div className="flex flex-row items-center gap-3 font-mono">
             {icon}
-            {title}
+            <span className="text-[0.9rem]">{title}</span>
           </div>
           <div className="flex items-center">
             <TooltipProvider>
@@ -40,16 +41,22 @@ export const CodeBlock: FC<Props> = ({
           </div>
         </TooltipProvider>
       )}
-      <pre
-        {...props}
-        className={twMerge(
-          "shiki not-prose flex overflow-auto pb-4",
-          title ? "pt-2" : "pt-4",
-          props.className
-        )}
-      >
-        {children}
-      </pre>
+      <ScrollArea>
+        <pre
+          {...props}
+          className={twMerge(
+            "shiki not-prose flex overflow-auto pb-4",
+            title ? "pt-2" : "pt-4",
+            props.className
+          )}
+        >
+          {children}
+        </pre>
+        <ScrollBar
+          orientation="horizontal"
+          thumbClassName="hover:bg-neutral-300 active:bg-neutral-400 dark:hover:bg-neutral-700 dark:active:bg-neutral-600 transition-colors"
+        />
+      </ScrollArea>
     </div>
   )
 }

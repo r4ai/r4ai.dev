@@ -17,7 +17,7 @@ export const CopyButton: FC<{ code: string }> = ({ code }) => {
     clearTimeout(id)
     id = setTimeout(() => {
       setIsHovering(true)
-    }, 150)
+    }, 200)
   }
 
   const clearHovering = () => {
