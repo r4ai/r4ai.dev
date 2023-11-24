@@ -52,10 +52,7 @@ export const CodeBlock: FC<Props> = ({
         >
           {children}
         </pre>
-        <ScrollBar
-          orientation="horizontal"
-          thumbClassName="hover:bg-neutral-300 active:bg-neutral-400 dark:hover:bg-neutral-700 dark:active:bg-neutral-600 transition-colors"
-        />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </div>
   )

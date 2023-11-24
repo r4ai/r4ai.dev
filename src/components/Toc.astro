@@ -63,11 +63,11 @@ const getMargin = (depth: number) => {
 <nav
   class={twMerge(
     props.class,
-    "pt-2 pb-4 px-4 border rounded-xl min-w-[120px] max-w-full lg:min-w-[180px] lg:max-w-[240px]"
+    "pt-2 pb-4 border rounded-xl min-w-[120px] max-w-full lg:min-w-[180px] lg:max-w-[320px]"
   )}
 >
-  <h2 class="mb-2 text-lg font-bold">目次</h2>
-  <ol class="space-y-1">
+  <h2 class="mb-2 px-4 text-lg font-bold">目次</h2>
+  <ol class="max-h-[80svh] space-y-1 overflow-auto px-4">
     {
       props.headings.map((heading) => {
         const { depth, slug, text } = heading
