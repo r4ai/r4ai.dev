@@ -7,6 +7,7 @@ icon: game-icons:astronaut-helmet
 genre: article
 draft: false
 publishedAt: 2023-09-05
+updatedAt: 2023-11-24
 ---
 
 ## 結論
@@ -14,8 +15,7 @@ publishedAt: 2023-09-05
 - `@iconify/iconify`を使って、SVG を直接生成した
 - SVG の生成をラップする Astro コンポーネントを自作した
 
-```tsx
-// Icon.astro
+```astro title=Icon.astro showLineNumbers
 ---
 import Iconify from "@iconify/iconify";
 
@@ -45,8 +45,7 @@ const getIconSvg = async (icon: string) => {
 
 使い方：
 
-```jsx
-// App.astro
+```astro title=App.astro showLineNumbers
 <Icon class="w-32" icon="fluent-emoji:robot" />
 ```
 
@@ -55,13 +54,11 @@ const getIconSvg = async (icon: string) => {
 - `astro-icon`: `iconify` のバージョンが古く、欲しいものが使えなかった。
 - `@iconify/tailwind`: iconの指定に変数を利用した際になぜか Icon が表示されず使えなかった。
 
-  ```jsx
-  // OK
+  ```astro title=OK
   <span class="fluent-emoji:robot" />
   ```
 
-  ```jsx
-  // NG
+  ```astro title=NG
   ---
   const icon = "icon" + "-" + "[fluent-emoji--building-construction]";
   ---
