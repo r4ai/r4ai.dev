@@ -47,7 +47,7 @@
     "react-hook-form": "^7.48.2",
     "react-hotkeys-hook": "^4.4.1",
     "rehype-katex": "^7.0.0",
-    "rehype-pretty-code": "^0.10.2",
+    "rehype-pretty-code": "^0.11.0",
     "remark-math": "^5.1.1",
     "sass": "^1.69.5",
     "scule": "^1.1.0",
