@@ -18,7 +18,7 @@
   "dependencies": {
     "@astrojs/mdx": "^1.1.3",
     "@astrojs/react": "^3.0.4",
-    "@astrojs/svelte": "^4.0.3",
+    "@astrojs/svelte": "^5.0.0",
     "@astrojs/tailwind": "^5.0.2",
     "@floating-ui/react": "^0.26.2",
     "@heroicons/react": "^2.0.18",
