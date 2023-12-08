@@ -1,0 +1,93 @@
+---
+type URLOptions = {
+  projectId: string
+  height?: string
+  ctl?: boolean
+  devtoolsheight?: number
+  embed?: boolean
+  file?: string
+  hidedevtools?: boolean
+  hideExplorer?: boolean
+  hideNavigation?: boolean
+  initialpath?: string
+  showSidebar?: boolean
+  startScript?: string
+  terminalHeight?: number
+  theme?: "dark" | "light"
+  view?: string
+}
+
+const parseUrl = (url: URL): URLOptions => {
+  const params = url.searchParams
+
+  const projectId = url.pathname.split("/")[2]
+
+  const height = params.get("height") || undefined
+  const ctl = Boolean(params.get("ctl"))
+  const devtoolsheight = Number(params.get("devtoolsheight"))
+  const embed = Boolean(params.get("embed"))
+  const file = params.get("file") || undefined
+  const hidedevtools = Boolean(params.get("hidedevtools"))
+  const hideExplorer = Boolean(params.get("hideExplorer"))
+  const hideNavigation = Boolean(params.get("hideNavigation"))
+  const initialpath = params.get("initialpath") || undefined
+  const showSidebar = Boolean(params.get("showSidebar"))
+  const startScript = params.get("startScript") || undefined
+  const terminalHeight = Number(params.get("terminalHeight"))
+  const theme = (params.get("theme") || undefined) as
+    | "light"
+    | "dark"
+    | undefined
+  const view = params.get("view") || undefined
+
+  return {
+    height,
+    projectId,
+    ctl,
+    devtoolsheight,
+    embed,
+    file,
+    hidedevtools,
+    hideExplorer,
+    hideNavigation,
+    initialpath,
+    showSidebar,
+    startScript,
+    terminalHeight,
+    theme,
+    view,
+  }
+}
+
+type Props = {
+  url: URL
+}
+const { url } = Astro.props as Props
+
+const options = parseUrl(url)
+---
+
+<script>
+  import sdk from "@stackblitz/sdk"
+
+  const elements = document.querySelectorAll("div[data-stackblitz]")
+  for (const elem of elements) {
+    const projectId = elem.getAttribute("data-project-id") ?? ""
+    const file = elem.getAttribute("data-file") ?? ""
+    const height = elem.computedStyleMap().get("height")?.toString() ?? "600px"
+    await sdk.embedProjectId(elem as HTMLElement, projectId, {
+      openFile: file,
+      height,
+      theme: resolvedTheme,
+    })
+  }
+</script>
+
+<div
+  data-stackblitz
+  data-project-id={options.projectId}
+  data-file={options.file}
+  data-theme={options.theme}
+  style={{ height: options.height ?? "600px" }}
+>
+</div>

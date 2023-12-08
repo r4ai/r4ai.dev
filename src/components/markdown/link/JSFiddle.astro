@@ -1,0 +1,37 @@
+---
+type Props = {
+  url: URL
+}
+const { url } = Astro.props
+
+const parseUrl = (url: URL) => ({
+  hostname: url.hostname,
+  username: url.pathname.split("/")[1],
+  id: url.pathname.split("/")[2],
+  version: url.pathname.split("/")[3] || undefined,
+  langs: url.pathname.split("/")[4] || undefined,
+  theme: url.pathname.split("/")[5] || undefined,
+})
+
+const getEmbedUrl = (url: URL, defaultTheme: "light" | "dark" = "dark") => {
+  const info = parseUrl(url)
+
+  let embedUrl = `//${info.hostname}/${info.username}/${info.id}/`
+  if (info.version) {
+    embedUrl += `${info.version}/`
+  }
+  embedUrl += "embed/"
+  if (info.langs) {
+    embedUrl += `${info.langs}/`
+  }
+  if (info.theme) {
+    embedUrl += `${info.theme}/`
+  } else {
+    embedUrl += defaultTheme
+  }
+
+  return embedUrl
+}
+---
+
+<script async src={getEmbedUrl(url)}></script>

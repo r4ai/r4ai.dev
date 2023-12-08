@@ -9,14 +9,17 @@ dependencies:
     specifier: ^1.1.3
     version: 1.1.5(astro@4.0.3)
   "@astrojs/react":
-    specifier: ^3.0.4
-    version: 3.0.6(@types/react-dom@18.2.17)(@types/react@18.2.41)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.4)
+    specifier: ^3.0.7
+    version: 3.0.7(@types/react-dom@18.2.17)(@types/react@18.2.41)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.4)
   "@astrojs/svelte":
     specifier: ^5.0.0
     version: 5.0.0(astro@4.0.3)(svelte@4.2.8)(typescript@5.3.2)(vite@5.0.4)
   "@astrojs/tailwind":
-    specifier: ^5.0.2
-    version: 5.0.2(astro@4.0.3)(tailwindcss@3.3.5)
+    specifier: ^5.0.3
+    version: 5.0.3(astro@4.0.3)(tailwindcss@3.3.5)
+  "@extractus/oembed-extractor":
+    specifier: ^4.0.1
+    version: 4.0.1
   "@floating-ui/react":
     specifier: ^0.26.2
     version: 0.26.3(react-dom@18.2.0)(react@18.2.0)
@@ -59,6 +62,9 @@ dependencies:
   "@react-three/fiber":
     specifier: ^8.15.8
     version: 8.15.12(react-dom@18.2.0)(react@18.2.0)(three@0.159.0)
+  "@stackblitz/sdk":
+    specifier: ^1.9.0
+    version: 1.9.0
   "@tailwindcss/typography":
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.5)
@@ -95,6 +101,9 @@ dependencies:
   react-hotkeys-hook:
     specifier: ^4.4.1
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
+  react-tweet:
+    specifier: ^3.1.1
+    version: 3.1.1(react-dom@18.2.0)(react@18.2.0)
   rehype-katex:
     specifier: ^7.0.0
     version: 7.0.0
@@ -418,10 +427,10 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/react@3.0.6(@types/react-dom@18.2.17)(@types/react@18.2.41)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.4):
+  /@astrojs/react@3.0.7(@types/react-dom@18.2.17)(@types/react@18.2.41)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.4):
     resolution:
       {
-        integrity: sha512-hjC02q8cPeyzw+LWe6V2dPTYf8OgfuZwxmH32tkhn3JC/VTz1AdO5rM7dgvbilLnUoL7qMGapODEkSl2mmW+oA==,
+        integrity: sha512-MpjuFw7YGta44OaQExKVCWyXjujUtUsp5Nst/wIjRHbkmBBlypdj+MF9/xqjsYM+vjcrByOGupmluRrFQO67YQ==,
       }
     engines: { node: ">=18.14.1" }
     peerDependencies:
@@ -432,7 +441,7 @@ packages:
     dependencies:
       "@types/react": 18.2.41
       "@types/react-dom": 18.2.17
-      "@vitejs/plugin-react": 4.2.0(vite@5.0.4)
+      "@vitejs/plugin-react": 4.2.1(vite@5.0.4)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       ultrahtml: 1.5.2
@@ -461,13 +470,13 @@ packages:
       - vite
     dev: false
 
-  /@astrojs/tailwind@5.0.2(astro@4.0.3)(tailwindcss@3.3.5):
+  /@astrojs/tailwind@5.0.3(astro@4.0.3)(tailwindcss@3.3.5):
     resolution:
       {
-        integrity: sha512-oXqeqmBlkQmsltrsU9nEWeXOtrZIAHW8dcmX7BCdrjzPnU6dPwWzAwhddNQ9ihKiWwsLnlbwQZIo2CDigcZlIA==,
+        integrity: sha512-p+uFa1PNuV8RxhGkPUFgVq8CUbmS3xr0u5k1An2xKECLotRh7vsrGcPUijHvYOt42URohcg8rIq0CxNoVMhReg==,
       }
     peerDependencies:
-      astro: ^3.2.4
+      astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
       astro: 4.0.3(@types/node@20.10.3)(sass@1.69.5)(typescript@5.3.2)
@@ -1160,6 +1169,18 @@ packages:
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
     dev: true
+
+  /@extractus/oembed-extractor@4.0.1:
+    resolution:
+      {
+        integrity: sha512-tT/ExVeyYRtXADjeFfqbUDwtlVj1kLy0+aSiw8FlHhUH1R6Bi/lrdpPe+agx3fFCmL4/HfNuT/pwYftk3NKSyg==,
+      }
+    engines: { node: ">= 15" }
+    dependencies:
+      cross-fetch: 4.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /@floating-ui/core@1.5.1:
     resolution:
@@ -2625,6 +2646,13 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@stackblitz/sdk@1.9.0:
+    resolution:
+      {
+        integrity: sha512-3m6C7f8pnR5KXys/Hqx2x6ylnpqOak6HtnZI6T5keEO0yT+E4Spkw37VEbdwuC+2oxmjdgq6YZEgiKX7hM1GmQ==,
+      }
+    dev: false
+
   /@sveltejs/vite-plugin-svelte-inspector@2.0.0(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.4):
     resolution:
       {
@@ -2665,6 +2693,15 @@ packages:
       vitefu: 0.2.5(vite@5.0.4)
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@swc/helpers@0.5.3:
+    resolution:
+      {
+        integrity: sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==,
+      }
+    dependencies:
+      tslib: 2.6.2
     dev: false
 
   /@tailwindcss/typography@0.5.10(tailwindcss@3.3.5):
@@ -3163,10 +3200,10 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vitejs/plugin-react@4.2.0(vite@5.0.4):
+  /@vitejs/plugin-react@4.2.1(vite@5.0.4):
     resolution:
       {
-        integrity: sha512-+MHTH/e6H12kRp5HUkzOGqPMksezRMmW+TNzlh/QXfI8rRf6l2Z2yH/v12no1UvTwhZgEDMuQ7g7rrfMseU6FQ==,
+        integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==,
       }
     engines: { node: ^14.18.0 || >=16.0.0 }
     peerDependencies:
@@ -4051,6 +4088,13 @@ packages:
       string-width: 7.0.0
     dev: true
 
+  /client-only@0.0.1:
+    resolution:
+      {
+        integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==,
+      }
+    dev: false
+
   /cliui@8.0.1:
     resolution:
       {
@@ -4062,6 +4106,14 @@ packages:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
     dev: true
+
+  /clsx@1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==,
+      }
+    engines: { node: ">=6" }
+    dev: false
 
   /clsx@2.0.0:
     resolution:
@@ -4210,6 +4262,17 @@ packages:
       cross-spawn: 7.0.3
     dev: false
 
+  /cross-fetch@4.0.0:
+    resolution:
+      {
+        integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==,
+      }
+    dependencies:
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /cross-spawn@7.0.3:
     resolution:
       {
@@ -4253,6 +4316,16 @@ packages:
         integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==,
       }
     dev: true
+
+  /date-fns@2.30.0:
+    resolution:
+      {
+        integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==,
+      }
+    engines: { node: ">=0.11" }
+    dependencies:
+      "@babel/runtime": 7.23.5
+    dev: false
 
   /debounce@1.2.1:
     resolution:
@@ -8297,6 +8370,21 @@ packages:
     dev: false
     optional: true
 
+  /node-fetch@2.7.0:
+    resolution:
+      {
+        integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==,
+      }
+    engines: { node: 4.x || >=6.0.0 }
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: 5.0.0
+    dev: false
+
   /node-releases@2.0.14:
     resolution:
       {
@@ -9175,6 +9263,23 @@ packages:
         integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==,
       }
     engines: { node: ">=0.10.0" }
+    dev: false
+
+  /react-tweet@3.1.1(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-8GQLa5y0G56kvGQkN7OiaKkjFAhWYVdyFq62ioY2qVtpMrjchVU+3KnqneCyp0+BemOQZkg6WWp/qoCNeEMH6A==,
+      }
+    peerDependencies:
+      react: ">= 18.0.0"
+      react-dom: ">= 18.0.0"
+    dependencies:
+      "@swc/helpers": 0.5.3
+      clsx: 1.2.1
+      date-fns: 2.30.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      swr: 2.2.4(react@18.2.0)
     dev: false
 
   /react-use-measure@2.1.1(react-dom@18.2.0)(react@18.2.0):
@@ -10405,6 +10510,19 @@ packages:
       periscopic: 3.1.0
     dev: false
 
+  /swr@2.2.4(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-njiZ/4RiIhoOlAaLYDqwz5qH/KZXVilRLvomrx83HjzCWTfa+InyfAjv05PSFxnmLzZkNO9ZfvgoqzAaEI4sGQ==,
+      }
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
   /synckit@0.8.6:
     resolution:
       {
@@ -10618,6 +10736,13 @@ packages:
     engines: { node: ">=8.0" }
     dependencies:
       is-number: 7.0.0
+
+  /tr46@0.0.3:
+    resolution:
+      {
+        integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==,
+      }
+    dev: false
 
   /trim-lines@3.0.1:
     resolution:
@@ -11072,6 +11197,17 @@ packages:
       punycode: 2.3.1
     dev: true
 
+  /use-sync-external-store@1.2.0(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==,
+      }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /util-deprecate@1.0.2:
     resolution:
       {
@@ -11428,6 +11564,23 @@ packages:
       {
         integrity: sha512-9Z0JcMTFxeE+b2x1LJTdnaT8rT8aEp7MVxkNwoycNmJWwPdzoXzMh0BjJSh/AEFP+KPYZUli814h8bJZFIZ2jA==,
       }
+    dev: false
+
+  /webidl-conversions@3.0.1:
+    resolution:
+      {
+        integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==,
+      }
+    dev: false
+
+  /whatwg-url@5.0.0:
+    resolution:
+      {
+        integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==,
+      }
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
     dev: false
 
   /which-boxed-primitive@1.0.2:

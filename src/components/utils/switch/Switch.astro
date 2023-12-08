@@ -1,0 +1,16 @@
+---
+type Props = {
+  value: unknown
+}
+const { value } = Astro.props
+const key = String(value)
+
+let html: string | undefined = undefined
+if (Astro.slots.has(key)) {
+  html = await Astro.slots.render(key)
+} else if (Astro.slots.has("default")) {
+  html = await Astro.slots.render("default")
+}
+---
+
+<Fragment set:html={html} />

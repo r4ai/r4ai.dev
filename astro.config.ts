@@ -6,7 +6,7 @@ import rehypeKatex from "rehype-katex"
 import svelte from "@astrojs/svelte"
 
 import mdx from "@astrojs/mdx"
-import type { AstroIntegration, RemarkPlugins } from "astro"
+import type { RemarkPlugins } from "astro"
 import {
   rehypeCustomCode,
   type RehypeCustomCodeOptions,
@@ -15,17 +15,22 @@ import remarkMetaString from "remark-meta-string"
 
 // https://astro.build/config
 export default defineConfig({
+  vite: {
+    ssr: {
+      noExternal: ["rehype-custom-code", "remark-meta-string", "react-tweet"],
+    },
+  },
   integrations: [
     tailwind({
       applyBaseStyles: false,
-    }) as AstroIntegration,
+    }),
     react(),
-    svelte() as AstroIntegration,
-    mdx() as AstroIntegration,
+    svelte(),
+    mdx(),
   ],
   markdown: {
     remarkPlugins: [
-      remarkMath,
+      remarkMath as unknown as RemarkPlugins[number],
       remarkMetaString as unknown as RemarkPlugins[number],
     ],
     rehypePlugins: [
@@ -61,7 +66,7 @@ export default defineConfig({
             },
           },
         } satisfies RehypeCustomCodeOptions,
-      ] as unknown as RemarkPlugins[number],
+      ],
     ],
     syntaxHighlight: false,
   },
