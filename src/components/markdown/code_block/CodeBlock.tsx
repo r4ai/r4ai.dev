@@ -11,7 +11,6 @@ export const CodeBlock: FC<Props> = ({
   children,
   code = "",
   title,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   lang,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   range,
@@ -49,6 +48,7 @@ export const CodeBlock: FC<Props> = ({
             title ? "pt-2" : "pt-4",
             props.className
           )}
+          data-lang={lang}
         >
           {children}
         </pre>
