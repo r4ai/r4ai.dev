@@ -13,8 +13,10 @@ export type CodeBlockProps = {
   range: number[]
   showLineNumbers: boolean
   icon: ReactNode
+  footer?: ReactNode
 }
 
+type Props = CodeBlockProps
 const props = Object.entries(Astro.props)
   .map(([key, value]) => {
     if (key === "tabindex") return ["tabIndex", value]

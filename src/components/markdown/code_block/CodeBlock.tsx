@@ -17,6 +17,7 @@ export const CodeBlock: FC<Props> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showLineNumbers,
   icon,
+  footer = undefined,
   ...props
 }) => {
   return (
@@ -54,6 +55,7 @@ export const CodeBlock: FC<Props> = ({
         </pre>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
+      {footer}
     </div>
   )
 }

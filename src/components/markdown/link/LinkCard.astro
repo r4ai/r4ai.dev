@@ -9,6 +9,7 @@ import { Switch, Case, Default } from "@/components/utils/switch"
 import JSFiddle from "./JSFiddle.astro"
 import StackBlitz from "./StackBlitz.astro"
 import { Twitter } from "./Twitter"
+import Gist from "./Gist.astro"
 
 const hasHtml = (oembed: OembedData): oembed is OembedData & { html: string } =>
   oembed !== undefined && "html" in oembed && typeof oembed.html === "string"
@@ -75,6 +76,9 @@ props.oembed = await getOembed(url)
         <div class="mx-auto w-full sm:w-[80%]">
           <Twitter url={url} client:load />
         </div>
+      </Case>
+      <Case slot="gist.github.com">
+        <Gist url={url} />
       </Case>
       <Default>
         {/* eslint-disable-next-line */}
