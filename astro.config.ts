@@ -12,6 +12,7 @@ import {
   type RehypeCustomCodeOptions,
 } from "rehype-custom-code"
 import remarkMetaString from "remark-meta-string"
+import { remarkEmbed } from "./src/lib/remarkPlugins/remarkEmbed"
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,6 +33,7 @@ export default defineConfig({
     remarkPlugins: [
       remarkMath as unknown as RemarkPlugins[number],
       remarkMetaString as unknown as RemarkPlugins[number],
+      remarkEmbed,
     ],
     rehypePlugins: [
       rehypeKatex,
