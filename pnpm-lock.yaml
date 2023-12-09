@@ -92,6 +92,9 @@ dependencies:
   katex:
     specifier: ^0.16.9
     version: 0.16.9
+  linkedom:
+    specifier: ^0.16.4
+    version: 0.16.4
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -148,6 +151,9 @@ devDependencies:
   "@iconify/tailwind":
     specifier: ^0.1.3
     version: 0.1.4
+  "@types/hast":
+    specifier: ^3.0.3
+    version: 3.0.3
   "@types/mdast":
     specifier: ^4.0.3
     version: 4.0.3
@@ -172,12 +178,15 @@ devDependencies:
   eslint-plugin-jsx-a11y:
     specifier: ^6.7.1
     version: 6.8.0(eslint@8.55.0)
+  hast-util-from-html:
+    specifier: ^2.0.1
+    version: 2.0.1
+  hast-util-select:
+    specifier: ^6.0.2
+    version: 6.0.2
   husky:
     specifier: ^8.0.3
     version: 8.0.3
-  linkedom:
-    specifier: ^0.16.4
-    version: 0.16.4
   lint-staged:
     specifier: ^15.0.2
     version: 15.2.0
@@ -3765,6 +3774,13 @@ packages:
       }
     dev: false
 
+  /bcp-47-match@2.0.3:
+    resolution:
+      {
+        integrity: sha512-JtTezzbAibu8G0R9op9zb3vcWZd9JF6M0xOYGPn0fNCd7wOpRB1mU2mH9T8gaBGbAAyIIVgB2G7xG0GP98zMAQ==,
+      }
+    dev: true
+
   /bidi-js@1.0.3:
     resolution:
       {
@@ -3818,7 +3834,6 @@ packages:
       {
         integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==,
       }
-    dev: true
 
   /boxen@7.1.1:
     resolution:
@@ -4319,6 +4334,13 @@ packages:
       domhandler: 5.0.3
       domutils: 3.1.0
       nth-check: 2.1.1
+    dev: false
+
+  /css-selector-parser@3.0.3:
+    resolution:
+      {
+        integrity: sha512-HAcgYSBFKo1jnglINdHeBPIscPOCOh8vCDCaOV5xkwMSlGPEnfdynxBuWkgZMwXltMKgFbDcr4EPmDpSWi34MA==,
+      }
     dev: true
 
   /css-tree@2.3.1:
@@ -4338,7 +4360,7 @@ packages:
         integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==,
       }
     engines: { node: ">= 6" }
-    dev: true
+    dev: false
 
   /cssesc@3.0.0:
     resolution:
@@ -4353,7 +4375,7 @@ packages:
       {
         integrity: sha512-iKuQcq+NdHqlAcwUY0o/HL69XQrUaQdMjmStJ8JFmUaiiQErlhrmuigkg/CU4E2J0IyUKUrMAgl36TvN67MqTw==,
       }
-    dev: true
+    dev: false
 
   /csstype@3.1.2:
     resolution:
@@ -4608,6 +4630,14 @@ packages:
       path-type: 4.0.0
     dev: true
 
+  /direction@2.0.1:
+    resolution:
+      {
+        integrity: sha512-9S6m9Sukh1cZNknO1CWAr2QAWsbKLafQiyM5gZ7VgXHeuaoUwffKN4q6NC4A/Mf9iiPlOXQEKW/Mv/mh9/3YFA==,
+      }
+    hasBin: true
+    dev: true
+
   /dlv@1.1.3:
     resolution:
       {
@@ -4634,14 +4664,14 @@ packages:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       entities: 4.5.0
-    dev: true
+    dev: false
 
   /domelementtype@2.3.0:
     resolution:
       {
         integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==,
       }
-    dev: true
+    dev: false
 
   /domhandler@5.0.3:
     resolution:
@@ -4651,7 +4681,7 @@ packages:
     engines: { node: ">= 4" }
     dependencies:
       domelementtype: 2.3.0
-    dev: true
+    dev: false
 
   /domutils@3.1.0:
     resolution:
@@ -4662,7 +4692,7 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
-    dev: true
+    dev: false
 
   /draco3d@1.5.6:
     resolution:
@@ -5797,6 +5827,15 @@ packages:
       vfile-location: 5.0.2
       web-namespaces: 2.0.1
 
+  /hast-util-has-property@3.0.0:
+    resolution:
+      {
+        integrity: sha512-MNilsvEKLFpV604hwfhVStK0usFY/QmM5zX16bo7EjnAEGofr5YyI37kzopBlZJkHD4t887i+q/C8/tr5Q94cA==,
+      }
+    dependencies:
+      "@types/hast": 3.0.3
+    dev: true
+
   /hast-util-is-element@3.0.0:
     resolution:
       {
@@ -5860,6 +5899,30 @@ packages:
       vfile: 6.0.1
       web-namespaces: 2.0.1
       zwitch: 2.0.4
+
+  /hast-util-select@6.0.2:
+    resolution:
+      {
+        integrity: sha512-hT/SD/d/Meu+iobvgkffo1QecV8WeKWxwsNMzcTJsKw1cKTQKSR/7ArJeURLNJF9HDjp9nVoORyNNJxrvBye8Q==,
+      }
+    dependencies:
+      "@types/hast": 3.0.3
+      "@types/unist": 3.0.2
+      bcp-47-match: 2.0.3
+      comma-separated-tokens: 2.0.3
+      css-selector-parser: 3.0.3
+      devlop: 1.1.0
+      direction: 2.0.1
+      hast-util-has-property: 3.0.0
+      hast-util-to-string: 3.0.0
+      hast-util-whitespace: 3.0.0
+      not: 0.1.0
+      nth-check: 2.1.1
+      property-information: 6.4.0
+      space-separated-tokens: 2.0.2
+      unist-util-visit: 5.0.0
+      zwitch: 2.0.4
+    dev: true
 
   /hast-util-to-estree@2.3.3:
     resolution:
@@ -6017,6 +6080,7 @@ packages:
       {
         integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==,
       }
+    dev: false
 
   /html-void-elements@2.0.1:
     resolution:
@@ -6041,7 +6105,7 @@ packages:
       domhandler: 5.0.3
       domutils: 3.1.0
       entities: 4.5.0
-    dev: true
+    dev: false
 
   /http-cache-semantics@4.1.1:
     resolution:
@@ -6828,7 +6892,7 @@ packages:
       html-escaper: 3.0.3
       htmlparser2: 9.0.0
       uhyphen: 0.2.0
-    dev: true
+    dev: false
 
   /lint-staged@15.2.0:
     resolution:
@@ -8522,6 +8586,13 @@ packages:
     engines: { node: ">=0.10.0" }
     dev: false
 
+  /not@0.1.0:
+    resolution:
+      {
+        integrity: sha512-5PDmaAsVfnWUgTUbJ3ERwn7u79Z0dYxN9ErxCpVJJqe2RK0PJ3z+iFUxuqjwtlDDegXvtWoxD/3Fzxox7tFGWA==,
+      }
+    dev: true
+
   /npm-run-path@4.0.1:
     resolution:
       {
@@ -8548,7 +8619,6 @@ packages:
       }
     dependencies:
       boolbase: 1.0.0
-    dev: true
 
   /object-assign@4.1.1:
     resolution:
@@ -11078,7 +11148,7 @@ packages:
       {
         integrity: sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==,
       }
-    dev: true
+    dev: false
 
   /ultrahtml@1.5.2:
     resolution:

@@ -1,52 +1,80 @@
-import { parseHTML } from "linkedom"
+import { fromHtml } from "hast-util-from-html"
+import { select } from "hast-util-select"
+import type { Element } from "hast"
 
-export const getOGP = async (url: URL) => {
-  const res = await fetch(url.href)
-  const data = await res.text()
-  const { document } = parseHTML(data)
-  const head = document.head
-  const body = document.body
-  const title =
-    head.querySelector("title")?.textContent ??
-    head.querySelector("meta[property='og:title']")?.getAttribute("content") ??
-    body.querySelector("h1")?.textContent
-  const description = getDescription(url, head)
-  const image = getImage(url, head)
-  return { title, description, image }
+type OGP = {
+  title?: string
+  description?: string
+  image?: string
 }
 
-const getDescription = (url: URL, head: HTMLElement) => {
-  const defaultDescription = () =>
-    head.querySelector("meta[name='description']")?.getAttribute("content") ??
-    head
-      .querySelector("meta[property='og:description']")
-      ?.getAttribute("content") ??
-    undefined
+export const getOGP = async (url: URL): Promise<OGP> => {
+  const res = await fetch(url.href)
+  const data = await res.text()
+
+  const root = fromHtml(data)
+  const head = select("head", root)
+  const body = select("body", root)
+
+  return {
+    title: getTitle(url, head, body),
+    description: getDescription(url, head),
+    image: getImage(url, head),
+  }
+}
+
+const getTitle = (url: URL, head?: Element, body?: Element) => {
+  const title = select("title", head)?.children[0]
+  if (title?.type === "text") return title.value
+
+  const ogTitle = select("meta[property='og:title']", head)?.properties?.content
+  if (ogTitle != null) return String(ogTitle)
+
+  const h1 = select("h1", body)?.children[0]
+  if (h1?.type === "text") return h1.value
+
+  return undefined
+}
+
+const getDescription = (url: URL, head?: Element) => {
+  const defaultDescription = () => {
+    const description = select("meta[name='description']", head)?.properties
+      ?.content
+    if (description != null) return String(description)
+
+    const ogDescription = select("meta[property='og:description']", head)
+      ?.properties?.content
+    if (ogDescription != null) return String(ogDescription)
+
+    return undefined
+  }
 
   switch (url.hostname) {
-    case "zenn.dev":
-      return (
-        head
-          .querySelector("meta[name='zenn:description']")
-          ?.getAttribute("content") ?? defaultDescription()
-      )
+    case "zenn.dev": {
+      const zennDescription = select("meta[name='zenn:description']", head)
+        ?.properties?.content
+      if (zennDescription != null) return String(zennDescription)
+      return defaultDescription()
+    }
     default:
       return defaultDescription()
   }
 }
 
-const getImage = (url: URL, head: HTMLElement) => {
-  const defaultImage = () =>
-    head.querySelector("meta[property='og:image']")?.getAttribute("content") ??
-    undefined
+const getImage = (url: URL, head?: Element) => {
+  const defaultImage = () => {
+    const ogImage = select("meta[property='og:image']", head)?.properties
+      ?.content
+    if (ogImage != null) return String(ogImage)
+  }
 
   switch (url.hostname) {
-    case "zenn.dev":
-      return (
-        head
-          .querySelector("meta[name='zenn:image']")
-          ?.getAttribute("content") ?? defaultImage()
-      )
+    case "zenn.dev": {
+      const zennImage = select("meta[name='zenn:image']", head)?.properties
+        ?.content
+      if (zennImage != null) return String(zennImage)
+      return defaultImage()
+    }
     default:
       return defaultImage()
   }
