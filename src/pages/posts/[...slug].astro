@@ -8,6 +8,7 @@ import { isDev } from "@/lib/dev"
 import PostLayout from "@/layouts/PostLayout.astro"
 import CodeBlock from "@/components/markdown/code_block/CodeBlock.astro"
 import Embed from "@/components/markdown/link/Embed.astro"
+import Blockquote from "@/components/markdown/Blockquote.astro"
 
 export async function getStaticPaths() {
   const posts = await getPostEntries()
@@ -96,6 +97,7 @@ const formatDate = (date: Date) =>
           components={{
             pre: CodeBlock,
             embed: Embed,
+            blockquote: Blockquote,
           }}
         />
       </div>

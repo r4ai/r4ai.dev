@@ -9,17 +9,26 @@ type OGP = {
 }
 
 export const getOGP = async (url: URL): Promise<OGP> => {
-  const res = await fetch(url.href)
-  const data = await res.text()
+  try {
+    const res = await fetch(url.href)
+    const data = await res.text()
 
-  const root = fromHtml(data)
-  const head = select("head", root)
-  const body = select("body", root)
+    const root = fromHtml(data)
+    const head = select("head", root)
+    const body = select("body", root)
 
-  return {
-    title: getTitle(url, head, body),
-    description: getDescription(url, head),
-    image: getImage(url, head),
+    return {
+      title: getTitle(url, head, body),
+      description: getDescription(url, head),
+      image: getImage(url, head),
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      title: undefined,
+      description: undefined,
+      image: undefined,
+    }
   }
 }
 
@@ -61,11 +70,21 @@ const getDescription = (url: URL, head?: Element) => {
   }
 }
 
+const isValidUrl = (url: string) => {
+  try {
+    new URL(url)
+    return true
+  } catch {
+    return false
+  }
+}
+
 const getImage = (url: URL, head?: Element) => {
   const defaultImage = () => {
     const ogImage = select("meta[property='og:image']", head)?.properties
       ?.content
-    if (ogImage != null) return String(ogImage)
+    if (ogImage != null && isValidUrl(String(ogImage))) return String(ogImage)
+    return undefined
   }
 
   switch (url.hostname) {

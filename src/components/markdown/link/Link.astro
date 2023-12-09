@@ -2,9 +2,9 @@
 import type { HTMLAttributes } from "astro/types"
 
 type Props = HTMLAttributes<"a">
-const props = Astro.props
+const { slot, ...props } = Astro.props
 ---
 
 <a {...props}>
-  <slot />
+  {slot ? slot : props.href}
 </a>

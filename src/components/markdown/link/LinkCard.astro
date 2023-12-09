@@ -18,7 +18,7 @@ const shouldInvertFavicon = url.hostname.includes("github")
   title ? (
     <div class="h-36">
       <a
-        class="not-prose flex min-h-full flex-row items-center rounded-lg border bg-secondary/25 transition hover:bg-secondary/80 hover:dark:bg-secondary/50"
+        class="not-prose flex min-h-full flex-row items-center rounded-lg border bg-secondary/25 not-italic transition hover:bg-secondary/80 hover:dark:bg-secondary/50"
         href={url.href}
         {...props}
       >
@@ -51,7 +51,7 @@ const shouldInvertFavicon = url.hostname.includes("github")
     </div>
   ) : (
     <Link {...props} href={url.href}>
-      {slot}
+      {slot ? slot : url.href}
     </Link>
   )
 }
