@@ -1,4 +1,6 @@
 ---
+import { Skeleton } from "@/components/ui/skeleton"
+
 type URLOptions = {
   projectId: string
   height?: string
@@ -69,8 +71,10 @@ const options = parseUrl(url)
 
 <script>
   import sdk from "@stackblitz/sdk"
+  console.log("loaded")
 
   const elements = document.querySelectorAll("div[data-stackblitz]")
+  console.log(elements)
   for (const elem of elements) {
     const projectId = elem.getAttribute("data-project-id") ?? ""
     const file = elem.getAttribute("data-file") ?? ""
@@ -88,6 +92,7 @@ const options = parseUrl(url)
   data-project-id={options.projectId}
   data-file={options.file}
   data-theme={options.theme}
-  style={{ height: options.height ?? "600px" }}
+  style={{ height: options.height ?? "600px", width: "100%" }}
 >
+  <Skeleton className="h-full w-full rounded-lg" client:visible />
 </div>
