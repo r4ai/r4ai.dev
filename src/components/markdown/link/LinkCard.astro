@@ -1,101 +1,57 @@
 ---
-import {
-  extract,
-  hasProvider,
-  type OembedData,
-} from "@extractus/oembed-extractor"
-import { randomUUID } from "crypto"
-import { Switch, Case, Default } from "@/components/utils/switch"
-import JSFiddle from "./JSFiddle.astro"
-import StackBlitz from "./StackBlitz.astro"
-import { Twitter } from "./Twitter"
-import Gist from "./Gist.astro"
+import type { HTMLAttributes } from "astro/types"
+import { twMerge } from "tailwind-merge"
+import { getFavicon, getOGP } from "@/lib/ogp"
+import Link from "./Link.astro"
 
-const hasHtml = (oembed: OembedData): oembed is OembedData & { html: string } =>
-  oembed !== undefined && "html" in oembed && typeof oembed.html === "string"
+type Props = HTMLAttributes<"a">
+const { href, slot, ...props } = Astro.props
+const url = new URL(href ?? "")
 
-const isTwitter = (url: URL) =>
-  url.hostname.match(/twitter\.com$/) || url.hostname.match(/x\.com$/)
+const { title, description, image } = await getOGP(url)
+const favicon = await getFavicon(url)
 
-export type LinkCardProps = JSX.IntrinsicElements["a"] & {
-  oembed?: OembedData
-  url: URL
-}
-type Props = LinkCardProps
-const props = Astro.props
-
-const url = new URL(props.href ?? "")
-
-let oembedId: string | undefined = undefined
-
-const getOembed = async (url: URL) => {
-  if (isTwitter(url)) {
-    return undefined
-  }
-  if (hasProvider(url.href)) {
-    const oembed = await extract(url.href)
-    if (hasHtml(oembed)) {
-      oembedId = randomUUID()
-      oembed.html = oembed.html.replace(
-        /<blockquote/g,
-        `<blockquote data-id="${oembedId}"`
-      )
-    }
-    return oembed
-  }
-  return undefined
-}
-props.oembed = await getOembed(url)
+const shouldInvertFavicon = url.hostname.includes("github")
 ---
 
-<style is:global>
-  .twitter-tweet {
-    margin: 0 auto !important;
-  }
-
-  div[data-oembed] > * {
-    margin: 0 auto !important;
-  }
-  div[data-oembed] > div {
-    width: fit-content; /* SlideShare */
-  }
-</style>
-
 {
-  props.oembed && hasHtml(props.oembed) ? (
-    <div data-oembed set:html={props.oembed.html} />
-  ) : (
-    <Switch value={url.hostname}>
-      <Case slot="jsfiddle.net">
-        <JSFiddle url={url} />
-      </Case>
-      <Case slot="stackblitz.com">
-        <StackBlitz url={url} />
-      </Case>
-      <Case slot="twitter.com">
-        <div class="mx-auto w-full sm:w-[80%]">
-          <Twitter url={url} client:load />
+  title ? (
+    <div class="h-36">
+      <a
+        class="not-prose flex min-h-full flex-row items-center rounded-lg border bg-secondary/25 transition hover:bg-secondary/80 hover:dark:bg-secondary/50"
+        href={url.href}
+        {...props}
+      >
+        <div class="flex min-w-0 flex-1 flex-col justify-between gap-2 px-5">
+          <p class="line-clamp-2 text-xl font-bold">{title}</p>
+          {description && (
+            <p class="truncate text-muted-foreground">{description}</p>
+          )}
+          <div class="flex flex-row items-center gap-2">
+            <img
+              src={favicon}
+              class={twMerge(
+                "inline-block h-4 w-4",
+                shouldInvertFavicon && "dark:invert"
+              )}
+            />
+            <p class="truncate">{url.hostname}</p>
+          </div>
         </div>
-      </Case>
-      <Case slot="gist.github.com">
-        <Gist url={url} />
-      </Case>
-      <Default>
-        {/* eslint-disable-next-line */}
-        <a {...(props as any)}>
-          <slot />
-        </a>
-      </Default>
-    </Switch>
-  )
-}
-
-{
-  oembedId && (
-    <script is:inline define:vars={{ id: oembedId }}>
-      const oembed = document.querySelector(`[data-id="${id}"]`)
-      oembed?.setAttribute("data-theme", resolvedTheme)
-      oembed?.setAttribute("data-embed-theme", resolvedTheme)
-    </script>
+        {image && (
+          <div class="flex-shrink-0">
+            <img
+              src={image}
+              class="h-36 w-36 rounded-r-lg object-cover md:w-fit"
+              alt={title ?? ""}
+            />
+          </div>
+        )}
+      </a>
+    </div>
+  ) : (
+    <Link {...props} href={url.href}>
+      {slot}
+    </Link>
   )
 }
