@@ -92,9 +92,6 @@ dependencies:
   katex:
     specifier: ^0.16.9
     version: 0.16.9
-  linkedom:
-    specifier: ^0.16.4
-    version: 0.16.4
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -3834,6 +3831,7 @@ packages:
       {
         integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==,
       }
+    dev: true
 
   /boxen@7.1.1:
     resolution:
@@ -4323,19 +4321,6 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  /css-select@5.1.0:
-    resolution:
-      {
-        integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==,
-      }
-    dependencies:
-      boolbase: 1.0.0
-      css-what: 6.1.0
-      domhandler: 5.0.3
-      domutils: 3.1.0
-      nth-check: 2.1.1
-    dev: false
-
   /css-selector-parser@3.0.3:
     resolution:
       {
@@ -4354,14 +4339,6 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
-  /css-what@6.1.0:
-    resolution:
-      {
-        integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==,
-      }
-    engines: { node: ">= 6" }
-    dev: false
-
   /cssesc@3.0.0:
     resolution:
       {
@@ -4369,13 +4346,6 @@ packages:
       }
     engines: { node: ">=4" }
     hasBin: true
-
-  /cssom@0.5.0:
-    resolution:
-      {
-        integrity: sha512-iKuQcq+NdHqlAcwUY0o/HL69XQrUaQdMjmStJ8JFmUaiiQErlhrmuigkg/CU4E2J0IyUKUrMAgl36TvN67MqTw==,
-      }
-    dev: false
 
   /csstype@3.1.2:
     resolution:
@@ -4654,45 +4624,6 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
-
-  /dom-serializer@2.0.0:
-    resolution:
-      {
-        integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==,
-      }
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      entities: 4.5.0
-    dev: false
-
-  /domelementtype@2.3.0:
-    resolution:
-      {
-        integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==,
-      }
-    dev: false
-
-  /domhandler@5.0.3:
-    resolution:
-      {
-        integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==,
-      }
-    engines: { node: ">= 4" }
-    dependencies:
-      domelementtype: 2.3.0
-    dev: false
-
-  /domutils@3.1.0:
-    resolution:
-      {
-        integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==,
-      }
-    dependencies:
-      dom-serializer: 2.0.0
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-    dev: false
 
   /draco3d@1.5.6:
     resolution:
@@ -6095,18 +6026,6 @@ packages:
         integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==,
       }
 
-  /htmlparser2@9.0.0:
-    resolution:
-      {
-        integrity: sha512-uxbSI98wmFT/G4P2zXx4OVx04qWUmyFPrD2/CNepa2Zo3GPNaCaaxElDgwUrwYWkK1nr9fft0Ya8dws8coDLLQ==,
-      }
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      domutils: 3.1.0
-      entities: 4.5.0
-    dev: false
-
   /http-cache-semantics@4.1.1:
     resolution:
       {
@@ -6879,19 +6798,6 @@ packages:
       {
         integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==,
       }
-    dev: false
-
-  /linkedom@0.16.4:
-    resolution:
-      {
-        integrity: sha512-SykvDVh/jAnaO+WiPqH5vX3QpZrIRImuppzYhIHons3RXPhDwqN2dOyfopOVaHleqWtoS+3vWCqen+m8M3HToQ==,
-      }
-    dependencies:
-      css-select: 5.1.0
-      cssom: 0.5.0
-      html-escaper: 3.0.3
-      htmlparser2: 9.0.0
-      uhyphen: 0.2.0
     dev: false
 
   /lint-staged@15.2.0:
@@ -8619,6 +8525,7 @@ packages:
       }
     dependencies:
       boolbase: 1.0.0
+    dev: true
 
   /object-assign@4.1.1:
     resolution:
@@ -11142,13 +11049,6 @@ packages:
       }
     engines: { node: ">=14.17" }
     hasBin: true
-
-  /uhyphen@0.2.0:
-    resolution:
-      {
-        integrity: sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==,
-      }
-    dev: false
 
   /ultrahtml@1.5.2:
     resolution:
