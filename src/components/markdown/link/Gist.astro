@@ -14,14 +14,16 @@ const getEmbedUrl = (url: URL) => {
 
   return url.protocol + "//" + url.hostname + pathname + EXTENSION + url.search
 }
+
+// TODO: Don't work on first page load with ViewTransition. #BUG
 ---
 
-<div>
+<div data-gist>
   <script is:inline src={getEmbedUrl(url)}></script>
 </div>
 
 <style is:global>
-  /**!
+  /**
    * Modified from https://github.com/sindresorhus/github-markdown-css/blob/b336b4215cde412ab0dc2562cdc1c6740e6078d3/github-markdown.css
    * Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
    * Licensed under MIT (https://github.com/sindresorhus/github-markdown-css/blob/b336b4215cde412ab0dc2562cdc1c6740e6078d3/license)

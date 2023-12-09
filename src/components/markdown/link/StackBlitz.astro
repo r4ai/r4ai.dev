@@ -73,18 +73,21 @@ const options = parseUrl(url)
   import sdk from "@stackblitz/sdk"
   console.log("loaded")
 
-  const elements = document.querySelectorAll("div[data-stackblitz]")
-  console.log(elements)
-  for (const elem of elements) {
-    const projectId = elem.getAttribute("data-project-id") ?? ""
-    const file = elem.getAttribute("data-file") ?? ""
-    const height = elem.computedStyleMap().get("height")?.toString() ?? "600px"
-    await sdk.embedProjectId(elem as HTMLElement, projectId, {
-      openFile: file,
-      height,
-      theme: resolvedTheme,
-    })
-  }
+  document.addEventListener("astro:page-load", () => {
+    const elements = document.querySelectorAll("div[data-stackblitz]")
+    console.log(elements)
+    for (const elem of elements) {
+      const projectId = elem.getAttribute("data-project-id") ?? ""
+      const file = elem.getAttribute("data-file") ?? ""
+      const height =
+        elem.computedStyleMap().get("height")?.toString() ?? "600px"
+      sdk.embedProjectId(elem as HTMLElement, projectId, {
+        openFile: file,
+        height,
+        theme: resolvedTheme,
+      })
+    }
+  })
 </script>
 
 <div
