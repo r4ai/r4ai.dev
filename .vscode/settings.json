@@ -1,10 +1,18 @@
 {
-  "tailwindCSS.experimental.classRegex": [
-    // key名がtwで始まるものをtailwindのクラスとして認識する
-    // e.g. twColor: text-red-500;
-    // > https://github.com/tailwindlabs/tailwindcss-intellisense/issues/270
-    "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,"
-  ],
+  "[typescriptreact]": {
+    "tailwindCSS.experimental.classRegex": [
+      // e.g. tw="text-red-500"
+      "tw=\"([^\"\\n]*)\""
+    ]
+  },
+  "[yaml]": {
+    "tailwindCSS.experimental.classRegex": [
+      // key名がtwで始まるものをtailwindのクラスとして認識する
+      // e.g. twColor: text-red-500;
+      // > https://github.com/tailwindlabs/tailwindcss-intellisense/issues/270
+      // "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,",
+    ]
+  },
   "files.associations": {
     "*.css": "tailwindcss"
   },

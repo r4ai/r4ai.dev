@@ -1,0 +1,36 @@
+---
+import Code from "@/components/Code.astro"
+import { getPostEntries } from "@/lib/posts"
+
+export async function getStaticPaths() {
+  return await getPostEntries()
+}
+
+const { entry } = Astro.props
+---
+
+<style is:inline>
+  * {
+    background-color: black !important;
+  }
+</style>
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{entry.data.title}</title>
+  </head>
+  <body>
+    <Code
+      code={`# ${entry.data.title}
+
+${entry.body}`}
+      lang="mdx"
+      theme="material-theme-darker"
+    />
+  </body>
+</html>

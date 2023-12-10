@@ -29,6 +29,9 @@ export default defineConfig({
     svelte(),
     mdx(),
   ],
+  redirects: {
+    "/posts/raw/[...slug]": "/posts/[...slug]/raw",
+  },
   markdown: {
     remarkPlugins: [
       remarkMath as unknown as RemarkPlugins[number],

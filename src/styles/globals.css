@@ -89,3 +89,19 @@ body {
   height: 100%;
   scroll-behavior: smooth;
 }
+
+@font-face {
+  font-family: "UDEV Gothic LG";
+  src: url("/fonts/UDEVGothic/UDEVGothicLG-Regular.woff2") format("woff2");
+  font-weight: regular;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "UDEV Gothic LG";
+  src: url("/fonts/UDEVGothic/UDEVGothicLG-Italic.woff2") format("woff2");
+  font-weight: regular;
+  font-style: italic;
+  font-display: swap;
+}

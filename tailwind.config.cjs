@@ -1,4 +1,5 @@
 const { addDynamicIconSelectors } = require("@iconify/tailwind")
+const defaultTheem = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -78,6 +79,13 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        mono: ["UDEV Gothic LG", ...defaultTheem.fontFamily.mono],
+        times: ["Times New Roman", "Times", "serif"],
+      },
+      fontSize: {
+        "4.5xl": "2.5rem",
       },
       typography: {
         DEFAULT: {

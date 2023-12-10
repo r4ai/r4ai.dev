@@ -23,7 +23,7 @@ export const getOGP = async (url: URL): Promise<OGP> => {
       image: getImage(url, head),
     }
   } catch (e) {
-    console.error(e)
+    console.error("Failed to get OGP: ", url.href)
     return {
       title: undefined,
       description: undefined,
