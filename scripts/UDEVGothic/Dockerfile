@@ -1,5 +1,5 @@
 # 使用する基本イメージ
-FROM debian:buster
+FROM debian:bookworm
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
