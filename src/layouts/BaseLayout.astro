@@ -6,10 +6,9 @@ import { Toaster } from "@/components/ui/toaster"
 export type Props = {
   title: string
   description?: string
-  /** url of og:image */
-  ogImage?: string
+  ogImage?: URL
   ogType?: "website" | "article" | "profile" | "book" | "music" | "video"
-  ogUrl?: string
+  ogUrl?: URL
   twitterCard?: "summary" | "summary_large_image" | "app" | "player"
   twitterSite?: string
 }
@@ -19,7 +18,7 @@ const {
   description = "Tech blog by Rai",
   ogImage,
   ogType = "website",
-  ogUrl = Astro.url.href,
+  ogUrl = new URL(Astro.url.pathname, Astro.site),
   twitterCard = "summary",
   twitterSite = "@r4ai_jp",
 } = Astro.props
