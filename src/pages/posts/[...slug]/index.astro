@@ -9,6 +9,7 @@ import PostLayout from "@/layouts/PostLayout.astro"
 import CodeBlock from "@/components/markdown/code_block/CodeBlock.astro"
 import Embed from "@/components/markdown/link/Embed.astro"
 import Blockquote from "@/components/markdown/Blockquote.astro"
+import { join } from "node:path"
 
 export async function getStaticPaths() {
   const posts = await getPostEntries()
@@ -26,9 +27,11 @@ const formatDate = (date: Date) =>
     month: "2-digit",
     day: "2-digit",
   })
+
+const ogImageUrl = new URL(join(Astro.url.pathname, "ogimage.png"), Astro.url)
 ---
 
-<PostLayout title={entry.data.title}>
+<PostLayout title={entry.data.title} ogType="article" ogImage={ogImageUrl.href}>
   <main
     class="mx-auto my-20 flex w-full max-w-5xl flex-col gap-16 px-6"
     transition:name={`post-/posts/${entry.slug}`}

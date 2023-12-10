@@ -3,11 +3,28 @@ import NavBar from "../components/NavBar.astro"
 import { ViewTransitions } from "astro:transitions"
 import { Toaster } from "@/components/ui/toaster"
 
-export interface Props {
+export type Props = {
   title: string
+  description?: string
+  /** url of og:image */
+  ogImage?: string
+  ogType?: "website" | "article" | "profile" | "book" | "music" | "video"
+  ogUrl?: string
+  twitterCard?: "summary" | "summary_large_image" | "app" | "player"
+  twitterSite?: string
 }
 
-const title = `${Astro.props.title} | r4ai.dev`
+const {
+  title: titleProps,
+  description = "Tech blog by Rai",
+  ogImage,
+  ogType = "website",
+  ogUrl = Astro.url.href,
+  twitterCard = "summary",
+  twitterSite = "@r4ai_jp",
+} = Astro.props
+
+const title = `${titleProps} | r4ai.dev`
 ---
 
 <script is:inline>
@@ -49,11 +66,21 @@ const title = `${Astro.props.title} | r4ai.dev`
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={ogUrl} />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:site" content={twitterSite} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
     <ViewTransitions />
   </head>
   <body class="flex h-full flex-col">
