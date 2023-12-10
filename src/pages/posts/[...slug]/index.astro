@@ -31,7 +31,12 @@ const formatDate = (date: Date) =>
 const ogImageUrl = new URL(join(Astro.url.pathname, "ogimage.png"), Astro.site)
 ---
 
-<PostLayout title={entry.data.title} ogType="article" ogImage={ogImageUrl}>
+<PostLayout
+  title={entry.data.title}
+  ogType="article"
+  ogImage={ogImageUrl}
+  twitterCard="summary_large_image"
+>
   <main
     class="mx-auto my-20 flex w-full max-w-5xl flex-col gap-16 px-6"
     transition:name={`post-/posts/${entry.slug}`}

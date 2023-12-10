@@ -75,6 +75,7 @@ const title = `${titleProps} | r4ai.dev`
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={ogUrl} />
+    <meta property="og:site_name" content={Astro.site?.hostname} />
     <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:site" content={twitterSite} />
     <meta name="twitter:title" content={title} />
