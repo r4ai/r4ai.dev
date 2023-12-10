@@ -41,9 +41,10 @@ const shouldInvertFavicon = url.hostname.includes("github")
         {image && (
           <div class="flex-shrink-0">
             <img
-              src={image}
+              src={image.href}
               class="h-36 w-36 rounded-r-lg object-cover md:w-fit"
               alt={title ?? ""}
+              loading="lazy"
             />
           </div>
         )}

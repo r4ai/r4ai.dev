@@ -5,7 +5,7 @@ import type { Element } from "hast"
 type OGP = {
   title?: string
   description?: string
-  image?: string
+  image?: URL
 }
 
 export const getOGP = async (url: URL): Promise<OGP> => {
@@ -17,10 +17,11 @@ export const getOGP = async (url: URL): Promise<OGP> => {
     const head = select("head", root)
     const body = select("body", root)
 
+    const image = getImage(url, head)
     return {
       title: getTitle(url, head, body),
       description: getDescription(url, head),
-      image: getImage(url, head),
+      image: image != null ? new URL(image, url) : undefined,
     }
   } catch (e) {
     console.error("Failed to get OGP: ", url.href)
