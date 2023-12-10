@@ -3,11 +3,19 @@ import { readFile } from "fs/promises"
 import satori from "satori"
 import sharp from "sharp"
 import { loadDefaultJapaneseParser } from "budoux"
+import { isDev } from "@/lib/dev"
 
 declare module "react" {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
     tw?: string
   }
+}
+
+const console = {
+  log: (...args: unknown[]): unknown => isDev() && console.log(...args),
+  warn: (...args: unknown[]): unknown => isDev() && console.warn(...args),
+  error: (...args: unknown[]): unknown => isDev() && console.error(...args),
+  info: (...args: unknown[]): unknown => isDev() && console.info(...args),
 }
 
 type OgImageProps = {
