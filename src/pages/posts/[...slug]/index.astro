@@ -9,6 +9,7 @@ import PostLayout from "@/layouts/PostLayout.astro"
 import CodeBlock from "@/components/markdown/code_block/CodeBlock.astro"
 import Embed from "@/components/markdown/link/Embed.astro"
 import Blockquote from "@/components/markdown/Blockquote.astro"
+import CustomImage from "@/components/markdown/image/ImageComponent.astro"
 import { join } from "node:path"
 
 export async function getStaticPaths() {
@@ -106,6 +107,7 @@ const ogImageUrl = new URL(join(Astro.url.pathname, "ogimage.png"), Astro.site)
             pre: CodeBlock,
             embed: Embed,
             blockquote: Blockquote,
+            img: CustomImage,
           }}
         />
       </div>

@@ -1,7 +1,7 @@
 // @ts-check
+const { defineConfig } = require("eslint-define-config")
 
-/** @type {import('eslint').ESLint.ConfigData} */
-module.exports = {
+module.exports = defineConfig({
   root: true,
   extends: [
     "eslint:recommended",
@@ -47,4 +47,4 @@ module.exports = {
       },
     },
   ],
-}
+})

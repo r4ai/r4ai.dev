@@ -21,7 +21,7 @@ export const CodeBlock: FC<Props> = ({
   ...props
 }) => {
   return (
-    <div className="prose-none relative my-6 flex flex-col rounded-xl border bg-neutral-50 dark:bg-neutral-900/75">
+    <div className="relative my-2 flex flex-col rounded-xl border bg-neutral-50 dark:bg-neutral-900/75">
       {title ? (
         <div className="flex flex-row justify-between border-b px-4 py-2">
           <div className="flex flex-row items-center gap-3 font-mono">

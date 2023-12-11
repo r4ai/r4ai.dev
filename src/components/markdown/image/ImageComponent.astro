@@ -1,0 +1,44 @@
+---
+import { twMerge } from "tailwind-merge"
+import { parseAlt } from "./parser"
+import { Image, type LocalImageProps } from "astro:assets"
+import "viewerjs/dist/viewer.css"
+
+type Props = LocalImageProps
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { src, alt: altText, slot, class: className, ...props } = Astro.props
+
+const { alt, meta } = parseAlt(altText ?? "")
+---
+
+<script>
+  import Viewer from "viewerjs"
+
+  let viewers: Viewer[] = []
+  for (const img of document.querySelectorAll<HTMLElement>("[data-viewer]")) {
+    viewers.push(
+      new Viewer(img, {
+        navbar: false,
+        inheritedAttributes: ["class"],
+      })
+    )
+  }
+</script>
+
+<Image
+  {...props}
+  data-viewer
+  src={src}
+  alt={alt}
+  class={twMerge(
+    "mx-auto hover:cursor-zoom-in",
+    meta.get("invert") && "dark:invert",
+    className
+  )}
+/>
+
+<style is:global>
+  .viewer-canvas {
+    backdrop-filter: blur(16px);
+  }
+</style>

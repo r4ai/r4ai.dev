@@ -8,5 +8,12 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   },
-  "include": ["./src", "./astro.config.ts"]
+  "include": ["./src", "./astro.config.ts"],
+  "mdx": {
+    "plugins": [
+      ["remark-frontmatter", ["toml", "yaml"]],
+      "remark-gfm",
+      "remark-math"
+    ]
+  }
 }

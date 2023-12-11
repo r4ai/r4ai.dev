@@ -41,7 +41,7 @@
       & > span[data-line]::before {
         content: counter(line);
         counter-increment: line;
-        @apply mr-3 inline-block w-4 text-right text-neutral-600;
+        @apply mr-4 inline-block w-4 text-right dark:text-neutral-600 text-neutral-400;
       }
     }
 
