@@ -14,16 +14,18 @@ const { alt, meta } = parseAlt(altText ?? "")
 <script>
   import Viewer from "viewerjs"
 
-  let viewers: Viewer[] = []
-  for (const img of document.querySelectorAll<HTMLElement>("[data-viewer]")) {
-    viewers.push(
-      new Viewer(img, {
-        navbar: false,
-        toolbar: false,
-        inheritedAttributes: ["class", "height", "width"],
-      })
-    )
-  }
+  document.addEventListener("astro:page-load", () => {
+    let viewers: Viewer[] = []
+    for (const img of document.querySelectorAll<HTMLElement>("[data-viewer]")) {
+      viewers.push(
+        new Viewer(img, {
+          navbar: false,
+          toolbar: false,
+          inheritedAttributes: ["class", "height", "width"],
+        })
+      )
+    }
+  })
 </script>
 
 <Image
