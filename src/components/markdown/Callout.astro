@@ -106,6 +106,7 @@ const styles: Styles = {
     props.class,
     props.className
   )}
+  data-callout={props.type}
 >
   <div
     class={twMerge(
@@ -118,3 +119,9 @@ const styles: Styles = {
   </div>
   <slot />
 </div>
+
+<style is:global>
+  [data-callout] [data-code-block] {
+    @apply my-2;
+  }
+</style>

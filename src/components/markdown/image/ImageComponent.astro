@@ -19,7 +19,8 @@ const { alt, meta } = parseAlt(altText ?? "")
     viewers.push(
       new Viewer(img, {
         navbar: false,
-        inheritedAttributes: ["class"],
+        toolbar: false,
+        inheritedAttributes: ["class", "height", "width"],
       })
     )
   }
