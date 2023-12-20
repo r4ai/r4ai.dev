@@ -83,7 +83,7 @@
     "hast-util-select": "^6.0.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "lucide-react": "^0.294.0",
+    "lucide-react": "^0.299.0",
     "postcss-import": "^15.1.0",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.2",
