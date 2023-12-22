@@ -190,9 +190,7 @@ export default defineConfig({
                     }
                   },
                   line(hast, line) {
-                    if (hast.children.length > 0) {
-                      hast.properties["data-line"] = line
-                    }
+                    hast.properties["data-line"] = line
                     if (meta.range?.includes(line)) {
                       hast.properties["data-highlighted-line"] = true
                     }
