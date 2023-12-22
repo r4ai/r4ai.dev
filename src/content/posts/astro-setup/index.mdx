@@ -65,7 +65,7 @@ npm install -D \
 
 設定ファイルを作成する：
 
-```js title=.eslintrc.cjs
+```js title=.eslintrc.cjs showLineNumbers
 // @ts-check
 
 /** @type {import('eslint').ESLint.ConfigData} */
@@ -113,7 +113,7 @@ module.exports = {
 };
 ```
 
-```json diff title=package.json
+```json diff title=package.json showLineNumbers
   {
     "scripts": {
 +     "check": "astro check && tsc --noEmit",
@@ -151,7 +151,7 @@ npm install --dev lint-staged
 
 lint-staged の設定を書く。
 
-```js title=.lintstagedrc.cjs
+```js title=.lintstagedrc.cjs showLineNumbers
 // @ts-check
 
 /** @type {import('lint-staged').Config} */
