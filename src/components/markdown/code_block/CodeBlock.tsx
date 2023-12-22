@@ -40,6 +40,8 @@ export const CodeBlock: FC<Props> = ({
   showLineNumbers,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   npm2yarn,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  diffIndentSize,
   icon,
   footer = undefined,
   ...props

@@ -21,14 +21,15 @@ export const Npm2Yarn: FC<Npm2YarnProps> = (props) => {
           <Tabs.Trigger
             className="border-b-2 px-2 pb-1 transition data-[state=active]:border-gray-900 data-[state=active]:font-bold dark:data-[state=active]:border-gray-200"
             value={c[0]}
+            key={c[0]}
           >
             {c[0]}
           </Tabs.Trigger>
         ))}
       </Tabs.List>
       {Object.entries(code).map((c) => (
-        <Tabs.Content value={c[0]}>
-          <CodeBlock {...props}>
+        <Tabs.Content value={c[0]} key={c[0]}>
+          <CodeBlock {...props} code={c[1]}>
             <code
               className="px-4"
               dangerouslySetInnerHTML={{

@@ -28,7 +28,7 @@
       @apply grid w-full text-[0.9rem];
     }
 
-    & span[data-line] {
+    & span[data-line]:not(:last-child) {
       @apply border-l-2 border-l-transparent px-4;
     }
 
@@ -38,7 +38,7 @@
         counter-reset: line;
       }
 
-      & > span[data-line]::before {
+      & > span[data-line]:not(:last-child)::before {
         content: counter(line);
         counter-increment: line;
         @apply mr-4 inline-block w-4 text-right text-neutral-400 dark:text-neutral-600;
