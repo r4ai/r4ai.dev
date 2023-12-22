@@ -1,0 +1,174 @@
+---
+title: Astro × TailwindCSS × React プロジェクトのセットアップ
+tags: 
+  - Astro
+  - TailwindCSS
+  - React
+  - husky
+  - lint-staged
+icon: vscode-icons:file-type-astro
+genre: article
+draft: false
+publishedAt: 2023-12-22
+---
+
+## Prettier の導入
+
+パッケージをインストールする：
+
+```sh npm2yarn
+npm install --dev prettier prettier-plugin-astro prettier-plugin-tailwindcss
+```
+
+設定ファイルを作成する：
+
+```js title=.prettierrc.cjs showLineNumbers
+// @ts-check
+
+/** @type {import('prettier').Options} */
+module.exports = {
+  printWidth: 80,
+  tabWidth: 2,
+  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  overrides: [
+    {
+      files: "*.astro",
+      options: {
+        parser: "astro",
+      },
+    },
+  ],
+};
+```
+
+```json diff title=package.json showLineNumbers
+  {
+    "scripts": {
++     "format": "prettier --ignore-path .gitignore --write './**/*.{js,cjs,ts,jsx,tsx,astro,json,html,md}'",
+    }
+  }
+```
+
+## ESLint の導入
+
+パッケージをインストールする：
+
+```sh npm2yarn
+npm install -D \
+    eslint \
+    eslint-config-prettier \
+    eslint-plugin-astro \
+    eslint-plugin-jsx-a11y \
+    @typescript-eslint/eslint-plugin \
+    @typescript-eslint/parser
+```
+
+設定ファイルを作成する：
+
+```js title=.eslintrc.cjs
+// @ts-check
+
+/** @type {import('eslint').ESLint.ConfigData} */
+module.exports = {
+  root: true,
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:astro/recommended",
+    "prettier",
+  ],
+  env: {
+    browser: true,
+    node: true,
+  },
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  plugins: ["@typescript-eslint"],
+  rules: {
+    "no-undef": "off",
+  },
+  ignorePatterns: ["node_modules", "dist"],
+  overrides: [
+    {
+      files: ["*.astro"],
+      parser: "astro-eslint-parser",
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+        extraFileExtensions: [".astro"],
+      },
+    },
+    {
+      files: "*.cjs",
+      env: {
+        node: true,
+      },
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
+      },
+    },
+  ],
+};
+```
+
+```json diff title=package.json
+  {
+    "scripts": {
++     "check": "astro check && tsc --noEmit",
++     "lint": "eslint --ext '.js,.cjs,.ts,.jsx,.tsx,.astro' .",
++     "lint:fix": "eslint --ext '.js,.cjs,.ts,.jsx,.tsx,.astro' --fix .",
+    }
+  }
+```
+
+## lint-staged, husky の導入
+
+### 1. husky の導入
+
+husky をインストールする。
+
+```sh npm2yarn
+npm exec husky-init && npm install
+```
+
+pre-commit の設定を行う。
+
+```sh npm2yarn
+npm exec husky set .husky/pre-commit "npm exec lint-staged"
+```
+
+https://typicode.github.io/husky/getting-started.html#automatic-recommended
+
+### 2. lint-staged の導入
+
+lint-staged をインストールする。
+
+```sh npm2yarn
+npm install --dev lint-staged 
+```
+
+lint-staged の設定を書く。
+
+```js title=.lintstagedrc.cjs
+// @ts-check
+
+/** @type {import('lint-staged').Config} */
+module.exports = {
+  "*.{js,cjs,ts,jsx,tsx,astro}": ["eslint --fix", "prettier --write"],
+  "*.{md,html,json,yaml,yml}": ["prettier --write"],
+}
+```
+
+### 3. 動作確認
+
+```bash
+git add -A && git commit -m 'chore: huskyとlint-stagedを導入し、commit時にeslintとprettierを実行させる'
+```
+
+### 参考文献
+
+https://github.com/okonet/lint-staged#installation-and-setup
+
+https://github.com/typicode/husky

@@ -5,6 +5,7 @@ import { CodeBlock as CodeBlockComponent } from "./CodeBlock"
 import { camelCase } from "scule"
 import Iconify from "@iconify/iconify/dist/iconify.js"
 import { skillIcons } from "@/lib/langs"
+import { Npm2Yarn } from "./Npm2Yarn"
 
 export type CodeBlockProps = {
   code: string
@@ -12,6 +13,11 @@ export type CodeBlockProps = {
   lang: string
   range: number[]
   showLineNumbers: boolean
+  diff?: boolean
+  npm2yarn?: {
+    npm: string
+    yarn: string
+  }
   icon: ReactNode
   footer?: ReactNode
 }
@@ -48,11 +54,23 @@ const skillIcon = async (lang: string) => {
 const iconName = await skillIcon(props.lang)
 ---
 
-<CodeBlockComponent {...props} client:visible>
-  <Icon
-    icon={iconName}
-    class="h-4 w-4 brightness-90 contrast-75 filter"
-    slot="icon"
-  />
-  <slot />
-</CodeBlockComponent>
+{
+  props.npm2yarn ? (
+    <Npm2Yarn {...props} client:visible>
+      <Icon
+        icon={iconName}
+        class="h-4 w-4 brightness-90 contrast-75 filter"
+        slot="icon"
+      />
+    </Npm2Yarn>
+  ) : (
+    <CodeBlockComponent {...props} client:visible>
+      <Icon
+        icon={iconName}
+        class="h-4 w-4 brightness-90 contrast-75 filter"
+        slot="icon"
+      />
+      <slot />
+    </CodeBlockComponent>
+  )
+}

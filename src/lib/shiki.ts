@@ -1,6 +1,11 @@
-import { getHighlighter } from "shikiji"
+import { getHighlighter, bundledLanguages } from "shikiji"
 
 export const highlighter = await getHighlighter({
-  themes: ["material-theme-darker", "github-light", "github-dark"],
-  langs: ["markdown", "mdx"],
+  themes: [
+    "material-theme-darker",
+    "github-light",
+    "github-dark",
+    "one-dark-pro",
+  ],
+  langs: Object.keys(bundledLanguages),
 })

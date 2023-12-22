@@ -7,6 +7,28 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 type Props = JSX.IntrinsicElements["pre"] & CodeBlockProps
 
+type CodeProps = JSX.IntrinsicElements["pre"] &
+  Pick<CodeBlockProps, "lang" | "title">
+
+const Code: FC<CodeProps> = ({ children, title, lang, ...props }) => {
+  return (
+    <ScrollArea>
+      <pre
+        {...props}
+        className={twMerge(
+          "shiki not-prose flex overflow-auto pb-4",
+          title ? "pt-2" : "pt-4",
+          props.className
+        )}
+        data-lang={lang}
+      >
+        {children}
+      </pre>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
+  )
+}
+
 export const CodeBlock: FC<Props> = ({
   children,
   code = "",
@@ -16,6 +38,8 @@ export const CodeBlock: FC<Props> = ({
   range,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showLineNumbers,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  npm2yarn,
   icon,
   footer = undefined,
   ...props
@@ -44,20 +68,9 @@ export const CodeBlock: FC<Props> = ({
           </div>
         </TooltipProvider>
       )}
-      <ScrollArea>
-        <pre
-          {...props}
-          className={twMerge(
-            "shiki not-prose flex overflow-auto pb-4",
-            title ? "pt-2" : "pt-4",
-            props.className
-          )}
-          data-lang={lang}
-        >
-          {children}
-        </pre>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+      <Code {...props} lang={lang} title={title}>
+        {children}
+      </Code>
       {footer}
     </div>
   )
