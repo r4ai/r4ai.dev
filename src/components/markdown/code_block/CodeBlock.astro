@@ -14,10 +14,8 @@ export type CodeBlockProps = {
   range: number[]
   showLineNumbers: boolean
   diff?: boolean
-  npm2yarn?: {
-    npm: string
-    yarn: string
-  }
+  diffIndentSize?: number
+  npm2yarn?: boolean
   icon: ReactNode
   footer?: ReactNode
 }
@@ -32,6 +30,13 @@ const props = Object.entries(Astro.props)
     (acc, [key, value]) => ({ ...acc, [key]: value }),
     {}
   ) as CodeBlockProps
+props.code = props.diffIndentSize
+  ? props.code
+      ?.toString()
+      .split("\n")
+      .map((line) => line.slice(Number(props.diffIndentSize)))
+      .join("\n")
+  : props.code
 
 const transformLang = (lang: string) => {
   const icons = skillIcons(true)

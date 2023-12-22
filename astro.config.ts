@@ -80,6 +80,7 @@ export default defineConfig({
                         }
                         break
                       }
+                      meta.diffIndentSize = diffIndetSize.toString()
 
                       hast.children.forEach((line) => {
                         if (
