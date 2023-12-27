@@ -28,7 +28,7 @@
       @apply grid w-full text-[0.9rem];
     }
 
-    & span[data-line]:not(:last-child) {
+    & span.line {
       @apply border-l-2 border-l-transparent px-4;
     }
 
