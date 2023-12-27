@@ -215,8 +215,8 @@ devDependencies:
     specifier: ^13.0.1
     version: 13.0.1
   rehype-custom-code:
-    specifier: ^0.2.4
-    version: 0.2.4(shikiji@0.9.11)
+    specifier: ^0.3.0
+    version: 0.3.1(shikiji@0.9.11)
   remark:
     specifier: ^15.0.1
     version: 15.0.1
@@ -7063,10 +7063,10 @@ packages:
       set-function-name: 2.0.1
     dev: true
 
-  /rehype-custom-code@0.2.4(shikiji@0.9.11):
-    resolution: {integrity: sha512-2JJGLBnBh9AoFs/uOLi2O4v5U7hpG/bB5VjvLuboKDrhnMyHl4AFExOLS3CTEiqe5xtvuSVXEQFG04dA6xlwfg==}
+  /rehype-custom-code@0.3.1(shikiji@0.9.11):
+    resolution: {integrity: sha512-jvArwegQBH0wNGo+MQSATwN0eUYZ9FQaczUU5lH5QSv6/AyDjbAzbEcLQ7fBOuMH3EQOTN9GD4rhtNyrZHU5xw==}
     peerDependencies:
-      shikiji: ^0.8.0
+      shikiji: ^0.8.0 || ^0.9.0
     dependencies:
       deepmerge: 4.3.1
       hast-util-is-element: 3.0.0
