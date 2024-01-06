@@ -1,5 +1,5 @@
 import { fetchFont } from "@/lib/font"
-import { readFile } from "fs/promises"
+import { readFile } from "node:fs/promises"
 import satori from "satori"
 import sharp from "sharp"
 import { loadDefaultJapaneseParser } from "budoux"
@@ -35,20 +35,23 @@ const isHalfWidth = (char: string) => {
   )
 }
 
+const calculateTextWidth = (text: string) =>
+  Array.from(text).reduce((acc, char) => {
+    if (isHalfWidth(char)) {
+      return acc + 1
+    } else {
+      return acc + 2
+    }
+  }, 0)
+
 const buildText = (text: string) => {
-  const texts = parser
+  const words = parser
     .parse(text.replaceAll("<br>", "").replaceAll("<br />", ""))
     .map((text) => text.split("\n"))
     .flat()
     .map((text) => ({
       text,
-      width: Array.from(text).reduce((acc, char) => {
-        if (isHalfWidth(char)) {
-          return acc + 1
-        } else {
-          return acc + 2
-        }
-      }, 0),
+      width: calculateTextWidth(text),
       shouldWrap: false,
     }))
 
@@ -59,46 +62,48 @@ const buildText = (text: string) => {
     19, // 3行目: 半角19文字
     16, // 4行目: 半角16文字
   ]
-  let currentWidth = texts[0].width
+  let currentWidth = words[0].width
   let currentLine = 0
-  for (let i = 1; i < texts.length; i++) {
+  for (let i = 1; i < words.length; i++) {
     if (currentWidth > maxWidth[Math.min(currentLine, 3)]) {
       currentLine += 1
       currentWidth -= maxWidth[Math.min(currentLine, 3)]
       continue
     }
 
-    currentWidth += texts[i].width
+    currentWidth += words[i].width
     if (currentWidth > maxWidth[Math.min(currentLine, 3)]) {
       currentLine += 1
-      texts[i].shouldWrap = true
-      currentWidth = texts[i].width
+      words[i].shouldWrap = true
+      currentWidth = words[i].width
     }
   }
-  console.log(texts)
+  console.log(words)
 
   // 改行ごとに分割
-  // e.g. formattedTexts = ["あいうえお", "かきくけこ", "さしすせそ", "たちつてと..."]
-  const formattedTexts = [""]
-  let i = 0
-  for (const text of texts) {
-    if (i > 3) {
-      formattedTexts[i - 1] += "..."
+  // e.g. lines = ["あいうえお", "かきくけこ", "さしすせそ", "たちつてと..."]
+  const lines = [""]
+  let lineCount = 0
+  for (const word of words) {
+    // 4行目以降は省略
+    if (lineCount > 3) {
+      lines[lineCount - 1] += "..."
       break
     }
-    if (text.shouldWrap) {
-      i += 1
-      formattedTexts[i] = text.text
+
+    if (word.shouldWrap) {
+      lineCount += 1
+      lines[lineCount] = word.text
     } else {
-      formattedTexts[i] += text.text
+      lines[lineCount] += word.text
     }
   }
-  console.log(formattedTexts)
+  console.log(lines)
 
   return (
     <div tw="flex flex-col">
-      {formattedTexts.map((text) => (
-        <div>{text}</div>
+      {lines.map((line) => (
+        <div>{line}</div>
       ))}
     </div>
   )
