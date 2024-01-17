@@ -23,6 +23,7 @@ export type CodeBlockProps = {
 
 type Props = CodeBlockProps
 const props = Object.entries(Astro.props)
+  .map(([key, value]) => [key.replace("data-", ""), value])
   .map(([key, value]) => {
     if (key === "tabindex") return ["tabIndex", value]
     return [camelCase(key.replace("data", "")), value]

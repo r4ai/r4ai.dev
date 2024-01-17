@@ -44,7 +44,6 @@ export default defineConfig({
       [
         rehypeCustomCode,
         {
-          propsPrefix: "",
           shouldExportCodeAsProps: true,
           shiki: {
             themes: {
