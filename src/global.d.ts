@@ -7,3 +7,10 @@ declare module "@pagefind/default-ui" {
     constructor(arg: unknown)
   }
 }
+
+declare namespace astroHTML.JSX {
+  interface HTMLAttributes {
+    "data-pagefind-main"?: boolean
+    "data-pagefind-ignore"?: boolean
+  }
+}
