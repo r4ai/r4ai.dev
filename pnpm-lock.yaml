@@ -219,7 +219,7 @@ devDependencies:
     version: 13.0.1
   rehype-custom-code:
     specifier: ^0.3.1
-    version: 0.3.2(shikiji@0.9.19)
+    version: 0.3.2(shikiji@0.10.0)
   remark:
     specifier: ^15.0.1
     version: 15.0.1
@@ -248,8 +248,8 @@ devDependencies:
     specifier: ^0.33.0
     version: 0.33.2
   shikiji:
-    specifier: ^0.9.0
-    version: 0.9.19
+    specifier: ^0.10.0
+    version: 0.10.0
   sirv:
     specifier: ^2.0.4
     version: 2.0.4
@@ -7032,7 +7032,7 @@ packages:
       set-function-name: 2.0.1
     dev: true
 
-  /rehype-custom-code@0.3.2(shikiji@0.9.19):
+  /rehype-custom-code@0.3.2(shikiji@0.10.0):
     resolution: {integrity: sha512-cdDzKu/mOGbEmMIxngHozB+QD2d2mS7RhyCcVHkf38hbim2hsui8oKaASrp8d3wzct348J16xvppzjBkGEG3zQ==}
     peerDependencies:
       shikiji: ^0.8.0 || ^0.9.0
@@ -7043,7 +7043,7 @@ packages:
       json5: 2.2.3
       parse-numeric-range: 1.3.0
       scule: 1.2.0
-      shikiji: 0.9.19
+      shikiji: 0.10.0
       unist-util-visit: 5.0.0
     dev: true
 
@@ -7497,13 +7497,25 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
+  /shikiji-core@0.10.0:
+    resolution: {integrity: sha512-imG+bvRkuNlZUi2q9tMVfegRRouTpDxMFejpfF/6J+bFX3NDKtlW9T9iIAkBYnw4pcCtSwirW0AvkwlQR4wyxg==}
+    dev: true
+
   /shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
+    dev: false
+
+  /shikiji@0.10.0:
+    resolution: {integrity: sha512-1dAzIOWbtM7B4Sem5BvE+CEdsebDsRA34SfCxM4qJ4PLgR73ZD92VEtNfbcoZ3xOLSqvtV0J9i4WpCgVsmQteg==}
+    dependencies:
+      shikiji-core: 0.10.0
+    dev: true
 
   /shikiji@0.9.19:
     resolution: {integrity: sha512-Kw2NHWktdcdypCj1GkKpXH4o6Vxz8B8TykPlPuLHOGSV8VkhoCLcFOH4k19K4LXAQYRQmxg+0X/eM+m2sLhAkg==}
     dependencies:
       shikiji-core: 0.9.19
+    dev: false
 
   /side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
