@@ -1,3 +1,7 @@
+---
+import { SearchButton } from "./SearchButton"
+---
+
 <nav class="sticky top-4 z-50 mx-auto flex max-w-fit">
   <ul
     class="flex flex-row items-center justify-center gap-6 rounded-full border bg-stone-1/60 px-6 py-3 text-base text-card-foreground backdrop-blur-xl"
@@ -7,22 +11,7 @@
     <li><a href="/posts">Posts</a></li>
     <li><a href="/contact">Contact</a></li>
     <li class="ml-6 flex">
-      <button>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="h-5 w-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          ></path>
-        </svg>
-      </button>
+      <SearchButton client:load />
     </li>
   </ul>
 </nav>

@@ -1,0 +1,41 @@
+@import "@pagefind/default-ui/css/ui.css";
+
+#search {
+  & {
+    --pagefind-ui-scale: 0.75;
+    --pagefind-ui-primary: theme(colors.primary.DEFAULT);
+    --pagefind-ui-text: theme(colors.foreground);
+    --pagefind-ui-background: transparent;
+    --pagefind-ui-border: theme(colors.border);
+    --pagefind-ui-tag: theme(colors.secondary.foreground);
+    --pagefind-ui-border-width: theme(borderWidth.DEFAULT);
+    --pagefind-ui-border-radius: theme(borderRadius.xl);
+    --pagefind-ui-image-border-radius: theme(borderRadius.xl);
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: theme(fontFamily.sans);
+  }
+
+  .pagefind-ui__results-area {
+    @apply px-4;
+  }
+
+  .pagefind-ui__search-input {
+    @apply rounded-b-none border-0 border-b;
+  }
+
+  .pagefind-ui__search-input:placeholder-shown {
+    @apply rounded-xl border;
+  }
+}
+
+@media (width >= 768px) {
+  #search {
+    --pagefind-ui-scale: 0.8;
+  }
+}
+
+@media (width >= 1024px) {
+  #search {
+    --pagefind-ui-scale: 0.85;
+  }
+}
