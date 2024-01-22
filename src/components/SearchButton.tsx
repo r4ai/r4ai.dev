@@ -1,7 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import { useEffect, type FC } from "react"
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
-// @ts-expect-error: @pagefind/default-ui is not typed
 import { PagefindUI } from "@pagefind/default-ui"
 import "@/styles/pagefind.css"
 import { twMerge } from "tailwind-merge"
