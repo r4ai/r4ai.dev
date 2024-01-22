@@ -5,9 +5,19 @@ interface Props {
   icon: string
   alt?: string
   class?: string
+  pagefindImage?: boolean
 }
 
-const props = Astro.props
+const {
+  icon,
+  alt,
+  class: className,
+  pagefindImage = false,
+  ...props
+} = Astro.props
+
+const svg2dataUrl = (svg: string) =>
+  `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`
 
 const getIconSvg = async (icon: string, alt?: string) => {
   await Iconify.loadIcon(icon)
@@ -22,6 +32,13 @@ const getIconSvg = async (icon: string, alt?: string) => {
     "</svg>"
   )
 }
+
+const svg = await getIconSvg(icon, alt)
 ---
 
-<div set:html={await getIconSvg(props.icon, props.alt)} class={props.class} />
+<div
+  set:html={svg}
+  class={className}
+  data-pagefind-meta={pagefindImage ? `image:${svg2dataUrl(svg)}` : undefined}
+  {...props}
+/>

@@ -12,5 +12,6 @@ declare namespace astroHTML.JSX {
   interface HTMLAttributes {
     "data-pagefind-main"?: boolean
     "data-pagefind-ignore"?: boolean
+    "data-pagefind-meta"?: string
   }
 }
