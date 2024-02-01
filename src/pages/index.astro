@@ -6,6 +6,7 @@ import Zenn from "../assets/zenn.svg"
 import Bsky from "../assets/bsky.png"
 import GitHub from "../assets/github.svg"
 import IconBrobs from "../assets/icon_blobs.png"
+import { Waraiotoko } from "../assets/Waraiotoko"
 import { CubeCanvas } from "@/components/Cube"
 import RareIcon from "@/components/RareIcon.svelte"
 ---
@@ -19,6 +20,9 @@ import RareIcon from "@/components/RareIcon.svelte"
       class="col-span-3 col-start-1 mx-auto w-full max-w-xs sm:col-span-4"
       client:idle
     >
+      <Waraiotoko
+        className="image absolute z-[1] h-full w-full drop-shadow-lg"
+      />
       <Image src={IconBrobs} class="image z-0 drop-shadow-lg" alt="Me" />
     </RareIcon>
     <section class="col-span-4 my-auto sm:col-start-5 sm:col-end-9">
