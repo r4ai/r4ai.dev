@@ -80,7 +80,7 @@
     "hast-util-select": "^6.0.2",
     "husky": "^9.0.0",
     "lint-staged": "^15.2.0",
-    "lucide-react": "^0.338.0",
+    "lucide-react": "^0.341.0",
     "npm-to-yarn": "^2.1.0",
     "pagefind": "^1.0.4",
     "postcss-import": "^16.0.0",
