@@ -198,7 +198,7 @@ devDependencies:
     version: 0.341.0(react@18.2.0)
   npm-to-yarn:
     specifier: ^2.1.0
-    version: 2.1.0
+    version: 2.2.1
   pagefind:
     specifier: ^1.0.4
     version: 1.0.4
@@ -6306,8 +6306,8 @@ packages:
     dependencies:
       path-key: 4.0.0
 
-  /npm-to-yarn@2.1.0:
-    resolution: {integrity: sha512-2C1IgJLdJngq1bSER7K7CGFszRr9s2rijEwvENPEgI0eK9xlD3tNwDc0UJnRj7FIT2aydWm72jB88uVswAhXHA==}
+  /npm-to-yarn@2.2.1:
+    resolution: {integrity: sha512-O/j/ROyX0KGLG7O6Ieut/seQ0oiTpHF2tXAcFbpdTLQFiaNtkyTXXocM1fwpaa60dg1qpWj0nHlbNhx6qwuENQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
