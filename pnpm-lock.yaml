@@ -13,7 +13,7 @@ dependencies:
     version: 3.0.10(@types/react-dom@18.2.19)(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0)(vite@5.1.4)
   '@astrojs/svelte':
     specifier: ^5.0.0
-    version: 5.0.3(astro@4.3.5)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4)
+    version: 5.1.0(astro@4.3.5)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4)
   '@astrojs/tailwind':
     specifier: ^5.0.3
     version: 5.1.0(astro@4.3.5)(tailwindcss@3.4.1)
@@ -442,12 +442,12 @@ packages:
       - vite
     dev: false
 
-  /@astrojs/svelte@5.0.3(astro@4.3.5)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4):
-    resolution: {integrity: sha512-6TUBRUxmsEczKPBT6oDUAfvzuFCmITuhZfKPT5ZtOOyj9XOVnEnj/Iobd3ajKUbpWNYX7qZVAd1KMkmJc1Nhsg==}
+  /@astrojs/svelte@5.1.0(astro@4.3.5)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4):
+    resolution: {integrity: sha512-1f0wkFkHs+1vcCliaEB1j9SYEU/n5ZYTAASv5Rkq6nvjNFRrnPuXLQCYIYFqdGGqFm6UPdgKpJBFbFFeQlr4yA==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       astro: ^4.0.0
-      svelte: ^4.0.0 || ^5.0.0-next.1
+      svelte: ^4.0.0 || ^5.0.0-next.56
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.0.2(svelte@4.2.12)(vite@5.1.4)
       astro: 4.3.5(@types/node@20.11.20)(sass@1.71.1)(typescript@5.3.3)
