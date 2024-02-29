@@ -67,7 +67,7 @@ dependencies:
     version: 1.0.7(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
   '@react-three/drei':
     specifier: ^9.91.0
-    version: 9.99.4(@react-three/fiber@8.15.16)(@types/react@18.2.61)(@types/three@0.161.2)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
+    version: 9.99.5(@react-three/fiber@8.15.16)(@types/react@18.2.61)(@types/three@0.161.2)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
   '@react-three/fiber':
     specifier: ^8.15.12
     version: 8.15.16(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
@@ -706,6 +706,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+
+  /@babel/runtime@7.24.0:
+    resolution: {integrity: sha512-Chk32uHMg6TnQdvw2e9IlqPpFX/6NLuK0Ys2PqLb7/gL5uFn9mXvK715FGLlOLQrcO4qIkNHkvPGktzzXexsFw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+    dev: false
 
   /@babel/template@7.23.9:
     resolution: {integrity: sha512-+xrD2BWLpvHKNmX2QbpdpsBaWnRxahMwJjO+KZk2JOElj5nSmKezyS1B4u+QbHMTX69t4ukm6hh9lsYQ7GHCKA==}
@@ -2125,8 +2132,8 @@ packages:
     resolution: {integrity: sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==}
     dev: false
 
-  /@react-three/drei@9.99.4(@react-three/fiber@8.15.16)(@types/react@18.2.61)(@types/three@0.161.2)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0):
-    resolution: {integrity: sha512-Dig6SmsOIF1LiGAatU0WjFAgNqCixfHhO6BGlvb16E0vVi+t3S5WJbyEQO6msRgYu7pGQLCy9m0iBcfLUz8vkw==}
+  /@react-three/drei@9.99.5(@react-three/fiber@8.15.16)(@types/react@18.2.61)(@types/three@0.161.2)(react-dom@18.2.0)(react@18.2.0)(three@0.161.0):
+    resolution: {integrity: sha512-9gqzYvuyd1Wtvv/+s+FdSogQdehDXUvZmhqKXw8EeBbqZaySpjvMcTf1B2hHNVVkgKl/zQHRf2z+240UsrrPXg==}
     peerDependencies:
       '@react-three/fiber': '>=8.0'
       react: '>=18.0'
@@ -2136,7 +2143,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
       '@mediapipe/tasks-vision': 0.10.8
       '@react-spring/three': 9.6.1(@react-three/fiber@8.15.16)(react@18.2.0)(three@0.161.0)
       '@react-three/fiber': 8.15.16(react-dom@18.2.0)(react@18.2.0)(three@0.161.0)
@@ -3631,7 +3638,7 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
     dev: false
 
   /debounce@1.2.1:
