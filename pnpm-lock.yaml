@@ -34,7 +34,7 @@ dependencies:
     version: 3.1.1
   '@iconify/json':
     specifier: ^2.2.154
-    version: 2.2.186
+    version: 2.2.188
   '@pagefind/default-ui':
     specifier: ^1.0.4
     version: 1.0.4
@@ -1081,8 +1081,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify/json@2.2.186:
-    resolution: {integrity: sha512-Qcg7WA0fSOZJuBcNY5lZWbIZVLhdjYxI4kNxq1gWF5G5vFiBr2Xa1ScIKsvcKQwVSGax9E5tbTAHgdvgdr+IMQ==}
+  /@iconify/json@2.2.188:
+    resolution: {integrity: sha512-gsJwZ60Vb5IrtjYu+Al4qMaML9ZKUnop6Gi0537ZcA6nEhe3Nb58WH4c6b1+mXOHwOkFlLA8AFBXJUHY5nKMdA==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
