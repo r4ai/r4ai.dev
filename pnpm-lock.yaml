@@ -218,8 +218,8 @@ devDependencies:
     specifier: ^13.0.1
     version: 13.0.1
   rehype-custom-code:
-    specifier: ^0.3.1
-    version: 0.3.3(shikiji@0.10.2)
+    specifier: ^0.4.0
+    version: 0.4.0(shiki@1.1.7)
   remark:
     specifier: ^15.0.1
     version: 15.0.1
@@ -2305,6 +2305,10 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@shikijs/core@1.1.7:
+    resolution: {integrity: sha512-gTYLUIuD1UbZp/11qozD3fWpUTuMqPSf3svDMMrL0UmlGU7D9dPw/V1FonwAorCUJBltaaESxq90jrSjQyGixg==}
+    dev: true
 
   /@shuding/opentype.js@1.4.0-beta.0:
     resolution: {integrity: sha512-3NgmNyH3l/Hv6EvsWJbsvpcpUba6R8IREQ83nH83cyakCw7uM1arZKNfHwv1Wz6jgqrF/j4x5ELvR6PnK9nTcA==}
@@ -7148,10 +7152,10 @@ packages:
       set-function-name: 2.0.2
     dev: true
 
-  /rehype-custom-code@0.3.3(shikiji@0.10.2):
-    resolution: {integrity: sha512-JGb5yx6E6ognPpfBINIt+SFJZ1mHxwFQBjw0UZXaKaIHO0q9JKXcvBNT28cB9v4Tn3dYcv2/tb5wXw27mVXNZg==}
+  /rehype-custom-code@0.4.0(shiki@1.1.7):
+    resolution: {integrity: sha512-S6ErCf0ICOl4+DzloLvwodewKQRe94VXySIGESovFJwJRnR6EfIhfYwEeT014GYVca5y6ylSlfxapNgkx9v8iw==}
     peerDependencies:
-      shikiji: ^0.8.0 || ^0.9.0 || ^0.10.0
+      shiki: ^1.1.7
     dependencies:
       deepmerge: 4.3.1
       hast-util-is-element: 3.0.0
@@ -7159,7 +7163,7 @@ packages:
       json5: 2.2.3
       parse-numeric-range: 1.3.0
       scule: 1.3.0
-      shikiji: 0.10.2
+      shiki: 1.1.7
       unist-util-visit: 5.0.0
     dev: true
 
@@ -7615,6 +7619,12 @@ packages:
   /shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  /shiki@1.1.7:
+    resolution: {integrity: sha512-9kUTMjZtcPH3i7vHunA6EraTPpPOITYTdA5uMrvsJRexktqP0s7P3s9HVK80b4pP42FRVe03D7fT3NmJv2yYhw==}
+    dependencies:
+      '@shikijs/core': 1.1.7
+    dev: true
 
   /shikiji-core@0.10.2:
     resolution: {integrity: sha512-9Of8HMlF96usXJHmCL3Gd0Fcf0EcyJUF9m8EoAKKd98mHXi0La2AZl1h6PegSFGtiYcBDK/fLuKbDa1l16r1fA==}
