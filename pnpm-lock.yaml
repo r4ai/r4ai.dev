@@ -67,7 +67,7 @@ dependencies:
     version: 1.0.7(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
   '@react-three/drei':
     specifier: ^9.91.0
-    version: 9.102.3(@react-three/fiber@8.15.19)(@types/react@18.2.66)(@types/three@0.162.0)(react-dom@18.2.0)(react@18.2.0)(three@0.162.0)
+    version: 9.102.4(@react-three/fiber@8.15.19)(@types/react@18.2.66)(@types/three@0.162.0)(react-dom@18.2.0)(react@18.2.0)(three@0.162.0)
   '@react-three/fiber':
     specifier: ^8.15.12
     version: 8.15.19(react-dom@18.2.0)(react@18.2.0)(three@0.162.0)
@@ -2283,8 +2283,8 @@ packages:
     resolution: {integrity: sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==}
     dev: false
 
-  /@react-three/drei@9.102.3(@react-three/fiber@8.15.19)(@types/react@18.2.66)(@types/three@0.162.0)(react-dom@18.2.0)(react@18.2.0)(three@0.162.0):
-    resolution: {integrity: sha512-VQrzfEtoS7qOntbWN3XytplN11FnrQt2h02+I68wIpiE5SS4hfquBlytwQ5tLwkF6lRBl9SgeEe7XMy8QcZCUw==}
+  /@react-three/drei@9.102.4(@react-three/fiber@8.15.19)(@types/react@18.2.66)(@types/three@0.162.0)(react-dom@18.2.0)(react@18.2.0)(three@0.162.0):
+    resolution: {integrity: sha512-+cbcmEBSUz3rUxuLgWSdfEtXPifkpt9DniKe1T3FFDzOi1lorDk+Hyo2bxrWimEilyuMajrUtLVWohKFamH3Eg==}
     peerDependencies:
       '@react-three/fiber': '>=8.0'
       react: '>=18.0'
@@ -2308,7 +2308,7 @@ packages:
       react: 18.2.0
       react-composer: 5.0.3(react@18.2.0)
       react-dom: 18.2.0(react@18.2.0)
-      stats-gl: 2.2.2
+      stats-gl: 2.2.7
       stats.js: 0.17.0
       suspend-react: 0.1.3(react@18.2.0)
       three: 0.162.0
@@ -7993,8 +7993,8 @@ packages:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
     dev: false
 
-  /stats-gl@2.2.2:
-    resolution: {integrity: sha512-1RQSqf5fV/p0SDmfHVcIT8sgCxPv70KfviIdFIUYDGHWEsRtYxavP7JcMRSS50NKRgn4L81zxoOm6ejWwV/KiQ==}
+  /stats-gl@2.2.7:
+    resolution: {integrity: sha512-3EjvpmVgUic2YxCM+dxwg68B0tzWqMCAmflmdbqEKuqwZL+huYieqV14crm80NB7r2F4mWaYcLLlcpbhteEagw==}
     dev: false
 
   /stats.js@0.17.0:
