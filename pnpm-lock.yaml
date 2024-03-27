@@ -135,7 +135,7 @@ devDependencies:
     version: 0.1.1(tailwindcss@3.4.1)
   '@tailwindcss/typography':
     specifier: ^0.5.10
-    version: 0.5.11(tailwindcss@3.4.1)
+    version: 0.5.12(tailwindcss@3.4.1)
   '@types/hast':
     specifier: ^3.0.3
     version: 3.0.4
@@ -2737,8 +2737,8 @@ packages:
       tailwindcss: 3.4.1
     dev: true
 
-  /@tailwindcss/typography@0.5.11(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-ahOULqBQGCdSqL3vMNjH1R5cU2gxTh059fJIKF2enHXE8c/s3yKGDSKZ1+4poCr7BZRREJS8n5cCFmwsW4Ok3A==}
+  /@tailwindcss/typography@0.5.12(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-CNwpBpconcP7ppxmuq3qvaCxiRWnbhANpY/ruH4L5qs2GCiVDJXde/pjj2HWPV1+Q4G9+V/etrwUYopdcjAlyg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
