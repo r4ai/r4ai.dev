@@ -19,7 +19,7 @@ dependencies:
     version: 5.1.0(astro@4.3.5)(tailwindcss@3.4.3)
   '@extractus/oembed-extractor':
     specifier: ^4.0.1
-    version: 4.0.2
+    version: 4.0.3
   '@floating-ui/react':
     specifier: ^0.26.3
     version: 0.26.10(react-dom@18.2.0)(react@18.2.0)
@@ -1339,8 +1339,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@extractus/oembed-extractor@4.0.2:
-    resolution: {integrity: sha512-bM/PewyNL38JnIeeAoYVd3thPn4a121itYNFh1FE0ozvoubTJoxc6uDi3O9uVYEPRX7d/tY2PKOs5Eiz8SSang==}
+  /@extractus/oembed-extractor@4.0.3:
+    resolution: {integrity: sha512-yrRJ6T7/QIy/+iFLuTxGANQ/e7hvSsVKd7v6vs9AGVKsfFJU9S1qY9tL+Lzz9po4XMvNYS0EdxdUm+sgc5SP0Q==}
     engines: {node: '>= 18'}
     dependencies:
       cross-fetch: 4.0.0
