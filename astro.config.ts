@@ -79,6 +79,7 @@ export default defineConfig({
       noExternal: ["rehype-custom-code", "remark-meta-string", "react-tweet"],
     },
   },
+  prefetch: true,
   integrations: [
     tailwind({
       applyBaseStyles: false,

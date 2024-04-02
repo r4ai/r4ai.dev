@@ -1,0 +1,133 @@
+---
+title: Typst で始めるレポート作成
+tags:
+  - typst
+icon: fluent-emoji-flat:pen
+genre: article
+draft: true
+publishedAt: 2024-02-04
+---
+
+## Typstとは
+
+Typstとは、LaTeXと同等の機能性を持ちながら、低い学習コストで利用できるよう設計された、新進気鋭のRust製組版システムである。元々は、[typst.app](https://typst.app/)にて提供されていたSaaSだったが、そのコア部分であるコンパイラ等がオープンソース化され、現在では[GitHub](https://github.com/typst/)にてコミュニティと共に開発が進められている。
+
+https://typst.app/about/
+
+https://github.com/typst/typst
+
+### LaTeXとの比較
+
+- **コンパイルが爆速**
+- 環境構築が容易
+- 数学組版や参考文献管理など、LaTeXに匹敵する機能を持つ
+- 組版の柔軟性については、LaTeXに迫る自由度を持つが、まだ一部未熟な部分もある（十分実用可能なレベルではある）
+- LSPが存在するが、LaTeXのものに比べるとまだ未熟
+
+### Markdown（Pandoc）との比較
+
+- Typstでは、Markdownに似た記法を採用しているため、学習コストが低い
+- Markdownに比べ機能性と拡張性が高く、より柔軟な組版が可能
+  - Pandocで同等のことをやろうとすると、自作のフィルターを書くなど、かなりの労力が必要
+
+## 環境構築
+
+[Installation - typst/typst](https://github.com/typst/typst?tab=readme-ov-file#installation) を参照されたい。
+
+Homebrewやwinget、nix、cargo、Dockerなど、様々な方法で容易にインストールできる。
+
+
+## 基本文法
+
+詳しくは [Syntax - Typst Documentation](https://typst.app/docs/reference/syntax/) を参照されたい。
+
+### 見出し
+
+Markdownと違い、見出しのレベルは`=`で表現する。
+
+```typst
+= 見出し1
+== 見出し2
+=== 見出し3
+==== 見出し4
+===== 見出し5
+```
+
+### コメントアウト
+
+```typst
+// コメントアウト
+
+/* コメントアウト
+   - 行1
+   - 行2 */
+```
+
+### 段落
+
+Markdownと同様、空行を挟むことで段落を区切る。
+
+```typst
+段落1 \ // "\" で改行
+ここは段落1です
+
+段落2 \
+ここは段落2です
+```
+
+### 強調・斜体
+
+```typst
+*強調*
+
+_Italic_
+_斜体（デフォルトだと、日本語フォントだと斜体にならない）_
+```
+
+### 箇条書き
+
+```typst
+- 箇条書き1
+- 箇条書き2
+  - 箇条書き2-1
+  - 箇条書き2-2
+```
+
+### 番号付きリスト
+
+```typst
++ 自動番号付きリスト1
++ 自動番号付きリスト2
+  + 自動番号付きリスト2-1
+  + 自動番号付きリスト2-2
+
+2. 手動番号付きリスト1
+3. 手動番号付きリスト2
+4. 手動番号付きリスト3
+```
+
+### 定義リスト
+
+```typst
+/ Typst: 組版システム。
+  Typstは、LaTeXと同等の機能性を持ちながら、低い学習コストで利用できるよう設計された、
+  新進気鋭のRust製組版システムである。
+/ LaTeX: 組版システム
+/ Markdown: 軽量マークアップ言語
+```
+
+### コードブロック
+
+````typst
+インラインコード: `hello_world.rs`
+
+ハイライト付きインラインコード: ```rust let x = 1;```
+
+コードブロック:
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+````
