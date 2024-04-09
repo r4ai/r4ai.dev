@@ -194,8 +194,8 @@ devDependencies:
     specifier: ^15.2.0
     version: 15.2.2
   lucide-react:
-    specifier: ^0.365.0
-    version: 0.365.0(react@18.2.0)
+    specifier: ^0.366.0
+    version: 0.366.0(react@18.2.0)
   npm-to-yarn:
     specifier: ^2.1.0
     version: 2.2.1
@@ -6124,8 +6124,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.365.0(react@18.2.0):
-    resolution: {integrity: sha512-sJYpPyyzGHI4B3pys+XSFnE4qtSWc68rFnDLxbNNKjkLST5XSx9DNn5+1Z3eFgFiw39PphNRiVBSVb+AL3oKwA==}
+  /lucide-react@0.366.0(react@18.2.0):
+    resolution: {integrity: sha512-iUOsp/35wOkrgEzigZlZI/OhVxQZ8CmxjebdIjfSDzNBmrNYjQfKSpeKderaEFfGt3OycF1BE+wLlaqWRuoh4w==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
