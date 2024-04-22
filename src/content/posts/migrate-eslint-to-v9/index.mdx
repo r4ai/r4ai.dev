@@ -73,7 +73,7 @@ module.exports = defineConfig({
 })
 ```
 
-まずは要らなそうな設定項目を削除する。Common JS ファイルは流石にもう書かないので、その設定を削除する。
+まずは要らなそうな設定項目を削除する。Common JS は流石にもう書かないので、その設定を削除する。
 
 ```js title=.eslintrc.cjs showLineNumbers diff
   // @ts-check
@@ -130,7 +130,7 @@ module.exports = defineConfig({
 
 ## Flat Config への移行
 
-続いて、実際に Flat Config への移行を行う。Flat Config ではコンフィグファイル名が `eslint.config.js` に変更されたので、新たに `eslint.config.js` を作成する。
+続いて、実際に Flat Config への移行を行う。Flat Config では設定ファイル名が `eslint.config.js` に変更されたので、新たに `eslint.config.js` を作成する。
 
 ```sh
 touch eslint.config.js
@@ -138,7 +138,7 @@ touch eslint.config.js
 
 ### typescript-eslint の移行
 
-まず、最も重要そうな typescript-eslint の設定を移行する。
+まず、最も重要そうな `typescript-eslint` の設定を移行する。
 
 [公式ドキュメントの移行ガイド](https://typescript-eslint.io/packages/typescript-eslint/#migrating-from-legacy-config-setups) に従って、`typescript-eslint` を新たに導入する。
 
@@ -366,9 +366,9 @@ ESLint の VSCode Extension で、Flat Config を有効化する。
 
 ## おまけ（CommonJS から ESM への移行）
 
-今回移行したプロジェクトでは、prettier等の設定ファイルを CommonJS で記述していた。しかし、今回の Flat Config への移行に伴い ESLint での CommonJS に対するコンフィグは削除し、また流石にもう設定ファイルといえど CommonJS は書きたくないので ESM に移行する。
+今回移行したプロジェクトでは、prettier等の設定ファイルを CommonJS で記述していた。しかし、今回の Flat Config への移行に伴い ESLint での CommonJS に対するコンフィグは削除した他、流石にもうコンフィグといえど CommonJS は書きたくないので ESM に移行する。
 
-ついでに、ESLint のコンフィグファイルの名前が `eslint.config.js` に変更されたのに合わせて、他の設定ファイルも `.hogerc.cjs` から `hoge.config.js` に名前を変更する。
+ついでに、ESLint のコンフィグファイルの名前が `eslint.config.js` に変更されたのに合わせて、他のコンフィグファイルも `.hogerc.cjs` から `hoge.config.js` に名前を変更する。
 
 ```js title=lint-staged.config.js showLineNumbers diff
   // @ts-check
