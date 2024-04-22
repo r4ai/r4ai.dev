@@ -55,5 +55,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "eslint.experimental.useFlatConfig": true
 }
