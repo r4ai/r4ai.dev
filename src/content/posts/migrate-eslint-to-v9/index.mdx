@@ -1,0 +1,528 @@
+---
+title: Astro プロジェクトの ESLint Flat Config への移行
+tags: 
+  - ESLint
+  - Astro
+  - TypeScript
+  - TailwindCSS
+  - Pretter
+icon: logos:eslint
+genre: article
+draft: false
+publishedAt: 2024-04-22
+---
+
+ESLint v9 より旧 `.eslintrc.*` ファイルのデフォルトでのサポートが廃止され、Flat Config がデフォルトとなった。この記事では、Astro プロジェクトの ESLint 設定を Flat Config に移行した際の手順を紹介する。
+
+https://eslint.org/blog/2024/04/eslint-v9.0.0-released/
+
+## 旧コンフィグの内容を整理する
+
+移行前の設定ファイル：
+
+```js title=.eslintrc.cjs showLineNumbers
+// @ts-check
+const { defineConfig } = require("eslint-define-config")
+
+module.exports = defineConfig({
+  root: true,
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:astro/recommended",
+    "prettier",
+  ],
+  env: {
+    browser: true,
+    node: true,
+  },
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  rules: {
+    "no-undef": "off",
+  },
+  plugins: ["@typescript-eslint"],
+  ignorePatterns: ["node_modules", "dist"],
+  overrides: [
+    {
+      // Define the configuration for `.astro` file.
+      files: ["*.astro"],
+      // Allows Astro components to be parsed.
+      parser: "astro-eslint-parser",
+      // Parse the script in `.astro` as TypeScript by adding the following configuration.
+      // It's the setting you need when using TypeScript.
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+        extraFileExtensions: [".astro"],
+      },
+      rules: {
+        // override/add rules settings here, such as:
+        // "astro/no-set-html-directive": "error"
+      },
+    },
+    {
+      files: "*.cjs",
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
+      },
+    },
+  ],
+})
+```
+
+まずは要らなそうな設定項目を削除する。Common JS ファイルは流石にもう書かないので、その設定を削除する。
+
+```js title=.eslintrc.cjs showLineNumbers diff
+  // @ts-check
+  const { defineConfig } = require("eslint-define-config")
+
+  module.exports = defineConfig({
+    root: true,
+    extends: [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:astro/recommended",
+      "prettier",
+    ],
+    env: {
+      browser: true,
+      node: true,
+    },
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+    rules: {
+      "no-undef": "off",
+    },
+    plugins: ["@typescript-eslint"],
+    ignorePatterns: ["node_modules", "dist"],
+    overrides: [
+      {
+        // Define the configuration for `.astro` file.
+        files: ["*.astro"],
+        // Allows Astro components to be parsed.
+        parser: "astro-eslint-parser",
+        // Parse the script in `.astro` as TypeScript by adding the following configuration.
+        // It's the setting you need when using TypeScript.
+        parserOptions: {
+          parser: "@typescript-eslint/parser",
+          extraFileExtensions: [".astro"],
+        },
+        rules: {
+          // override/add rules settings here, such as:
+          // "astro/no-set-html-directive": "error"
+        },
+      },
+-     {
+-       files: "*.cjs",
+-       rules: {
+-         "@typescript-eslint/no-var-requires": "off",
+-       },
+-     },
+    ],
+  })
+```
+
+## Flat Config への移行
+
+続いて、実際に Flat Config への移行を行う。Flat Config ではコンフィグファイル名が `eslint.config.js` に変更されたので、新たに `eslint.config.js` を作成する。
+
+```sh
+touch eslint.config.js
+```
+
+### typescript-eslint の移行
+
+まず、最も重要そうな typescript-eslint の設定を移行する。
+
+[公式ドキュメントの移行ガイド](https://typescript-eslint.io/packages/typescript-eslint/#migrating-from-legacy-config-setups) に従って、`typescript-eslint` を新たに導入する。
+
+```sh npm2yarn
+npm install typescript-eslint
+```
+
+旧コンフィグで使っていた、`@typescript-eslint/parser` と `@typescript-eslint/eslint-plugin` を削除する。
+
+```sh npm2yarn
+npm uninstall @typescript-eslint/parser @typescript-eslint/eslint-plugin
+```
+
+`eslint.config.js` に typescript-eslint の設定を移行する。
+
+```js title=eslint.config.js showLineNumbers
+// @ts-check
+
+import eslint from "@eslint/js"
+import tsEslint from "typescript-eslint"
+
+export default tsEslint.config(
+  eslint.configs.recommended,
+  ...tsEslint.configs.recommended
+)
+```
+
+https://typescript-eslint.io/packages/typescript-eslint/#migrating-from-legacy-config-setups
+
+### eslint-plugin-astro の移行
+
+`eslint-plugin-astro` の設定を移行する。
+
+```sh npm2yarn
+npm install --save-dev eslint-plugin-astro
+```
+
+```js title=eslint.config.js showLineNumbers diff
+  // @ts-check
+
+  import eslint from "@eslint/js"
++ import eslintPluginAstro from "eslint-plugin-astro"
+  import tsEslint from "typescript-eslint"
+
+  export default tsEslint.config(
+    eslint.configs.recommended,
+    ...tsEslint.configs.recommended,
++   ...eslintPluginAstro.configs["flat/recommended"],
++   ...eslintPluginAstro.configs["flat/jsx-a11y-strict"]
+  )
+```
+
+https://github.com/ota-meshi/eslint-plugin-astro
+
+### eslint-config-prettier の移行
+
+`eslint-config-prettier` の設定を移行する。
+
+```sh npm2yarn
+npm install --save-dev eslint-config-prettier
+```
+
+```js title=eslint.config.js showLineNumbers diff
+  // @ts-check
+
+  import eslint from "@eslint/js"
+  import eslintPluginAstro from "eslint-plugin-astro"
++ import eslintConfigPrettier from "eslint-config-prettier"
+  import tsEslint from "typescript-eslint"
+
+  export default tsEslint.config(
+    eslint.configs.recommended,
+    ...tsEslint.configs.recommended,
+    ...eslintPluginAstro.configs["flat/recommended"],
+    ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
++   eslintConfigPrettier
+  )
+```
+
+https://github.com/prettier/eslint-config-prettier
+
+### .gitignore の内容を ESLint でも無視する
+
+`.gitignore` の内容を ESLint でも無視するように設定する。
+
+CLI オプションの `--ignore-path` は廃止されたので、`eslint.config.js` の `ignores` フィールドに無視するパスを追加する必要がある。しかし、これを手動で行うのは面倒なので、[`eslint-config-flat-gitignore`](https://www.npmjs.com/package/eslint-config-flat-gitignore) を導入する。
+
+```sh npm2yarn
+npm install --save-dev eslint-config-flat-gitignore
+```
+
+```js title=eslint.config.js showLineNumbers diff
+  // @ts-check
+
+  import eslint from "@eslint/js"
++ import gitignore from "eslint-config-flat-gitignore"
+  import eslintConfigPrettier from "eslint-config-prettier"
+  import eslintPluginAstro from "eslint-plugin-astro"
+  import tsEslint from "typescript-eslint"
+
+  export default tsEslint.config(
++   gitignore(),
+    eslint.configs.recommended,
+    ...tsEslint.configs.recommended,
+    ...eslintPluginAstro.configs["flat/recommended"],
+    ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+    eslintConfigPrettier
+  )
+```
+
+`gitignore()` は一番最初に読み込むことが推奨されているので、他の設定よりも前に記述する。
+
+https://github.com/antfu/eslint-config-flat-gitignore
+
+### グローバル変数の設定の移行
+
+Flat Configでは、`env` フィールドが廃止され、`globals` フィールドでのみグローバル変数の設定が可能となった。これに伴い、`env` フィールドで設定していたランタイム依存のグローバル変数を `globals` フィールドに移行する。ただし、ランタイム依存のグローバル変数を全て手動で書くのは不可能なので、[`globals`](https://github.com/sindresorhus/globals) パッケージ を利用する。
+
+```sh npm2yarn
+npm install --save-dev globals
+```
+
+```js title=eslint.config.js showLineNumbers diff
+  // @ts-check
+
+  import eslint from "@eslint/js"
+  import gitignore from "eslint-config-flat-gitignore"
+  import eslintConfigPrettier from "eslint-config-prettier"
+  import eslintPluginAstro from "eslint-plugin-astro"
++ import globals from "globals"
+  import tsEslint from "typescript-eslint"
+
+  export default tsEslint.config(
+    gitignore(),
+    eslint.configs.recommended,
+    ...tsEslint.configs.recommended,
+    ...eslintPluginAstro.configs["flat/recommended"],
+    ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+    eslintConfigPrettier,
++   {
++     languageOptions: {
++       globals: {
++         ...globals.browser,
++         ...globals.node,
++       },
++     },
++   }
+  )
+```
+
+ここでは、ブラウザと Node.js 依存のグローバル変数を設定している。
+
+https://eslint.org/docs/latest/use/configure/migration-guide#configuring-language-options
+
+https://github.com/sindresorhus/globals
+
+### TypeScript ファイルで `no-undef` を無効化する
+
+未定義変数のチェックは TypeScript 側で行うため、TypeScript ファイルでは ESLint の `no-undef` ルールは無効化する。
+
+> We strongly recommend that you do not use the no-undef lint rule on TypeScript projects. The checks it provides are already provided by TypeScript without the need for configuration - TypeScript just does this significantly better.
+>
+> \- [TypeScript ESLint](https://typescript-eslint.io/troubleshooting/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors)
+
+```js title=eslint.config.js showLineNumbers diff
+  // @ts-check
+
+  import eslint from "@eslint/js"
+  import gitignore from "eslint-config-flat-gitignore"
+  import eslintConfigPrettier from "eslint-config-prettier"
+  import eslintPluginAstro from "eslint-plugin-astro"
+  import globals from "globals"
+  import tsEslint from "typescript-eslint"
+
+  export default tsEslint.config(
+    gitignore(),
+    eslint.configs.recommended,
+    ...tsEslint.configs.recommended,
++   {
++     files: ["**/*.{ts,tsx,mts,cts,astro}"],
++     rules: {
++       "no-undef": "off",
++     },
++   },
+    ...eslintPluginAstro.configs["flat/recommended"],
+    ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+    eslintConfigPrettier,
+    {
+      languageOptions: {
+        globals: {
+          ...globals.browser,
+          ...globals.node,
+        },
+      },
+    }
+  )
+```
+
+https://typescript-eslint.io/troubleshooting/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+
+## ESLint を実行するスクリプトの変更
+
+`package.json` の `lint` スクリプトを変更する。
+
+```json title=package.json showLineNumbers diff
+  {
+    "scripts": {
+-     "lint": "eslint --ext '.js,.cjs,mjs,.ts,.jsx,.tsx,.astro' .",
+-     "lint:fix": "eslint --ext '.js,.cjs,.mjs,.ts,.jsx,.tsx,.astro' --fix .",
++     "lint": "eslint .",
++     "lint:fix": "eslint --fix .",
+    }
+  }
+```
+
+## VSCode の設定
+
+ESLint の VSCode Extension で、Flat Config を有効化する。
+
+```json title=.vscode/settings.json showLineNumbers
+{
+  "eslint.experimental.useFlatConfig": true
+}
+```
+
+## おまけ（CommonJS から ESM への移行）
+
+今回移行したプロジェクトでは、prettier等の設定ファイルを CommonJS で記述していた。しかし、今回の Flat Config への移行に伴い ESLint での CommonJS に対するコンフィグは削除し、また流石にもう設定ファイルといえど CommonJS は書きたくないので ESM に移行する。
+
+ついでに、ESLint のコンフィグファイルの名前が `eslint.config.js` に変更されたのに合わせて、他の設定ファイルも `.hogerc.cjs` から `hoge.config.js` に名前を変更する。
+
+```js title=lint-staged.config.js showLineNumbers diff
+  // @ts-check
+
+  /** @type {import("lint-staged").Config} */
+- module.exports = {
++ export default {
+    "*.{js,cjs,ts,jsx,tsx,astro}": ["eslint --fix", "prettier --write"],
+    "*.{md,html,json,yaml,yml}": ["prettier --write"],
+  }
+```
+
+```js title=prettier.config.js showLineNumbers diff
+  // @ts-check
+  
+  /** @type {import("prettier").Options} */
+- module.exports = {
++ export default {
+    printWidth: 80,
+    tabWidth: 2,
+    plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+    semi: false,
+    trailingComma: "es5",
+    overrides: [
+      {
+        files: "*.astro",
+        options: {
+          parser: "astro",
+        },
+      },
+    ],
+  }
+```
+
+```js title=tailwind.config.ts showLineNumbers diff
+- const { addDynamicIconSelectors } = require("@iconify/tailwind")
+- const defaultTheem = require("tailwindcss/defaultTheme")
++ import { addDynamicIconSelectors } from "@iconify/tailwind"
++ import type { Config } from "tailwindcss"
++ import defaultTheme from "tailwindcss/defaultTheme"
+
+- /** @type {import('tailwindcss').Config} */
+- module.exports = {
++ export default {
+    darkMode: ["class"],
+    content: ["./src/**/*.{astro,js,jsx,ts,tsx,html,mdx}"],
+    theme: {
+      container: {
+        center: true,
+        padding: "2rem",
+        screens: {
+          "2xl": "1400px",
+        },
+      },
+      extend: {
+        colors: {
+          border: "hsl(var(--border))",
+          input: "hsl(var(--input))",
+          ring: "hsl(var(--ring))",
+          background: "hsl(var(--background))",
+          foreground: "hsl(var(--foreground))",
+          primary: {
+            DEFAULT: "hsl(var(--primary))",
+            foreground: "hsl(var(--primary-foreground))",
+          },
+          secondary: {
+            DEFAULT: "hsl(var(--secondary))",
+            foreground: "hsl(var(--secondary-foreground))",
+          },
+          destructive: {
+            DEFAULT: "hsl(var(--destructive))",
+            foreground: "hsl(var(--destructive-foreground))",
+          },
+          muted: {
+            DEFAULT: "hsl(var(--muted))",
+            foreground: "hsl(var(--muted-foreground))",
+          },
+          accent: {
+            DEFAULT: "hsl(var(--accent))",
+            foreground: "hsl(var(--accent-foreground))",
+          },
+          popover: {
+            DEFAULT: "hsl(var(--popover))",
+            foreground: "hsl(var(--popover-foreground))",
+          },
+          card: {
+            DEFAULT: "hsl(var(--card))",
+            foreground: "hsl(var(--card-foreground))",
+          },
+          stone: {
+            1: "rgb(var(--stone-1) / <alpha-value>)",
+            2: "rgb(var(--stone-2) / <alpha-value>)",
+            3: "rgb(var(--stone-3) / <alpha-value>)",
+            4: "rgb(var(--stone-4) / <alpha-value>)",
+            5: "rgb(var(--stone-5) / <alpha-value>)",
+            6: "rgb(var(--stone-6) / <alpha-value>)",
+            7: "rgb(var(--stone-7) / <alpha-value>)",
+            8: "rgb(var(--stone-8) / <alpha-value>)",
+            9: "rgb(var(--stone-9) / <alpha-value>)",
+            10: "rgb(var(--stone-10) / <alpha-value>)",
+          },
+        },
+        borderRadius: {
+          lg: "var(--radius)",
+          md: "calc(var(--radius) - 2px)",
+          sm: "calc(var(--radius) - 4px)",
+        },
+        keyframes: {
+          "accordion-down": {
+-           from: { height: 0 },
++           from: { height: "0" },
+            to: { height: "var(--radix-accordion-content-height)" },
+          },
+          "accordion-up": {
+            from: { height: "var(--radix-accordion-content-height)" },
+-           to: { height: 0 },
++           to: { height: "0" },
+          },
+        },
+        animation: {
+          "accordion-down": "accordion-down 0.2s ease-out",
+          "accordion-up": "accordion-up 0.2s ease-out",
+        },
+        fontFamily: {
+          mono: ["UDEV Gothic LG", ...defaultTheem.fontFamily.mono],
+          times: ["Times New Roman", "Times", "serif"],
+        },
+        fontSize: {
+          "4.5xl": "2.5rem",
+        },
+        typography: {
+          DEFAULT: {
+            css: {
+              "blockquote p:first-of-type::before": { content: "none" },
+              "blockquote p:first-of-type::after": { content: "none" },
+            },
+          },
+        },
+      },
+    },
+    plugins: [
+      require("tailwindcss-animate"),
+      require("@tailwindcss/typography"),
+      require("@tailwindcss/container-queries"),
+      addDynamicIconSelectors(),
+    ],
+- }
++ } satisfies Config
+```
+
+## おわりに
+
+Flat Config では、設定ファイルが `.eslintrc.*` から `eslint.config.js` に変更され、設定の書き方も大幅に変更された。移行には手間がかかるが、新しい設定ファイルの書き方はより柔軟で、設定の共有が容易になった。設定ファイルが JS のみになったため、旧コンフィグでの `extends: ["eslint:recommended"]` といった文字列での指定は無くなり、`eslint.configs.recommended` のようにオブジェクトで指定するようになった。これにより、直感的に設定を追加・削除できるようになった。
+
+少し前までは多くのプラグインが Flat Config に未対応であり移行は大変苦しかった。しかし現在では typescript-eslint など主要なプラグインのほとんどが対応しているため、移行はかなり容易になっている。
+
+いつかは移行せざるを得ないので、早めに移行しておくことをおすすめする。
