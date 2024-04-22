@@ -1,8 +1,8 @@
-const { addDynamicIconSelectors } = require("@iconify/tailwind")
-const defaultTheem = require("tailwindcss/defaultTheme")
+import { addDynamicIconSelectors } from "@iconify/tailwind"
+import type { Config } from "tailwindcss"
+import defaultTheme from "tailwindcss/defaultTheme"
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ["class"],
   content: ["./src/**/*.{astro,js,jsx,ts,tsx,html,mdx}"],
   theme: {
@@ -68,12 +68,12 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -81,7 +81,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        mono: ["UDEV Gothic LG", ...defaultTheem.fontFamily.mono],
+        mono: ["UDEV Gothic LG", ...defaultTheme.fontFamily.mono],
         times: ["Times New Roman", "Times", "serif"],
       },
       fontSize: {
@@ -103,4 +103,4 @@ module.exports = {
     require("@tailwindcss/container-queries"),
     addDynamicIconSelectors(),
   ],
-}
+} satisfies Config
