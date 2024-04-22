@@ -8,7 +8,7 @@ import * as Tabs from "@radix-ui/react-tabs"
 type Npm2YarnProps = CodeBlockProps
 
 export const Npm2Yarn: FC<Npm2YarnProps> = (props) => {
-  const code = {
+  const codeByPackageManager = {
     npm: convert(props.code, "npm"),
     yarn: convert(props.code, "yarn"),
     pnpm: convert(props.code, "pnpm"),
@@ -17,7 +17,7 @@ export const Npm2Yarn: FC<Npm2YarnProps> = (props) => {
   return (
     <Tabs.Root defaultValue="npm" className="not-prose">
       <Tabs.List className="flex flex-row">
-        {Object.entries(code).map((c) => (
+        {Object.entries(codeByPackageManager).map((c) => (
           <Tabs.Trigger
             className="border-b-2 px-2 pb-1 transition data-[state=active]:border-gray-900 data-[state=active]:font-bold dark:data-[state=active]:border-gray-200"
             value={c[0]}
@@ -27,13 +27,12 @@ export const Npm2Yarn: FC<Npm2YarnProps> = (props) => {
           </Tabs.Trigger>
         ))}
       </Tabs.List>
-      {Object.entries(code).map((c) => (
-        <Tabs.Content value={c[0]} key={c[0]}>
-          <CodeBlock {...props} code={c[1]}>
+      {Object.entries(codeByPackageManager).map(([packageManager, code]) => (
+        <Tabs.Content value={packageManager} key={packageManager}>
+          <CodeBlock {...props} code={code}>
             <code
-              className="px-4"
               dangerouslySetInnerHTML={{
-                __html: highlighter.codeToHtml(c[1], {
+                __html: highlighter.codeToHtml(code, {
                   lang: props.lang,
                   themes: {
                     light: "github-light",

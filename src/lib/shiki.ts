@@ -1,4 +1,4 @@
-import { getHighlighter, bundledLanguages } from "shikiji"
+import { getHighlighter, bundledLanguages } from "shiki"
 
 export const highlighter = await getHighlighter({
   themes: [
