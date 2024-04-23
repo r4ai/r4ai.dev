@@ -16,10 +16,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.0",
-    "@astrojs/react": "^3.0.7",
-    "@astrojs/svelte": "^5.0.0",
-    "@astrojs/tailwind": "^5.0.3",
+    "@astrojs/mdx": "^2.3.1",
+    "@astrojs/react": "^3.3.0",
+    "@astrojs/svelte": "^5.4.0",
+    "@astrojs/tailwind": "^5.1.0",
     "@extractus/oembed-extractor": "^4.0.1",
     "@floating-ui/react": "^0.26.3",
     "@heroicons/react": "^2.0.18",
@@ -39,7 +39,7 @@
     "@react-three/drei": "^9.91.0",
     "@react-three/fiber": "^8.15.12",
     "@stackblitz/sdk": "^1.9.0",
-    "astro": "^4.0.3",
+    "astro": "^4.6.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "katex": "^0.16.9",
@@ -60,7 +60,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.5.0",
+    "@astrojs/check": "^0.5.10",
     "@iconify/tailwind": "^0.1.4",
     "@r4ai/remark-callout": "^0.3.4",
     "@tailwindcss/container-queries": "^0.1.1",
