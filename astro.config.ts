@@ -16,6 +16,10 @@ import {
 } from "rehype-custom-code"
 import remarkMetaString from "remark-meta-string"
 import { remarkEmbed } from "./src/lib/remarkPlugins/remarkEmbed"
+import {
+  remarkCallout,
+  type Options as RemarkCalloutOptions,
+} from "@r4ai/remark-callout"
 
 import * as pagefind from "pagefind"
 
@@ -76,7 +80,12 @@ export default defineConfig({
   site: "https://r4ai.dev",
   vite: {
     ssr: {
-      noExternal: ["rehype-custom-code", "remark-meta-string", "react-tweet"],
+      noExternal: [
+        "rehype-custom-code",
+        "remark-meta-string",
+        "react-tweet",
+        "@r4ai/remark-callout",
+      ],
     },
   },
   prefetch: true,
@@ -97,6 +106,32 @@ export default defineConfig({
       remarkMath as unknown as RemarkPlugins[number],
       remarkMetaString as unknown as RemarkPlugins[number],
       remarkEmbed,
+      [
+        remarkCallout,
+        {
+          root: (callout) => {
+            return {
+              tagName: "callout-root",
+              properties: {
+                type: callout.type,
+                isFoldable: callout.isFoldable.toString(),
+                defaultFolded: callout.defaultFolded?.toString(),
+              },
+            }
+          },
+          title: (callout) => ({
+            tagName: "callout-title",
+            properties: {
+              type: callout.type,
+              isFoldable: callout.isFoldable.toString(),
+            },
+          }),
+          body: () => ({
+            tagName: "callout-body",
+            properties: {},
+          }),
+        } satisfies RemarkCalloutOptions,
+      ],
     ],
     rehypePlugins: [
       rehypeKatex,

@@ -3,7 +3,12 @@ import Tooltip from "@/components/Tooltip.astro"
 import { getPostEntries, type Post } from "@/lib/posts"
 import Toc from "@/components/Toc.astro"
 import Icon from "@/components/Icon.astro"
-import Callout from "@/components/markdown/Callout.astro"
+import {
+  Callout,
+  CalloutBody,
+  CalloutRoot,
+  CalloutTitle,
+} from "@/components/markdown"
 import { isDev } from "@/lib/dev"
 import PostLayout from "@/layouts/PostLayout.astro"
 import CodeBlock from "@/components/markdown/code_block/CodeBlock.astro"
@@ -98,7 +103,7 @@ const ogImageUrl = new URL(join(Astro.url.pathname, "ogimage.png"), Astro.site)
       >
         {
           entry.data.draft && isDev() && (
-            <Callout type="warning" title="この記事はドラフトです">
+            <Callout type="caution" title="この記事はドラフトです">
               現在、ドラフトの記事を表示しています。プロダクションビルドには含まれません。
             </Callout>
           )
@@ -109,6 +114,9 @@ const ogImageUrl = new URL(join(Astro.url.pathname, "ogimage.png"), Astro.site)
             embed: Embed,
             blockquote: Blockquote,
             img: CustomImage,
+            "callout-root": CalloutRoot,
+            "callout-title": CalloutTitle,
+            "callout-body": CalloutBody,
           }}
         />
       </div>

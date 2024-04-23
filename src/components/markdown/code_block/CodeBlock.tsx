@@ -50,7 +50,7 @@ export const CodeBlock: FC<Props> = ({
 }) => {
   return (
     <div
-      className="prose-pre relative my-6 flex flex-col rounded-xl border bg-neutral-50 dark:bg-neutral-900/75"
+      className="relative my-6 flex flex-col rounded-xl border bg-neutral-50 dark:bg-neutral-900/75"
       data-code-block
     >
       {title ? (

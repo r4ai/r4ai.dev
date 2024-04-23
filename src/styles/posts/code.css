@@ -1,12 +1,4 @@
 @layer base {
-  div[data-rehype-pretty-code-fragment] {
-    --highlighted-chars-bg-color: theme(colors.neutral.500 / 20%);
-  }
-
-  .dark div[data-rehype-pretty-code-fragment] {
-    --highlighted-chars-bg-color: theme(colors.neutral.600 / 40%);
-  }
-
   .shiki {
     background-color: transparent !important;
   }
@@ -29,7 +21,7 @@
     }
 
     & span.line {
-      @apply border-l-2 border-l-transparent px-4 h-6;
+      @apply h-6 border-l-2 border-l-transparent px-4;
     }
 
     /* 行番号表示 */
@@ -75,7 +67,7 @@
 
           &::before {
             content: "+";
-            @apply text-green-500 dark:text-green-600 mr-2;
+            @apply mr-2 text-green-500 dark:text-green-600;
           }
         }
       }
@@ -92,7 +84,7 @@
 
           &::before {
             content: "-";
-            @apply text-red-500 dark:text-red-600 mr-2;
+            @apply mr-2 text-red-500 dark:text-red-600;
           }
         }
       }

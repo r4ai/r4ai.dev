@@ -1,4 +1,5 @@
 {
+  "tailwindCSS.experimental.classRegex": ["tw`([\\s\\S]*?)`"],
   "[typescriptreact]": {
     "tailwindCSS.experimental.classRegex": [
       // e.g. tw="text-red-500"
