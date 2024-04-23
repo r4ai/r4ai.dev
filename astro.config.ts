@@ -80,12 +80,7 @@ export default defineConfig({
   site: "https://r4ai.dev",
   vite: {
     ssr: {
-      noExternal: [
-        "rehype-custom-code",
-        "remark-meta-string",
-        "react-tweet",
-        "@r4ai/remark-callout",
-      ],
+      noExternal: ["react-tweet"],
     },
   },
   prefetch: true,
