@@ -340,17 +340,16 @@ packages:
         integrity: sha512-jzj01BRv/fmo+9Mr2FhocywGzEYiyiP2GVHje1ziGNU6c97kwhYGsnvwMkHrncAy9T9Vi54cjaMK7UE4ClX4vA==,
       }
 
+  "@astrojs/compiler@2.7.1":
+    resolution:
+      {
+        integrity: sha512-/POejAYuj8WEw7ZI0J8JBvevjfp9jQ9Wmu/Bg52RiNwGXkMV7JnYpsenVfHvvf1G7R5sXHGKlTcxlQWhoUTiGQ==,
+      }
+
   "@astrojs/internal-helpers@0.2.1":
     resolution:
       {
         integrity: sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==,
-      }
-
-  "@astrojs/internal-helpers@@astrojs/compiler@2.7.1":
-    resolution:
-      {
-        integrity: sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==,
-        tarball: https://registry.npmjs.org/@astrojs/compiler/-/compiler-2.7.1.tgz,
       }
 
   "@astrojs/language-server@2.8.4":
@@ -9333,13 +9332,13 @@ snapshots:
 
   "@astrojs/compiler@2.5.3": {}
 
-  "@astrojs/internal-helpers@0.2.1": {}
+  "@astrojs/compiler@2.7.1": {}
 
-  "@astrojs/internal-helpers@@astrojs/compiler@2.7.1": {}
+  "@astrojs/internal-helpers@0.2.1": {}
 
   "@astrojs/language-server@2.8.4(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.4.5)":
     dependencies:
-      "@astrojs/compiler": "@astrojs/internal-helpers@@astrojs/compiler@2.7.1"
+      "@astrojs/compiler": 2.7.1
       "@jridgewell/sourcemap-codec": 1.4.15
       "@volar/kit": 2.1.6(typescript@5.4.5)
       "@volar/language-core": 2.1.6
@@ -11087,11 +11086,11 @@ snapshots:
 
   astro-eslint-parser@0.17.0(typescript@5.4.5):
     dependencies:
-      "@astrojs/compiler": "@astrojs/internal-helpers@@astrojs/compiler@2.7.1"
+      "@astrojs/compiler": 2.5.3
       "@typescript-eslint/scope-manager": 5.62.0
       "@typescript-eslint/types": 5.62.0
       "@typescript-eslint/typescript-estree": 5.62.0(typescript@5.4.5)
-      astrojs-compiler-sync: 0.3.5(@astrojs/internal-helpers@@astrojs/compiler@2.7.1)
+      astrojs-compiler-sync: 0.3.5(@astrojs/compiler@2.5.3)
       debug: 4.3.4
       entities: 4.5.0
       eslint-visitor-keys: 3.4.3
@@ -11182,9 +11181,9 @@ snapshots:
       - terser
       - typescript
 
-  astrojs-compiler-sync@0.3.5(@astrojs/internal-helpers@@astrojs/compiler@2.7.1):
+  astrojs-compiler-sync@0.3.5(@astrojs/compiler@2.5.3):
     dependencies:
-      "@astrojs/compiler": "@astrojs/internal-helpers@@astrojs/compiler@2.7.1"
+      "@astrojs/compiler": 2.5.3
       synckit: 0.9.0
 
   asynckit@0.4.0: {}
