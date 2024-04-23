@@ -148,6 +148,11 @@ export default defineConfig({
         } satisfies RehypeCustomCodeOptions,
       ],
     ],
+    remarkRehype: {
+      footnoteLabel: "脚注",
+      footnoteLabelTagName: "h2",
+      footnoteLabelProperties: {},
+    },
     syntaxHighlight: false,
   },
 })
