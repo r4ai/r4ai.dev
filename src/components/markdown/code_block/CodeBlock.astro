@@ -6,6 +6,9 @@ import { camelCase } from "scule"
 import Iconify from "@iconify/iconify/dist/iconify.js"
 import { skillIcons } from "@/lib/langs"
 import { Npm2Yarn } from "./Npm2Yarn"
+import { Mermaid } from "./Mermaid"
+import { fromHtml } from "hast-util-from-html"
+import { toText } from "hast-util-to-text"
 
 export type CodeBlockProps = {
   code: string
@@ -59,6 +62,10 @@ const skillIcon = async (lang: string) => {
   }
 }
 const iconName = await skillIcon(props.lang)
+
+const codeHtml = await Astro.slots.render("default")
+const codeHast = fromHtml(codeHtml)
+const code = toText(codeHast, { whitespace: "pre" })
 ---
 
 {
@@ -70,6 +77,8 @@ const iconName = await skillIcon(props.lang)
         slot="icon"
       />
     </Npm2Yarn>
+  ) : props.lang === "mermaid" ? (
+    <Mermaid client:load code={code} />
   ) : (
     <CodeBlockComponent {...props} client:visible>
       <Icon
