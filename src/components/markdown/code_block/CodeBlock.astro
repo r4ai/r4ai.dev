@@ -70,7 +70,7 @@ const code = toText(codeHast, { whitespace: "pre" })
 
 {
   props.npm2yarn ? (
-    <Npm2Yarn {...props} client:visible>
+    <Npm2Yarn {...props} {code} client:visible>
       <Icon
         icon={iconName}
         class="h-4 w-4 brightness-90 contrast-75 filter"
@@ -80,7 +80,7 @@ const code = toText(codeHast, { whitespace: "pre" })
   ) : props.lang === "mermaid" ? (
     <Mermaid client:load code={code} />
   ) : (
-    <CodeBlockComponent {...props} client:visible>
+    <CodeBlockComponent {...props} {code} client:visible>
       <Icon
         icon={iconName}
         class="h-4 w-4 brightness-90 contrast-75 filter"
