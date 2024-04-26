@@ -22,7 +22,7 @@ importers:
         version: 5.1.0(astro@4.3.5(@types/node@20.12.7)(sass@1.75.0)(typescript@5.4.5))(tailwindcss@3.4.3)
       '@extractus/oembed-extractor':
         specifier: ^4.0.3
-        version: 4.0.3
+        version: 4.0.4
       '@floating-ui/react':
         specifier: ^0.26.12
         version: 0.26.12(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -826,8 +826,8 @@ packages:
     resolution: {integrity: sha512-5WoDz3Y19Bg2BnErkZTp0en+c/i9PvgFS7MBe1+m60HjFr0hrphlAGp4yzI7pxpt4xShln4ZyYp4neJm8hmOkQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@extractus/oembed-extractor@4.0.3':
-    resolution: {integrity: sha512-yrRJ6T7/QIy/+iFLuTxGANQ/e7hvSsVKd7v6vs9AGVKsfFJU9S1qY9tL+Lzz9po4XMvNYS0EdxdUm+sgc5SP0Q==}
+  '@extractus/oembed-extractor@4.0.4':
+    resolution: {integrity: sha512-Jd+a+5fpGYxF4Lhs8iXZlL0vjCPg3FKnuXt8jrvXMXzTlazLNAE2My5/EIU/T1hH0XKRBS534ASEnicEhfjSlQ==}
     engines: {node: '>= 18'}
 
   '@floating-ui/core@1.6.0':
@@ -6063,7 +6063,7 @@ snapshots:
 
   '@eslint/js@9.1.1': {}
 
-  '@extractus/oembed-extractor@4.0.3':
+  '@extractus/oembed-extractor@4.0.4':
     dependencies:
       cross-fetch: 4.0.0
     transitivePeerDependencies:
