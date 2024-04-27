@@ -185,7 +185,7 @@ importers:
         version: 2.1.0
       eslint-plugin-astro:
         specifier: ^1.0.0
-        version: 1.0.2(eslint@9.1.1)(typescript@5.4.5)
+        version: 1.0.3(eslint@9.1.1)(typescript@5.4.5)
       eslint-plugin-jsx-a11y:
         specifier: ^6.8.0
         version: 6.8.0(eslint@9.1.1)
@@ -2704,8 +2704,8 @@ packages:
     resolution: {integrity: sha512-QUp6pM9pjKEVannNAbSJNeRuYwW3LshejfyBBpjeMGaJjaDUpVps4C6KVR8R7dWZnD3i0synmrE36znjTkJvdQ==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0', pnpm: '>=8.6.0'}
 
-  eslint-plugin-astro@1.0.2:
-    resolution: {integrity: sha512-zrhiL6spQqG6814TTb6i82nJtEAOb8fSn3Is7HB1L09AA5Uff7rgFefuw7B9ZvgUBgVdZ55QJMiv3nSJsP4YDQ==}
+  eslint-plugin-astro@1.0.3:
+    resolution: {integrity: sha512-+Nna5I9ypbYftyhmF6I9QbyK3o6m3PGfjgcgRzSF1TbHEXG5VI8z+nzsLywcvyVtGhcwmOpnB71iE7XDKnB94Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.57.0'
@@ -8196,7 +8196,7 @@ snapshots:
 
   eslint-define-config@2.1.0: {}
 
-  eslint-plugin-astro@1.0.2(eslint@9.1.1)(typescript@5.4.5):
+  eslint-plugin-astro@1.0.3(eslint@9.1.1)(typescript@5.4.5):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.1.1)
       '@jridgewell/sourcemap-codec': 1.4.15
