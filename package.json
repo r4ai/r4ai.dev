@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.5.0",
-    "@iconify/tailwind": "^0.1.4",
+    "@iconify/tailwind": "^1.0.0",
     "@r4ai/remark-callout": "^0.3.4",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.12",
