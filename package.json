@@ -113,5 +113,5 @@
     "unist-util-visit": "^5.0.0",
     "vite": "^5.2.10"
   },
-  "packageManager": "pnpm@9.0.6"
+  "packageManager": "pnpm@9.1.0"
 }
