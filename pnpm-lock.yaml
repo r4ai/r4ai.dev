@@ -22,7 +22,7 @@ importers:
         version: 5.1.0(astro@4.3.5(@types/node@20.12.10)(sass@1.77.0)(typescript@5.4.5))(tailwindcss@3.4.3)
       '@extractus/oembed-extractor':
         specifier: ^4.0.3
-        version: 4.0.4
+        version: 4.0.5
       '@floating-ui/react':
         specifier: ^0.26.12
         version: 0.26.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -826,8 +826,8 @@ packages:
     resolution: {integrity: sha512-ESiIudvhoYni+MdsI8oD7skpprZ89qKocwRM2KEvhhBJ9nl5MRh7BXU5GTod7Mdygq+AUl+QzId6iWJKR/wABA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@extractus/oembed-extractor@4.0.4':
-    resolution: {integrity: sha512-Jd+a+5fpGYxF4Lhs8iXZlL0vjCPg3FKnuXt8jrvXMXzTlazLNAE2My5/EIU/T1hH0XKRBS534ASEnicEhfjSlQ==}
+  '@extractus/oembed-extractor@4.0.5':
+    resolution: {integrity: sha512-ehfdSzu7bvt+9uzpkuy2zAIRoGnBY9QLPacB1pbXuvNddYK5CGJU+KAV8Q0uLS5ikFuRuCQsRorh63O/6lYdDg==}
     engines: {node: '>= 18'}
 
   '@floating-ui/core@1.6.1':
@@ -2278,6 +2278,9 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
+  cssom@0.5.0:
+    resolution: {integrity: sha512-iKuQcq+NdHqlAcwUY0o/HL69XQrUaQdMjmStJ8JFmUaiiQErlhrmuigkg/CU4E2J0IyUKUrMAgl36TvN67MqTw==}
+
   cssstyle@4.0.1:
     resolution: {integrity: sha512-8ZYiJ3A/3OkDd093CBT/0UKDWry7ak4BdPTFP2+QEP7cmhouyq/Up709ASSj2cK02BbZiMgk7kYjZNS4QP5qrQ==}
     engines: {node: '>=18'}
@@ -3092,6 +3095,9 @@ packages:
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
+  htmlparser2@9.1.0:
+    resolution: {integrity: sha512-5zfg6mHUoaer/97TxnGpxmbR7zJtPwIYFMZ/H5ucTlPZhKvtum05yiPK3Mgai3a0DyVxv7qYqoweaEd2nrYQzQ==}
+
   http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
 
@@ -3472,6 +3478,9 @@ packages:
 
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
+
+  linkedom@0.16.11:
+    resolution: {integrity: sha512-WgaTVbj7itjyXTsCvgerpneERXShcnNJF5VIV+/4SLtyRLN+HppPre/WDHRofAr2IpEuujSNgJbCBd5lMl6lRw==}
 
   lint-staged@15.2.2:
     resolution: {integrity: sha512-TiTt93OPh1OZOsb5B7k96A/ATl2AjIZo+vnzFZ6oHK5FuTk63ByDtxGQpHm+kFETjEWqgkF95M8FRXKR/LEBcw==}
@@ -5031,6 +5040,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  uhyphen@0.2.0:
+    resolution: {integrity: sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==}
+
   ultrahtml@1.5.3:
     resolution: {integrity: sha512-GykOvZwgDWZlTQMtp5jrD4BVL+gNn2NVlVafjcFUJ7taY20tqYdwdoWBFy6GBJsNTZe1GkGPkSl5knQAjtgceg==}
 
@@ -6036,9 +6048,10 @@ snapshots:
 
   '@eslint/js@9.2.0': {}
 
-  '@extractus/oembed-extractor@4.0.4':
+  '@extractus/oembed-extractor@4.0.5':
     dependencies:
       cross-fetch: 4.0.0
+      linkedom: 0.16.11
     transitivePeerDependencies:
       - encoding
 
@@ -7685,6 +7698,8 @@ snapshots:
 
   cssesc@3.0.0: {}
 
+  cssom@0.5.0: {}
+
   cssstyle@4.0.1:
     dependencies:
       rrweb-cssom: 0.6.0
@@ -8776,6 +8791,13 @@ snapshots:
 
   html-void-elements@3.0.0: {}
 
+  htmlparser2@9.1.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.1.0
+      entities: 4.5.0
+
   http-cache-semantics@4.1.1: {}
 
   http-proxy-agent@7.0.2:
@@ -9119,6 +9141,14 @@ snapshots:
       unicode-trie: 2.0.0
 
   lines-and-columns@1.2.4: {}
+
+  linkedom@0.16.11:
+    dependencies:
+      css-select: 5.1.0
+      cssom: 0.5.0
+      html-escaper: 3.0.3
+      htmlparser2: 9.1.0
+      uhyphen: 0.2.0
 
   lint-staged@15.2.2:
     dependencies:
@@ -11302,6 +11332,8 @@ snapshots:
       - supports-color
 
   typescript@5.4.5: {}
+
+  uhyphen@0.2.0: {}
 
   ultrahtml@1.5.3: {}
 
