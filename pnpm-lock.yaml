@@ -37,7 +37,7 @@ importers:
         version: 3.1.1
       '@iconify/json':
         specifier: ^2.2.203
-        version: 2.2.207
+        version: 2.2.208
       '@pagefind/default-ui':
         specifier: ^1.1.0
         version: 1.1.0
@@ -720,8 +720,8 @@ packages:
     resolution: {integrity: sha512-1nemfyD/OJzh9ALepH7YfuuP8BdEB24Skhd8DXWh0hzcOxImbb1ZizSZkpCzAwSZSGcJFmscIBaBQu+yLyWaxQ==}
     deprecated: no longer maintained, switch to modern iconify-icon web component
 
-  '@iconify/json@2.2.207':
-    resolution: {integrity: sha512-3ZsZcJHHCDoSbRKcpvdTk4e5ZnTLD902BjeNysj8NZIB5V9WaTh6L91eHyQgEaCt4j1shmAXrIr6LoImL6+GpA==}
+  '@iconify/json@2.2.208':
+    resolution: {integrity: sha512-xGJnQ/bYWWFrnPs/qNCSq9CYHXOBINpV3ctuy0zUucKejdNKnpAwVIzuyDJPt0McvQ6XfdU0rxkzH3rHVF43Vg==}
 
   '@iconify/tailwind@1.0.1':
     resolution: {integrity: sha512-Y0AbOvabPJ4qjhQGWvCfhWoYC7aETqYAg9V++xkHFqy9gcUteKnEEmgOEsoOf6T7V9Xz34qKNLnaIAVkt1gLtQ==}
@@ -5590,7 +5590,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/json@2.2.207':
+  '@iconify/json@2.2.208':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
