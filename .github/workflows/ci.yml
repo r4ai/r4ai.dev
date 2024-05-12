@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Node.js
         uses: jdx/mise-action@v2
+        env:
+          MISE_NODE_COREPACK: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Format
@@ -24,6 +26,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Node.js
         uses: jdx/mise-action@v2
+        env:
+          MISE_NODE_COREPACK: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Lint
@@ -36,6 +40,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Node.js
         uses: jdx/mise-action@v2
+        env:
+          MISE_NODE_COREPACK: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build
