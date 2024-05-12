@@ -11,8 +11,8 @@
     "check": "astro check && tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format:check": "prettier --check './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
-    "format": "prettier --write './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
+    "format:check": "prettier --ignore-path .gitignore --check './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
+    "format": "prettier --ignore-path .gitignore --write './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
     "astro": "astro",
     "prepare": "husky install"
   },
