@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^2.0.0
-        version: 2.3.1(astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5))
+        version: 2.3.1(astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))
       '@astrojs/react':
         specifier: ^3.0.7
-        version: 3.3.1(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+        version: 3.3.1(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       '@astrojs/svelte':
         specifier: ^5.0.0
-        version: 5.4.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+        version: 5.4.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       '@astrojs/tailwind':
         specifier: ^5.0.3
-        version: 5.1.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5))(tailwindcss@3.4.3)
+        version: 5.1.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(tailwindcss@3.4.3)
       '@extractus/oembed-extractor':
         specifier: ^4.0.3
         version: 4.0.5
@@ -79,7 +79,7 @@ importers:
         version: 1.10.0
       astro:
         specifier: ^4.0.3
-        version: 4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5)
+        version: 4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -260,7 +260,7 @@ importers:
         version: 11.1.0
       sass:
         specifier: ^1.75.0
-        version: 1.77.1
+        version: 1.77.2
       satori:
         specifier: ^0.10.13
         version: 0.10.13
@@ -290,7 +290,7 @@ importers:
         version: 5.0.0
       vite:
         specifier: ^5.2.10
-        version: 5.2.11(@types/node@20.12.12)(sass@1.77.1)
+        version: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
 
 packages:
 
@@ -3163,8 +3163,8 @@ packages:
   immediate@3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
 
-  immutable@4.3.5:
-    resolution: {integrity: sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==}
+  immutable@4.3.6:
+    resolution: {integrity: sha512-Ju0+lEMyzMVZarkTn/gqRpdqd5dOPaz1mCZ0SH3JV6iFw81PldE/PEB1hWVEA288HPt4WXW8O7AWxB10M+03QQ==}
 
   import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -4616,8 +4616,8 @@ packages:
   sass-formatter@0.7.9:
     resolution: {integrity: sha512-CWZ8XiSim+fJVG0cFLStwDvft1VI7uvXdCNJYXhDvowiv+DsbD1nXLiQ4zrE5UBvj5DWZJ93cwN0NX5PMsr1Pw==}
 
-  sass@1.77.1:
-    resolution: {integrity: sha512-OMEyfirt9XEfyvocduUIOlUSkWOXS/LAt6oblR/ISXCTukyavjex+zQNm51pPCOiFKY1QpWvEH1EeCkgyV3I6w==}
+  sass@1.77.2:
+    resolution: {integrity: sha512-eb4GZt1C3avsX3heBNlrc7I09nyT00IUuo4eFhAbeXWU2fvA7oXI53SxODVAA+zgZCk9aunAZgO+losjR3fAwA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -5617,12 +5617,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@2.3.1(astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5))':
+  '@astrojs/mdx@2.3.1(astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))':
     dependencies:
       '@astrojs/markdown-remark': 5.1.0
       '@mdx-js/mdx': 3.0.1
       acorn: 8.11.3
-      astro: 4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5)
+      astro: 4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       es-module-lexer: 1.5.0
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
@@ -5642,11 +5642,11 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  '@astrojs/react@3.3.1(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))':
+  '@astrojs/react@3.3.1(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))':
     dependencies:
       '@types/react': 18.3.2
       '@types/react-dom': 18.3.0
-      '@vitejs/plugin-react': 4.2.1(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+      '@vitejs/plugin-react': 4.2.1(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       ultrahtml: 1.5.3
@@ -5654,10 +5654,10 @@ snapshots:
       - supports-color
       - vite
 
-  '@astrojs/svelte@5.4.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))':
+  '@astrojs/svelte@5.4.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
-      astro: 4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5)
+      '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
+      astro: 4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       svelte: 4.2.17
       svelte2tsx: 0.6.27(svelte@4.2.17)(typescript@5.4.5)
       typescript: 5.4.5
@@ -5665,9 +5665,9 @@ snapshots:
       - supports-color
       - vite
 
-  '@astrojs/tailwind@5.1.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5))(tailwindcss@3.4.3)':
+  '@astrojs/tailwind@5.1.0(astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(tailwindcss@3.4.3)':
     dependencies:
-      astro: 4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5)
+      astro: 4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       autoprefixer: 10.4.19(postcss@8.4.38)
       postcss: 8.4.38
       postcss-load-config: 4.0.2(postcss@8.4.38)
@@ -6846,26 +6846,26 @@ snapshots:
 
   '@stackblitz/sdk@1.10.0': {}
 
-  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1)))(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))':
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2)))(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+      '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       debug: 4.3.4
       svelte: 4.2.17
-      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.1)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))':
+  '@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1)))(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2)))(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.10
       svelte: 4.2.17
       svelte-hmr: 0.16.0(svelte@4.2.17)
-      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.1)
-      vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
+      vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -7122,14 +7122,14 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 18.3.1
 
-  '@vitejs/plugin-react@4.2.1(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))':
+  '@vitejs/plugin-react@4.2.1(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))':
     dependencies:
       '@babel/core': 7.24.4
       '@babel/plugin-transform-react-jsx-self': 7.24.1(@babel/core@7.24.4)
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.4)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.1)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -7345,7 +7345,7 @@ snapshots:
       - supports-color
       - typescript
 
-  astro@4.3.5(@types/node@20.12.12)(sass@1.77.1)(typescript@5.4.5):
+  astro@4.3.5(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5):
     dependencies:
       '@astrojs/compiler': 2.5.3
       '@astrojs/internal-helpers': 0.2.1
@@ -7406,8 +7406,8 @@ snapshots:
       tsconfck: 3.0.3(typescript@5.4.5)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.1)
-      vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1))
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
+      vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       which-pm: 2.1.1
       yargs-parser: 21.1.1
       zod: 3.23.8
@@ -8895,7 +8895,7 @@ snapshots:
 
   immediate@3.0.6: {}
 
-  immutable@4.3.5: {}
+  immutable@4.3.6: {}
 
   import-fresh@3.3.0:
     dependencies:
@@ -10811,10 +10811,10 @@ snapshots:
     dependencies:
       suf-log: 2.5.3
 
-  sass@1.77.1:
+  sass@1.77.2:
     dependencies:
       chokidar: 3.6.0
-      immutable: 4.3.5
+      immutable: 4.3.6
       source-map-js: 1.2.0
 
   satori@0.10.13:
@@ -11584,7 +11584,7 @@ snapshots:
 
   viewerjs@1.11.6: {}
 
-  vite@5.2.11(@types/node@20.12.12)(sass@1.77.1):
+  vite@5.2.11(@types/node@20.12.12)(sass@1.77.2):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
@@ -11592,11 +11592,11 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.12.12
       fsevents: 2.3.3
-      sass: 1.77.1
+      sass: 1.77.2
 
-  vitefu@0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.1)):
+  vitefu@0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2)):
     optionalDependencies:
-      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.1)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
 
   volar-service-css@0.0.45(@volar/language-service@2.2.4):
     dependencies:
