@@ -26,7 +26,7 @@
       "genre: ${4|article,slide|}",
       "draft: true",
       "publishedAt: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
-      "---"
-    ]
-  }
+      "---",
+    ],
+  },
 }

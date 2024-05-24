@@ -1,5 +1,5 @@
-import { Title } from "@solidjs/meta";
-import Counter from "~/components/Counter";
+import { Title } from "@solidjs/meta"
+import Counter from "~/components/Counter"
 
 export default function Home() {
   return (
@@ -15,5 +15,5 @@ export default function Home() {
         to learn how to build SolidStart apps.
       </p>
     </main>
-  );
+  )
 }
