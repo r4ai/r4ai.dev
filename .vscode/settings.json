@@ -14,9 +14,6 @@
       // "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,",
     ]
   },
-  "[mdx]": {
-    "files.trimTrailingWhitespace": false
-  },
   "files.associations": {
     "*.css": "tailwindcss"
   },
