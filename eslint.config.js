@@ -1,12 +1,12 @@
 // @ts-check
 
-import gitignore from "eslint-config-flat-gitignore"
 import eslint from "@eslint/js"
-import tseslint from "typescript-eslint"
-import solid from "eslint-plugin-solid/dist/configs/typescript.js"
+import gitignore from "eslint-config-flat-gitignore"
 import prettier from "eslint-config-prettier"
-import globals from "globals"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
+import solid from "eslint-plugin-solid/dist/configs/typescript.js"
+import globals from "globals"
+import tseslint from "typescript-eslint"
 
 export default tseslint.config(
   gitignore(),
