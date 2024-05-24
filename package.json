@@ -14,7 +14,7 @@
     "format:check": "prettier --ignore-path .gitignore --check './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
     "format": "prettier --ignore-path .gitignore --write './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
     "astro": "astro",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",
