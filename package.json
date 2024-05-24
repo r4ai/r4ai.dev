@@ -5,7 +5,9 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "version": "vinxi version"
+    "version": "vinxi version",
+    "format:check": "prettier --ignore-path .gitignore --check .",
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
     "@solidjs/meta": "^0.29.4",
@@ -20,6 +22,8 @@
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3"
   }
 }

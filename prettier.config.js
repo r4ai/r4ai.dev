@@ -1,0 +1,8 @@
+// @ts-check
+
+/** @type {import("prettier").Config} */
+export default {
+  tabWidth: 2,
+  semi: false,
+  plugins: ["prettier-plugin-tailwindcss"],
+};
