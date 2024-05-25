@@ -25,7 +25,7 @@
     "noPropertyAccessFromIndexSignature": false,
 
     // Import aliases
-    "types": ["vinxi/types/client"],
+    "types": ["vinxi/types/client", "@testing-library/jest-dom"],
     "paths": {
       "~/*": ["./src/*"]
     }
