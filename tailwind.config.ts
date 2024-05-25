@@ -1,6 +1,7 @@
 import kobalte from "@kobalte/tailwindcss"
 import type { Config } from "tailwindcss"
 import { fontFamily } from "tailwindcss/defaultTheme"
+import animate from "tailwindcss-animate"
 
 export default {
   content: ["./src/**/*.{ts,tsx,mdx}"],
@@ -83,5 +84,5 @@ export default {
       },
     },
   },
-  plugins: [kobalte],
+  plugins: [kobalte, animate],
 } satisfies Config

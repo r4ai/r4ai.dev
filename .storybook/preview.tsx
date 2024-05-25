@@ -11,9 +11,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
-      docs: {
-        theme: themes.dark,
-      },
+    },
+    docs: {
+      theme: themes.dark,
     },
   },
   decorators: [
