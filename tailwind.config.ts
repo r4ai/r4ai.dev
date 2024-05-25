@@ -1,3 +1,4 @@
+import kobalte from "@kobalte/tailwindcss"
 import type { Config } from "tailwindcss"
 
 export default {
@@ -5,5 +6,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [kobalte],
 } satisfies Config
