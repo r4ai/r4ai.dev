@@ -1,0 +1,7 @@
+@import "../src/styles/global.css";
+
+@layer base {
+  .docs-story {
+    background-color: theme(colors.background);
+  }
+}
