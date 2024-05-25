@@ -4,6 +4,8 @@ import { withThemeByDataAttribute } from "@storybook/addon-themes"
 import { themes } from "@storybook/theming"
 import type { Preview } from "storybook-solidjs"
 
+import { ColorSchemeProvider } from "~/features/color-scheme"
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -25,7 +27,11 @@ const preview: Preview = {
       defaultTheme: "light",
       attributeName: "data-color-scheme",
     }),
-    (Story) => <Story />,
+    (Story) => (
+      <ColorSchemeProvider>
+        <Story />
+      </ColorSchemeProvider>
+    ),
   ],
 }
 

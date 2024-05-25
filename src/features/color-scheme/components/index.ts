@@ -1,1 +1,1 @@
-export * from "./init-color-scheme-script"
+export * from "./color-scheme-select"

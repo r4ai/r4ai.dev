@@ -44,7 +44,6 @@ export const ColorSchemeProvider: Component<ColorSchemeProviderProps> = (
   const props: Required<ColorSchemeProviderProps> = mergeProps(
     {
       initialColorScheme: "system",
-      initialResolvedColorScheme: "light",
     } as const,
     _props,
   )

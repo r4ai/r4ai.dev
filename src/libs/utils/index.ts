@@ -1,2 +1,2 @@
 export { cn } from "./cn"
-export { isProduction, isServer } from "./runtime"
+export { isServer } from "./runtime"
