@@ -4,9 +4,9 @@ pre-commit:
   parallel: true
   commands:
     lint-and-format:
-      run: |
-        bun run eslint --fix {staged_files}
-        bun run prettier --ignore-path .gitignore --write {staged_files}
+      run: >
+        bun run eslint --no-warn-ignored --fix {staged_files} &&
+        bun run prettier --ignore-unknown --write {staged_files} &&
         git add {staged_files}
 
     check-lockfile:
