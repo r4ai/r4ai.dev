@@ -56,7 +56,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: [...fontFamily.sans],
+        times: ["Times New Roman", "Times", ...fontFamily.serif]
+      },
+      fontSize: {
+        "4.5xl": "2.5rem",
       },
       keyframes: {
         "accordion-down": {
