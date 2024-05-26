@@ -1,21 +1,8 @@
 // @refresh reload
-import path from "node:path"
 
 import { createHandler, StartServer } from "@solidjs/start/server"
-import { build } from "esbuild"
 
-import rawInitColorSchemeScript from "~/features/color-scheme/scripts/init-color-scheme?raw"
-
-const initColorSchemeScript = await build({
-  stdin: {
-    contents: rawInitColorSchemeScript,
-    resolveDir: path.dirname(import.meta.dirname),
-    loader: "ts",
-  },
-  minify: true,
-  bundle: true,
-  write: false,
-}).then((result) => result.outputFiles[0].text)
+import initColorSchemeScript from "~/features/color-scheme/scripts/init-color-scheme?transform"
 
 export default createHandler(() => (
   <StartServer
