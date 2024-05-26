@@ -3,3 +3,12 @@
 .docs-story {
   background-color: theme(colors.background);
 }
+
+html {
+  height: theme(height.full);
+}
+
+body.sb-main-fullscreen,
+body.sb-main-fullscreen #storybook-root {
+  height: theme(height.full);
+}

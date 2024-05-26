@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "storybook-solidjs"
 
-import { Footer } from "./footer"
+import { Header } from "./header"
 
 const meta = {
-  title: "layout/Footer",
-  component: Footer,
+  title: "layouts/Header",
+  component: Header,
   tags: ["autodocs"],
   parameters: {
     layout: "padded",
   },
-} satisfies Meta<typeof Footer>
+} satisfies Meta<typeof Header>
 export default meta
 
-type Story = StoryObj<typeof Footer>
+type Story = StoryObj<typeof Header>
 
 export const Default: Story = {}
