@@ -10,39 +10,45 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Setup Node.js and Bun
         uses: jdx/mise-action@v2
-        env:
-          MISE_NODE_COREPACK: true
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Format
-        run: pnpm run format:check
+        run: bun run format:check
 
   lint:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Setup Node.js and Bun
         uses: jdx/mise-action@v2
-        env:
-          MISE_NODE_COREPACK: true
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Lint
-        run: pnpm run lint
+        run: bun run lint
+
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js and Bun
+        uses: jdx/mise-action@v2
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Test
+        run: bun run test
 
   build:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Setup Node.js and Bun
         uses: jdx/mise-action@v2
-        env:
-          MISE_NODE_COREPACK: true
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Build
-        run: pnpm run build
+        run: bun run build

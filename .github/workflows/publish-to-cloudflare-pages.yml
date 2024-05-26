@@ -18,19 +18,17 @@ jobs:
     steps:
       - name: Checkout respository
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Setup Node.js and Bun
         uses: jdx/mise-action@v2
-        env:
-          MISE_NODE_COREPACK: true
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Build website
-        run: pnpm run build
+        run: bun run build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: r4ai-dev
-          directory: ./dist
+          directory: ./.output/public
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
