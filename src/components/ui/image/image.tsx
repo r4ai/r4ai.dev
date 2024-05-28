@@ -4,6 +4,7 @@ import {
   createMemo,
   splitProps,
 } from "solid-js"
+import { NoHydration } from "solid-js/web"
 
 import type { Image as ImageType } from "~/libs/vite-plugins/vite-plugin-image/plugin"
 
@@ -11,7 +12,7 @@ export type ImageProps = Omit<ComponentProps<"img">, "src"> & {
   image: ImageType
 }
 
-export const Image: Component<ImageProps> = (props) => {
+const ImageInternal: Component<ImageProps> = (props) => {
   const [local, rest] = splitProps(props, [
     "image",
     "class",
@@ -21,25 +22,16 @@ export const Image: Component<ImageProps> = (props) => {
     "loading",
   ])
 
-  const avif = createMemo(() => local.image.url.avif)
-  const webp = createMemo(() => local.image.url.webp)
-  const original = createMemo(
-    () =>
-      Object.entries(local.image.url).find(
-        ([ext]) => !["avif", "webp"].includes(ext),
-      )?.[1],
-  )
-
   return (
     <picture>
       {import.meta.env.PROD && (
         <>
-          <source srcset={avif()} type="image/avif" />
-          <source srcset={webp()} type="image/webp" />
+          <source srcset={local.image.url.avif} type="image/avif" />
+          <source srcset={local.image.url.webp} type="image/webp" />
         </>
       )}
       <img
-        src={original()}
+        src={local.image.url[local.image.metadata.format ?? "webp"]}
         class={local.class}
         width={local.width ?? local.image.metadata.width}
         height={local.height ?? local.image.metadata.height}
@@ -50,3 +42,9 @@ export const Image: Component<ImageProps> = (props) => {
     </picture>
   )
 }
+
+export const Image: Component<ImageProps> = (props) => (
+  <NoHydration>
+    <ImageInternal {...props} />
+  </NoHydration>
+)

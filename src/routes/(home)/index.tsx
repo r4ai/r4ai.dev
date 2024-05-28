@@ -1,10 +1,8 @@
 import { Title } from "@solidjs/meta"
 
-import tmp from "~/assets/images/r4ai/icon-blobs.png"
 import iconBlobs from "~/assets/images/r4ai/icon-blobs.png?image"
 import { Image } from "~/components/ui"
 
-console.log("iconBlobs (vanilla)", tmp)
 console.log("iconBlobs", iconBlobs)
 
 export default function Home() {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "storybook-solidjs"
 
-import iconBlobs from "~/assets/images/r4ai/icon-blobs.png"
+import iconBlobs from "~/assets/images/r4ai/icon-blobs.png?image"
 
 import { Image } from "./image"
 
