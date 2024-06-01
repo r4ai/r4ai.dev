@@ -137,7 +137,7 @@ importers:
     devDependencies:
       '@astrojs/check':
         specifier: ^0.7.0
-        version: 0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.2.5)(typescript@5.4.5)
+        version: 0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.0)(typescript@5.4.5)
       '@iconify/tailwind':
         specifier: ^1.0.0
         version: 1.1.1
@@ -227,13 +227,13 @@ importers:
         version: 16.1.0(postcss@8.4.38)
       prettier:
         specifier: ^3.2.5
-        version: 3.2.5
+        version: 3.3.0
       prettier-plugin-astro:
         specifier: ^0.14.0
         version: 0.14.0
       prettier-plugin-tailwindcss:
         specifier: ^0.6.0
-        version: 0.6.1(prettier-plugin-astro@0.14.0)(prettier@3.2.5)
+        version: 0.6.1(prettier-plugin-astro@0.14.0)(prettier@3.3.0)
       rehype:
         specifier: ^13.0.1
         version: 13.0.1
@@ -4353,8 +4353,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
+  prettier@3.3.0:
+    resolution: {integrity: sha512-J9odKxERhCQ10OC2yb93583f6UnYutOeiV5i0zEDS7UGTdUt0u+y8erxl3lBKvwo/JHyyoEdXjwp4dke9oyZ/g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5557,9 +5557,9 @@ snapshots:
       css-tree: 2.3.1
       is-potential-custom-element-name: 1.0.1
 
-  '@astrojs/check@0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.2.5)(typescript@5.4.5)':
+  '@astrojs/check@0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.0)(typescript@5.4.5)':
     dependencies:
-      '@astrojs/language-server': 2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.2.5)(typescript@5.4.5)
+      '@astrojs/language-server': 2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.3.0)(typescript@5.4.5)
       chokidar: 3.6.0
       fast-glob: 3.3.2
       kleur: 4.1.5
@@ -5577,7 +5577,7 @@ snapshots:
 
   '@astrojs/internal-helpers@0.2.1': {}
 
-  '@astrojs/language-server@2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.2.5)(typescript@5.4.5)':
+  '@astrojs/language-server@2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.3.0)(typescript@5.4.5)':
     dependencies:
       '@astrojs/compiler': 2.8.0
       '@jridgewell/sourcemap-codec': 1.4.15
@@ -5590,13 +5590,13 @@ snapshots:
       volar-service-css: 0.0.45(@volar/language-service@2.2.4)
       volar-service-emmet: 0.0.45(@volar/language-service@2.2.4)
       volar-service-html: 0.0.45(@volar/language-service@2.2.4)
-      volar-service-prettier: 0.0.45(@volar/language-service@2.2.4)(prettier@3.2.5)
+      volar-service-prettier: 0.0.45(@volar/language-service@2.2.4)(prettier@3.3.0)
       volar-service-typescript: 0.0.45(@volar/language-service@2.2.4)
       volar-service-typescript-twoslash-queries: 0.0.45(@volar/language-service@2.2.4)
       vscode-html-languageservice: 5.2.0
       vscode-uri: 3.0.8
     optionalDependencies:
-      prettier: 3.2.5
+      prettier: 3.3.0
       prettier-plugin-astro: 0.14.0
     transitivePeerDependencies:
       - typescript
@@ -10461,16 +10461,16 @@ snapshots:
   prettier-plugin-astro@0.14.0:
     dependencies:
       '@astrojs/compiler': 1.8.2
-      prettier: 3.2.5
+      prettier: 3.3.0
       sass-formatter: 0.7.9
 
-  prettier-plugin-tailwindcss@0.6.1(prettier-plugin-astro@0.14.0)(prettier@3.2.5):
+  prettier-plugin-tailwindcss@0.6.1(prettier-plugin-astro@0.14.0)(prettier@3.3.0):
     dependencies:
-      prettier: 3.2.5
+      prettier: 3.3.0
     optionalDependencies:
       prettier-plugin-astro: 0.14.0
 
-  prettier@3.2.5: {}
+  prettier@3.3.0: {}
 
   prismjs@1.29.0: {}
 
@@ -11687,12 +11687,12 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.2.4
 
-  volar-service-prettier@0.0.45(@volar/language-service@2.2.4)(prettier@3.2.5):
+  volar-service-prettier@0.0.45(@volar/language-service@2.2.4)(prettier@3.3.0):
     dependencies:
       vscode-uri: 3.0.8
     optionalDependencies:
       '@volar/language-service': 2.2.4
-      prettier: 3.2.5
+      prettier: 3.3.0
 
   volar-service-typescript-twoslash-queries@0.0.45(@volar/language-service@2.2.4):
     optionalDependencies:
