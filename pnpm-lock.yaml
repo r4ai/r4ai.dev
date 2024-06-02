@@ -118,7 +118,7 @@ importers:
         version: 1.3.0
       shiki:
         specifier: ^1.3.0
-        version: 1.6.1
+        version: 1.6.2
       svelte:
         specifier: ^4.2.15
         version: 4.2.17
@@ -239,7 +239,7 @@ importers:
         version: 13.0.1
       rehype-custom-code:
         specifier: ^0.5.0
-        version: 0.5.0(shiki@1.6.1)
+        version: 0.5.0(shiki@1.6.2)
       remark:
         specifier: ^15.0.1
         version: 15.0.1
@@ -1593,8 +1593,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@shikijs/core@1.6.1':
-    resolution: {integrity: sha512-CqYyepN4SnBopaoXYwng4NO8riB5ask/LTCkhOFq+GNGtr2X+aKeD767eYdqYukeixEUvv4bXdyTYVaogj7KBw==}
+  '@shikijs/core@1.6.2':
+    resolution: {integrity: sha512-guW5JeDzZ7uwOjTfCOFZ2VtVXk5tmkMzBYbKGfXsmAH1qYOej49L5jQDcGmwd6/OgvpmWhzO2GNJkQIFnbwLPQ==}
 
   '@shuding/opentype.js@1.4.0-beta.0':
     resolution: {integrity: sha512-3NgmNyH3l/Hv6EvsWJbsvpcpUba6R8IREQ83nH83cyakCw7uM1arZKNfHwv1Wz6jgqrF/j4x5ELvR6PnK9nTcA==}
@@ -4716,8 +4716,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  shiki@1.6.1:
-    resolution: {integrity: sha512-1Pu/A1rtsG6HZvQm4W0NExQ45e02og+rPog7PDaFDiMumZgOYnZIu4JtGQeAIfMwdbKSjJQoCUr79vDLKUUxWA==}
+  shiki@1.6.2:
+    resolution: {integrity: sha512-X3hSm5GzzBd/BmPmGfkueOUADLyBoZo1ojYQXhd+NU2VJn458yt4duaS0rVzC+WtqftSV7mTVvDw+OB9AHi3Eg==}
 
   shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
@@ -5634,7 +5634,7 @@ snapshots:
       remark-parse: 11.0.0
       remark-rehype: 11.1.0
       remark-smartypants: 2.1.0
-      shiki: 1.6.1
+      shiki: 1.6.2
       unified: 11.0.4
       unist-util-remove-position: 5.0.0
       unist-util-visit: 5.0.0
@@ -6863,7 +6863,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.18.0':
     optional: true
 
-  '@shikijs/core@1.6.1': {}
+  '@shikijs/core@1.6.2': {}
 
   '@shuding/opentype.js@1.4.0-beta.0':
     dependencies:
@@ -10634,7 +10634,7 @@ snapshots:
       es-errors: 1.3.0
       set-function-name: 2.0.2
 
-  rehype-custom-code@0.5.0(shiki@1.6.1):
+  rehype-custom-code@0.5.0(shiki@1.6.2):
     dependencies:
       deepmerge: 4.3.1
       hast-util-is-element: 3.0.0
@@ -10643,7 +10643,7 @@ snapshots:
       json5: 2.2.3
       parse-numeric-range: 1.3.0
       scule: 1.3.0
-      shiki: 1.6.1
+      shiki: 1.6.2
       unist-util-visit: 5.0.0
 
   rehype-katex@7.0.0:
@@ -10986,9 +10986,9 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  shiki@1.6.1:
+  shiki@1.6.2:
     dependencies:
-      '@shikijs/core': 1.6.1
+      '@shikijs/core': 1.6.2
 
   shikiji-core@0.9.19: {}
 
