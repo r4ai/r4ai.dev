@@ -86,7 +86,7 @@
     "hast-util-to-text": "^4.0.2",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "lucide-react": "^0.387.0",
+    "lucide-react": "^0.390.0",
     "node-html-parser": "^6.1.13",
     "npm-to-yarn": "^2.2.1",
     "pagefind": "^1.1.0",
