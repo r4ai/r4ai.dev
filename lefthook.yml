@@ -5,12 +5,12 @@ pre-commit:
   commands:
     lint-and-format:
       run: >
-        bun run eslint --no-warn-ignored --fix {staged_files} &&
-        bun run prettier --ignore-unknown --write {staged_files} &&
+        bun run --bun eslint --no-warn-ignored --fix {staged_files} &&
+        bun run --bun prettier --ignore-unknown --write {staged_files} &&
         git add {staged_files}
 
     type-check:
-      run: bun run tsc
+      run: bun run --bun tsc
 
     check-lockfile:
       glob: "**/package.json"
