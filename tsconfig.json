@@ -25,10 +25,10 @@
     "noPropertyAccessFromIndexSignature": false,
 
     // Import aliases
-    "types": ["vinxi/types/client", "@testing-library/jest-dom"],
+    "types": ["vinxi/types/client", "@testing-library/jest-dom", "bun"],
     "paths": {
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", ".storybook/**/*"]
+  "include": ["src/**/*", ".storybook/**/*", "scripts/**/*"]
 }

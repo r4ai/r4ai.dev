@@ -1,6 +1,5 @@
 import { defineConfig } from "@solidjs/start/config"
 
-import image from "./src/libs/vite-plugins/vite-plugin-image"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
 
 export default defineConfig({
@@ -12,7 +11,7 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [raw(), image()],
+    plugins: [raw()],
     build: {
       rollupOptions: {
         external: ["sharp"],

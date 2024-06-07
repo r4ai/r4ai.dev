@@ -1,9 +1,9 @@
 import { Title } from "@solidjs/meta"
 
-import iconBlobs from "~/assets/images/r4ai/icon-blobs.png?image"
+import iconAvif from "~/assets/images/r4ai/icon-blobs.avif"
+import iconPng from "~/assets/images/r4ai/icon-blobs.png"
+import iconWebp from "~/assets/images/r4ai/icon-blobs.webp"
 import { Image } from "~/components/ui"
-
-console.log("iconBlobs", iconBlobs)
 
 export default function Home() {
   return (
@@ -16,7 +16,17 @@ export default function Home() {
         class="col-span-3 col-start-1 mx-auto w-full max-w-xs sm:col-span-4"
         client:idle
       > */}
-      <Image image={iconBlobs} class="drop-shadow-lg" alt="Me" />
+      <div class="col-span-3 col-start-1 mx-auto w-full max-w-xs sm:col-span-4">
+        <Image
+          src={{
+            avif: iconAvif,
+            webp: iconWebp,
+            fallback: iconPng,
+          }}
+          class="aspect-[1132/1140] size-full drop-shadow-lg"
+          alt="Me"
+        />
+      </div>
       {/* </RareIcon> */}
       <section class="col-span-4 my-auto sm:col-start-5 sm:col-end-9">
         <h1 class="font-times text-5xl font-black text-foreground sm:text-6xl">

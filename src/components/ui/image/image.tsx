@@ -1,20 +1,19 @@
-import {
-  type Component,
-  type ComponentProps,
-  createMemo,
-  splitProps,
-} from "solid-js"
+import { type Component, type ComponentProps, splitProps } from "solid-js"
 import { NoHydration } from "solid-js/web"
 
-import type { Image as ImageType } from "~/libs/vite-plugins/vite-plugin-image/plugin"
-
 export type ImageProps = Omit<ComponentProps<"img">, "src"> & {
-  image: ImageType
+  src:
+    | {
+        avif?: string
+        webp?: string
+        fallback: string
+      }
+    | string
 }
 
-const ImageInternal: Component<ImageProps> = (props) => {
+const ImageComponent: Component<ImageProps> = (props) => {
   const [local, rest] = splitProps(props, [
-    "image",
+    "src",
     "class",
     "width",
     "height",
@@ -24,17 +23,19 @@ const ImageInternal: Component<ImageProps> = (props) => {
 
   return (
     <picture>
-      {import.meta.env.PROD && (
+      {import.meta.env.PROD && typeof local.src === "object" && (
         <>
-          <source srcset={local.image.url.avif} type="image/avif" />
-          <source srcset={local.image.url.webp} type="image/webp" />
+          {local.src.avif && (
+            <source srcset={local.src.avif} type="image/avif" />
+          )}
+          {local.src.webp && (
+            <source srcset={local.src.webp} type="image/webp" />
+          )}
         </>
       )}
       <img
-        src={local.image.url[local.image.metadata.format ?? "webp"]}
+        src={typeof local.src === "object" ? local.src.fallback : local.src}
         class={local.class}
-        width={local.width ?? local.image.metadata.width}
-        height={local.height ?? local.image.metadata.height}
         decoding={local.decoding ?? "async"}
         loading={local.loading ?? "lazy"}
         {...rest}
@@ -45,6 +46,6 @@ const ImageInternal: Component<ImageProps> = (props) => {
 
 export const Image: Component<ImageProps> = (props) => (
   <NoHydration>
-    <ImageInternal {...props} />
+    <ImageComponent {...props} />
   </NoHydration>
 )
