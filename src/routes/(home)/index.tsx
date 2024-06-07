@@ -1,11 +1,14 @@
 import { Title } from "@solidjs/meta"
+import { siBluesky, siGithub, siZenn } from "simple-icons"
 
 import iconAvif from "~/assets/images/r4ai/icon-blobs.avif"
 import iconPng from "~/assets/images/r4ai/icon-blobs.png"
 import iconWebp from "~/assets/images/r4ai/icon-blobs.webp"
 import { Image } from "~/components/ui"
 
-export default function Home() {
+import { LinkCard } from "./components/link-card"
+
+export default () => {
   return (
     <main
       class="mx-auto my-12 grid max-w-2xl grid-flow-row grid-cols-4 gap-12 gap-y-0 px-8 text-foreground sm:grid-cols-8"
@@ -46,25 +49,24 @@ export default function Home() {
           とあるCS専攻な大学生です。普段はWeb開発をしています。最近はWASMを使ったゲーム開発に興味があります。
         </p>
         <div class="mt-6 flex flex-col space-y-3 font-mono text-base sm:inline-block">
-          {/* <LinkCard
+          <LinkCard
             title="@r4ai"
             href="https://github.com/r4ai"
-            icon={GitHub}
-            alt="GitHub"
-            shouldInvert
+            icon={siGithub}
+            site="GitHub"
           />
           <LinkCard
             title="@r4ai.dev"
             href="https://bsky.app/profile/r4ai.dev"
-            icon={Bsky}
-            alt="BlueSky"
+            icon={siBluesky}
+            site="BlueSky"
           />
           <LinkCard
             title="@t4aru"
             href="https://zenn.dev/t4aru"
-            icon={Zenn}
-            alt="Zenn.dev"
-          /> */}
+            icon={siZenn}
+            site="Zenn.dev"
+          />
         </div>
       </div>
       <div class="col-span-4">{/* <CubeCanvas client:only="react" /> */}</div>
