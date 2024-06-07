@@ -56,7 +56,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        times: ["Times New Roman", "Times", ...fontFamily.serif]
+        times: ["Times New Roman", "Times", ...fontFamily.serif],
       },
       fontSize: {
         "4.5xl": "2.5rem",
