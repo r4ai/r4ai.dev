@@ -1,7 +1,7 @@
 import type { SimpleIcon as SimpleIconJson } from "simple-icons"
 import type { Component } from "solid-js"
 
-import { SimpleIcon } from "~/components/ui/simple-icon"
+import { SimpleIcon } from "~/components/ui"
 import { cn } from "~/libs/utils"
 
 export type LinkCardProps = {
