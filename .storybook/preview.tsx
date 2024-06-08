@@ -4,6 +4,7 @@ import { withThemeByDataAttribute } from "@storybook/addon-themes"
 import { themes } from "@storybook/theming"
 import type { Preview } from "storybook-solidjs"
 
+import { Toaster } from "~/components/ui"
 import { ColorSchemeProvider } from "~/features/color-scheme"
 
 const preview: Preview = {
@@ -30,6 +31,7 @@ const preview: Preview = {
     (Story) => (
       <ColorSchemeProvider>
         <Story />
+        <Toaster />
       </ColorSchemeProvider>
     ),
   ],

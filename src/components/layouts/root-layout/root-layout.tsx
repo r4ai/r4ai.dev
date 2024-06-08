@@ -5,6 +5,7 @@ import {
   Suspense,
 } from "solid-js"
 
+import { Toaster } from "~/components/ui"
 import { ColorSchemeProvider } from "~/features/color-scheme"
 import { cn } from "~/libs/utils"
 
@@ -24,6 +25,7 @@ export const RootLayout: Component<RootLayoutProps> = (props) => {
         </div>
         <Footer />
       </div>
+      <Toaster />
     </ColorSchemeProvider>
   )
 }
