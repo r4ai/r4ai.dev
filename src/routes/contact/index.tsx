@@ -16,7 +16,7 @@ import {
   TextFieldRoot,
 } from "~/components/ui"
 
-import { SubmitButton } from "./components/submit-button"
+import { SubmitButton } from "./components"
 
 type ResponseSchema = {
   status: number

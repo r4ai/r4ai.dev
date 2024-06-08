@@ -7,7 +7,7 @@ import iconBlobsWebp from "~/assets/images/r4ai/icon-blobs.webp"
 import { IconBlobsClipPath } from "~/assets/images/r4ai/icon-blobs-clip-path"
 import { Image } from "~/components/ui"
 
-import { LinkCard, RareCard } from "./components"
+import { Cube, LinkCard, RareCard } from "./components"
 
 export default () => {
   return (
@@ -69,7 +69,9 @@ export default () => {
           />
         </div>
       </div>
-      <div class="col-span-4">{/* <CubeCanvas client:only="react" /> */}</div>
+      <div class="col-span-4">
+        <Cube />
+      </div>
       <h2 class="col-span-4 mb-6 mt-16 font-mono text-2xl font-semibold sm:col-span-8">
         使える技術
       </h2>

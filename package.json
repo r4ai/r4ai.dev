@@ -26,6 +26,7 @@
     "lucide-solid": "^0.379.0",
     "solid-js": "^1.8.17",
     "solid-sonner": "^0.2.7",
+    "three": "^0.165.0",
     "valibot": "^0.31.0",
     "vinxi": "^0.3.11"
   },
@@ -50,6 +51,7 @@
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.12.12",
+    "@types/three": "^0.165.0",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
