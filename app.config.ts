@@ -1,5 +1,6 @@
 import { defineConfig } from "@solidjs/start/config"
 
+import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
 
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [raw()],
+    plugins: [raw(), pagefind()],
     build: {
       rollupOptions: {
         external: ["sharp"],
