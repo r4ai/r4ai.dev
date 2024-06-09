@@ -1,8 +1,40 @@
+import { readFile } from "node:fs/promises"
 import path from "node:path"
 
-import { build } from "esbuild"
+import { build, type Plugin as ESBuildPlugin } from "esbuild"
 import { genString } from "knitwork"
 import { type Plugin } from "vite"
+
+const constantFoldingPlugin = ({
+  platform,
+}: {
+  platform: "node" | "browser"
+}): ESBuildPlugin => {
+  return {
+    name: "constant-folding",
+    setup(build) {
+      build.onLoad({ filter: /\.(js|ts|jsx|tsx)$/ }, async (args) => {
+        const ext = path.extname(args.path).slice(1) as
+          | "js"
+          | "ts"
+          | "jsx"
+          | "tsx"
+        let source = await readFile(args.path, "utf-8")
+
+        // Replace `typeof window === "undefined"` with `true` or `false` depending on the platform
+        source =
+          platform === "node"
+            ? source.replaceAll('typeof window === "undefined"', "true")
+            : source.replaceAll('typeof window === "undefined"', "false")
+
+        return {
+          contents: source,
+          loader: ext,
+        }
+      })
+    },
+  }
+}
 
 /**
  * A Vite plugin that makes it possible to import transformed raw code from files.
@@ -40,10 +72,12 @@ export const rawTransformPlugin = (): Plugin => {
           resolveDir: path.dirname(id),
           loader: "ts",
         },
+        platform: "browser",
         bundle: true,
         write: false,
         minify: true,
         treeShaking: true,
+        plugins: [constantFoldingPlugin({ platform: "browser" })],
       })
       const transformed = buildResult.outputFiles[0].text
       return {
