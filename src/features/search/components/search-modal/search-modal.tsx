@@ -2,7 +2,6 @@ import { Dialog } from "@kobalte/core/dialog"
 import { type Component } from "solid-js"
 
 import {
-  Button,
   DialogContent,
   DialogTrigger,
   type DialogTriggerProps,
@@ -11,19 +10,13 @@ import {
 import { Search } from "../search/search"
 
 export type SearchModalProps = {
-  class?: string
+  trigger?: Component<DialogTriggerProps>
 }
 
-export const SearchModal: Component<SearchModalProps> = () => {
+export const SearchModal: Component<SearchModalProps> = (props) => {
   return (
     <Dialog>
-      <DialogTrigger
-        as={(props: DialogTriggerProps) => (
-          <Button variant="outline" {...props}>
-            Search
-          </Button>
-        )}
-      />
+      <DialogTrigger as={props.trigger} />
       <DialogContent
         class="top-[10%] max-h-[80%] w-full max-w-screen-sm translate-y-0 border p-0 data-[closed]:slide-out-to-top-[10%] data-[expanded]:slide-in-from-top-[10%]"
         closeButton={false}
