@@ -3,6 +3,7 @@ import { type Component, type ComponentProps, splitProps } from "solid-js"
 
 import { Button } from "~/components/ui/button"
 import { ColorSchemeSelect } from "~/features/color-scheme"
+import { SearchModal } from "~/features/search"
 import { cn } from "~/libs/utils"
 
 export type HeaderProps = Omit<ComponentProps<"header">, "children">
@@ -41,9 +42,13 @@ export const Header: Component<HeaderProps> = (props) => {
               <ColorSchemeSelect />
             </li>
             <li>
-              <Button variant="ghost" size="icon" onClick={() => alert("WIP")}>
-                <SearchIcon class="size-5" />
-              </Button>
+              <SearchModal
+                trigger={(props) => (
+                  <Button variant="ghost" size="icon" {...props}>
+                    <SearchIcon class="size-5" />
+                  </Button>
+                )}
+              />
             </li>
           </ul>
         </div>
