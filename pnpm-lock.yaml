@@ -142,8 +142,8 @@ importers:
         specifier: ^1.0.0
         version: 1.1.1
       '@r4ai/remark-callout':
-        specifier: ^0.3.4
-        version: 0.3.4
+        specifier: ^0.4.0
+        version: 0.4.0
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.4)
@@ -1106,8 +1106,8 @@ packages:
   '@polka/url@1.0.0-next.25':
     resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
 
-  '@r4ai/remark-callout@0.3.4':
-    resolution: {integrity: sha512-Z4fj4FoLb8zj4i4D72R6UXPwj6cUiUon+kb1IDMEsVEYDtkPHAZuiRfasNvFqN6jVAzQsVdGjn/5x2CKZ7dm/Q==}
+  '@r4ai/remark-callout@0.4.0':
+    resolution: {integrity: sha512-bJJCmKVyKwRYul0O+oI62gGCKqUcXL1wihmxMiFT3y98DL5fTpzd1jjlHshJHf+sdg3tHfRUlVmxC2U4OlF1kg==}
     engines: {node: '>=16'}
 
   '@radix-ui/number@1.0.1':
@@ -6349,7 +6349,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.25': {}
 
-  '@r4ai/remark-callout@0.3.4':
+  '@r4ai/remark-callout@0.4.0':
     dependencies:
       defu: 6.1.4
       unist-util-visit: 5.0.0
