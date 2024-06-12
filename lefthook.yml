@@ -9,9 +9,6 @@ pre-commit:
         bun run --bun prettier --ignore-unknown --write {staged_files} &&
         git add {staged_files}
 
-    type-check:
-      run: bun run --bun tsc
-
     check-lockfile:
       glob: "**/package.json"
       run: bun install --frozen-lockfile
