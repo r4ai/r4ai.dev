@@ -1,5 +1,11 @@
 import { defineConfig } from "@solidjs/start/config"
 import pkg from "@vinxi/plugin-mdx"
+import rehypeKatex from "rehype-katex"
+import rehypeMdxImportMedia from "rehype-mdx-import-media"
+import rehypeSlug from "rehype-slug"
+import remarkFrontmatter from "remark-frontmatter"
+import remarkGfm from "remark-gfm"
+import remarkMath from "remark-math"
 
 import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
@@ -23,11 +29,9 @@ export default defineConfig({
         define: {
           "import.meta.env": `'import.meta.env'`,
         },
-        jsx: true,
-        jsxImportSource: "solid-js",
-        providerImportSource: "solid-mdx",
-        rehypePlugins: [],
-        remarkPlugins: [],
+        jsxImportSource: "solid-jsx",
+        remarkPlugins: [remarkFrontmatter, remarkGfm, remarkMath],
+        rehypePlugins: [rehypeKatex, rehypeSlug, rehypeMdxImportMedia],
       }),
     ],
     build: {
