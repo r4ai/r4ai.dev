@@ -6,8 +6,7 @@ import {
   DialogTrigger,
   type DialogTriggerProps,
 } from "~/components/ui"
-
-import { Search } from "../search/search"
+import { Search } from "~/features/search"
 
 export type SearchModalProps = {
   trigger?: Component<DialogTriggerProps>

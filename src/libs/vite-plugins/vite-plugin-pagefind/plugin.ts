@@ -20,22 +20,34 @@ export const pagefindPlugin = (
   options: PagefindPluginOptions = defaultPagefindPluginOptions,
 ): Plugin => {
   let config: ResolvedConfig
+  let isBuild: boolean
+  const pagefindJsPath = () =>
+    path.resolve(config.root, options.site, "pagefind/pagefind.js")
   return {
     name: "pagefind-js",
+    config(_, { command }) {
+      isBuild = command === "build"
+      return {
+        build: {
+          rollupOptions: {
+            external: "/pagefind/pagefind.js",
+          },
+        },
+      }
+    },
     configResolved(resolvedConfig) {
       config = resolvedConfig
     },
     resolveId(id) {
       if (id === "pagefind-js") {
-        if (config?.server) {
-          return path.resolve(config.root, options.site, "pagefind/pagefind.js")
-        } else {
+        if (isBuild) {
           return "/pagefind/pagefind.js"
         }
+        return pagefindJsPath()
       }
     },
     configureServer() {
-      if (!existsSync(path.resolve(config.root, options.site, "pagefind"))) {
+      if (!existsSync(pagefindJsPath())) {
         console.warn(
           `pagefind output directory "${path.join(options.site, "pagefind")}" does not exist. Please run \`bun run build\` before running \`bun run dev\`. Otherwise, Pagefind will not work.`,
         )
