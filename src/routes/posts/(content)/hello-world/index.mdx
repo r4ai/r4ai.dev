@@ -9,15 +9,15 @@ publishedAt: 2023-09-04
 updatedAt: 2023-09-05
 ---
 
+# MDX Sample Post
+
 Sample post for testing purposes.
 
-**Bold text**
-_Italic text_
-~~Strikethrough text~~
-`Inline code`
+**Bold text**\
+_Italic text_\
+~~Strikethrough text~~\
+`Inline code`\
 [example.com](https://example.com)
-
-> Done is better than perfect.
 
 ## List
 
@@ -34,6 +34,8 @@ _Italic text_
 ## Code
 
 Inline code: `print("Hello, World!")`
+
+Block code:
 
 ```python
 def hello_world():
@@ -64,11 +66,65 @@ $$
 0 < |x - a| < \delta \implies |f(x) - b| < \epsilon
 $$
 
+## Table
+
+| Header 1 | Header 2 | Header 3 |
+| -------- | -------- | -------- |
+| Row 1    | Row 1    | Row 1    |
+| Row 2    | Row 2    | Row 2    |
+| Row 3    | Row 3    | Row 3    |
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :----------- | :------------: | ------------: |
+| Cell 1       |     Cell 2     |        Cell 3 |
+| Cell 4       |     Cell 5     |        Cell 6 |
+
 ## Image
 
-`![alt text](./iconassets/.webp)`:
+`![alt text](./assets/icon.webp)`:
 
 ![alt text](./assets/icon.webp)
+
+`![alt text](./assets/icon.webp "r4ai")`:
+
+![alt text](./assets/icon.webp "r4ai")
+
+## Blockquote
+
+> Done is better than perfect.
+
+> 私はその人を常に先生と呼んでいた。だからここでもただ先生と書くだけで本名は打ち明けない。これは世間を憚かる遠慮というよりも、その方が私にとって自然だからである。私はその人の記憶を呼び起すごとに、すぐ「先生」といいたくなる。筆を執っても心持は同じ事である。よそよそしい頭文字などはとても使う気にならない。
+>
+> 『こころ』 - 夏目漱石
+
+> - list item 1
+> - list item 2
+>
+> 1. list item 1
+> 2. list item 2
+>
+> ```c
+> int main() {
+>   printf("Hello, World!\n");
+>   return 0;
+> }
+> ```
+>
+> > nested blockquote
+
+## Break
+
+```md
+---
+```
+
+---
+
+## Footnote
+
+Footnote[^1] text.
+
+[^1]: Footnote content.
 
 ## Heading 2
 

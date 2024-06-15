@@ -1,0 +1,6 @@
+@import "katex/dist/katex.min.css";
+
+.katex {
+  font-size: 1.1rem;
+  overflow-x: auto;
+}

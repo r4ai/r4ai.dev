@@ -2,8 +2,9 @@
   "tailwindCSS.experimental.classRegex": ["tw`([\\s\\S]*?)`"],
   "[typescriptreact]": {
     "tailwindCSS.experimental.classRegex": [
-      // e.g. tw="text-red-500"
-      "tw=\"([^\"\\n]*)\""
+      // @see https://github.com/nextui-org/tailwind-variants/issues/127#issuecomment-1823185653
+      "tv\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
+      "\"(.*?)\""
     ]
   },
   "[yaml]": {

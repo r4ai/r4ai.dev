@@ -1,9 +1,9 @@
 import kobalte from "@kobalte/tailwindcss"
-import type { Config } from "tailwindcss"
+import { withTV } from "tailwind-variants/transformer"
 import { fontFamily } from "tailwindcss/defaultTheme"
 import animate from "tailwindcss-animate"
 
-export default {
+export default withTV({
   content: ["./src/**/*.{ts,tsx,mdx}"],
   darkMode: ["class", '[data-color-scheme="dark"]'],
   theme: {
@@ -88,4 +88,4 @@ export default {
     },
   },
   plugins: [kobalte, animate],
-} satisfies Config
+})

@@ -5,4 +5,5 @@ export default {
   tabWidth: 2,
   semi: false,
   plugins: ["prettier-plugin-tailwindcss"],
+  tailwindFunctions: ["tv"],
 }
