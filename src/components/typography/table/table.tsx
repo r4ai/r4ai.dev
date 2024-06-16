@@ -7,7 +7,7 @@ export type TableProps = ComponentProps<"table">
 export const Table: Component<TableProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
-    <div class="w-full overflow-auto">
+    <div class="mx-auto max-w-screen-md overflow-auto">
       <table
         class={cn("w-full caption-bottom text-sm", local.class)}
         {...rest}

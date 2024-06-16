@@ -9,6 +9,9 @@ publishedAt: 2023-09-04
 updatedAt: 2023-09-05
 ---
 
+import akihabara from "./assets/akihabara.webp"
+import { Image } from "~/components/typography"
+
 # MDX Sample Post
 
 Sample post for testing purposes.
@@ -88,6 +91,21 @@ $$
 `![alt text](./assets/icon.webp "r4ai")`:
 
 ![alt text](./assets/icon.webp "r4ai")
+
+```mdx
+import akihabara from "./assets/akihabara.webp"
+import { Image } from "~/components/typography"
+
+<Image src={akihabara} class="w-full max-w-screen-xl">
+  [Pat
+  Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+</Image>
+```
+
+<Image src={akihabara} class="w-full max-w-screen-xl">
+  [Pat
+  Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+</Image>
 
 ## Blockquote
 

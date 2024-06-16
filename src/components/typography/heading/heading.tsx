@@ -28,7 +28,7 @@ export const Heading = <Level extends HeadingLevel>(
 }
 
 const heading = tv({
-  base: "scroll-m-20 tracking-tight",
+  base: "mx-auto max-w-screen-md scroll-m-20 tracking-tight",
   variants: {
     level: {
       h1: "text-4xl font-extrabold lg:text-5xl",

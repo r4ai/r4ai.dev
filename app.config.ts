@@ -5,7 +5,9 @@ import { nodeTypes } from "@mdx-js/mdx"
 import { defineConfig } from "@solidjs/start/config"
 import pkg from "@vinxi/plugin-mdx"
 import rehypeKatex from "rehype-katex"
-import rehypeMdxImportMedia from "rehype-mdx-import-media"
+import rehypeMdxImportMedia, {
+  type RehypeMdxImportMediaOptions,
+} from "rehype-mdx-import-media"
 import rehypeRaw from "rehype-raw"
 import rehypeSlug from "rehype-slug"
 import remarkFrontmatter from "remark-frontmatter"
@@ -51,6 +53,15 @@ export default defineConfig({
           remarkInlineCode,
         ],
         rehypePlugins: [
+          [
+            rehypeMdxImportMedia,
+            {
+              attributes: {
+                img: ["src", "srcset"],
+              },
+              elementAttributeNameCase: "html",
+            } satisfies RehypeMdxImportMediaOptions,
+          ],
           [rehypeRaw, { passThrough: nodeTypes }],
           rehypeSlug,
           rehypeFootnote,
@@ -63,7 +74,6 @@ export default defineConfig({
             } satisfies RehypeSectionizeOptions,
           ],
           rehypeKatex,
-          rehypeMdxImportMedia,
         ],
       }),
     ],

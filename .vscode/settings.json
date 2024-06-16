@@ -15,6 +15,9 @@
       // "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,",
     ]
   },
+  "[mdx]": {
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+  },
   "files.associations": {
     "*.css": "tailwindcss"
   },

@@ -7,5 +7,7 @@ export type ParagraphProps = ComponentProps<"p">
 export const Paragraph: Component<ParagraphProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
 
-  return <p class={cn("leading-7", local.class)} {...rest} />
+  return (
+    <p class={cn("mx-auto max-w-screen-md leading-7", local.class)} {...rest} />
+  )
 }

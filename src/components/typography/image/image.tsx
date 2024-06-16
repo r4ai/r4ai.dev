@@ -1,8 +1,17 @@
-import { type Component, type ComponentProps, splitProps } from "solid-js"
+import {
+  type Component,
+  type ComponentProps,
+  createMemo,
+  type JSX,
+  splitProps,
+} from "solid-js"
+import { Dynamic } from "solid-js/web"
 
 import { cn } from "~/libs/utils"
 
-export type ImageProps = ComponentProps<"img">
+export type ImageProps = Omit<ComponentProps<"img">, "title"> & {
+  title?: JSX.Element
+}
 
 export const Image: Component<ImageProps> = (props) => {
   const [local, rest] = splitProps(props, [
@@ -10,20 +19,22 @@ export const Image: Component<ImageProps> = (props) => {
     "title",
     "decoding",
     "loading",
+    "children",
   ])
+  const title = createMemo(() => local.title ?? local.children)
   return (
-    <figure class="space-y-2">
+    <Dynamic component={title() ? "figure" : "div"} class="space-y-2">
       <img
-        class={cn("rounded-lg", local.class)}
+        class={cn("mx-auto w-full max-w-screen-lg rounded-lg", local.class)}
         decoding={local.decoding ?? "async"}
         loading={local.loading ?? "lazy"}
         {...rest}
       />
-      {local.title && (
+      {title() && (
         <figcaption class="mx-auto w-fit italic text-muted-foreground">
-          {local.title}
+          {title()}
         </figcaption>
       )}
-    </figure>
+    </Dynamic>
   )
 }
