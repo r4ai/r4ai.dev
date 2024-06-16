@@ -75,10 +75,28 @@ const helloWorld = () => {
 ```
 ````
 
+renders:
+
 ```js
 const helloWorld = () => {
   console.log("Hello, World!") // [!code --]
   console.log("Hello, JavaScript!") // [!code ++]
+}
+```
+
+````mdx
+```js diff
+const helloWorld = () => {
+  ;-console.log("Hello, World!") + console.log("Hello, JavaScript!")
+}
+```
+````
+
+renders:
+
+```js diff
+const helloWorld = () => {
+  ;-console.log("Hello, World!") + console.log("Hello, JavaScript!")
 }
 ```
 
