@@ -28,6 +28,7 @@ import {
   transformerTitle,
 } from "./src/libs/rehype-transformers"
 import rehypeFootnote from "./src/libs/unified-plugins/rehype-footnote"
+import remarkHeader from "./src/libs/unified-plugins/remark-header"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
 import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
@@ -64,6 +65,7 @@ export default defineConfig({
           remarkGfm,
           remarkMath,
           remarkInlineCode,
+          remarkHeader,
         ],
         rehypePlugins: [
           rehypeKatex,
