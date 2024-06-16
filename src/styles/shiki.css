@@ -86,3 +86,17 @@
     @apply rounded-md border border-zinc-300 bg-zinc-400/10 px-1 dark:border-zinc-700 dark:bg-zinc-600/20;
   }
 }
+
+/* line numbers */
+.shiki.has-line-numbers {
+  & .line:not(:last-child:empty) {
+    & {
+      @apply px-4;
+    }
+
+    &::before {
+      content: attr(data-line);
+      @apply mr-4 inline-block w-4 text-right text-zinc-400 dark:text-zinc-600;
+    }
+  }
+}

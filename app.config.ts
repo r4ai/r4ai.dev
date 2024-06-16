@@ -22,7 +22,10 @@ import remarkFrontmatter from "remark-frontmatter"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 
-import { transformerMetaDiff } from "./src/libs/rehype-transformers"
+import {
+  transformerLineNumbers,
+  transformerMetaDiff,
+} from "./src/libs/rehype-transformers"
 import rehypeFootnote from "./src/libs/unified-plugins/rehype-footnote"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
 import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
@@ -77,6 +80,7 @@ export default defineConfig({
                 transformerNotationDiff(),
                 transformerNotationHighlight(),
                 transformerNotationWordHighlight(),
+                transformerLineNumbers(),
               ],
             } satisfies RehypeShikiOptions,
           ],

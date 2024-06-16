@@ -1,6 +1,8 @@
 import type { Element, ElementContent, Text } from "hast"
 import type { ShikiTransformer } from "shiki"
 
+import { parseMeta } from "../utils"
+
 const isElement = (node: ElementContent): node is Element =>
   node.type === "element" && node.children.length > 0
 
@@ -53,7 +55,8 @@ const getDiffIndentSize = (hast: Element) => {
  */
 export const transformerMetaDiff = (): ShikiTransformer => ({
   code(hast) {
-    if (!this.options.meta?.__raw?.includes("diff")) return
+    const meta = parseMeta(this.options.meta?.__raw)
+    if (!meta.diff) return
 
     this.addClassToHast(this.pre, "has-diff")
 
