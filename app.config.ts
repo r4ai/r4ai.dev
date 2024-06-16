@@ -2,6 +2,14 @@ import rehypeSectionize, {
   type RehypeSectionizeOptions,
 } from "@hbsnow/rehype-sectionize"
 import { nodeTypes } from "@mdx-js/mdx"
+import rehypeShiki, { RehypeShikiOptions } from "@shikijs/rehype"
+import {
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers"
 import { defineConfig } from "@solidjs/start/config"
 import pkg from "@vinxi/plugin-mdx"
 import rehypeKatex from "rehype-katex"
@@ -53,6 +61,23 @@ export default defineConfig({
           remarkInlineCode,
         ],
         rehypePlugins: [
+          rehypeKatex,
+          [
+            rehypeShiki,
+            {
+              themes: {
+                light: "one-light",
+                dark: "material-theme-darker",
+              },
+              transformers: [
+                transformerMetaHighlight(),
+                transformerMetaWordHighlight(),
+                transformerNotationDiff(),
+                transformerNotationHighlight(),
+                transformerNotationWordHighlight(),
+              ],
+            } satisfies RehypeShikiOptions,
+          ],
           [
             rehypeMdxImportMedia,
             {
@@ -73,7 +98,6 @@ export default defineConfig({
               rankPropertyName: "level",
             } satisfies RehypeSectionizeOptions,
           ],
-          rehypeKatex,
         ],
       }),
     ],

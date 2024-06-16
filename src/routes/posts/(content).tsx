@@ -5,6 +5,7 @@ import { MDXProvider } from "solid-jsx"
 
 import {
   Blockquote,
+  CodeBlock,
   Heading,
   Image,
   InlineCode,
@@ -59,6 +60,7 @@ export default (props: { children?: JSX.Element }) => {
           th: TableHead,
           td: TableCell,
           caption: TableCaption,
+          pre: CodeBlock,
         }}
       >
         {props.children}

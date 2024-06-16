@@ -64,6 +64,80 @@ const helloWorld = () => {
 }
 ```
 
+### Diff
+
+````mdx
+```js
+const helloWorld = () => {
+  console.log("Hello, World!") // \[!code --]
+  console.log("Hello, JavaScript!") // \[!code ++]
+}
+```
+````
+
+```js
+const helloWorld = () => {
+  console.log("Hello, World!") // [!code --]
+  console.log("Hello, JavaScript!") // [!code ++]
+}
+```
+
+### Highlight line
+
+````mdx
+```js
+const helloWorld = () => {
+  console.log("Hello, World!") // \[!code highlight]
+  console.log("Hello, JavaScript!") // \[!code highlight]
+}
+```
+````
+
+renders:
+
+```js
+const helloWorld = () => {
+  console.log("Hello, World!") // [!code highlight]
+  console.log("Hello, JavaScript!") // [!code highlight]
+}
+```
+
+````mdx
+```js {1,3-4}
+console.log("1")
+console.log("2")
+console.log("3")
+console.log("4")
+```
+````
+
+renders:
+
+```js {1,3-4}
+console.log("1")
+console.log("2")
+console.log("3")
+console.log("4")
+```
+
+### Highlight word
+
+````mdx
+```ts
+// \[!code word:Hello:1]
+const message = "Hello World"
+console.log(message) // prints Hello World
+```
+````
+
+renders:
+
+```ts
+// [!code word:Hello:1]
+const message = "Hello World"
+console.log(message) // prints Hello World
+```
+
 ## Math
 
 Inline math: $e^{i\pi} + 1 = 0$

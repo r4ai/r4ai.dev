@@ -1,4 +1,5 @@
 export * from "./blockquote"
+export * from "./code-block"
 export * from "./heading"
 export * from "./image"
 export * from "./inline-code"
