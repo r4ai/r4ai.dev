@@ -25,6 +25,7 @@ import remarkMath from "remark-math"
 import {
   transformerLineNumbers,
   transformerMetaDiff,
+  transformerTitle,
 } from "./src/libs/rehype-transformers"
 import rehypeFootnote from "./src/libs/unified-plugins/rehype-footnote"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
@@ -81,6 +82,7 @@ export default defineConfig({
                 transformerNotationHighlight(),
                 transformerNotationWordHighlight(),
                 transformerLineNumbers(),
+                transformerTitle(),
               ],
             } satisfies RehypeShikiOptions,
           ],

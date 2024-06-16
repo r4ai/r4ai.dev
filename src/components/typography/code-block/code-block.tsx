@@ -1,10 +1,11 @@
 import "~/styles/shiki.css"
 
-import { ClipboardCheckIcon, ClipboardIcon } from "lucide-solid"
+import { ClipboardCheckIcon, ClipboardIcon, FileIcon } from "lucide-solid"
 import {
   type Component,
   type ComponentProps,
   createSignal,
+  type JSX,
   splitProps,
 } from "solid-js"
 
@@ -17,25 +18,50 @@ import {
 } from "~/components/ui"
 import { cn } from "~/libs/utils"
 
-export type CodeBlockProps = ComponentProps<"pre">
+export type CodeBlockProps = ComponentProps<"pre"> & {
+  title: string
+  lang: string
+}
 
 export const CodeBlock: Component<CodeBlockProps> = (props) => {
-  const [local, rest] = splitProps(props, ["class", "ref"])
+  const [local, rest] = splitProps(props, ["class", "ref", "title", "lang"])
   let preRef: HTMLPreElement | undefined
 
   return (
     <div class="relative mx-auto max-w-screen-md rounded-xl border bg-muted bg-zinc-50 dark:bg-zinc-900/75">
-      <div>{/* title */}</div>
-      <pre
-        class={cn("peer m-0 overflow-auto py-4", local.class)}
-        ref={(el) => {
-          preRef = el
-          if (typeof local.ref === "function") local.ref(el)
-          else local.ref = el
-        }}
-        {...rest}
-      />
+      <div class="peer">
+        {props.title && (
+          <CodeBlockTitle lang={props.lang}>{props.title}</CodeBlockTitle>
+        )}
+        <pre
+          class={cn("m-0 overflow-auto py-4 text-[0.9rem]", local.class)}
+          ref={(el) => {
+            preRef = el
+            if (typeof local.ref === "function") local.ref(el)
+            else local.ref = el
+          }}
+          {...rest}
+        />
+      </div>
       <CopyButton preRef={preRef} />
+    </div>
+  )
+}
+
+type CodeBlockTitleProps = {
+  lang: string
+  children?: JSX.Element
+}
+
+const CodeBlockTitle: Component<CodeBlockTitleProps> = (props) => {
+  return <CodeBlockFileTitle {...props} />
+}
+
+const CodeBlockFileTitle: Component<CodeBlockTitleProps> = (props) => {
+  return (
+    <div class="flex flex-row items-center gap-3 border-b px-4 py-2.5 font-mono">
+      <FileIcon class="size-4 brightness-90 contrast-75 filter" />
+      <span class="text-[0.9rem]">{props.children}</span>
     </div>
   )
 }
