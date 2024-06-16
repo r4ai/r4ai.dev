@@ -9,8 +9,15 @@ publishedAt: 2023-09-04
 updatedAt: 2023-09-05
 ---
 
-import akihabara from "./assets/akihabara.webp"
-import { Image } from "~/components/typography"
+import akihabaraWebp from "./assets/akihabara.webp"
+import akihabaraAvif from "./assets/akihabara.avif"
+import akihabaraJpg from "./assets/akihabara.jpg"
+import {
+  Image,
+  ImageCaption,
+  ImagePicture,
+  ImageSource,
+} from "~/components/typography"
 
 # MDX Sample Post
 
@@ -93,18 +100,58 @@ $$
 ![alt text](./assets/icon.webp "r4ai")
 
 ```mdx
-import akihabara from "./assets/akihabara.webp"
-import { Image } from "~/components/typography"
+import akihabaraWebp from "./assets/akihabara.webp"
+import { Image, ImageCaption } from "~/components/typography"
 
-<Image src={akihabara} class="w-full max-w-screen-xl">
-  [Pat
-  Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+<Image src={akihabaraWebp} class="w-full max-w-screen-xl">
+  <ImageCaption>
+    [Pat
+    Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+  </ImageCaption>
 </Image>
 ```
 
-<Image src={akihabara} class="w-full max-w-screen-xl">
-  [Pat
-  Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+<Image src={akihabaraWebp} class="w-full max-w-screen-xl">
+  <ImageCaption>
+    [Pat
+    Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+  </ImageCaption>
+</Image>
+
+```mdx
+<Image class="w-full max-w-screen-xl">
+  <ImagePicture>
+    <ImageSource srcset={akihabaraWebp} type="image/webp" />
+    <ImageSource srcset={akihabaraAvif} type="image/avif" />
+    <ImageSource
+      as="img"
+      loading="lazy"
+      decoding="async"
+      srcset={akihabaraJpg}
+    />
+  </ImagePicture>
+  <ImageCaption>
+    [Pat
+    Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+  </ImageCaption>
+</Image>
+```
+
+<Image class="w-full max-w-screen-xl">
+  <ImagePicture>
+    <ImageSource srcset={akihabaraWebp} type="image/webp" />
+    <ImageSource srcset={akihabaraAvif} type="image/avif" />
+    <ImageSource
+      as="img"
+      loading="lazy"
+      decoding="async"
+      srcset={akihabaraJpg}
+    />
+  </ImagePicture>
+  <ImageCaption>
+    [Pat
+    Krupa](https://unsplash.com/ja/@patkrupa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)が撮影した写真
+  </ImageCaption>
 </Image>
 
 ## Blockquote

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "storybook-solidjs"
 
-import { Image } from "./image"
+import { Image } from "~/components/typography"
 
 const meta = {
   title: "typography/Image",

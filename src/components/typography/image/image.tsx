@@ -1,9 +1,10 @@
+import { Polymorphic, type PolymorphicProps } from "@kobalte/core"
 import {
   type Component,
   type ComponentProps,
-  createMemo,
   type JSX,
   splitProps,
+  type ValidComponent,
 } from "solid-js"
 import { Dynamic } from "solid-js/web"
 
@@ -19,22 +20,62 @@ export const Image: Component<ImageProps> = (props) => {
     "title",
     "decoding",
     "loading",
+    "src",
+    "srcset",
     "children",
   ])
-  const title = createMemo(() => local.title ?? local.children)
   return (
-    <Dynamic component={title() ? "figure" : "div"} class="space-y-2">
-      <img
-        class={cn("mx-auto w-full max-w-screen-lg rounded-lg", local.class)}
-        decoding={local.decoding ?? "async"}
-        loading={local.loading ?? "lazy"}
-        {...rest}
-      />
-      {title() && (
-        <figcaption class="mx-auto w-fit italic text-muted-foreground">
-          {title()}
-        </figcaption>
+    <Dynamic component="figure" class="space-y-2">
+      {(local.src || local.srcset) && (
+        <img
+          class={cn("mx-auto w-full max-w-screen-lg rounded-lg", local.class)}
+          decoding={local.decoding ?? "async"}
+          loading={local.loading ?? "lazy"}
+          src={local.src}
+          srcset={local.srcset}
+          {...rest}
+        />
       )}
+      {local.children}
+      {local.title && <ImageCaption>{local.title}</ImageCaption>}
     </Dynamic>
   )
+}
+
+export type ImageCaptionProps<T extends ValidComponent = "figcaption"> =
+  PolymorphicProps<T> & {
+    class?: string
+  }
+
+export const ImageCaption = <T extends ValidComponent = "figcaption">(
+  props: ImageCaptionProps<T>,
+) => {
+  const [local, rest] = splitProps(props, ["class", "as"])
+  return (
+    <Polymorphic
+      as={local.as ?? "figcaption"}
+      class={cn("mx-auto w-fit italic text-muted-foreground", local.class)}
+      {...rest}
+    />
+  )
+}
+
+export type ImagePictureProps<T extends ValidComponent = "picture"> =
+  PolymorphicProps<T>
+
+export const ImagePicture = <T extends ValidComponent = "picture">(
+  props: ImagePictureProps<T>,
+) => {
+  const [local, rest] = splitProps(props, ["as"])
+  return <Polymorphic as={local.as ?? "picture"} {...rest} />
+}
+
+export type ImageSourceProps<T extends ValidComponent = "source"> =
+  PolymorphicProps<T>
+
+export const ImageSource = <T extends ValidComponent = "source">(
+  props: ImageSourceProps<T>,
+) => {
+  const [local, rest] = splitProps(props, ["as"])
+  return <Polymorphic as={local.as ?? "source"} {...rest} />
 }
