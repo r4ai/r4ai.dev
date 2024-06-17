@@ -2,6 +2,9 @@ import rehypeSectionize, {
   type RehypeSectionizeOptions,
 } from "@hbsnow/rehype-sectionize"
 import { nodeTypes } from "@mdx-js/mdx"
+import remarkCallout, {
+  Options as RemarkCalloutOptions,
+} from "@r4ai/remark-callout"
 import rehypeShiki, { RehypeShikiOptions } from "@shikijs/rehype"
 import {
   transformerMetaHighlight,
@@ -65,6 +68,34 @@ export default defineConfig({
           remarkGfm,
           remarkMath,
           remarkInlineCode,
+          [
+            remarkCallout,
+            {
+              root: (callout) => {
+                return {
+                  tagName: "callout-root",
+                  properties: {
+                    type: callout.type,
+                    isFoldable: callout.isFoldable.toString(),
+                    defaultFolded: callout.defaultFolded?.toString(),
+                  },
+                }
+              },
+              title: (callout) => ({
+                tagName: "callout-title",
+                properties: {
+                  type: callout.type,
+                  isFoldable: callout.isFoldable.toString(),
+                },
+              }),
+              body: (callout) => ({
+                tagName: "callout-body",
+                properties: {
+                  type: callout.type,
+                },
+              }),
+            } satisfies RemarkCalloutOptions,
+          ],
           remarkHeader,
         ],
         rehypePlugins: [

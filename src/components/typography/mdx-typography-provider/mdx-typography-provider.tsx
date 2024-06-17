@@ -1,4 +1,9 @@
-import type { Component, ComponentProps, JSX } from "solid-js"
+import {
+  type Component,
+  type ComponentProps,
+  type JSX,
+  splitProps,
+} from "solid-js"
 import { MDXProvider } from "solid-jsx"
 
 import {
@@ -22,6 +27,14 @@ import {
   TableHead,
   TableRow,
 } from "~/components/typography"
+import {
+  CalloutBody,
+  type CalloutBodyProps,
+  CalloutRoot,
+  type CalloutRootProps,
+  CalloutTitle,
+  type CalloutTitleProps,
+} from "~/components/ui"
 
 export type MDXTypographyProviderProps = {
   children?: JSX.Element
@@ -57,6 +70,44 @@ export const MDXTypographyProvider: Component<MDXTypographyProviderProps> = (
         td: TableCell,
         caption: TableCaption,
         pre: CodeBlock,
+        "callout-root": (
+          props: Omit<CalloutRootProps, "isFoldable" | "defaultFolded"> & {
+            isFoldable: "true" | "false"
+            defaultFolded: "true" | "false"
+          },
+        ) => {
+          const [local, rest] = splitProps(props, [
+            "isFoldable",
+            "defaultFolded",
+          ])
+          return (
+            <CalloutRoot
+              isFoldable={local.isFoldable === "true"}
+              defaultFolded={local.defaultFolded === "true"}
+              {...rest}
+            />
+          )
+        },
+        "callout-title": (
+          props: Omit<CalloutTitleProps, "isFoldable"> & {
+            isFoldable: "true" | "false"
+          },
+        ) => {
+          const [local, rest] = splitProps(props, ["isFoldable"])
+          return (
+            <CalloutTitle isFoldable={local.isFoldable === "true"} {...rest} />
+          )
+        },
+        "callout-body": (
+          props: Omit<CalloutBodyProps, "isFoldable"> & {
+            isFoldable: "true" | "false"
+          },
+        ) => {
+          const [local, rest] = splitProps(props, ["isFoldable"])
+          return (
+            <CalloutBody isFoldable={local.isFoldable === "true"} {...rest} />
+          )
+        },
         ...props.components,
       }}
     >

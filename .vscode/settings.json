@@ -1,12 +1,8 @@
 {
-  "tailwindCSS.experimental.classRegex": ["tw`([\\s\\S]*?)`"],
-  "[typescriptreact]": {
-    "tailwindCSS.experimental.classRegex": [
-      // @see https://github.com/nextui-org/tailwind-variants/issues/127#issuecomment-1823185653
-      "tv\\(([^)(]*(?:\\([^)(]*(?:\\([^)(]*(?:\\([^)(]*\\)[^)(]*)*\\)[^)(]*)*\\)[^)(]*)*)\\)",
-      "\"(.*?)\""
-    ]
-  },
+  "tailwindCSS.experimental.classRegex": [
+    // @see https://www.tailwind-variants.org/docs/getting-started#intellisense-setup-optional
+    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
   "[yaml]": {
     "tailwindCSS.experimental.classRegex": [
       // key名がtwで始まるものをtailwindのクラスとして認識する

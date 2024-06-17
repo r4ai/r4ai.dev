@@ -329,6 +329,113 @@ Footnote[^1] text.
 
 [^1]: Footnote content.
 
+## Callout
+
+```mdx
+> [!note]
+> Note content.
+```
+
+renders:
+
+> [!note]
+> Note content here.
+
+### With title
+
+```mdx
+> [!note] Title here
+> Note content with title here.
+```
+
+renders:
+
+> [!note] Title here
+> Note content with title here.
+
+### Foldable
+
+#### With default folded
+
+```mdx
+> [!note]- foldable
+> Foldable note content.
+```
+
+renders:
+
+> [!note]- foldable
+> Foldable note content.
+
+#### With default unfolded
+
+```mdx
+> [!note]+ foldable
+> Foldable note content.
+```
+
+renders:
+
+> [!note]+ foldable
+> Foldable note content.
+
+### Types
+
+> [!note]
+> Note content.
+
+> [!abstract]
+> Abstract content.
+>
+> **Aliases**: `summary`, `tldr`
+
+> [!info]
+> Info content.
+
+> [!todo]
+> Todo content.
+
+> [!tip]
+> Tip content.
+>
+> **Aliases**: `hint`, `important`
+
+> [!success]
+> Success content.
+>
+> **Aliases**: `check`, `done`
+
+> [!question]
+> Question content.
+>
+> **Aliases**: `help`, `faq`
+
+> [!warning]
+> Warning content.
+>
+> **Aliases**: `caution`, `attention`
+
+> [!failure]
+> Failure content.
+>
+> **Aliases**: `fail`, `missing`
+
+> [!danger]
+> Danger content.
+>
+> **Aliases**: `error`
+
+> [!bug]
+> Bug content.
+
+> [!example]
+> Example content.
+
+> [!quote]
+> Quote content.
+>
+> **Aliases**: `cite`
+
 ## Heading 2
 
 ### Heading 3
