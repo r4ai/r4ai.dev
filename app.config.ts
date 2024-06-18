@@ -42,6 +42,11 @@ export default defineConfig({
   ssr: true,
   server: {
     preset: "static",
+    esbuild: {
+      options: {
+        target: "es2022",
+      },
+    },
     prerender: {
       crawlLinks: true,
       routes: [
