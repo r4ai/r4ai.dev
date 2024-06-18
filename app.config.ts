@@ -44,7 +44,14 @@ export default defineConfig({
     preset: "static",
     prerender: {
       crawlLinks: true,
-      routes: ["/", "/projects", "/posts", "/contact", "/posts/hello-world"],
+      routes: [
+        "/",
+        "/projects",
+        "/posts",
+        "/contact",
+        "/posts/hello-world",
+        "/posts/hello-world/mdx",
+      ],
     },
   },
   extensions: ["ts", "tsx", "mdx"],

@@ -1,4 +1,4 @@
-import "./styles/global.css"
+import "~/styles/global.css"
 
 import { MetaProvider, Title } from "@solidjs/meta"
 import { Router } from "@solidjs/router"

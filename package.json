@@ -75,6 +75,7 @@
     "eslint-plugin-solid": "^0.14.0",
     "eslint-plugin-storybook": "^0.8.0",
     "fast-check": "^3.19.0",
+    "hono": "^4.4.6",
     "jsdom": "^24.0.0",
     "knitwork": "^1.1.0",
     "lefthook": "^1.6.12",

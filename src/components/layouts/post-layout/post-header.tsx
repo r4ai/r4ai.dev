@@ -1,9 +1,11 @@
 import { RefreshCcwIcon } from "lucide-solid"
 import type { Component } from "solid-js"
+import * as v from "valibot"
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui"
+import { posts } from "~/routes/posts/(content)/config"
 
-import type { PostSchema } from "../../utils/post-scheme"
+type PostSchema = v.InferOutput<typeof posts.schema>
 
 export type PostHeaderProps = PostSchema
 
