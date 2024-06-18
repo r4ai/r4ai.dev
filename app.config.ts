@@ -1,11 +1,13 @@
+import path from "node:path"
+
 import rehypeSectionize, {
   type RehypeSectionizeOptions,
 } from "@hbsnow/rehype-sectionize"
 import { nodeTypes } from "@mdx-js/mdx"
 import remarkCallout, {
-  Options as RemarkCalloutOptions,
+  type Options as RemarkCalloutOptions,
 } from "@r4ai/remark-callout"
-import rehypeShiki, { RehypeShikiOptions } from "@shikijs/rehype"
+import rehypeShiki, { type RehypeShikiOptions } from "@shikijs/rehype"
 import {
   transformerMetaHighlight,
   transformerMetaWordHighlight,
@@ -14,6 +16,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers"
 import { defineConfig } from "@solidjs/start/config"
+// @ts-expect-error @vinxi/plugin-mdx is not typed
 import pkg from "@vinxi/plugin-mdx"
 import rehypeKatex from "rehype-katex"
 import rehypeMdxImportMedia, {
@@ -35,8 +38,14 @@ import remarkHeader from "./src/libs/unified-plugins/remark-header"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
 import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
+import { posts } from "./src/routes/posts/(content)/config"
 
 const { default: mdx } = pkg
+
+const postsDir = path.resolve(
+  import.meta.dirname,
+  "./src/routes/posts/(content)/",
+)
 
 export default defineConfig({
   ssr: true,
@@ -54,8 +63,8 @@ export default defineConfig({
         "/projects",
         "/posts",
         "/contact",
-        "/posts/hello-world",
-        "/posts/hello-world/mdx",
+        ...(await posts.getRoutes(postsDir)),
+        ...(await posts.getAPIRoutes(["mdx", "png"], postsDir)),
       ],
     },
   },

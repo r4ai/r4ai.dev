@@ -1,6 +1,6 @@
 import * as v from "valibot"
 
-import { defineCollection } from "~/libs/content-collection"
+import { defineCollection } from "../../../libs/content-collection"
 
 export const posts = defineCollection({
   basePath: "posts",

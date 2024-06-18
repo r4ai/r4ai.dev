@@ -1,4 +1,6 @@
+import fs from "node:fs/promises"
 import path from "node:path"
+import posixPath from "node:path/posix"
 
 export const resolveIndex = (route: string) => {
   const stem = path.basename(route).split(".").slice(0, -1).join(".")
@@ -7,3 +9,33 @@ export const resolveIndex = (route: string) => {
   }
   return route
 }
+
+export const getFilesOf = async (dir: string, level: number) => {
+  const allFiles = await fs.readdir(dir)
+  const searching: Promise<string[]>[] = []
+  for (const file of allFiles) {
+    const filePath = path.resolve(dir, file)
+    const stat = await fs.stat(filePath)
+
+    // If directory, recursively search files
+    if (stat.isDirectory()) {
+      searching.push(getFilesOf(filePath, level + 1))
+      continue
+    }
+
+    // If index.mdx file, add to files
+    if (file === "index.mdx") {
+      searching.push(new Promise((resolve) => resolve([filePath])))
+      continue
+    }
+  }
+
+  const files = (await Promise.all(searching)).flat()
+  return files
+}
+
+export const fileToRouteFrom = (
+  file: string,
+  dirname: string,
+  basePath: string,
+) => `/${posixPath.join(basePath, resolveIndex(file.replace(dirname, "")))}`

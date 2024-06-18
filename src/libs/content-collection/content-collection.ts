@@ -1,10 +1,9 @@
 import * as fs from "node:fs/promises"
-import path from "node:path"
 import posixPath from "node:path/posix"
 
 import type { Hono } from "hono"
 
-import { resolveIndex } from "./utils"
+import { fileToRouteFrom, getFilesOf } from "./utils"
 
 type CollectionOptions<Schema> = {
   basePath: string
@@ -17,51 +16,36 @@ export const defineCollection = <Schema>({
   dirname,
   schema,
 }: CollectionOptions<Schema>) => {
-  const _files = async (dir: string, level: number) => {
-    // Only support one level deep because vite only supports one level deep dynamic imports
-    // @see https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#globs-only-go-one-level-deep
-    if (level > 3) return []
+  const getFiles = (dir: string = dirname) => getFilesOf(dir, 1)
 
-    const allFiles = await fs.readdir(dir)
-    const searching: Promise<string[]>[] = []
-    for (const file of allFiles) {
-      const filePath = path.resolve(dir, file)
-      const stat = await fs.stat(filePath)
+  const fileToRoute = (file: string, dir: string = dirname) =>
+    fileToRouteFrom(file, dir, basePath)
 
-      // If directory, recursively search files
-      if (stat.isDirectory()) {
-        searching.push(_files(filePath, level + 1))
-        continue
-      }
+  const getRoutes = (dir: string = dirname) =>
+    getFiles(dir).then((files) => files.map((file) => fileToRoute(file, dir)))
 
-      // If index.mdx file, add to files
-      if (file === "index.mdx") {
-        searching.push(new Promise((resolve) => resolve([filePath])))
-        continue
-      }
-    }
+  const getAPIRoutes = (
+    extensions: string[] = ["mdx", "png"],
+    dir: string = dirname,
+  ) =>
+    getRoutes(dir).then((routes) =>
+      routes
+        .map((route) =>
+          extensions.map((ext) => `/${posixPath.join("api", route)}.${ext}`),
+        )
+        .flat(),
+    )
 
-    const files = (await Promise.all(searching)).flat()
-    return files
-  }
-
-  const getFiles = () => _files(dirname, 1)
-
-  const fileToRoute = (file: string) =>
-    `/${posixPath.join(basePath, resolveIndex(file.replace(dirname, "")))}`
-
-  const getRoutes = () => getFiles().then((files) => files.map(fileToRoute))
-
-  const getFile = async (route: string) => {
-    const files = await getFiles()
+  const getFile = async (route: string, dir: string = dirname) => {
+    const files = await getFiles(dir)
     return files.find((file) => fileToRoute(file) === route)
   }
 
-  const registerAPI = async (app: Hono) => {
-    const files = await getFiles()
+  const registerAPI = async (app: Hono, dir: string = dirname) => {
+    const files = await getFiles(dir)
 
     for (const file of files) {
-      const route = fileToRoute(file)
+      const route = fileToRoute(file, dir)
 
       // Raw MDX file
       app.get(`${route}.mdx`, async () => {
@@ -84,8 +68,10 @@ export const defineCollection = <Schema>({
   return {
     basePath,
     schema,
+    dirname,
     getFiles,
     getRoutes,
+    getAPIRoutes,
     fileToRoute,
     getFile,
     registerAPI,

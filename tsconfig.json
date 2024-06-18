@@ -34,5 +34,5 @@
     "checkMdx": true,
     "plugins": ["remark-frontmatter", "remark-gfm", "remark-math"]
   },
-  "include": ["src/**/*", ".storybook/**/*", "scripts/**/*"]
+  "include": ["src/**/*", ".storybook/**/*", "scripts/**/*", "app.config.ts"]
 }
