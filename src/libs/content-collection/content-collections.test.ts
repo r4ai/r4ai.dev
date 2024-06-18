@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest"
 
-import { posts } from "./fixtures"
+import { posts } from "./fixtures/posts"
 
 describe("content-collections", () => {
   test("routes", async () => {
