@@ -1,5 +1,4 @@
 import type { DropdownMenuSubTriggerProps } from "@kobalte/core/dropdown-menu"
-import { LaptopMinimalIcon, MoonStarIcon, SunIcon } from "lucide-solid"
 import type { Component } from "solid-js"
 
 import { Button } from "~/components/ui/button"
@@ -23,9 +22,9 @@ export const ColorSchemeSelect: Component<ColorSchemeSelectProps> = () => {
         as={(props: DropdownMenuSubTriggerProps) => (
           <Button variant="ghost" size="icon" {...props}>
             {resolvedColorScheme() === "dark" ? (
-              <MoonStarIcon class="size-5" />
+              <span class="i-lucide-moon-star size-5" />
             ) : (
-              <SunIcon class="size-5" />
+              <span class="i-lucide-sun size-5" />
             )}
           </Button>
         )}
@@ -35,21 +34,21 @@ export const ColorSchemeSelect: Component<ColorSchemeSelectProps> = () => {
           class="space-x-2"
           onClick={() => setColorScheme("light")}
         >
-          <SunIcon class="size-4" />
+          <span class="i-lucide-sun size-4" />
           <span>Light</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           class="space-x-2"
           onClick={() => setColorScheme("dark")}
         >
-          <MoonStarIcon class="size-4" />
+          <span class="i-lucide-moon-star size-4" />
           <span>Dark</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           class="space-x-2"
           onClick={() => setColorScheme("system")}
         >
-          <LaptopMinimalIcon class="size-4" />
+          <span class="i-lucide-laptop-minimal size-4" />
           <span>System</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

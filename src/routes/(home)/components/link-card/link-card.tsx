@@ -1,12 +1,10 @@
-import type { SimpleIcon as SimpleIconJson } from "simple-icons"
-import type { Component } from "solid-js"
+import type { Component, JSX } from "solid-js"
 
-import { SimpleIcon } from "~/components/ui"
 import { cn } from "~/libs/utils"
 
 export type LinkCardProps = {
   href: string
-  icon: SimpleIconJson
+  icon: JSX.Element
   title: string
   site: string
   class?: string
@@ -21,7 +19,7 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
           props.class,
         )}
       >
-        <SimpleIcon icon={props.icon} class="size-5" />
+        {props.icon}
         <p class={"text-sm after:content-['↗']"}>
           {props.site + " " + props.title}
         </p>

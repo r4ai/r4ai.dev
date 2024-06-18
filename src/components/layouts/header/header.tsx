@@ -1,4 +1,3 @@
-import { SearchIcon } from "lucide-solid"
 import { type Component, type ComponentProps, splitProps } from "solid-js"
 
 import { Button } from "~/components/ui/button"
@@ -45,7 +44,7 @@ export const Header: Component<HeaderProps> = (props) => {
               <SearchModal
                 trigger={(props) => (
                   <Button variant="ghost" size="icon" {...props}>
-                    <SearchIcon class="size-5" />
+                    <span class="i-lucide-search size-5" />
                   </Button>
                 )}
               />

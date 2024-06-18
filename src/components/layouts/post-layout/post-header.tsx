@@ -1,4 +1,3 @@
-import { RefreshCcwIcon } from "lucide-solid"
 import type { Component } from "solid-js"
 import * as v from "valibot"
 
@@ -30,7 +29,7 @@ export const PostHeader: Component<PostHeaderProps> = (props) => {
               <div>
                 <Tooltip>
                   <TooltipTrigger class="flex flex-row items-center gap-1">
-                    <RefreshCcwIcon class="size-4" />
+                    <span class="i-lucide-refresh-ccw size-4" />
                     <span>{formatDate(props.updatedAt)}</span>
                   </TooltipTrigger>
                   <TooltipContent class="font-semibold">

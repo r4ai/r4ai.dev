@@ -1,4 +1,3 @@
-import { FileTextIcon, SearchIcon } from "lucide-solid"
 import type {
   PagefindSearchFragment,
   PagefindSearchResult,
@@ -97,7 +96,7 @@ const SearchInput: Component = () => {
       class="flex flex-row items-center gap-3 border-b p-4"
       onSubmit={handleSubmit}
     >
-      <SearchIcon class="h-5 w-5" />
+      <span class="i-lucide-search h-5 w-5" />
       <input
         tabIndex={0}
         type="text"
@@ -218,7 +217,7 @@ const SearchResult: Component<SearchResultProps> = (props) => {
     <SearchResultPresenter
       class={cn(activeIndex() === local.index && "bg-muted")}
       href={result()?.raw_url}
-      icon={<FileTextIcon class="m-0.5 h-5 w-5" />}
+      icon={<span class="i-lucide-file-text m-0.5 h-5 w-5" />}
       title={result()?.meta["title"]}
       excerpt={result()?.excerpt}
       onFocus={() => setActiveIndex(local.index)}

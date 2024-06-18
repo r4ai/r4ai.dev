@@ -1,6 +1,5 @@
 import "~/styles/shiki.css"
 
-import { ClipboardCheckIcon, ClipboardIcon, FileIcon } from "lucide-solid"
 import {
   type Component,
   type ComponentProps,
@@ -60,7 +59,7 @@ const CodeBlockTitle: Component<CodeBlockTitleProps> = (props) => {
 const CodeBlockFileTitle: Component<CodeBlockTitleProps> = (props) => {
   return (
     <div class="flex flex-row items-center gap-3 border-b px-4 py-2.5 font-mono">
-      <FileIcon class="size-4 brightness-90 contrast-75 filter" />
+      <span class="i-lucide-file size-4 brightness-90 contrast-75 filter" />
       <span class="text-[0.9rem]">{props.children}</span>
     </div>
   )
@@ -95,9 +94,9 @@ const CopyButton: Component<CopyButtonProps> = (props) => {
             }}
           >
             {copied() ? (
-              <ClipboardCheckIcon class="size-5" />
+              <span class="i-lucide-clipboard-check size-5" />
             ) : (
-              <ClipboardIcon class="size-5" />
+              <span class="i-lucide-clipboard size-5" />
             )}
           </Button>
         )}

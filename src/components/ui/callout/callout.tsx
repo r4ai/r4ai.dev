@@ -1,21 +1,4 @@
 import {
-  AlertTriangleIcon,
-  BugIcon,
-  CheckCircle2Icon,
-  CheckIcon,
-  ChevronRightIcon,
-  ClipboardListIcon,
-  FlameIcon,
-  HelpCircleIcon,
-  InfoIcon,
-  ListIcon,
-  type LucideProps,
-  PencilIcon,
-  QuoteIcon,
-  XIcon,
-  ZapIcon,
-} from "lucide-solid"
-import {
   type Component,
   type ComponentProps,
   createMemo,
@@ -23,15 +6,15 @@ import {
   Show,
   splitProps,
 } from "solid-js"
-import { Dynamic } from "solid-js/web"
 import { tv, type VariantProps } from "tailwind-variants"
 
 const callout = tv({
   slots: {
     root: "group mx-auto my-6 max-w-screen-md space-y-2 rounded-xl border bg-card p-4",
     title: "flex flex-row items-center gap-2.5 font-bold",
-    icon: "size-5",
-    foldIcon: "size-5 shrink-0 transition-transform group-open:rotate-90",
+    icon: "i-lucide-pencil size-5",
+    foldIcon:
+      "i-chevron-right size-5 shrink-0 transition-transform group-open:rotate-90",
     body: "space-y-4",
   },
   variants: {
@@ -40,47 +23,60 @@ const callout = tv({
       abstract: {
         root: "border-purple-600/20 bg-purple-500/10 dark:border-purple-800/20",
         title: "text-purple-600 dark:text-purple-400",
+        icon: "i-lucide-clipboard-list",
       },
       info: {
         root: "border-blue-600/20 bg-blue-500/10 dark:border-blue-800/20",
         title: "text-blue-600 dark:text-blue-400",
+        icon: "i-lucide-info",
       },
       todo: {
         root: "border-blue-600/20 bg-blue-500/10 dark:border-blue-800/20",
         title: "text-blue-600 dark:text-blue-400",
+        icon: "i-lucide-check-circle-2",
       },
       tip: {
         root: "border-yellow-600/20 bg-yellow-500/10 dark:border-yellow-800/20",
         title: "text-yellow-600 dark:text-yellow-400",
+        icon: "i-lucide-flame",
       },
       success: {
         root: "border-green-600/20 bg-green-500/10 dark:border-green-800/20",
         title: "text-green-600 dark:text-green-400",
+        icon: "i-lucide-check",
       },
       question: {
         root: "border-blue-600/20 bg-blue-500/10 dark:border-blue-800/20",
         title: "text-blue-600 dark:text-blue-400",
+        icon: "i-lucide-help-circle",
       },
       warning: {
         root: "border-orange-600/20 bg-orange-500/10 dark:border-orange-800/20",
         title: "text-orange-600 dark:text-orange-400",
+        icon: "i-lucide-alert-triangle",
       },
       failure: {
         root: "border-red-600/20 bg-red-500/10 dark:border-red-800/20",
         title: "text-red-600 dark:text-red-400",
+        icon: "i-lucide-x",
       },
       danger: {
         root: "border-red-600/20 bg-red-500/10 dark:border-red-800/20",
         title: "text-red-600 dark:text-red-400",
+        icon: "i-lucide-zap",
       },
       bug: {
         root: "border-red-600/20 bg-red-500/10 dark:border-red-800/20",
         title: "text-red-600 dark:text-red-400",
+        icon: "i-lucide-bug",
       },
-      example: {},
+      example: {
+        icon: "i-lucide-list",
+      },
       quote: {
         root: "border-zinc-600/20 bg-zinc-500/10 dark:border-zinc-800/20",
         title: "text-zinc-600 dark:text-zinc-400",
+        icon: "i-lucide-quote",
       },
     },
     foldable: {
@@ -101,7 +97,6 @@ type CalloutType = NonNullable<VariantProps<typeof callout>["type"]>
 type Callout<T extends CalloutType = CalloutType> = {
   type: T
   label: string
-  Icon: Component<LucideProps>
 }
 
 type Callouts = {
@@ -115,137 +110,110 @@ const callouts = {
   note: {
     type: "note",
     label: "Note",
-    Icon: (props) => <PencilIcon {...props} />,
   },
   abstract: {
     type: "abstract",
     label: "Abstract",
-    Icon: (props) => <ClipboardListIcon {...props} />,
   },
   summary: {
     type: "abstract",
     label: "Summary",
-    Icon: (props) => <ClipboardListIcon {...props} />,
   },
   tldr: {
     type: "abstract",
     label: "TL;DR",
-    Icon: (props) => <ClipboardListIcon {...props} />,
   },
   info: {
     type: "info",
     label: "Info",
-    Icon: (props) => <InfoIcon {...props} />,
   },
   todo: {
     type: "todo",
     label: "ToDo",
-    Icon: (props) => <CheckCircle2Icon {...props} />,
   },
   tip: {
     type: "tip",
     label: "Tip",
-    Icon: (props) => <FlameIcon {...props} />,
   },
   hint: {
     type: "tip",
     label: "Hint",
-    Icon: (props) => <FlameIcon {...props} />,
   },
   important: {
     type: "tip",
     label: "Important",
-    Icon: (props) => <CheckCircle2Icon {...props} />,
   },
   success: {
     type: "success",
     label: "Success",
-    Icon: (props) => <CheckIcon {...props} />,
   },
   check: {
     type: "success",
     label: "Check",
-    Icon: (props) => <CheckIcon {...props} />,
   },
   done: {
     type: "success",
     label: "Done",
-    Icon: (props) => <CheckCircle2Icon {...props} />,
   },
   question: {
     type: "question",
     label: "Question",
-    Icon: (props) => <HelpCircleIcon {...props} />,
   },
   help: {
     type: "question",
     label: "Help",
-    Icon: (props) => <HelpCircleIcon {...props} />,
   },
   faq: {
     type: "question",
     label: "FAQ",
-    Icon: (props) => <HelpCircleIcon {...props} />,
   },
   warning: {
     type: "warning",
     label: "Warning",
-    Icon: (props) => <AlertTriangleIcon {...props} />,
   },
   caution: {
     type: "warning",
     label: "Caution",
-    Icon: (props) => <AlertTriangleIcon {...props} />,
   },
   attention: {
     type: "warning",
     label: "Attention",
-    Icon: (props) => <AlertTriangleIcon {...props} />,
   },
   failure: {
     type: "failure",
     label: "Failure",
-    Icon: (props) => <XIcon {...props} />,
   },
   fail: {
     type: "failure",
     label: "Fail",
-    Icon: (props) => <XIcon {...props} />,
   },
   missing: {
     type: "failure",
     label: "Missing",
-    Icon: (props) => <XIcon {...props} />,
   },
   danger: {
     type: "danger",
     label: "Danger",
-    Icon: (props) => <ZapIcon {...props} />,
   },
   error: {
     type: "danger",
     label: "Error",
-    Icon: (props) => <ZapIcon {...props} />,
   },
   bug: {
     type: "bug",
     label: "Bug",
-    Icon: (props) => <BugIcon {...props} />,
   },
   example: {
     type: "example",
     label: "Example",
-    Icon: (props) => <ListIcon {...props} />,
   },
   quote: {
     type: "quote",
     label: "Quote",
-    Icon: (props) => <QuoteIcon {...props} />,
   },
   site: {
     type: "quote",
     label: "Site",
-    Icon: (props) => <QuoteIcon {...props} />,
   },
 } as const satisfies Callouts
 
@@ -350,10 +318,10 @@ export const CalloutTitle: Component<CalloutTitleProps> = (props) => {
       class={className().title({ class: local.class })}
       {...rest}
     >
-      <Dynamic component={calloutData().Icon} class={className().icon()} />
+      <span class={className().icon()} />
       <div>{local.children ?? calloutData().label}</div>
       <Show when={local.isFoldable}>
-        <ChevronRightIcon class={className().foldIcon()} />
+        <span class={className().foldIcon()} />
       </Show>
     </Summary>
   )

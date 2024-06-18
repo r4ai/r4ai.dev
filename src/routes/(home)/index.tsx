@@ -1,5 +1,4 @@
 import { Title } from "@solidjs/meta"
-import { siBluesky, siGithub, siZenn } from "simple-icons"
 
 import iconBlobsAvif from "~/assets/images/r4ai/icon-blobs.avif"
 import iconBlobsPng from "~/assets/images/r4ai/icon-blobs.png"
@@ -52,19 +51,19 @@ export default () => {
           <LinkCard
             title="@r4ai"
             href="https://github.com/r4ai"
-            icon={siGithub}
+            icon={<span class="i-simple-icons-github size-5" />}
             site="GitHub"
           />
           <LinkCard
             title="@r4ai.dev"
             href="https://bsky.app/profile/r4ai.dev"
-            icon={siBluesky}
+            icon={<span class="i-simple-icons-bluesky size-5" />}
             site="BlueSky"
           />
           <LinkCard
             title="@t4aru"
             href="https://zenn.dev/t4aru"
-            icon={siZenn}
+            icon={<span class="i-simple-icons-zenn size-5" />}
             site="Zenn.dev"
           />
         </div>

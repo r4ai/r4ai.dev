@@ -1,4 +1,3 @@
-import { LoaderCircleIcon } from "lucide-solid"
 import { type Component, splitProps } from "solid-js"
 
 import { Button, type ButtonProps } from "~/components/ui"
@@ -19,7 +18,7 @@ export const SubmitButton: Component<SubmitButtonProps> = (props) => {
     >
       {props.submitting ? (
         <>
-          <LoaderCircleIcon class="size-4 animate-spin" />
+          <span class="i-lucide-circle size-4 animate-spin" />
           <span class="ml-2">送信中</span>
         </>
       ) : (

@@ -1,3 +1,7 @@
+import {
+  getIconCollections,
+  iconsPlugin as icons,
+} from "@egoist/tailwindcss-icons"
 import kobalte from "@kobalte/tailwindcss"
 import { withTV } from "tailwind-variants/transformer"
 import { fontFamily } from "tailwindcss/defaultTheme"
@@ -87,5 +91,11 @@ export default withTV({
       },
     },
   },
-  plugins: [kobalte, animate],
+  plugins: [
+    kobalte,
+    animate,
+    icons({
+      collections: getIconCollections(["lucide", "simple-icons"]),
+    }),
+  ],
 })
