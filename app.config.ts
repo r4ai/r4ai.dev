@@ -84,16 +84,14 @@ export default defineConfig({
           [
             remarkCallout,
             {
-              root: (callout) => {
-                return {
-                  tagName: "callout-root",
-                  properties: {
-                    type: callout.type,
-                    isFoldable: callout.isFoldable.toString(),
-                    defaultFolded: callout.defaultFolded?.toString(),
-                  },
-                }
-              },
+              root: (callout) => ({
+                tagName: "callout-root",
+                properties: {
+                  type: callout.type,
+                  isFoldable: callout.isFoldable.toString(),
+                  defaultFolded: callout.defaultFolded?.toString(),
+                },
+              }),
               title: (callout) => ({
                 tagName: "callout-title",
                 properties: {
