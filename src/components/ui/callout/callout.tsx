@@ -14,7 +14,7 @@ const callout = tv({
     title: "flex flex-row items-center gap-2.5 font-bold",
     icon: "i-lucide-pencil size-5",
     foldIcon:
-      "i-chevron-right size-5 shrink-0 transition-transform group-open:rotate-90",
+      "i-lucide-chevron-right size-5 shrink-0 transition-transform group-open:rotate-90",
     body: "space-y-4",
   },
   variants: {
