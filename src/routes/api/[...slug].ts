@@ -1,12 +1,39 @@
+"use server"
+
+import * as fs from "node:fs/promises"
+
 import type { APIHandler } from "@solidjs/start/server"
 import { Hono } from "hono"
+import { isDev } from "solid-js/web"
 
-import { posts } from "~/routes/posts/(content)/config"
+import { fileToRoute, getFiles } from "~/libs/content-collection/utils"
+
+import { posts } from "../posts/(content)/config"
 
 const app = new Hono().basePath("/api")
 
-// Register the API for posts
-await posts.registerAPI(app)
+const postsApi = new Hono()
+const postsDir = isDev ? posts.dirname : `src/routes/posts/(content)/`
+const postFiles = await getFiles(postsDir)
+for (const file of postFiles) {
+  const route = fileToRoute(file, postsDir)
+
+  // Raw MDX file
+  postsApi.get(`${route}.mdx`, async () => {
+    const code = await fs.readFile(file, "utf-8")
+    return new Response(code, {
+      headers: {
+        "Content-Type": "text/mdx; charset=utf-8",
+      },
+    })
+  })
+
+  // OG Image
+  postsApi.get(`${route}.png`, async (c) => {
+    return c.text("Not implemented", { status: 501 })
+  })
+}
+app.route("/posts", postsApi)
 
 const createHandler = (): APIHandler => async (event) => {
   return await app.fetch(event.request, {

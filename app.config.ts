@@ -1,5 +1,3 @@
-import path from "node:path"
-
 import rehypeSectionize, {
   type RehypeSectionizeOptions,
 } from "@hbsnow/rehype-sectionize"
@@ -28,6 +26,7 @@ import remarkFrontmatter from "remark-frontmatter"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 
+import { getAPIRoutes, getRoutes } from "./src/libs/content-collection"
 import {
   transformerLineNumbers,
   transformerMetaDiff,
@@ -38,14 +37,14 @@ import remarkHeader from "./src/libs/unified-plugins/remark-header"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
 import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
-import { posts } from "./src/routes/posts/(content)/config"
 
 const { default: mdx } = pkg
 
-const postsDir = path.resolve(
-  import.meta.dirname,
-  "./src/routes/posts/(content)/",
-)
+const postsDir = "src/routes/posts/(content)/"
+const postRoutes = [
+  ...(await getRoutes(postsDir, "posts")),
+  ...(await getAPIRoutes(postsDir, "api/posts", ["mdx", "png"])),
+]
 
 export default defineConfig({
   ssr: true,
@@ -58,14 +57,7 @@ export default defineConfig({
     },
     prerender: {
       crawlLinks: true,
-      routes: [
-        "/",
-        "/projects",
-        "/posts",
-        "/contact",
-        ...(await posts.getRoutes(postsDir)),
-        ...(await posts.getAPIRoutes(["mdx", "png"], postsDir)),
-      ],
+      routes: ["/", "/projects", "/posts", "/contact", ...postRoutes],
     },
   },
   extensions: ["ts", "tsx", "mdx"],

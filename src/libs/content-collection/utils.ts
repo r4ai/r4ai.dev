@@ -10,7 +10,7 @@ export const resolveIndex = (route: string) => {
   return route
 }
 
-export const getFilesOf = async (dir: string, level: number) => {
+export const getFiles = async (dir: string) => {
   const allFiles = await fs.readdir(dir)
   const searching: Promise<string[]>[] = []
   for (const file of allFiles) {
@@ -19,7 +19,7 @@ export const getFilesOf = async (dir: string, level: number) => {
 
     // If directory, recursively search files
     if (stat.isDirectory()) {
-      searching.push(getFilesOf(filePath, level + 1))
+      searching.push(getFiles(filePath))
       continue
     }
 
@@ -34,8 +34,23 @@ export const getFilesOf = async (dir: string, level: number) => {
   return files
 }
 
-export const fileToRouteFrom = (
+export const getRoutes = (dir: string, base: string) =>
+  getFiles(dir).then((files) =>
+    files.map((file) => fileToRoute(file, dir, base)),
+  )
+
+export const fileToRoute = (
   file: string,
   dirname: string,
-  basePath: string,
-) => `/${posixPath.join(basePath, resolveIndex(file.replace(dirname, "")))}`
+  basePath: string = "",
+) =>
+  `${basePath && "/"}${posixPath.join(basePath, resolveIndex(file.split(dirname).slice(1).join("")))}`
+
+export const getAPIRoutes = (
+  dir: string,
+  base: string,
+  extensions: string[] = ["mdx", "png"],
+) =>
+  getRoutes(dir, base).then((routes) =>
+    routes.map((route) => extensions.map((ext) => `${route}.${ext}`)).flat(),
+  )
