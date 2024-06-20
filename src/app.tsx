@@ -1,3 +1,5 @@
+import "virtual:uno.css"
+import "@unocss/reset/tailwind-compat.css"
 import "~/styles/global.css"
 
 import { MetaProvider, Title } from "@solidjs/meta"

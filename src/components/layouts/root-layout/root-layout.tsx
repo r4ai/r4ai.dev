@@ -18,7 +18,7 @@ export const RootLayout: Component<RootLayoutProps> = (props) => {
   const [local, rest] = splitProps(props, ["class", "children"])
   return (
     <ColorSchemeProvider>
-      <div class="flex min-h-full flex-col">
+      <div class="min-h-full flex flex-col">
         <Header />
         <div class={cn("flex-1", local.class)} {...rest}>
           <Suspense>{local.children}</Suspense>

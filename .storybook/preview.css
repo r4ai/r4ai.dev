@@ -1,14 +1,12 @@
-@import "../src/styles/global.css";
-
 .docs-story {
-  background-color: theme(colors.background);
+  @apply bg-background;
 }
 
 html {
-  height: theme(height.full);
+  @apply h-full;
 }
 
 body.sb-main-fullscreen,
 body.sb-main-fullscreen #storybook-root {
-  height: theme(height.full);
+  @apply h-full;
 }

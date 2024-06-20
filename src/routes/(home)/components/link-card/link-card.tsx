@@ -15,7 +15,7 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
     <a href={props.href} aria-label={props.title} class="inline-block">
       <div
         class={cn(
-          "flex flex-row gap-3 rounded-md border px-3 py-3 shadow-sm transition-colors hover:bg-neutral-50 hover:underline dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-900 dark:hover:text-neutral-200",
+          "flex flex-row gap-3 rounded-md border px-3 py-3 shadow-sm transition-colors hover:bg-zinc-50 hover:underline dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-200",
           props.class,
         )}
       >

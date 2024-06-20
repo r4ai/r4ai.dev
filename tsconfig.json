@@ -39,6 +39,6 @@
     ".storybook/**/*",
     "scripts/**/*",
     "app.config.ts",
-    "content.config.ts"
+    "unocss.config.ts"
   ]
 }

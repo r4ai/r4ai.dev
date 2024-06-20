@@ -18,7 +18,7 @@ export const Header: Component<HeaderProps> = (props) => {
       )}
       {...rest}
     >
-      <div class="flex flex-row items-center gap-5 rounded-full border bg-background/60 px-4 py-2 backdrop-blur-xl">
+      <div class="flex flex-row items-center gap-5 border rounded-full bg-background/60 px-4 py-2 backdrop-blur-xl">
         <nav>
           <ul class="flex flex-row items-center gap-5 px-2">
             <li>

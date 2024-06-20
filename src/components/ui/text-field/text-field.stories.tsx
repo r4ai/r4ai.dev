@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: (
-      <TextFieldRoot class="mx-auto w-full max-w-xs">
+      <TextFieldRoot class="mx-auto max-w-xs w-full">
         <TextField type="email" placeholder="Email" />
       </TextFieldRoot>
     ),

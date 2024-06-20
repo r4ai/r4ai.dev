@@ -1,3 +1,6 @@
+import "virtual:uno.css"
+import "@unocss/reset/tailwind-compat.css"
+import "../src/styles/global.css"
 import "./preview.css"
 
 import { withThemeByDataAttribute } from "@storybook/addon-themes"

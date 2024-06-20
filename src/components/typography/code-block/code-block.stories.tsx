@@ -26,7 +26,7 @@ export const Default: Story = {
     },
     tabindex: 0,
     children: (
-      <code class="!flex flex-col">
+      <code class="flex-col !flex">
         <span class="line">
           <span style={{ color: "#A626A4", "--shiki-dark": "#C678DD" }}>
             fn

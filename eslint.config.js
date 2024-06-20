@@ -1,6 +1,7 @@
 // @ts-check
 
 import eslint from "@eslint/js"
+import unocss from "@unocss/eslint-config/flat"
 import gitignore from "eslint-config-flat-gitignore"
 import prettier from "eslint-config-prettier"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
@@ -18,6 +19,7 @@ export default tseslint.config(
       "no-undef": "off",
     },
   },
+  unocss,
   // @ts-expect-error eslint-plugin-solid's type is not compatible with eslint-plugin-typescript
   solid,
   {

@@ -18,7 +18,7 @@ import {
 import { cn } from "~/libs/utils"
 
 export type CodeBlockProps = ComponentProps<"pre"> & {
-  title: string
+  title?: string
   lang: string
 }
 
@@ -27,7 +27,7 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
   let preRef: HTMLPreElement | undefined
 
   return (
-    <div class="relative mx-auto max-w-screen-md rounded-xl border bg-muted bg-zinc-50 dark:bg-zinc-900/75">
+    <div class="relative mx-auto max-w-screen-md border rounded-xl bg-muted bg-zinc-50 dark:bg-zinc-900/75">
       <div class="peer">
         {props.title && (
           <CodeBlockTitle lang={props.lang}>{props.title}</CodeBlockTitle>

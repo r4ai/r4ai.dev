@@ -1,3 +1,5 @@
+@layer base, components;
+
 [data-color-scheme="dark"] .shiki,
 [data-color-scheme="dark"] .shiki span {
   color: var(--shiki-dark) !important;
@@ -19,55 +21,55 @@
 
 .shiki {
   & {
-    @apply !bg-transparent;
+    --at-apply: "!bg-transparent";
   }
 
   & code {
-    @apply block w-fit min-w-full;
+    --at-apply: "block w-fit min-w-full";
   }
 
-  & .line:not(:last-child:empty) {
-    @apply inline-block w-full border-l-2 border-transparent px-4;
+  & .line:where(:not(:last-child:empty)) {
+    --at-apply: "inline-block w-full border-l-2 border-transparent px-4";
   }
 }
 
 /* diff */
 .shiki.has-diff {
-  & .line:not(:last-child:empty) {
+  & .line:where(:not(:last-child:empty)) {
     & {
-      @apply px-2;
+      --at-apply: "px-2";
     }
     & *:first-child {
-      @apply ml-4;
+      --at-apply: "ml-4";
     }
   }
 
   & .line.diff.add {
     & {
-      @apply bg-green-500/10 dark:bg-green-600/20;
+      --at-apply: "bg-green-500/10 dark:bg-green-600/20";
     }
     & > :first-child {
       & {
-        @apply ml-0;
+        --at-apply: "ml-0";
       }
       &::before {
         content: "+";
-        @apply mr-2 text-green-500 dark:text-green-600;
+        --at-apply: "mr-2 text-green-500 dark:text-green-600";
       }
     }
   }
 
   & .line.diff.remove {
     & {
-      @apply bg-red-500/10 dark:bg-red-600/20;
+      --at-apply: "bg-red-500/10 dark:bg-red-600/20";
     }
     & > :first-child {
       & {
-        @apply ml-0;
+        --at-apply: "ml-0";
       }
       &::before {
         content: "-";
-        @apply mr-2 text-red-500 dark:text-red-600;
+        --at-apply: "mr-2 text-red-500 dark:text-red-600";
       }
     }
   }
@@ -76,27 +78,20 @@
 /* highlight line */
 .shiki {
   & .line.highlighted {
-    @apply border-l-blue-400 bg-zinc-400/10 dark:border-l-lime-400 dark:bg-zinc-600/20;
+    --at-apply: "border-l-blue-400 bg-zinc-400/10 dark:border-l-lime-400 dark:bg-zinc-600/20";
   }
 }
 
 /* highlight word */
 .shiki {
   & .highlighted-word {
-    @apply rounded-md border border-zinc-300 bg-zinc-400/10 px-1 dark:border-zinc-700 dark:bg-zinc-600/20;
+    --at-apply: "rounded-md border border-zinc-300 bg-zinc-400/10 px-1 dark:border-zinc-700 dark:bg-zinc-600/20";
   }
 }
 
 /* line numbers */
 .shiki.has-line-numbers {
-  & .line:not(:last-child:empty) {
-    & {
-      @apply px-4;
-    }
-
-    &::before {
-      content: attr(data-line);
-      @apply mr-4 inline-block w-4 text-right text-zinc-400 dark:text-zinc-600;
-    }
+  & .line:where(:not(:last-child:empty)) {
+    --at-apply: "px-4 before:(content-[attr(data-line)] mr-4 inline-block w-4 text-right text-zinc-400 dark:text-zinc-600)";
   }
 }

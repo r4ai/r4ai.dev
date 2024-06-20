@@ -1,12 +1,12 @@
 .root {
-  @apply relative h-full w-full;
+  --at-apply: relative h-full w-full;
   transform-style: preserve-3d;
   perspective-origin: 50% 50%;
   perspective: 1000px;
 }
 
 .wrapper {
-  @apply z-10 h-full w-full transition-opacity;
+  --at-apply: z-10 h-full w-full transition-opacity;
 }
 
 .card {
@@ -14,7 +14,7 @@
 }
 
 .overlay {
-  @apply absolute z-20 h-full w-full -translate-y-full;
+  --at-apply: absolute z-20 h-full w-full -translate-y-full;
 }
 
 .overlay-pattern {

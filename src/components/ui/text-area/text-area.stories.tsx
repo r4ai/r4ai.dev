@@ -12,7 +12,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     children: (
-      <TextFieldRoot class="mx-auto w-full max-w-xs">
+      <TextFieldRoot class="mx-auto max-w-xs w-full">
         <TextArea placeholder="Type your message here." />
       </TextFieldRoot>
     ),
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: (
-      <TextFieldRoot class="mx-auto w-full max-w-xs">
+      <TextFieldRoot class="mx-auto max-w-xs w-full">
         <TextArea placeholder="Type your message here." />
       </TextFieldRoot>
     ),

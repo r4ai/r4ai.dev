@@ -35,6 +35,7 @@ export type DialogContentProps = ParentProps<
   DialogPrimitive.DialogContentProps & {
     class?: string
     closeButton?: boolean
+    overlayProps?: DialogOverlayProps
   }
 >
 
@@ -49,22 +50,23 @@ export const DialogContent = <T extends ValidComponent = "div">(
     "class",
     "children",
     "closeButton",
+    "overlayProps",
   ])
 
   return (
     <DialogPrimitive.Portal>
-      <DialogOverlay />
+      <DialogOverlay {...local.overlayProps} />
       <div class="fixed inset-0 z-50 flex items-center justify-center">
         <DialogPrimitive.Content
           class={cn(
-            "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[expanded]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 data-[closed]:slide-out-to-left-1/2 data-[closed]:slide-out-to-top-[48%] data-[expanded]:slide-in-from-left-1/2 data-[expanded]:slide-in-from-top-[48%] sm:rounded-lg md:w-full",
+            "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[expanded]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 data-[closed]:slide-out-to-left-1/2 data-[closed]:slide-out-to-top-48/100 data-[expanded]:slide-in-from-left-1/2 data-[expanded]:slide-in-from-top-48/100 sm:rounded-lg md:w-full",
             local.class,
           )}
           {...rest}
         >
           {local.children}
           {local.closeButton && (
-            <DialogPrimitive.CloseButton class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-[opacity,box-shadow] hover:opacity-100 focus:outline-none focus:ring-[1.5px] focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+            <DialogPrimitive.CloseButton class="absolute right-4 top-4 rounded-sm bg-transparent opacity-70 ring-offset-background transition-(box-shadow opacity) disabled:pointer-events-none hover:opacity-100 focus:outline-none focus:ring-1.5 focus:ring-offset-2 focus:ring-ring">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

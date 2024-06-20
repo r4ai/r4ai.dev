@@ -17,7 +17,7 @@ export const SearchModal: Component<SearchModalProps> = (props) => {
     <Dialog>
       <DialogTrigger as={props.trigger} />
       <DialogContent
-        class="top-[10%] max-h-[80%] w-full max-w-screen-sm translate-y-0 border p-0 data-[closed]:slide-out-to-top-[10%] data-[expanded]:slide-in-from-top-[10%]"
+        class="top-[10%] max-h-[80%] w-full max-w-screen-sm translate-y-0 border p-0 !data-[expanded]:slide-in-from-top-1/10 !data-[closed]:slide-out-to-top-1/10"
         closeButton={false}
       >
         <Search />

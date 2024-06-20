@@ -2,24 +2,26 @@ import {
   type Component,
   type ComponentProps,
   createMemo,
-  type JSX,
+  mergeProps,
   Show,
   splitProps,
 } from "solid-js"
 import { tv, type VariantProps } from "tailwind-variants"
 
-const callout = tv({
+export const callout = tv({
   slots: {
-    root: "group mx-auto my-6 max-w-screen-md space-y-2 rounded-xl border bg-card p-4",
+    root: "bg-card group mx-auto max-w-screen-md space-y-2 rounded-xl border p-4",
     title: "flex flex-row items-center gap-2.5 font-bold",
-    icon: "i-lucide-pencil size-5",
+    icon: "size-5",
     foldIcon:
       "i-lucide-chevron-right size-5 shrink-0 transition-transform group-open:rotate-90",
     body: "space-y-4",
   },
   variants: {
     type: {
-      note: {},
+      note: {
+        icon: "i-lucide-pencil",
+      },
       abstract: {
         root: "border-purple-600/20 bg-purple-500/10 dark:border-purple-800/20",
         title: "text-purple-600 dark:text-purple-400",
@@ -106,7 +108,7 @@ type Callouts = {
 /**
  * @see https://help.obsidian.md/Editing+and+formatting/Callouts#Supported+types
  */
-const callouts = {
+export const callouts = {
   note: {
     type: "note",
     label: "Note",
@@ -230,17 +232,23 @@ const getCallout = <Key extends string>(
   return callouts.note
 }
 
-export type CalloutProps = CalloutRootProps & {
-  title: JSX.Element
+export type CalloutProps = Omit<
+  CalloutRootProps,
+  "isFoldable" | "defaultFolded"
+> & {
+  type: keyof typeof callouts
+  isFoldable?: boolean
+  defaultFolded?: boolean
 }
 
 export const Callout: Component<CalloutProps> = (props) => {
-  const [local, rest] = splitProps(props, [
-    "title",
-    "type",
-    "isFoldable",
-    "defaultFolded",
-  ])
+  const [local, rest] = splitProps(
+    mergeProps(props, {
+      isFoldable: false,
+      defaultFolded: false,
+    }),
+    ["title", "type", "isFoldable", "defaultFolded"],
+  )
 
   return (
     <CalloutRoot

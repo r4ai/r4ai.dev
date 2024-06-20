@@ -11,12 +11,12 @@ import { Cube, LinkCard, RareCard } from "./components"
 export default () => {
   return (
     <main
-      class="mx-auto my-12 grid max-w-2xl grid-flow-row grid-cols-4 gap-12 gap-y-0 px-8 text-foreground sm:grid-cols-8"
+      class="grid grid-flow-row grid-cols-4 mx-auto my-12 max-w-2xl gap-12 gap-y-0 px-8 text-foreground sm:grid-cols-8"
       data-pagefind-main
     >
       <Title>About me | r4ai.dev</Title>
       <RareCard
-        class="col-span-3 col-start-1 mx-auto w-full max-w-xs sm:col-span-4"
+        class="col-span-3 col-start-1 mx-auto max-w-xs w-full sm:col-span-4"
         clipPath="url(#r4ai-icon-blobs-clip-path)"
       >
         <IconBlobsClipPath clipPathId="r4ai-icon-blobs-clip-path" />
@@ -31,23 +31,23 @@ export default () => {
         />
       </RareCard>
       <section class="col-span-4 my-auto sm:col-start-5 sm:col-end-9">
-        <h1 class="font-times text-5xl font-black text-foreground sm:text-6xl">
+        <h1 class="text-5xl text-foreground font-black font-times sm:text-6xl">
           Hi,
           <br />
           I'm Rai
         </h1>
-        <p class="mt-4 font-mono text-lg font-medium italic text-stone-700 dark:text-stone-400">
+        <p class="mt-4 text-lg text-zinc-700 font-medium font-mono italic dark:text-zinc-400">
           nemui desu.
         </p>
       </section>
-      <h2 class="col-span-4 mb-6 mt-12 font-mono text-2xl font-semibold sm:col-span-8">
+      <h2 class="col-span-4 mb-6 mt-12 text-2xl font-semibold font-mono sm:col-span-8">
         自己紹介
       </h2>
       <div class="col-span-4 col-start-1 sm:col-span-4">
-        <p class="col-span-4 font-mono text-base sm:col-span-4">
+        <p class="col-span-4 text-base font-mono sm:col-span-4">
           とあるCS専攻な大学生です。普段はWeb開発をしています。最近はWASMを使ったゲーム開発に興味があります。
         </p>
-        <div class="mt-6 flex flex-col space-y-3 font-mono text-base sm:inline-block">
+        <div class="mt-6 flex flex-col text-base font-mono sm:inline-block space-y-3">
           <LinkCard
             title="@r4ai"
             href="https://github.com/r4ai"
@@ -71,10 +71,10 @@ export default () => {
       <div class="col-span-4">
         <Cube />
       </div>
-      <h2 class="col-span-4 mb-6 mt-16 font-mono text-2xl font-semibold sm:col-span-8">
+      <h2 class="col-span-4 mb-6 mt-16 text-2xl font-semibold font-mono sm:col-span-8">
         使える技術
       </h2>
-      <div class="col-span-4 font-mono text-base text-foreground sm:col-span-5">
+      <div class="col-span-4 text-base text-foreground font-mono sm:col-span-5">
         <p class="leading-7 [&:not(:first-child)]:mt-6">言語:</p>
         <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
           <li>JavaScript/TypeScript</li>
@@ -90,10 +90,10 @@ export default () => {
           <li>Svelte</li>
         </ul>
       </div>
-      <h2 class="col-span-4 mb-6 mt-12 font-mono text-2xl font-semibold sm:col-span-8">
+      <h2 class="col-span-4 mb-6 mt-12 text-2xl font-semibold font-mono sm:col-span-8">
         記事・スライド
       </h2>
-      <div class="col-span-4 font-mono text-base text-foreground sm:col-span-8">
+      <div class="col-span-4 text-base text-foreground font-mono sm:col-span-8">
         <ul class="mb-6 ml-6 list-disc [&>li]:mt-2">
           <li>
             <a

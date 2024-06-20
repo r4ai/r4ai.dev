@@ -1,0 +1,13 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@apply",
+      "description": "Apply a mixin to the current rule"
+    },
+    {
+      "name": "@screen",
+      "description": "Apply a media query to the current rule"
+    }
+  ]
+}

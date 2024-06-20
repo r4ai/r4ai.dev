@@ -18,7 +18,7 @@ export const SubmitButton: Component<SubmitButtonProps> = (props) => {
     >
       {props.submitting ? (
         <>
-          <span class="i-lucide-circle size-4 animate-spin" />
+          <span class="i-lucide-loader-circle size-4 animate-spin" />
           <span class="ml-2">送信中</span>
         </>
       ) : (

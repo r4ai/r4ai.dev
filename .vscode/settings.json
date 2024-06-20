@@ -3,6 +3,7 @@
     // @see https://www.tailwind-variants.org/docs/getting-started#intellisense-setup-optional
     ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
+  "unocss.autocomplete.matchType": "fuzzy",
   "[yaml]": {
     "tailwindCSS.experimental.classRegex": [
       // key名がtwで始まるものをtailwindのクラスとして認識する
@@ -14,9 +15,7 @@
   "[mdx]": {
     "editor.defaultFormatter": "unifiedjs.vscode-mdx"
   },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
+  "css.customData": [".vscode/css.css-data.json"],
   "mdx.server.enable": true,
   "auto-close-tag.activationOnLanguage": [
     "mdx",
@@ -44,5 +43,20 @@
     "source.fixAll.eslint": "explicit"
   },
   "eslint.experimental.useFlatConfig": true,
-  "cSpell.words": ["Pagefind"]
+  "cSpell.words": ["Pagefind", "lucide", "unocss"],
+  "iconify.annotations": true,
+  "iconify.languageIds": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "svelte",
+    "html",
+    "pug",
+    "json",
+    "yaml",
+    "mdx"
+  ],
+  "iconify.inplace": false
 }
