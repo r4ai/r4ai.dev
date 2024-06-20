@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router"
 import { type Component, type ComponentProps, splitProps } from "solid-js"
 
 import { Button } from "~/components/ui/button"
@@ -22,16 +23,16 @@ export const Header: Component<HeaderProps> = (props) => {
         <nav>
           <ul class="flex flex-row items-center gap-5 px-2">
             <li>
-              <a href="/">Home</a>
+              <A href="/">Home</A>
             </li>
             <li>
-              <a href="/posts">Posts</a>
+              <A href="/posts">Posts</A>
             </li>
             <li>
-              <a href="/projects">Projects</a>
+              <A href="/projects">Projects</A>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <A href="/contact">Contact</A>
             </li>
           </ul>
         </nav>
