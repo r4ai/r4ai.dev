@@ -2,6 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
   "dependencyDashboard": false,
+  "schedule": ["before 4am on monday"],
+  "timezone": "Asia/Tokyo",
+  "prHourlyLimit": 0,
   "lockFileMaintenance": {
     "automerge": true,
     "platformAutomerge": true,
@@ -21,6 +24,7 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest", "pinDigest"],
+      "groupName": "minor and patch dependencies",
       "automerge": true,
       "platformAutomerge": true
     }
