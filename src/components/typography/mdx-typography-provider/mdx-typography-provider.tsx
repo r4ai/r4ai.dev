@@ -4,6 +4,7 @@ import {
   type JSX,
   splitProps,
 } from "solid-js"
+import { NoHydration } from "solid-js/web"
 import { MDXProvider } from "solid-jsx"
 
 import {
@@ -34,6 +35,10 @@ import {
   type CalloutRootProps,
   CalloutTitle,
   type CalloutTitleProps,
+  OEmbedRich,
+  type OEmbedRichProps,
+  OEmbedVideo,
+  type OEmbedVideoProps,
 } from "~/components/ui"
 
 export type MDXTypographyProviderProps = {
@@ -108,6 +113,16 @@ export const MDXTypographyProvider: Component<MDXTypographyProviderProps> = (
             <CalloutBody isFoldable={local.isFoldable === "true"} {...rest} />
           )
         },
+        "oembed-video": (props: OEmbedVideoProps) => (
+          <NoHydration>
+            <OEmbedVideo {...props} />
+          </NoHydration>
+        ),
+        "oembed-rich": (props: OEmbedRichProps) => (
+          <NoHydration>
+            <OEmbedRich {...props} />
+          </NoHydration>
+        ),
         ...props.components,
       }}
     >

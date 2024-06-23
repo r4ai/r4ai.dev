@@ -19,6 +19,7 @@
   "dependencies": {
     "@kobalte/core": "^0.13.1",
     "@modular-forms/solid": "^0.21.0",
+    "@r4ai/remark-embed": "npm:@jsr/r4ai__remark-embed@^0.1.2",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.13.3",
     "@solidjs/start": "^1.0.1",

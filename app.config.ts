@@ -5,6 +5,8 @@ import { nodeTypes } from "@mdx-js/mdx"
 import remarkCallout, {
   type Options as RemarkCalloutOptions,
 } from "@r4ai/remark-callout"
+import remarkEmbed, { type RemarkEmbedOptions } from "@r4ai/remark-embed"
+import { transformerOEmbed } from "@r4ai/remark-embed/transformers"
 import rehypeShiki, { type RehypeShikiOptions } from "@shikijs/rehype"
 import {
   transformerMetaHighlight,
@@ -108,6 +110,31 @@ export default defineConfig({
                 },
               }),
             } satisfies RemarkCalloutOptions,
+          ],
+          [
+            remarkEmbed,
+            {
+              transformers: [
+                transformerOEmbed({
+                  video: (url, oEmbed) => ({
+                    tagName: "oembed-video",
+                    properties: {
+                      url: url.href,
+                      oEmbed: JSON.stringify(oEmbed),
+                    },
+                    children: [],
+                  }),
+                  rich: (url, oEmbed) => ({
+                    tagName: "oembed-rich",
+                    properties: {
+                      url: url.href,
+                      oEmbed: JSON.stringify(oEmbed),
+                    },
+                    children: [],
+                  }),
+                }),
+              ],
+            } satisfies RemarkEmbedOptions,
           ],
           remarkHeader,
         ],
