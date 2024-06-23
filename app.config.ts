@@ -30,12 +30,12 @@ import remarkMath from "remark-math"
 import unocss from "unocss/vite"
 
 import { getAPIRoutes, getRoutes } from "./src/libs/content-collection"
+import { transformerOpenGraphLinkCard } from "./src/libs/remark-embed-transformers"
 import {
   transformerLineNumbers,
   transformerMetaDiff,
   transformerTitle,
-} from "./src/libs/rehype-transformers"
-import { transformerOpenGraphLinkCard } from "./src/libs/remark-embed-transformers"
+} from "./src/libs/shiki-transformers"
 import rehypeFootnote from "./src/libs/unified-plugins/rehype-footnote"
 import remarkHeader from "./src/libs/unified-plugins/remark-header"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
