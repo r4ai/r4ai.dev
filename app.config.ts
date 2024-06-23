@@ -35,6 +35,7 @@ import {
   transformerMetaDiff,
   transformerTitle,
 } from "./src/libs/rehype-transformers"
+import { transformerOpenGraphLinkCard } from "./src/libs/remark-embed-transformers"
 import rehypeFootnote from "./src/libs/unified-plugins/rehype-footnote"
 import remarkHeader from "./src/libs/unified-plugins/remark-header"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
@@ -133,6 +134,7 @@ export default defineConfig({
                     children: [],
                   }),
                 }),
+                transformerOpenGraphLinkCard(),
               ],
             } satisfies RemarkEmbedOptions,
           ],

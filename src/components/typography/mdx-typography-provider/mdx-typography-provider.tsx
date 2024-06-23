@@ -35,6 +35,7 @@ import {
   type CalloutRootProps,
   CalloutTitle,
   type CalloutTitleProps,
+  LinkCard,
   OEmbedRich,
   type OEmbedRichProps,
   OEmbedVideo,
@@ -123,6 +124,7 @@ export const MDXTypographyProvider: Component<MDXTypographyProviderProps> = (
             <OEmbedRich {...props} />
           </NoHydration>
         ),
+        "link-card": LinkCard,
         ...props.components,
       }}
     >
