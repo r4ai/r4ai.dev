@@ -1,15 +1,18 @@
 import { A } from "@solidjs/router"
 import { type Component, For } from "solid-js"
+import { Dynamic } from "solid-js/web"
 
 import type { Post } from "~/routes/posts/libs"
 
 export type PostCardProps = {
   post: Post
+  a?: Component
 }
 
 export const PostCard: Component<PostCardProps> = (props) => {
   return (
-    <A
+    <Dynamic
+      component={props.a ?? A}
       href={props.post.route}
       class="flex flex-row gap-4 rounded-xl p-4 transition hover:bg-muted"
     >
@@ -31,6 +34,6 @@ export const PostCard: Component<PostCardProps> = (props) => {
           </span>
         </div>
       </div>
-    </A>
+    </Dynamic>
   )
 }
