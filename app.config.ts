@@ -27,6 +27,7 @@ import rehypeSlug from "rehype-slug"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
+import remarkMdxFrontmatter from "remark-mdx-frontmatter"
 import unocss from "unocss/vite"
 
 import { getAPIRoutes, getRoutes } from "./src/libs/content-collection"
@@ -83,6 +84,7 @@ export default defineConfig({
         },
         remarkPlugins: [
           remarkFrontmatter,
+          remarkMdxFrontmatter,
           remarkGfm,
           remarkMath,
           remarkInlineCode,

@@ -4,7 +4,7 @@ import { defineCollection } from "../../../libs/content-collection"
 
 export const posts = defineCollection({
   basePath: "posts",
-  dirname: import.meta.dirname,
+  dirname: "src/routes/posts/(content)",
   schema: v.object({
     title: v.string(
       "Please provide a post title. Example: `title: Hello World`",
