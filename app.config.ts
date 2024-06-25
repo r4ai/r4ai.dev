@@ -42,13 +42,13 @@ import remarkHeader from "./src/libs/unified-plugins/remark-header"
 import remarkInlineCode from "./src/libs/unified-plugins/remark-inline-code"
 import pagefind from "./src/libs/vite-plugins/vite-plugin-pagefind"
 import raw from "./src/libs/vite-plugins/vite-plugin-raw-transform"
+import { posts } from "./src/routes/posts/(content)/config"
 
 const { default: mdx } = pkg
 
-const postsDir = "src/routes/posts/(content)/"
 const postRoutes = [
-  ...(await getRoutes(postsDir, "posts")),
-  ...(await getAPIRoutes(postsDir, "api/posts", ["mdx", "png"])),
+  ...(await getRoutes(posts.dirname, "posts")),
+  ...(await getAPIRoutes(posts.dirname, "api/posts", ["mdx", "png"])),
 ]
 
 export default defineConfig({

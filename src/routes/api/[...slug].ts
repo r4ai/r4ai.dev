@@ -4,19 +4,16 @@ import * as fs from "node:fs/promises"
 
 import type { APIHandler } from "@solidjs/start/server"
 import { Hono } from "hono"
-import { isDev } from "solid-js/web"
 
 import { fileToRoute, getFiles } from "~/libs/content-collection/utils"
-
-import { posts } from "../posts/(content)/config"
+import { posts } from "~/routes/posts/(content)/config"
 
 const app = new Hono().basePath("/api")
 
 const postsApi = new Hono()
-const postsDir = isDev ? posts.dirname : `src/routes/posts/(content)/`
-const postFiles = await getFiles(postsDir)
+const postFiles = await getFiles(posts.dirname)
 for (const file of postFiles) {
-  const route = fileToRoute(file, postsDir)
+  const route = fileToRoute(file, posts.dirname)
 
   // Raw MDX file
   postsApi.get(`${route}.mdx`, async () => {
