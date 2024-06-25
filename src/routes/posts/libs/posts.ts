@@ -40,8 +40,8 @@ export const getPosts = cache(async () => {
   return posts
 }, "posts")
 
-export const sortPostsByPublishedAt = (posts: Post[]) =>
-  posts.sort(
+export const sortPostsByPublishedAt = (posts?: Post[]) =>
+  posts?.sort(
     (a, b) =>
       new Date(b.frontmatter.publishedAt).getTime() -
       new Date(a.frontmatter.publishedAt).getTime(),
