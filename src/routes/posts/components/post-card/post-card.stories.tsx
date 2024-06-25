@@ -20,7 +20,7 @@ export const Default: Story = {
       route: "/posts/example",
       frontmatter: {
         title: "Example",
-        icon: "📝",
+        icon: "i-fluent-emoji:memo",
         draft: false,
         genre: "article",
         publishedAt: new Date().toISOString(),

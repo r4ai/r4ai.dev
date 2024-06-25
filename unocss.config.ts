@@ -26,6 +26,11 @@ export default defineConfig({
           import("@iconify-json/simple-icons/icons.json").then(
             (mod) => mod.default,
           ),
+        // @ts-expect-error why this type error happens???
+        "fluent-emoji": () =>
+          import("@iconify-json/fluent-emoji/icons.json").then(
+            (mod) => mod.default,
+          ),
       },
     }),
   ],

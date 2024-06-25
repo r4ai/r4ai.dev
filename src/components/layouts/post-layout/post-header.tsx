@@ -2,6 +2,7 @@ import type { Component } from "solid-js"
 import * as v from "valibot"
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui"
+import { cn } from "~/libs/utils"
 import { posts } from "~/routes/posts/(content)/config"
 
 type PostSchema = v.InferOutput<typeof posts.schema>
@@ -11,7 +12,7 @@ export type PostHeaderProps = PostSchema
 export const PostHeader: Component<PostHeaderProps> = (props) => {
   return (
     <header class="flex flex-col items-center justify-center">
-      <span class="text-6xl lg:text-7xl">{props.icon}</span>
+      <span class={cn("text-6xl lg:text-7xl", props.icon)} />
       <h1
         class="mb-6 mt-4 text-center text-3xl font-black lg:text-4xl"
         // eslint-disable-next-line solid/no-innerhtml

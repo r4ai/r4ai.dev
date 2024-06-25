@@ -2,6 +2,7 @@ import { A } from "@solidjs/router"
 import { type Component, For } from "solid-js"
 import { Dynamic } from "solid-js/web"
 
+import { cn } from "~/libs/utils"
 import type { Post } from "~/routes/posts/libs"
 
 export type PostCardProps = {
@@ -14,11 +15,9 @@ export const PostCard: Component<PostCardProps> = (props) => {
     <Dynamic
       component={props.a ?? A}
       href={props.post.route}
-      class="flex flex-row gap-4 rounded-xl p-4 transition hover:bg-muted"
+      class="flex flex-row items-center gap-5 rounded-xl p-4 transition hover:bg-muted"
     >
-      <div>
-        <span class="text-size-3xl">{props.post.frontmatter.icon}</span>
-      </div>
+      <div class={cn("size-12", props.post.frontmatter.icon)} />
       <div>
         <h3 class="text-lg font-bold">{props.post.frontmatter.title}</h3>
         <div class="flex flex-row gap-2 text-sm text-muted-foreground">
