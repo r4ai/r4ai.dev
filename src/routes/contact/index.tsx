@@ -85,7 +85,7 @@ export default () => {
   }
 
   return (
-    <main class="mx-auto max-w-xl flex grow flex-col gap-12 container">
+    <main class="mx-auto my-6 max-w-xl flex grow flex-col gap-12 container">
       <Title>Contact | r4ai.dev</Title>
       <div class="flex flex-col">
         <h2 class="mx-auto text-4.5xl font-black font-times">Contact</h2>

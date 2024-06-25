@@ -10,8 +10,8 @@ export const posts = defineCollection({
       "Please provide a post title. Example: `title: Hello World`",
     ),
     genre: v.picklist(
-      ["article", "slide"],
-      "Please provide a post genre. Example: `genre: article`",
+      ["tech-blog", "slide"],
+      "Please provide a post genre. Example: `genre: tech-blog`",
     ),
     icon: v.string("Please provide a post icon. Example: `icon: 📝`"),
     draft: v.boolean(
