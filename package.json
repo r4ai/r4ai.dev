@@ -88,7 +88,7 @@
     "lint-staged": "^15.2.2",
     "lucide-react": "^0.395.0",
     "node-html-parser": "^6.1.13",
-    "npm-to-yarn": "^2.2.1",
+    "npm-to-yarn": "^3.0.0",
     "pagefind": "^1.1.0",
     "postcss-import": "^16.1.0",
     "prettier": "^3.2.5",
