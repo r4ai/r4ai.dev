@@ -1,9 +1,11 @@
-import { addDynamicIconSelectors } from "@iconify/tailwind"
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
+import animate from "tailwindcss-animate"
+import typography from "@tailwindcss/typography"
+import containerQueries from "@tailwindcss/container-queries"
 
 export default {
-  darkMode: ["class"],
+  darkMode: ["selector", "[data-color-schema='dark']"],
   content: ["./src/**/*.{astro,js,jsx,ts,tsx,html,mdx}"],
   theme: {
     container: {
@@ -97,10 +99,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/container-queries"),
-    addDynamicIconSelectors(),
-  ],
+  plugins: [animate, typography, containerQueries],
 } satisfies Config
