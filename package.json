@@ -64,6 +64,7 @@
     "@r4ai/remark-callout": "^0.6.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/eslint-config-prettier": "^6.11.3",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.7.3",
