@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config"
 import tailwind from "@astrojs/tailwind"
-import react from "@astrojs/react"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 import { fileURLToPath } from "node:url"
@@ -9,11 +8,6 @@ import sirv from "sirv"
 
 import mdx from "@astrojs/mdx"
 import type { AstroIntegration, RemarkPlugins } from "astro"
-import {
-  rehypeCustomCode,
-  type RehypeCustomCodeOptions,
-} from "rehype-custom-code"
-import remarkMetaString from "remark-meta-string"
 import {
   remarkCallout,
   type Options as RemarkCalloutOptions,
@@ -76,17 +70,11 @@ const pageFind = (): AstroIntegration => {
 // https://astro.build/config
 export default defineConfig({
   site: "https://r4ai.dev",
-  vite: {
-    ssr: {
-      noExternal: ["react-tweet"],
-    },
-  },
   prefetch: true,
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
-    react(),
     mdx(),
     pageFind(),
   ],
@@ -96,7 +84,6 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkMath as unknown as RemarkPlugins[number],
-      remarkMetaString as unknown as RemarkPlugins[number],
       // remarkEmbed,
       [
         remarkCallout,
@@ -125,21 +112,7 @@ export default defineConfig({
         } satisfies RemarkCalloutOptions,
       ],
     ],
-    rehypePlugins: [
-      rehypeKatex,
-      [
-        rehypeCustomCode,
-        {
-          shouldExportCodeAsProps: true,
-          shiki: {
-            themes: {
-              light: "github-light",
-              dark: "one-dark-pro",
-            },
-          },
-        } satisfies RehypeCustomCodeOptions,
-      ],
-    ],
+    rehypePlugins: [rehypeKatex],
     remarkRehype: {
       footnoteLabel: "脚注",
       footnoteLabelTagName: "h2",
