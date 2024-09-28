@@ -140,8 +140,8 @@ const extructFontFiles = async (zipFileName: string, toCopyFonts: string[]) => {
 
 const convertFontFiles = async () => {
   console.log("[Log] Start converting font files...")
-  await exec("docker-compose up --build")
-  await exec("docker-compose down")
+  await exec("docker compose up --build")
+  await exec("docker compose down")
   console.log("[Log] Finished converting font files")
 }
 
