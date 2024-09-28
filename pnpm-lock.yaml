@@ -59,6 +59,9 @@ importers:
       "@r4ai/remark-callout":
         specifier: ^0.6.2
         version: 0.6.2
+      "@storybook/addon-a11y":
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.3)
       "@storybook/addon-essentials":
         specifier: ^8.3.3
         version: 8.3.3(storybook@8.3.3)
@@ -68,15 +71,24 @@ importers:
       "@storybook/addon-links":
         specifier: ^8.3.3
         version: 8.3.3(react@18.3.1)(storybook@8.3.3)
+      "@storybook/addon-themes":
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.3)
       "@storybook/blocks":
         specifier: ^8.3.3
         version: 8.3.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.3)
       "@storybook/docs-tools":
         specifier: ^8.3.3
         version: 8.3.3(storybook@8.3.3)
+      "@storybook/manager-api":
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.3)
       "@storybook/testing-library":
         specifier: ^0.2.2
         version: 0.2.2
+      "@storybook/theming":
+        specifier: ^8.3.3
+        version: 8.3.3(storybook@8.3.3)
       "@tailwindcss/container-queries":
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.13)
@@ -1413,6 +1425,14 @@ packages:
         integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==,
       }
 
+  "@storybook/addon-a11y@8.3.3":
+    resolution:
+      {
+        integrity: sha512-TiCbNfKJOBD2b8mMqHOii8ntdt0V4+ifAgzmGku+F1hdf2EhEw1nL6CHpvnx/GBXoGeK4mrPJIKKoPNp+zz0dw==,
+      }
+    peerDependencies:
+      storybook: ^8.3.3
+
   "@storybook/addon-actions@8.3.3":
     resolution:
       {
@@ -1493,6 +1513,14 @@ packages:
     resolution:
       {
         integrity: sha512-OwqYfieNuqSqWNtUZLu3UmsfQNnwA2UaSMBZyeC2Dte9Jd59PPYggcWmH+b0S6OTbYXWNAUK5U6WdK+X9Ypzdw==,
+      }
+    peerDependencies:
+      storybook: ^8.3.3
+
+  "@storybook/addon-themes@8.3.3":
+    resolution:
+      {
+        integrity: sha512-TNXBKVFjRVy8MWNV0e4+6i52vpK/kseJGcCrTi1qKxkhztwWJx8p6gH/WtaPZykxnnn++CTyYz4Xt1on23CetQ==,
       }
     peerDependencies:
       storybook: ^8.3.3
@@ -1613,6 +1641,14 @@ packages:
     peerDependencies:
       storybook: ^8.3.3
 
+  "@storybook/manager-api@8.3.3":
+    resolution:
+      {
+        integrity: sha512-Na4U+McOeVUJAR6qzJfQ6y2Qt0kUgEDUriNoAn+curpoKPTmIaZ79RAXBzIqBl31VyQKknKpZbozoRGf861YaQ==,
+      }
+    peerDependencies:
+      storybook: ^8.3.3
+
   "@storybook/react-dom-shim@8.3.3":
     resolution:
       {
@@ -1637,6 +1673,14 @@ packages:
         integrity: sha512-L8sXFJUHmrlyU2BsWWZGuAjv39Jl1uAqUHdxmN42JY15M4+XCMjGlArdCCjDe1wpTSW6USYISA9axjZojgtvnw==,
       }
     deprecated: In Storybook 8, this package functionality has been integrated to a new package called @storybook/test, which uses Vitest APIs for an improved experience. When upgrading to Storybook 8 with 'npx storybook@latest upgrade', you will get prompted and will get an automigration for the new package. Please migrate when you can.
+
+  "@storybook/theming@8.3.3":
+    resolution:
+      {
+        integrity: sha512-gWJKetI6XJQgkrvvry4ez10+jLaGNCQKi5ygRPM9N+qrjA3BB8F2LCuFUTBuisa4l64TILDNjfwP/YTWV5+u5A==,
+      }
+    peerDependencies:
+      storybook: ^8.3.3
 
   "@tailwindcss/container-queries@0.1.1":
     resolution:
@@ -9206,6 +9250,12 @@ snapshots:
 
   "@sinclair/typebox@0.27.8": {}
 
+  "@storybook/addon-a11y@8.3.3(storybook@8.3.3)":
+    dependencies:
+      "@storybook/addon-highlight": 8.3.3(storybook@8.3.3)
+      axe-core: 4.10.0
+      storybook: 8.3.3
+
   "@storybook/addon-actions@8.3.3(storybook@8.3.3)":
     dependencies:
       "@storybook/global": 5.0.0
@@ -9296,6 +9346,11 @@ snapshots:
   "@storybook/addon-outline@8.3.3(storybook@8.3.3)":
     dependencies:
       "@storybook/global": 5.0.0
+      storybook: 8.3.3
+      ts-dedent: 2.2.0
+
+  "@storybook/addon-themes@8.3.3(storybook@8.3.3)":
+    dependencies:
       storybook: 8.3.3
       ts-dedent: 2.2.0
 
@@ -9407,6 +9462,10 @@ snapshots:
       storybook: 8.3.3
       util: 0.12.5
 
+  "@storybook/manager-api@8.3.3(storybook@8.3.3)":
+    dependencies:
+      storybook: 8.3.3
+
   "@storybook/react-dom-shim@8.3.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.3)":
     dependencies:
       react: 18.3.1
@@ -9431,6 +9490,10 @@ snapshots:
       "@testing-library/dom": 9.3.4
       "@testing-library/user-event": 14.5.2(@testing-library/dom@9.3.4)
       ts-dedent: 2.2.0
+
+  "@storybook/theming@8.3.3(storybook@8.3.3)":
+    dependencies:
+      storybook: 8.3.3
 
   "@tailwindcss/container-queries@0.1.1(tailwindcss@3.4.13)":
     dependencies:
