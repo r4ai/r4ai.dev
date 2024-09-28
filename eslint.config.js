@@ -10,11 +10,13 @@ import tsEslint from "typescript-eslint"
 export default tsEslint.config(
   gitignore(),
   eslint.configs.recommended,
-  ...tsEslint.configs.recommended,
+  ...tsEslint.configs.recommendedTypeChecked,
   {
-    files: ["**/*.{ts,tsx,mts,cts,astro}"],
-    rules: {
-      "no-undef": "off",
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
   ...eslintPluginAstro.configs["flat/recommended"],

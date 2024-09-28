@@ -19,5 +19,5 @@ for (const dir of dirs) {
 try {
   await exec("docker image rm udevgothic-woff2-converter")
 } catch (e) {
-  console.warn("[Error] Failed to remove docker image")
+  console.warn("[Error] Failed to remove docker image:", e)
 }

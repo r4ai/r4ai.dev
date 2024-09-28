@@ -7,13 +7,15 @@ const exec = (
   env?: NodeJS.ProcessEnv
 ): Promise<void> => {
   const command = cmd.split(" ")[0]
+  if (!command) throw new Error("Command is empty")
   const args = cmd.split(" ").slice(1)
   const promise: Promise<void> = new Promise((resolve) => {
-    console.log(`$ ${command} ${args}`)
+    console.log(`$ ${command} ${args.join(" ")}`)
 
     const childProcess = spawn(command, args, { cwd, env })
 
     childProcess.stdout.on("data", (data) => {
+      // eslint-disable-next-line
       ;(data.toString() as string).split("\n").forEach((line) => {
         console.log(`>>> ${line.trim()}`)
       })
@@ -110,7 +112,7 @@ const downloadZipFile = async () => {
   const response = await fetch(
     "https://api.github.com/repos/yuru7/udev-gothic/releases/latest"
   )
-  const json: Releases = await response.json()
+  const json = (await response.json()) as Releases
 
   for (const asset of json.assets) {
     if (!asset.name.startsWith("UDEVGothic_v")) continue

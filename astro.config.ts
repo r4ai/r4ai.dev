@@ -24,7 +24,7 @@ const pageFind = (): AstroIntegration => {
       "astro:config:setup": ({ config }) => {
         outDir = fileURLToPath(config.outDir)
       },
-      "astro:server:setup": async ({ server }) => {
+      "astro:server:setup": ({ server }) => {
         if (!outDir) {
           throw new Error("outDir is undefined")
         }
