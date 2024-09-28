@@ -1,0 +1,97 @@
+@layer base, components;
+
+[data-color-scheme="dark"] .shiki,
+[data-color-scheme="dark"] .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.shiki code {
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  tab-size: 4;
+  hyphens: none;
+}
+
+.shiki {
+  & {
+    --at-apply: "!bg-transparent";
+  }
+
+  & code {
+    --at-apply: "block w-fit min-w-full";
+  }
+
+  & .line:where(:not(:last-child:empty)) {
+    --at-apply: "inline-block w-full border-l-2 border-transparent px-4";
+  }
+}
+
+/* diff */
+.shiki.has-diff {
+  & .line:where(:not(:last-child:empty)) {
+    & {
+      --at-apply: "px-2";
+    }
+    & *:first-child {
+      --at-apply: "ml-4";
+    }
+  }
+
+  & .line.diff.add {
+    & {
+      --at-apply: "bg-green-500/10 dark:bg-green-600/20";
+    }
+    & > :first-child {
+      & {
+        --at-apply: "ml-0";
+      }
+      &::before {
+        content: "+";
+        --at-apply: "mr-2 text-green-500 dark:text-green-600";
+      }
+    }
+  }
+
+  & .line.diff.remove {
+    & {
+      --at-apply: "bg-red-500/10 dark:bg-red-600/20";
+    }
+    & > :first-child {
+      & {
+        --at-apply: "ml-0";
+      }
+      &::before {
+        content: "-";
+        --at-apply: "mr-2 text-red-500 dark:text-red-600";
+      }
+    }
+  }
+}
+
+/* highlight line */
+.shiki {
+  & .line.highlighted {
+    --at-apply: "border-l-blue-400 bg-zinc-400/10 dark:border-l-lime-400 dark:bg-zinc-600/20";
+  }
+}
+
+/* highlight word */
+.shiki {
+  & .highlighted-word {
+    --at-apply: "rounded-md border border-zinc-300 bg-zinc-400/10 px-1 dark:border-zinc-700 dark:bg-zinc-600/20";
+  }
+}
+
+/* line numbers */
+.shiki.has-line-numbers {
+  & .line:where(:not(:last-child:empty)) {
+    --at-apply: "px-4 before:(content-[attr(data-line)] mr-4 inline-block w-4 text-right text-zinc-400 dark:text-zinc-600)";
+  }
+}

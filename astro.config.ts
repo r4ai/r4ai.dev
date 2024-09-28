@@ -5,6 +5,13 @@ import {
   type Options as RemarkCalloutOptions,
   remarkCallout,
 } from "@r4ai/remark-callout"
+import remarkEmbed, { type RemarkEmbedOptions } from "@r4ai/remark-embed"
+import {
+  transformerLinkCard,
+  type TransformerLinkCardOptions,
+  transformerOEmbed,
+  type TransformerOEmbedOptions,
+} from "@r4ai/remark-embed/transformers"
 import type { RemarkPlugins } from "astro"
 import { defineConfig } from "astro/config"
 import rehypeKatex from "rehype-katex"
@@ -30,7 +37,36 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkMath as unknown as RemarkPlugins[number],
-      // remarkEmbed,
+      [
+        remarkEmbed,
+        {
+          transformers: [
+            transformerOEmbed({
+              video: (url, oEmbed) => ({
+                tagName: "oembed-video",
+                properties: {
+                  url: url.href,
+                  oEmbed: JSON.stringify(oEmbed),
+                },
+                children: [],
+              }),
+              rich: (url, oEmbed) => ({
+                tagName: "oembed-rich",
+                properties: {
+                  url: url.href,
+                  oEmbed: JSON.stringify(oEmbed),
+                },
+                children: [],
+              }),
+            } satisfies TransformerOEmbedOptions),
+            transformerLinkCard({
+              tagName: () => "link-card",
+              properties: (og) => ({ og: JSON.stringify(og) }),
+              children: () => [],
+            } satisfies TransformerLinkCardOptions),
+          ],
+        } satisfies RemarkEmbedOptions,
+      ],
       [
         remarkCallout,
         {
