@@ -9,8 +9,9 @@
     "jsxImportSource": "solid-js"
   },
   "include": [
-    "src",
-    "scripts",
+    "src/**/*",
+    "scripts/**/*",
+    ".storybook/**/*",
     "astro.config.ts",
     "eslint.config.js",
     "lint-staged.config.js",

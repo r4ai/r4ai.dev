@@ -99,5 +99,10 @@ export default {
       },
     },
   },
-  plugins: [animate, typography, containerQueries],
+  plugins: [
+    animate,
+    typography,
+    // @ts-expect-error invalid type
+    containerQueries,
+  ],
 } satisfies Config
