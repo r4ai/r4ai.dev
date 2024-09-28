@@ -39,7 +39,7 @@ export const TabsList = <T extends ValidComponent = "div">(
   return (
     <TabsPrimitive.List
       class={cn(
-        "data-[orientation=vertical]:(flex-col items-stretch) relative flex w-full rounded-lg bg-muted p-1 text-muted-foreground data-[orientation=horizontal]:items-center",
+        "relative flex w-full rounded-lg bg-muted p-1 text-muted-foreground data-[orientation=vertical]:flex-col data-[orientation=horizontal]:items-center data-[orientation=vertical]:items-stretch",
         local.class
       )}
       {...rest}
@@ -63,7 +63,7 @@ export const TabsContent = <T extends ValidComponent = "div">(
   return (
     <TabsPrimitive.Content
       class={cn(
-        "focus-visible:(ring-offset-background ring-1.5 ring-offset-2) outline-none ring-ring transition-shadow duration-200 data-[orientation=horizontal]:mt-2 data-[orientation=vertical]:ml-2",
+        "focus-visible:ring-1.5 outline-none ring-ring transition-shadow duration-200 focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[orientation=horizontal]:mt-2 data-[orientation=vertical]:ml-2",
         local.class
       )}
       {...rest}
@@ -87,7 +87,7 @@ export const TabsTrigger = <T extends ValidComponent = "button">(
   return (
     <TabsPrimitive.Trigger
       class={cn(
-        "disabled:(pointer-events-none opacity-50) peer z-20 inline-flex h-7 w-full items-center justify-center whitespace-nowrap rounded-md !bg-transparent px-3 py-1 text-sm font-medium outline-none transition-colors data-[selected]:text-foreground",
+        "peer z-20 inline-flex h-7 w-full items-center justify-center whitespace-nowrap rounded-md !bg-transparent px-3 py-1 text-sm font-medium outline-none transition-colors disabled:pointer-events-none disabled:opacity-50 data-[selected]:text-foreground",
         local.class
       )}
       {...rest}
@@ -100,9 +100,9 @@ export const tabsIndicatorVariants = tv({
   variants: {
     variant: {
       block:
-        "data-[orientation=horizontal]:(bottom-1 left-0 h-[calc(100%-0.5rem)]) data-[orientation=vertical]:(right-1 top-0 w-[calc(100%-0.5rem)]) bg-background shadow rounded-md peer-focus-visible:(ring-1.5 ring-ring ring-offset-2 ring-offset-background outline-none)",
+        "data-[orientation=horizontal]:bottom-1 data-[orientation=horizontal]:left-0 data-[orientation=horizontal]:h-[calc(100%-0.5rem)] data-[orientation=vertical]:right-1 data-[orientation=vertical]:top-0 data-[orientation=vertical]:w-[calc(100%-0.5rem)] bg-background shadow rounded-md peer-focus-visible:ring-1.5 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background peer-focus-visible:outline-none",
       underline:
-        "data-[orientation=horizontal]:(-bottom-[1px] left-0 h-2px) data-[orientation=vertical]:(-right-[1px] top-0 w-2px) bg-primary",
+        "data-[orientation=horizontal]:-bottom-[1px] data-[orientation=horizontal]:left-0 data-[orientation=horizontal]:h-2px data-[orientation=vertical]:-right-[1px] data-[orientation=vertical]:top-0 data-[orientation=vertical]:w-2px bg-primary",
     },
   },
   defaultVariants: {
@@ -132,7 +132,8 @@ export const TabsIndicator = <T extends ValidComponent = "div">(
   return (
     <TabsPrimitive.Indicator
       class={cn(
-        "transition-property-[box-shadow,transform] data-[orientation=horizontal]:(bottom-1 h-[calc(100%-0.5rem)]) data-[orientation=vertical]:(right-1 w-[calc(100%-0.5rem)]) peer-focus-visible:(ring-1.5 outline-none) absolute left-0 top-0 z-10 rounded-md bg-background shadow outline-none ring-ring ring-offset-2 ring-offset-background transition-all duration-200",
+        "transition-property-[box-shadow,transform] data-[orientation=horizontal]:bottom-1 data-[orientation=vertical]:right-1 data-[orientation=horizontal]:h-[calc(100%-0.5rem)] data-[orientation=vertical]:w-[calc(100%-0.5rem)]",
+        "peer-focus-visible:ring-1.5 absolute left-0 top-0 z-10 rounded-md bg-background shadow outline-none ring-ring ring-offset-2 ring-offset-background transition-all duration-200 peer-focus-visible:outline-none",
         local.class
       )}
       {...rest}
