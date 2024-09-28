@@ -1,8 +1,8 @@
+import containerQueries from "@tailwindcss/container-queries"
+import typography from "@tailwindcss/typography"
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
 import animate from "tailwindcss-animate"
-import typography from "@tailwindcss/typography"
-import containerQueries from "@tailwindcss/container-queries"
 
 export default {
   darkMode: ["selector", "[data-color-schema='dark']"],

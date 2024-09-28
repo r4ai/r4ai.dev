@@ -1,19 +1,18 @@
-import { defineConfig } from "astro/config"
-import tailwind from "@astrojs/tailwind"
-import remarkMath from "remark-math"
-import rehypeKatex from "rehype-katex"
-import { fileURLToPath } from "node:url"
 import * as path from "node:path"
-import sirv from "sirv"
+import { fileURLToPath } from "node:url"
 
 import mdx from "@astrojs/mdx"
-import type { AstroIntegration, RemarkPlugins } from "astro"
+import tailwind from "@astrojs/tailwind"
 import {
-  remarkCallout,
   type Options as RemarkCalloutOptions,
+  remarkCallout,
 } from "@r4ai/remark-callout"
-
+import type { AstroIntegration, RemarkPlugins } from "astro"
+import { defineConfig } from "astro/config"
 import * as pagefind from "pagefind"
+import rehypeKatex from "rehype-katex"
+import remarkMath from "remark-math"
+import sirv from "sirv"
 
 const pageFind = (): AstroIntegration => {
   let outDir: string | undefined = undefined
