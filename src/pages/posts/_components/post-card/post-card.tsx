@@ -47,7 +47,7 @@ export const PostCard: Component<PostCardProps> = (props) => {
             )}
           </For>
         </ul>
-        <div class="ml-auto mt-auto text-sm text-muted-foreground">
+        <div class="ml-auto mt-auto pt-1 text-sm text-muted-foreground">
           {format(props.publishedAt, "long")}
         </div>
       </div>

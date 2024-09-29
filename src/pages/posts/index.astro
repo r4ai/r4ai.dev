@@ -31,7 +31,7 @@ const posts = await Promise.all(
   <div class="container mx-auto mb-12 grid max-w-screen-lg gap-24">
     <section class="space-y-6">
       <h2 class="text-center font-times text-4.5xl font-black">Posts</h2>
-      <div class="grid grid-cols-2 gap-8">
+      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
         {
           posts
             .filter((post) => post.props.entry.data.genre === "article")
@@ -55,7 +55,7 @@ const posts = await Promise.all(
     </section>
     <section class="space-y-6">
       <h2 class="text-center font-times text-4.5xl font-black">Slides</h2>
-      <div class="grid grid-cols-2 gap-8">
+      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
         {
           posts
             .filter((post) => post.props.entry.data.genre === "slide")
