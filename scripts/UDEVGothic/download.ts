@@ -15,7 +15,6 @@ const exec = (
     const childProcess = spawn(command, args, { cwd, env })
 
     childProcess.stdout.on("data", (data) => {
-      // eslint-disable-next-line
       ;(data.toString() as string).split("\n").forEach((line) => {
         console.log(`>>> ${line.trim()}`)
       })

@@ -23,6 +23,8 @@ import {
   useSearch,
 } from "@/features/search"
 import { cn } from "@/lib/utils"
+import IconFileText from "~icons/lucide/file-text"
+import IconSearch from "~icons/lucide/search"
 
 export type SearchProps = ComponentProps<"div"> & {
   resultTransformer?: SearchResultProps["resultTransformer"]
@@ -96,7 +98,7 @@ const SearchInput: Component = () => {
       class="flex flex-row items-center gap-3 border-b p-4"
       onSubmit={handleSubmit}
     >
-      <span class="i-lucide-search h-5 w-5" />
+      <IconSearch class="size-5" />
       <input
         tabIndex={0}
         type="text"
@@ -217,7 +219,7 @@ const SearchResult: Component<SearchResultProps> = (props) => {
     <SearchResultPresenter
       class={cn(activeIndex() === local.index && "bg-muted")}
       href={result()?.raw_url}
-      icon={<span class="i-lucide-file-text m-0.5 h-5 w-5" />}
+      icon={<IconFileText class="m-0.5 size-5" />}
       title={result()?.meta["title"]}
       excerpt={result()?.excerpt}
       onFocus={() => setActiveIndex(local.index)}
@@ -251,7 +253,7 @@ const SearchResultPresenter: Component<SearchResultPresenterProps> = (
     <li>
       <a
         class={cn(
-          "flex flex-row gap-3 rounded-lg p-2 outline-none",
+          "flex flex-row gap-1.5 rounded-lg p-2 outline-none",
           local.class
         )}
         href={local.href}

@@ -1,0 +1,56 @@
+---
+import "@/styles/global.css"
+
+import type { HTMLAttributes } from "astro/types"
+
+import { Footer, Header } from "@/components/layouts"
+import { Toaster } from "@/components/ui"
+import { cn, getLanguageFromLocale, type PartiallyPartial } from "@/lib/utils"
+
+import { SEO, type SEOProps } from "./seo"
+
+// Astro can't parse complex types
+// prettier-ignore
+export type Props = PartiallyPartial<SEOProps, "titleSuffix" | "favicon" | "locale"> & HTMLAttributes<"body">
+
+const {
+  title,
+  titleSuffix = "r4ai",
+  description,
+  favicon = "/favicon.svg",
+  image,
+  locale = "ja_JP",
+  url,
+  og,
+  twitter,
+  class: className,
+} = Astro.props
+---
+
+<html
+  lang={getLanguageFromLocale(locale)}
+  data-color-scheme="light"
+  class="h-full"
+>
+  <head prefix="og: https://ogp.me/ns#">
+    <SEO
+      {title}
+      {titleSuffix}
+      {description}
+      {favicon}
+      {image}
+      {locale}
+      {og}
+      {twitter}
+      {url}
+    />
+  </head>
+  <body class="flex min-h-full flex-col bg-background text-foreground">
+    <Header />
+    <main class={cn("flex-1", className)} data-pagefind-body>
+      <slot />
+    </main>
+    <Footer />
+    <Toaster client:only="solid-js" />
+  </body>
+</html>

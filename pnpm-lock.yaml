@@ -65,6 +65,9 @@ importers:
       "@eslint/js":
         specifier: ^9.11.1
         version: 9.11.1
+      "@iconify-json/lucide":
+        specifier: ^1.2.6
+        version: 1.2.6
       "@r4ai/remark-callout":
         specifier: ^0.6.2
         version: 0.6.2
@@ -134,6 +137,9 @@ importers:
       "@types/three":
         specifier: ^0.169.0
         version: 0.169.0
+      "@typescript-eslint/parser":
+        specifier: ^8.7.0
+        version: 8.7.0(eslint@9.11.1(jiti@2.0.0))(typescript@5.6.2)
       eslint:
         specifier: ^9.11.1
         version: 9.11.1(jiti@2.0.0)
@@ -257,6 +263,9 @@ importers:
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
+      unplugin-icons:
+        specifier: ^0.19.3
+        version: 0.19.3
       vite:
         specifier: ^5.4.8
         version: 5.4.8(@types/node@22.7.3)(sass@1.79.3)
@@ -966,6 +975,12 @@ packages:
         integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==,
       }
     engines: { node: ">=18.18" }
+
+  "@iconify-json/lucide@1.2.6":
+    resolution:
+      {
+        integrity: sha512-HVLLxmG/rJ91GqpEE97OHdEwb/LfjwMVdynWIrnjvNRQNoKvrYG2N2+jABSBibEhnYQOfv+k8/7X6fK44PEtKA==,
+      }
 
   "@iconify/types@2.0.0":
     resolution:
@@ -1754,14 +1769,14 @@ packages:
       react-dom:
         optional: true
 
-  "@storybook/builder-vite@8.4.0-alpha.1":
+  "@storybook/builder-vite@8.4.0-alpha.2":
     resolution:
       {
-        integrity: sha512-CcE8hyqZfjXlBbtrLAuTQELmCEvkR+o2ea+xECUluOwVTJnNye5Vh/Qzlkw+d3yEYtgO3Go2wCuEiN/3+BWo3w==,
+        integrity: sha512-JT19lBZ34CoG9ofFpwctYiRBjpI68AznNz+EtQzawWx95TqwAjgB9zX9t2m2cWYXPT+CoVPC9UtI6/hlfmEjOw==,
       }
     peerDependencies:
       "@preact/preset-vite": "*"
-      storybook: ^8.4.0-alpha.1
+      storybook: ^8.4.0-alpha.2
       typescript: ">= 4.3.x"
       vite: ^4.0.0 || ^5.0.0
       vite-plugin-glimmerx: "*"
@@ -1787,13 +1802,13 @@ packages:
     peerDependencies:
       storybook: ^8.3.3
 
-  "@storybook/csf-plugin@8.4.0-alpha.1":
+  "@storybook/csf-plugin@8.4.0-alpha.2":
     resolution:
       {
-        integrity: sha512-NbNMpAyKAFKcRJk+Zv/7NtHUurNXsKwJmK8qfKXSgNenE8J4G8L35vehPRZh0sb6xxO+hYm7JDtKR/VmCY9aYw==,
+        integrity: sha512-vm4G8/OqqWnUjSrsFX1GBlDFt3y6GMJm8thd8xvVDp25yhH0NwrhqSeb4eXJtAo2t8gu89KPC8PctOixFvbXRA==,
       }
     peerDependencies:
-      storybook: ^8.4.0-alpha.1
+      storybook: ^8.4.0-alpha.2
 
   "@storybook/csf@0.0.1":
     resolution:
@@ -8355,6 +8370,29 @@ packages:
       }
     engines: { node: ">= 0.8" }
 
+  unplugin-icons@0.19.3:
+    resolution:
+      {
+        integrity: sha512-EUegRmsAI6+rrYr0vXjFlIP+lg4fSC4zb62zAZKx8FGXlWAGgEGBCa3JDe27aRAXhistObLPbBPhwa/0jYLFkQ==,
+      }
+    peerDependencies:
+      "@svgr/core": ">=7.0.0"
+      "@svgx/core": ^1.0.1
+      "@vue/compiler-sfc": ^3.0.2 || ^2.7.0
+      vue-template-compiler: ^2.6.12
+      vue-template-es2015-compiler: ^1.9.0
+    peerDependenciesMeta:
+      "@svgr/core":
+        optional: true
+      "@svgx/core":
+        optional: true
+      "@vue/compiler-sfc":
+        optional: true
+      vue-template-compiler:
+        optional: true
+      vue-template-es2015-compiler:
+        optional: true
+
   unplugin@1.14.1:
     resolution:
       {
@@ -9495,6 +9533,10 @@ snapshots:
 
   "@humanwhocodes/retry@0.3.0": {}
 
+  "@iconify-json/lucide@1.2.6":
+    dependencies:
+      "@iconify/types": 2.0.0
+
   "@iconify/types@2.0.0": {}
 
   "@iconify/utils@2.1.33":
@@ -10022,9 +10064,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  "@storybook/builder-vite@8.4.0-alpha.1(storybook@8.3.3)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.3)(sass@1.79.3))":
+  "@storybook/builder-vite@8.4.0-alpha.2(storybook@8.3.3)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.3)(sass@1.79.3))":
     dependencies:
-      "@storybook/csf-plugin": 8.4.0-alpha.1(storybook@8.3.3)
+      "@storybook/csf-plugin": 8.4.0-alpha.2(storybook@8.3.3)
       "@types/find-cache-dir": 3.2.1
       browser-assert: 1.2.1
       es-module-lexer: 1.5.4
@@ -10067,7 +10109,7 @@ snapshots:
     transitivePeerDependencies:
       - webpack-sources
 
-  "@storybook/csf-plugin@8.4.0-alpha.1(storybook@8.3.3)":
+  "@storybook/csf-plugin@8.4.0-alpha.2(storybook@8.3.3)":
     dependencies:
       storybook: 8.3.3
       unplugin: 1.14.1
@@ -14271,7 +14313,7 @@ snapshots:
 
   storybook-solidjs-vite@1.0.0-beta.2(storybook@8.3.3)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.3)(sass@1.79.3)):
     dependencies:
-      "@storybook/builder-vite": 8.4.0-alpha.1(storybook@8.3.3)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.3)(sass@1.79.3))
+      "@storybook/builder-vite": 8.4.0-alpha.2(storybook@8.3.3)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.3)(sass@1.79.3))
     transitivePeerDependencies:
       - "@preact/preset-vite"
       - storybook
@@ -14679,6 +14721,19 @@ snapshots:
   universalify@2.0.1: {}
 
   unpipe@1.0.0: {}
+
+  unplugin-icons@0.19.3:
+    dependencies:
+      "@antfu/install-pkg": 0.4.1
+      "@antfu/utils": 0.7.10
+      "@iconify/utils": 2.1.33
+      debug: 4.3.7
+      kolorist: 1.8.0
+      local-pkg: 0.5.0
+      unplugin: 1.14.1
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-sources
 
   unplugin@1.14.1:
     dependencies:

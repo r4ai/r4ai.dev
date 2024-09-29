@@ -64,9 +64,5 @@
 }
 
 * {
-  --at-apply: "border-border dark:border-border";
-}
-
-body {
-  --at-apply: "bg-background text-foreground";
+  @apply border-border dark:border-border;
 }

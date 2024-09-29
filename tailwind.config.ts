@@ -5,7 +5,7 @@ import defaultTheme from "tailwindcss/defaultTheme"
 import animate from "tailwindcss-animate"
 
 export default {
-  darkMode: ["selector", "[data-color-schema='dark']"],
+  darkMode: ["selector", "[data-color-scheme='dark']"],
   content: ["./src/**/*.{astro,js,jsx,ts,tsx,html,mdx}"],
   theme: {
     container: {

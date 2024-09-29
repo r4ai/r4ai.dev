@@ -16,8 +16,9 @@ import type { RemarkPlugins } from "astro"
 import { defineConfig } from "astro/config"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
+import icons from "unplugin-icons/vite"
 
-import { pagefind } from "./src/lib/astro-integrations/pagefind"
+import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,11 +29,13 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     mdx(),
-    pagefind(),
     solid(),
   ],
   redirects: {
-    "/posts/raw/[...slug]": "/posts/[...slug]/raw",
+    // "/posts/raw/[...slug]": "/posts/[...slug]/raw",
+  },
+  vite: {
+    plugins: [pagefind(), icons({ compiler: "solid" })],
   },
   markdown: {
     remarkPlugins: [

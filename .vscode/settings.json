@@ -14,35 +14,10 @@
       // "tw.*:(?:.|\n)*?[\"'`]([^\"'`]*).*?,",
     ]
   },
-  "[mdx]": {
-    "files.trimTrailingWhitespace": false
-  },
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "mdx.server.enable": true,
-  "auto-close-tag.activationOnLanguage": [
-    "mdx",
-    "xml",
-    "php",
-    "blade",
-    "ejs",
-    "jinja",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "plaintext",
-    "markdown",
-    "vue",
-    "liquid",
-    "erb",
-    "lang-cfml",
-    "cfml",
-    "HTML (EEx)",
-    "HTML (Eex)",
-    "plist"
-  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -57,5 +32,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.experimental.useFlatConfig": true
+  "eslint.useFlatConfig": true
 }

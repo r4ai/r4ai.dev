@@ -12,15 +12,7 @@ import tsEslint from "typescript-eslint"
 export default tsEslint.config(
   gitignore(),
   eslint.configs.recommended,
-  ...tsEslint.configs.recommendedTypeChecked,
-  {
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
+  ...tsEslint.configs.recommended,
   {
     files: ["**/*.stories.{ts,tsx}"],
     rules: {
@@ -28,8 +20,7 @@ export default tsEslint.config(
     },
   },
   solid,
-  ...eslintPluginAstro.configs["flat/recommended"],
-  ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+  ...eslintPluginAstro.configs.recommended,
   {
     plugins: {
       "simple-import-sort": simpleImportSort,

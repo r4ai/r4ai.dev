@@ -226,7 +226,7 @@ const getCallout = <Key extends string>(
   : (typeof callouts)["note"] => {
   if (type in callouts) {
     // @ts-expect-error callouts[type] exists
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
     return callouts[type]
   }
   // @ts-expect-error callouts.note is valid return value

@@ -1,11 +1,22 @@
+import { createSignal, onMount } from "solid-js"
 import { Toaster as Sonner } from "solid-sonner"
 
-import { useColorScheme } from "@/features/color-scheme"
+import {
+  getResolvedColorScheme,
+  type ResolvedColorScheme,
+  subscribeResolvedColorSchemeChange,
+} from "@/features/color-scheme"
 
 export type ToasterProps = Parameters<typeof Sonner>[0]
 
 export const Toaster = (props: ToasterProps) => {
-  const { resolvedColorScheme } = useColorScheme()
+  const [resolvedColorScheme, setResolvedColorScheme] =
+    createSignal<ResolvedColorScheme>("light")
+
+  onMount(() => {
+    setResolvedColorScheme(getResolvedColorScheme())
+    return subscribeResolvedColorSchemeChange(setResolvedColorScheme)
+  })
 
   return (
     <Sonner

@@ -1,5 +1,5 @@
 import type { DropdownMenuSubTriggerProps } from "@kobalte/core/dropdown-menu"
-import type { Component } from "solid-js"
+import { type Component, Suspense } from "solid-js"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -8,13 +8,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useColorScheme } from "@/features/color-scheme"
+import { ColorSchemeProvider, useColorScheme } from "@/features/color-scheme"
+import IconLaptopMinimal from "~icons/lucide/laptop-minimal"
+import IconMoonStar from "~icons/lucide/moon-star"
+import IconSun from "~icons/lucide/sun"
 
-export type ColorSchemeSelectProps = {
-  children?: never
+export type ColorSchemeSelectProps = ColorSchemeSelectInnerProps
+
+export const ColorSchemeSelect: Component<ColorSchemeSelectProps> = (props) => {
+  return (
+    <Suspense>
+      <ColorSchemeProvider>
+        <ColorSchemeSelectInner {...props} />
+      </ColorSchemeProvider>
+    </Suspense>
+  )
 }
 
-export const ColorSchemeSelect: Component<ColorSchemeSelectProps> = () => {
+export type ColorSchemeSelectInnerProps = DropdownMenuSubTriggerProps
+
+export const ColorSchemeSelectInner: Component<ColorSchemeSelectInnerProps> = (
+  props
+) => {
   const { resolvedColorScheme, setColorScheme } = useColorScheme()
   return (
     <DropdownMenu placement="bottom">
@@ -22,33 +37,34 @@ export const ColorSchemeSelect: Component<ColorSchemeSelectProps> = () => {
         as={(props: DropdownMenuSubTriggerProps) => (
           <Button variant="ghost" size="icon" {...props}>
             {resolvedColorScheme() === "dark" ? (
-              <span class="i-lucide-moon-star size-5" />
+              <IconMoonStar class="size-5" />
             ) : (
-              <span class="i-lucide-sun size-5" />
+              <IconSun class="size-5" />
             )}
           </Button>
         )}
+        {...props}
       />
       <DropdownMenuContent class="w-32">
         <DropdownMenuItem
           class="space-x-2"
           onClick={() => setColorScheme("light")}
         >
-          <span class="i-lucide-sun size-4" />
+          <IconSun class="size-4" />
           <span>Light</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           class="space-x-2"
           onClick={() => setColorScheme("dark")}
         >
-          <span class="i-lucide-moon-star size-4" />
+          <IconMoonStar class="size-4" />
           <span>Dark</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           class="space-x-2"
           onClick={() => setColorScheme("system")}
         >
-          <span class="i-lucide-laptop-minimal size-4" />
+          <IconLaptopMinimal class="size-4" />
           <span>System</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
