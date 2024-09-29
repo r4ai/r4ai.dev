@@ -79,7 +79,7 @@ export const rawTransformPlugin = (): Plugin => {
         treeShaking: true,
         plugins: [constantFoldingPlugin({ platform: "browser" })],
       })
-      const transformed = buildResult.outputFiles[0].text
+      const transformed = buildResult.outputFiles[0]?.text ?? ""
       return {
         code: `export default ${genString(transformed, { singleQuotes: false })}`,
       }

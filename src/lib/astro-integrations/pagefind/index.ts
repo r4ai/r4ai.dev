@@ -1,1 +1,0 @@
-export { pagefind } from "./pagefind"

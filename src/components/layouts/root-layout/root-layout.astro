@@ -5,6 +5,7 @@ import type { HTMLAttributes } from "astro/types"
 
 import { Footer, Header } from "@/components/layouts"
 import { Toaster } from "@/components/ui"
+import initColorSchemeScript from "@/features/color-scheme/scripts/init-color-scheme?transform"
 import { cn, getLanguageFromLocale, type PartiallyPartial } from "@/lib/utils"
 
 import { SEO, type SEOProps } from "./seo"
@@ -46,6 +47,7 @@ const {
     />
   </head>
   <body class="flex min-h-full flex-col bg-background text-foreground">
+    <script is:inline set:html={initColorSchemeScript} />
     <Header />
     <main class={cn("flex-1", className)} data-pagefind-body>
       <slot />

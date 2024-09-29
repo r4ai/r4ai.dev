@@ -19,6 +19,7 @@ import remarkMath from "remark-math"
 import icons from "unplugin-icons/vite"
 
 import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
+import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,7 +36,7 @@ export default defineConfig({
     // "/posts/raw/[...slug]": "/posts/[...slug]/raw",
   },
   vite: {
-    plugins: [pagefind(), icons({ compiler: "solid" })],
+    plugins: [pagefind(), rawTransform(), icons({ compiler: "solid" })],
   },
   markdown: {
     remarkPlugins: [
