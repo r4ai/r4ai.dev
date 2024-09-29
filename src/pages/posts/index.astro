@@ -1,10 +1,81 @@
 ---
+import { icons } from "@iconify-json/fluent-emoji"
+import { getCollection } from "astro:content"
+
 import { RootLayout } from "@/components/layouts"
+
+import { PostCard } from "./_components"
+
+const getIcon = (icon: string) => icons.icons[icon]
+
+const posts = await Promise.all(
+  (await getCollection("posts"))
+    .filter((entry) => (import.meta.env.DEV ? true : !entry.data.draft))
+    .map(async (entry) => ({
+      params: { slug: entry.slug },
+      props: {
+        entry: {
+          ...entry,
+          data: {
+            ...entry.data,
+            icon: entry.data.icon ?? "fluent-emoji/memo",
+            svg: getIcon(entry.data.icon)?.body ?? getIcon("memo")!.body, // "memo" icon exsits in fluent-emoji
+          },
+        },
+      },
+    }))
+)
 ---
 
 <RootLayout title="Posts" image={new URL("https://example.com")}>
-  <div class="container space-y-6">
-    <h1 class="text-4xl font-bold">Posts</h1>
-    <p>WIP</p>
+  <div class="container mx-auto mb-12 grid max-w-screen-lg gap-24">
+    <section class="space-y-6">
+      <h2 class="text-center font-times text-4.5xl font-black">Posts</h2>
+      <div class="grid grid-cols-2 gap-8">
+        {
+          posts
+            .filter((post) => post.props.entry.data.genre === "article")
+            .sort(
+              (a, b) =>
+                new Date(b.props.entry.data.publishedAt).getTime() -
+                new Date(a.props.entry.data.publishedAt).getTime()
+            )
+            .flatMap((post) => (
+              <PostCard
+                title={post.props.entry.data.title}
+                tags={post.props.entry.data.tags ?? []}
+                icon={post.props.entry.data.svg}
+                href={`/posts/${post.params.slug}`}
+                alt={post.props.entry.data.icon}
+                publishedAt={post.props.entry.data.publishedAt}
+              />
+            ))
+        }
+      </div>
+    </section>
+    <section class="space-y-6">
+      <h2 class="text-center font-times text-4.5xl font-black">Slides</h2>
+      <div class="grid grid-cols-2 gap-8">
+        {
+          posts
+            .filter((post) => post.props.entry.data.genre === "slide")
+            .sort(
+              (a, b) =>
+                new Date(b.props.entry.data.publishedAt).getTime() -
+                new Date(a.props.entry.data.publishedAt).getTime()
+            )
+            .flatMap((post) => (
+              <PostCard
+                title={post.props.entry.data.title}
+                tags={post.props.entry.data.tags ?? []}
+                icon={post.props.entry.data.svg}
+                href={`/posts/${post.params.slug}`}
+                alt={post.props.entry.data.icon}
+                publishedAt={post.props.entry.data.publishedAt}
+              />
+            ))
+        }
+      </div>
+    </section>
   </div>
 </RootLayout>

@@ -16,6 +16,9 @@ importers:
       "@astrojs/tailwind":
         specifier: ^5.1.1
         version: 5.1.1(astro@4.15.9(@types/node@22.7.3)(rollup@4.22.5)(sass@1.79.3)(typescript@5.6.2))(tailwindcss@3.4.13)
+      "@formkit/tempo":
+        specifier: ^0.1.2
+        version: 0.1.2
       "@kobalte/core":
         specifier: ^0.13.6
         version: 0.13.6(solid-js@1.9.1)
@@ -65,6 +68,9 @@ importers:
       "@eslint/js":
         specifier: ^9.11.1
         version: 9.11.1
+      "@iconify-json/fluent-emoji":
+        specifier: ^1.2.0
+        version: 1.2.0
       "@iconify-json/lucide":
         specifier: ^1.2.6
         version: 1.2.6
@@ -1193,6 +1199,12 @@ packages:
         integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==,
       }
 
+  "@formkit/tempo@0.1.2":
+    resolution:
+      {
+        integrity: sha512-jNPPbjL8oj7hK3eHX++CwbR6X4GKQt+x00/q4yeXkwynXHGKL27dylYhpEgwrmediPP4y7s0XtN1if/M/JYujg==,
+      }
+
   "@humanwhocodes/module-importer@1.0.1":
     resolution:
       {
@@ -1206,6 +1218,12 @@ packages:
         integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==,
       }
     engines: { node: ">=18.18" }
+
+  "@iconify-json/fluent-emoji@1.2.0":
+    resolution:
+      {
+        integrity: sha512-Spq/1dggEDng2Rb81X++m7pyolC5UQe1uzaKr97ZXcojQdMCLYKgfrCmfEePUE+fuKT7eb8JFalzJ58cwOaEqA==,
+      }
 
   "@iconify-json/lucide@1.2.6":
     resolution:
@@ -9871,9 +9889,15 @@ snapshots:
 
   "@floating-ui/utils@0.2.8": {}
 
+  "@formkit/tempo@0.1.2": {}
+
   "@humanwhocodes/module-importer@1.0.1": {}
 
   "@humanwhocodes/retry@0.3.0": {}
+
+  "@iconify-json/fluent-emoji@1.2.0":
+    dependencies:
+      "@iconify/types": 2.0.0
 
   "@iconify-json/lucide@1.2.6":
     dependencies:
