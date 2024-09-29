@@ -1,3 +1,4 @@
+export * from "./animation"
 export { getLanguageFromLocale, type Language, type Locale } from "./i18n"
 export { isServer } from "./runtime"
 export { cn } from "./tailwindcss"

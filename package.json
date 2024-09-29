@@ -43,6 +43,7 @@
     "@chromatic-com/storybook": "^2.0.2",
     "@eslint/js": "^9.11.1",
     "@iconify-json/lucide": "^1.2.6",
+    "@iconify-json/simple-icons": "^1.2.4",
     "@r4ai/remark-callout": "^0.6.2",
     "@r4ai/remark-embed": "^0.3.1",
     "@solidjs/testing-library": "^0.8.10",

@@ -68,6 +68,9 @@ importers:
       "@iconify-json/lucide":
         specifier: ^1.2.6
         version: 1.2.6
+      "@iconify-json/simple-icons":
+        specifier: ^1.2.4
+        version: 1.2.4
       "@r4ai/remark-callout":
         specifier: ^0.6.2
         version: 0.6.2
@@ -1202,6 +1205,12 @@ packages:
     resolution:
       {
         integrity: sha512-HVLLxmG/rJ91GqpEE97OHdEwb/LfjwMVdynWIrnjvNRQNoKvrYG2N2+jABSBibEhnYQOfv+k8/7X6fK44PEtKA==,
+      }
+
+  "@iconify-json/simple-icons@1.2.4":
+    resolution:
+      {
+        integrity: sha512-AKUGO7cX2KykFEJ+P6tY3wGhGgbrL3RMqbxNTfutGsKojaSEFosN/cmWQ9l9hmUiS2IN7fVLsPMAIvV1uJyyVw==,
       }
 
   "@iconify/types@2.0.0":
@@ -9842,6 +9851,10 @@ snapshots:
   "@humanwhocodes/retry@0.3.0": {}
 
   "@iconify-json/lucide@1.2.6":
+    dependencies:
+      "@iconify/types": 2.0.0
+
+  "@iconify-json/simple-icons@1.2.4":
     dependencies:
       "@iconify/types": 2.0.0
 
