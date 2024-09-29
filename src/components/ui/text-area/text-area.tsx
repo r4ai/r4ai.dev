@@ -1,15 +1,20 @@
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as TextFieldPrimitive from "@kobalte/core/text-field"
-import type { ValidComponent, VoidProps } from "solid-js"
+import type { JSX, ValidComponent, VoidProps } from "solid-js"
 import { splitProps } from "solid-js"
+import type { Merge } from "ts-essentials"
 
 import { cn } from "@/lib/utils"
 
 export type TextAreaProps = VoidProps<
-  Omit<TextFieldPrimitive.TextFieldTextAreaProps, "ref"> & {
-    class?: string
-    ref?: HTMLTextAreaElement | ((el: HTMLTextAreaElement) => void)
-  }
+  Merge<
+    Omit<TextFieldPrimitive.TextFieldTextAreaProps, "ref">,
+    {
+      onInput: JSX.EventHandler<HTMLTextAreaElement, InputEvent>
+      class?: string
+      ref?: HTMLTextAreaElement | ((el: HTMLTextAreaElement) => void)
+    }
+  >
 >
 
 export const TextArea = <T extends ValidComponent = "textarea">(

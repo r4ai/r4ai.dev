@@ -1,8 +1,9 @@
 import type { PolymorphicProps } from "@kobalte/core/polymorphic"
 import * as TextFieldPrimitive from "@kobalte/core/text-field"
-import type { ValidComponent, VoidProps } from "solid-js"
+import type { JSX, ValidComponent, VoidProps } from "solid-js"
 import { splitProps } from "solid-js"
 import { tv } from "tailwind-variants"
+import type { Merge } from "ts-essentials"
 
 import { cn } from "@/lib/utils"
 
@@ -96,9 +97,13 @@ export const TextFieldDescription = <T extends ValidComponent = "div">(
 }
 
 export type TextFieldProps = VoidProps<
-  TextFieldPrimitive.TextFieldInputProps & {
-    class?: string
-  }
+  Merge<
+    TextFieldPrimitive.TextFieldInputProps,
+    {
+      onInput?: JSX.EventHandler<HTMLInputElement, InputEvent>
+      class?: string
+    }
+  >
 >
 
 export const TextField = <T extends ValidComponent = "input">(

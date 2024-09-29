@@ -71,6 +71,9 @@ importers:
       "@iconify-json/simple-icons":
         specifier: ^1.2.4
         version: 1.2.4
+      "@modular-forms/solid":
+        specifier: ^0.23.0
+        version: 0.23.0(solid-js@1.9.1)(typescript@5.6.2)
       "@r4ai/remark-callout":
         specifier: ^0.6.2
         version: 0.6.2
@@ -275,6 +278,9 @@ importers:
       unplugin-icons:
         specifier: ^0.19.3
         version: 0.19.3
+      valibot:
+        specifier: ^0.42.1
+        version: 0.42.1(typescript@5.6.2)
       vite:
         specifier: ^5.4.8
         version: 5.4.8(@types/node@22.7.3)(sass@1.79.3)
@@ -1482,6 +1488,14 @@ packages:
       {
         integrity: sha512-HsvL6zgE5sUPGgkIDlmAWR1HTNHz2Iy11BAWPTa4Jjabkpguy4Ze2gzfLrg6pdRuBvFwgUYyxiaNqZwrEEXepA==,
       }
+
+  "@modular-forms/solid@0.23.0":
+    resolution:
+      {
+        integrity: sha512-6Nb0g01T275iszl96+JI/ozFZk9dD2TYxgFVTacVb9KXP/Yg4HgJnD94eMC70EYogbvcQU4O+XTi/wJhfNLPgg==,
+      }
+    peerDependencies:
+      solid-js: ^1.3.1
 
   "@nodelib/fs.scandir@2.1.5":
     resolution:
@@ -8691,6 +8705,17 @@ packages:
       }
     hasBin: true
 
+  valibot@0.42.1:
+    resolution:
+      {
+        integrity: sha512-3keXV29Ar5b//Hqi4MbSdV7lfVp6zuYLZuA9V1PvQUsXqogr+u5lvLPLk3A4f74VUXDnf/JfWMN6sB+koJ/FFw==,
+      }
+    peerDependencies:
+      typescript: ">=5"
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   validate-html-nesting@1.2.2:
     resolution:
       {
@@ -10045,6 +10070,13 @@ snapshots:
   "@mermaid-js/parser@0.3.0":
     dependencies:
       langium: 3.0.0
+
+  "@modular-forms/solid@0.23.0(solid-js@1.9.1)(typescript@5.6.2)":
+    dependencies:
+      solid-js: 1.9.1
+      valibot: 0.42.1(typescript@5.6.2)
+    transitivePeerDependencies:
+      - typescript
 
   "@nodelib/fs.scandir@2.1.5":
     dependencies:
@@ -15113,6 +15145,10 @@ snapshots:
   utils-merge@1.0.1: {}
 
   uuid@9.0.1: {}
+
+  valibot@0.42.1(typescript@5.6.2):
+    optionalDependencies:
+      typescript: 5.6.2
 
   validate-html-nesting@1.2.2: {}
 
