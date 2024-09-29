@@ -21,6 +21,7 @@ export default tsEslint.config(
   },
   solid,
   ...eslintPluginAstro.configs.recommended,
+  ...eslintPluginAstro.configs["jsx-a11y-strict"],
   {
     plugins: {
       "simple-import-sort": simpleImportSort,
