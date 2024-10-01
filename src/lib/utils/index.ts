@@ -1,5 +1,6 @@
 export * from "./animation"
 export { getLanguageFromLocale, type Language, type Locale } from "./i18n"
+export { type Collection, getIconHtml, getIcons } from "./icons"
 export { getPostEntries } from "./posts"
 export { isServer } from "./runtime"
 export { cn } from "./tailwindcss"

@@ -32,9 +32,9 @@ const heading = tv({
   variants: {
     level: {
       h1: "text-4xl font-extrabold lg:text-5xl",
-      h2: "border-b pb-2 text-3xl font-semibold group-data-[heading-level]:mt-10",
-      h3: "text-2xl font-semibold group-data-[heading-level]:mt-8",
-      h4: "text-xl font-semibold group-data-[heading-level]:mt-8",
+      h2: "border-b pb-2 text-3xl font-semibold group-data-[margin=true]:[&:not(:first-child)]:mt-10",
+      h3: "text-2xl font-semibold group-data-[margin=true]:[&:not(:first-child)]:mt-8",
+      h4: "text-xl font-semibold group-data-[margin=true]:[&:not(:first-child)]:mt-8",
     },
   },
 })

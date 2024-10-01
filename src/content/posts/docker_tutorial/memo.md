@@ -1,7 +1,7 @@
 ---
 title: memo
 tags: []
-icon: fluent-emoji-flat/construction
+icon: construction
 genre: article
 draft: true
 publishedAt: 2023-12-11

@@ -1,5 +1,4 @@
 import containerQueries from "@tailwindcss/container-queries"
-import typography from "@tailwindcss/typography"
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
 import animate from "tailwindcss-animate"
@@ -99,5 +98,5 @@ export default {
       },
     },
   },
-  plugins: [animate, typography, containerQueries],
+  plugins: [animate, containerQueries],
 } satisfies Config

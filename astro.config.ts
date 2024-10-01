@@ -9,18 +9,27 @@ import remarkEmbed, { type RemarkEmbedOptions } from "@r4ai/remark-embed"
 import {
   transformerLinkCard,
   type TransformerLinkCardOptions,
-  transformerOEmbed,
-  type TransformerOEmbedOptions,
 } from "@r4ai/remark-embed/transformers"
-import type { RemarkPlugins } from "astro"
+import {
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers"
 import { defineConfig } from "astro/config"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
 import icons from "unplugin-icons/vite"
 
+import {
+  transformerLineNumbers,
+  transformerMetaDiff,
+  transformerTitle,
+} from "./src/lib/shiki-transformers"
+import remarkInlineCode from "./src/lib/unified-plugins/remark-inline-code"
 import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
 import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://r4ai.dev",
@@ -33,36 +42,20 @@ export default defineConfig({
     solid(),
   ],
   redirects: {
-    // "/posts/raw/[...slug]": "/posts/[...slug]/raw",
+    "/posts/raw/[...slug]": "/posts/[...slug].mdx",
+    "/posts/[...slug]/raw": "/posts/[...slug].mdx",
   },
   vite: {
     plugins: [pagefind(), rawTransform(), icons({ compiler: "solid" })],
   },
   markdown: {
     remarkPlugins: [
-      remarkMath as unknown as RemarkPlugins[number],
+      remarkMath,
+      remarkInlineCode,
       [
         remarkEmbed,
         {
           transformers: [
-            transformerOEmbed({
-              video: (url, oEmbed) => ({
-                tagName: "oembed-video",
-                properties: {
-                  url: url.href,
-                  oEmbed: JSON.stringify(oEmbed),
-                },
-                children: [],
-              }),
-              rich: (url, oEmbed) => ({
-                tagName: "oembed-rich",
-                properties: {
-                  url: url.href,
-                  oEmbed: JSON.stringify(oEmbed),
-                },
-                children: [],
-              }),
-            } satisfies TransformerOEmbedOptions),
             transformerLinkCard({
               tagName: () => "link-card",
               properties: (og) => ({ og: JSON.stringify(og) }),
@@ -104,6 +97,21 @@ export default defineConfig({
       footnoteLabelTagName: "h2",
       footnoteLabelProperties: {},
     },
-    syntaxHighlight: false,
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "one-dark-pro",
+      },
+      transformers: [
+        transformerMetaDiff(),
+        transformerMetaHighlight(),
+        transformerMetaWordHighlight(),
+        transformerNotationDiff(),
+        transformerNotationHighlight(),
+        transformerNotationWordHighlight(),
+        transformerLineNumbers(),
+        transformerTitle(),
+      ],
+    },
   },
 })

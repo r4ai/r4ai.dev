@@ -3,9 +3,11 @@ import { type Component, createMemo, splitProps } from "solid-js"
 
 import { cn } from "@/lib/utils"
 
+type Undefined<T> = { [K in keyof T]: T[K] | undefined }
+
 export type LinkCardProps = {
   shouldInvertIcon?: boolean
-} & ((LinkInfo & { og: undefined }) | { og: string })
+} & ((LinkInfo & { og: undefined }) | (Undefined<LinkInfo> & { og: string }))
 
 export const LinkCard: Component<LinkCardProps> = (props) => {
   const og = createMemo(() => {
@@ -13,6 +15,12 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
     const [, og] = splitProps(props, ["og", "shouldInvertIcon"])
     return og as LinkInfo
   })
+
+  const url = createMemo(() => props.url ?? og()?.url)
+  const title = createMemo(() => props.title ?? og()?.title)
+  const description = createMemo(() => props.description ?? og()?.description)
+  const favicon = createMemo(() => props.favicon ?? og()?.favicon)
+  const image = createMemo(() => props.image ?? og()?.image)
   const shouldInvertIcon = createMemo(
     () =>
       props.shouldInvertIcon ?? new URL(og().url)?.hostname?.includes("github")
@@ -22,20 +30,20 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
     <div class="mx-auto h-36 w-full max-w-screen-md">
       <a
         class="flex min-h-full flex-row items-center rounded-lg border bg-muted/25 not-italic transition hover:bg-muted dark:hover:bg-muted/50"
-        href={og()?.url}
+        href={url()}
         {...props}
       >
         <div class="flex min-w-0 flex-1 flex-col justify-between gap-2 overflow-auto break-all px-3 md:px-5">
-          <p class="line-clamp-2 text-base font-bold">{og()?.title}</p>
-          {og()?.description && (
+          <p class="line-clamp-2 text-base font-bold">{title()}</p>
+          {description() && (
             <p class="line-clamp-3 text-sm text-muted-foreground">
-              {og()?.description}
+              {description()}
             </p>
           )}
           <div class="flex flex-row items-center gap-2 text-sm">
-            {og()?.favicon ? (
+            {favicon() ? (
               <img
-                src={og()?.favicon}
+                src={favicon()}
                 class={cn(
                   "inline-block h-4 w-4",
                   shouldInvertIcon() && "dark:invert"
@@ -46,17 +54,15 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
             ) : (
               <span class="i-lucide-globe size-4" />
             )}
-            <p class="truncate text-foreground/75">
-              {new URL(og()?.url).hostname}
-            </p>
+            <p class="truncate text-foreground/75">{new URL(url()).hostname}</p>
           </div>
         </div>
-        {og()?.image?.src && (
+        {image()?.src && (
           <div class="shrink-0">
             <img
-              src={og()?.image?.src}
+              src={image()?.src}
               class="size-24 object-cover md:h-36 md:w-auto md:rounded-r-lg"
-              alt={og()?.image?.alt}
+              alt={image()?.alt}
               loading="lazy"
               decoding="async"
             />

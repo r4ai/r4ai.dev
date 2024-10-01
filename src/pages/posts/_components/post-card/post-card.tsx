@@ -17,7 +17,7 @@ export const PostCard: Component<PostCardProps> = (props) => {
   return (
     <a
       href={props.href}
-      class="flex flex-row gap-4 rounded-xl border bg-muted/25 p-4 font-mono transition hover:bg-muted dark:hover:bg-muted/60"
+      class="flex flex-row gap-4 rounded-xl border p-4 font-mono transition hover:bg-muted dark:hover:bg-muted/60"
     >
       <div class="">
         <svg

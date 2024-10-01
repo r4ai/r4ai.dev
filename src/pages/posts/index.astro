@@ -6,32 +6,36 @@ import { RootLayout } from "@/components/layouts"
 
 import { PostCard } from "./_components"
 
+const DEFAULT_ICON = "memo"
+
 const getIcon = (icon: string) => icons.icons[icon]
 
 const posts = await Promise.all(
-  (await getCollection("posts"))
-    .filter((entry) => (import.meta.env.DEV ? true : !entry.data.draft))
-    .map(async (entry) => ({
-      params: { slug: entry.slug },
-      props: {
-        entry: {
-          ...entry,
-          data: {
-            ...entry.data,
-            icon: entry.data.icon ?? "fluent-emoji/memo",
-            svg: getIcon(entry.data.icon)?.body ?? getIcon("memo")!.body, // "memo" icon exsits in fluent-emoji
-          },
+  (
+    await getCollection("posts", ({ data }) =>
+      import.meta.env.DEV ? true : !data.draft
+    )
+  ).map(async (entry) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry: {
+        ...entry,
+        data: {
+          ...entry.data,
+          icon: entry.data.icon ?? DEFAULT_ICON,
+          svg: getIcon(entry.data.icon)?.body ?? getIcon(DEFAULT_ICON)!.body, // `DEFAULT_ICON` icon exsits in fluent-emoji
         },
       },
-    }))
+    },
+  }))
 )
 ---
 
 <RootLayout title="Posts" image={new URL("https://example.com")}>
-  <div class="container mx-auto mb-12 grid max-w-screen-lg gap-24">
+  <div class="container mx-auto mb-12 grid gap-24">
     <section class="space-y-6">
       <h2 class="text-center font-times text-4.5xl font-black">Posts</h2>
-      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+      <div class="mx-auto grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         {
           posts
             .filter((post) => post.props.entry.data.genre === "article")
@@ -55,7 +59,7 @@ const posts = await Promise.all(
     </section>
     <section class="space-y-6">
       <h2 class="text-center font-times text-4.5xl font-black">Slides</h2>
-      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+      <div class="mx-auto grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         {
           posts
             .filter((post) => post.props.entry.data.genre === "slide")

@@ -1,0 +1,58 @@
+---
+import { cn } from "@/lib/utils"
+import { getIconHtml } from "@/lib/utils"
+
+import { MdxFileLink } from "./mdx-file-link"
+import { PublishedAt } from "./published-at"
+import { Tags } from "./tags"
+import { UpdatedAt } from "./updated-at"
+
+export type Props = {
+  class?: string | undefined
+  slug: string
+  title: string
+  icon: string
+  tags: string[]
+  publishedAt: Date
+  updatedAt?: Date | undefined
+}
+const {
+  class: className,
+  slug,
+  title,
+  icon,
+  tags,
+  publishedAt,
+  updatedAt,
+} = Astro.props
+
+const iconHtml = await getIconHtml("fluent-emoji", icon)
+---
+
+<header
+  class={cn(
+    "grid items-center justify-center container max-w-screen-lg",
+    className
+  )}
+>
+  <div class="mx-auto text-6xl lg:text-7xl" set:html={iconHtml} />
+  <h1
+    class="mb-8 mt-4 text-center text-3xl font-black lg:text-4xl"
+    set:html={title}
+  />
+  <div class="grid items-center justify-center gap-4">
+    {tags.length > 0 && <Tags {tags} />}
+    <div class="mx-auto flex flex-row gap-1 text-muted-foreground">
+      <PublishedAt {publishedAt} />
+      {
+        updatedAt && (
+          <>
+            <span>・</span>
+            <UpdatedAt {updatedAt} client:load />
+          </>
+        )
+      }
+    </div>
+    <MdxFileLink {slug} />
+  </div>
+</header>

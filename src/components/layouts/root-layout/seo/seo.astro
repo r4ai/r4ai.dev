@@ -1,6 +1,14 @@
 ---
+import type { PartiallyPartial } from "@/lib/utils"
+
 import { OpenGraph, type OpenGraphProps } from "./open-graph"
 import { TwitterCard, type TwitterCardProps } from "./twitter-card"
+import type {
+  TwitterAppCard,
+  TwitterPlayerCard,
+  TwitterSummaryCard,
+  TwitterSummaryLargeImageCard,
+} from "./twitter-card/twitter-card-schema"
 
 export type Props = {
   title: string
@@ -10,8 +18,15 @@ export type Props = {
   locale: OpenGraphProps["locale"]
   favicon: string
   url?: URL
-  og?: OpenGraphProps
-  twitter?: TwitterCardProps
+  og?: Partial<OpenGraphProps>
+  twitter?:
+    | Partial<TwitterSummaryCard>
+    | Partial<TwitterSummaryLargeImageCard>
+    | PartiallyPartial<
+        TwitterPlayerCard,
+        "title" | "description" | "image" | "imageAlt"
+      >
+    | PartiallyPartial<TwitterAppCard, "description">
 }
 const props = Astro.props
 
@@ -32,10 +47,10 @@ const og: OpenGraphProps = {
 
 const twitter: TwitterCardProps | undefined =
   props.twitter?.card === "summary" ||
-  props.twitter?.card === "summary_large_image" ||
-  props.twitter?.card === "player"
+  props.twitter?.card === "summary_large_image"
     ? {
         ...props.twitter,
+        card: props.twitter.card,
         title: props.twitter.title ?? props.title,
         description: props.twitter.description ?? props.description,
         image:
@@ -45,12 +60,25 @@ const twitter: TwitterCardProps | undefined =
           props.twitter.imageAlt ??
           (props.image instanceof URL ? undefined : props.image.alt),
       }
-    : props.twitter?.card === "app"
+    : props.twitter?.card === "player"
       ? {
           ...props.twitter,
+          card: props.twitter.card,
+          title: props.twitter.title ?? props.title,
           description: props.twitter.description ?? props.description,
+          image:
+            props.twitter.image ??
+            (props.image instanceof URL ? props.image : props.image.url),
+          imageAlt:
+            props.twitter.imageAlt ??
+            (props.image instanceof URL ? undefined : props.image.alt),
         }
-      : props.twitter
+      : props.twitter?.card === "app"
+        ? {
+            ...props.twitter,
+            description: props.twitter.description ?? props.description,
+          }
+        : undefined
 ---
 
 <meta charset="utf-8" />

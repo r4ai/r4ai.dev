@@ -10,13 +10,17 @@ draft: false
 publishedAt: 2024-04-23
 ---
 
-import { LinkCard } from "@/components/markdown"
+import { LinkCard } from "@/components/ui"
 
 CommonJS を窓から投げ捨てるための自分用メモ。
 
 https://deno.com/blog/commonjs-is-hurting-javascript
 
-<LinkCard href="https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c" />
+<LinkCard
+  url="https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c"
+  title="Pure ESM package"
+  favicon="https://github.githubassets.com/favicons/favicon.svg"
+/>
 
 ## パッケージのエントリポイントは全て exports で指定する
 

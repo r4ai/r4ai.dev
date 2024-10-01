@@ -16,6 +16,9 @@ import {
   type TooltipTriggerProps,
 } from "@/components/ui"
 import { cn } from "@/lib/utils"
+import IconClipboard from "~icons/lucide/clipboard"
+import IconClipboardCheck from "~icons/lucide/clipboard-check"
+import IconFile from "~icons/lucide/file"
 
 export type CodeBlockProps = ComponentProps<"pre"> & {
   title?: string
@@ -27,13 +30,13 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
   let preRef: HTMLPreElement | undefined
 
   return (
-    <div class="relative mx-auto max-w-screen-md rounded-xl border bg-muted bg-zinc-50 dark:bg-zinc-900/75">
+    <div class="relative mx-auto w-full max-w-screen-md rounded-xl border bg-muted bg-zinc-50 dark:bg-zinc-900/75">
       <div class="peer">
         {props.title && (
           <CodeBlockTitle lang={props.lang}>{props.title}</CodeBlockTitle>
         )}
         <pre
-          class={cn("m-0 overflow-auto py-4 text-[0.9rem]", local.class)}
+          class={cn("shiki !m-0 grid overflow-auto py-4", local.class)}
           ref={(el) => {
             preRef = el
             if (typeof local.ref === "function") {
@@ -63,7 +66,7 @@ const CodeBlockTitle: Component<CodeBlockTitleProps> = (props) => {
 const CodeBlockFileTitle: Component<CodeBlockTitleProps> = (props) => {
   return (
     <div class="flex flex-row items-center gap-3 border-b px-4 py-2.5 font-mono">
-      <span class="i-lucide-file size-4 brightness-90 contrast-75 filter" />
+      <IconFile class="size-4 brightness-90 contrast-75 filter" />
       <span class="text-[0.9rem]">{props.children}</span>
     </div>
   )
@@ -110,9 +113,9 @@ const CopyButton: Component<CopyButtonProps> = (props) => {
             })}
           >
             {copied() ? (
-              <span class="i-lucide-clipboard-check size-5" />
+              <IconClipboardCheck class="size-5" />
             ) : (
-              <span class="i-lucide-clipboard size-5" />
+              <IconClipboard class="size-5" />
             )}
           </Button>
         )}

@@ -10,7 +10,7 @@ export const InlineCode: Component<InlineCodeProps> = (props) => {
   return (
     <code
       class={cn(
-        "rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        "mx-1 rounded-md bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm",
         local.class
       )}
       {...rest}
