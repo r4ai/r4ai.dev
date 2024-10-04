@@ -66,13 +66,23 @@ $$
 
 ## Image
 
-![alt text](./icon.webp)
+import icon from "./icon.webp"
+import { Image } from "@/components/mdx-components"
 
 `![alt text](./icon.webp)`:
 
-<img src="./icon.webp" alt="alt text" width="200" />
+![alt text](./icon.webp)
 
-`<img src="./icon.webp" alt="alt text" width="200" />`:
+```mdx
+import icon from "./icon.webp"
+import { Image } from "@/components/mdx-components"
+
+<Image src={icon} alt="alt text" title="title text"  width="200" />
+```
+
+yields:
+
+<Image src={icon} alt="alt text" title="title text"  width="200" />
 
 ## Heading 2
 

@@ -6,7 +6,6 @@ import {
   splitProps,
   type ValidComponent,
 } from "solid-js"
-import { Dynamic } from "solid-js/web"
 
 import { cn } from "@/lib/utils"
 
@@ -25,7 +24,7 @@ export const Image: Component<ImageProps> = (props) => {
     "children",
   ])
   return (
-    <Dynamic component="figure" class="space-y-2">
+    <figure class="grid justify-center space-y-2">
       {(local.src || local.srcset) && (
         <img
           class={cn("mx-auto w-full max-w-screen-lg rounded-lg", local.class)}
@@ -37,8 +36,10 @@ export const Image: Component<ImageProps> = (props) => {
         />
       )}
       {local.children}
-      {local.title && <ImageCaption>{local.title}</ImageCaption>}
-    </Dynamic>
+      {local.title && (
+        <ImageCaption class="max-w-screen-md">{local.title}</ImageCaption>
+      )}
+    </figure>
   )
 }
 

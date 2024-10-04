@@ -1,11 +1,10 @@
 import { type ComponentProps, splitProps } from "solid-js"
 import { NoHydration } from "solid-js/web"
 
-import { CodeBlock } from "@/components/mdx-components/astro-components"
+import { CodeBlock, Image } from "@/components/mdx-components/astro-components"
 import {
   Blockquote,
   Heading,
-  Image,
   InlineCode,
   Link,
   List,
@@ -37,11 +36,16 @@ import {
   type OEmbedVideoProps,
 } from "@/components/ui"
 
+const H1 = (props: ComponentProps<"h1">) => <Heading level="h1" {...props} />
+const H2 = (props: ComponentProps<"h2">) => <Heading level="h2" {...props} />
+const H3 = (props: ComponentProps<"h3">) => <Heading level="h3" {...props} />
+const H4 = (props: ComponentProps<"h4">) => <Heading level="h4" {...props} />
+
 export const components = {
-  h1: (props: ComponentProps<"h1">) => <Heading level="h1" {...props} />,
-  h2: (props: ComponentProps<"h2">) => <Heading level="h2" {...props} />,
-  h3: (props: ComponentProps<"h3">) => <Heading level="h3" {...props} />,
-  h4: (props: ComponentProps<"h4">) => <Heading level="h4" {...props} />,
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
   p: Paragraph,
   section: Section,
   blockquote: Blockquote,
@@ -104,4 +108,31 @@ export const components = {
   ),
   "link-card": LinkCard,
   oembed: OEmbed,
+}
+
+export {
+  Blockquote,
+  CodeBlock,
+  H1,
+  H2,
+  H3,
+  H4,
+  Image,
+  InlineCode,
+  Link,
+  LinkCard,
+  List,
+  ListItem,
+  OEmbed,
+  OrderedList,
+  Paragraph,
+  Section,
+  Separator,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableRow,
 }

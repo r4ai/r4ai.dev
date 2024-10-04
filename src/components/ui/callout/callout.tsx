@@ -6,79 +6,82 @@ import {
   Show,
   splitProps,
 } from "solid-js"
+import { Dynamic } from "solid-js/web"
 import { tv, type VariantProps } from "tailwind-variants"
+
+import IconBug from "~icons/lucide/bug"
+import IconCheck from "~icons/lucide/check"
+import IconCheckCircle2 from "~icons/lucide/check-circle-2"
+import IconChevronRight from "~icons/lucide/chevron-right"
+import IconClipboard from "~icons/lucide/clipboard-list"
+import IconFlame from "~icons/lucide/flame"
+import IconHelpCircle from "~icons/lucide/help-circle"
+import IconInfo from "~icons/lucide/info"
+import IconList from "~icons/lucide/list"
+import IconPencil from "~icons/lucide/pencil"
+import IconQuote from "~icons/lucide/quote"
+import IconTriangleAlert from "~icons/lucide/triangle-alert"
+import IconX from "~icons/lucide/x"
+import IconZap from "~icons/lucide/zap"
 
 export const callout = tv({
   slots: {
     root: "bg-card group mx-auto max-w-screen-md space-y-2 rounded-xl border p-4",
     title: "flex flex-row items-center gap-2.5 font-bold",
-    icon: "size-5",
-    foldIcon:
-      "i-lucide-chevron-right size-5 shrink-0 transition-transform group-open:rotate-90",
-    body: "space-y-4",
+    foldIcon: "shrink-0 transition-transform group-open:rotate-90",
+    body: [
+      "*:my-4 last:*:mb-0 first:*:mt-4 [&>:is(ul,ol)_:is(li,li>*)]:my-2",
+      "[&>:is(h1,h2):not(:first-child)]:mt-12",
+      "[&>:is(h3,h4):not(:first-child)]:mt-9",
+    ],
   },
   variants: {
     type: {
-      note: {
-        icon: "i-lucide-pencil",
-      },
+      note: {},
       abstract: {
         root: "border-purple-600/20 bg-purple-500/10 dark:border-purple-800/20",
         title: "text-purple-600 dark:text-purple-400",
-        icon: "i-lucide-clipboard-list",
       },
       info: {
         root: "border-blue-600/20 bg-blue-500/10 dark:border-blue-800/20",
         title: "text-blue-600 dark:text-blue-400",
-        icon: "i-lucide-info",
       },
       todo: {
         root: "border-blue-600/20 bg-blue-500/10 dark:border-blue-800/20",
         title: "text-blue-600 dark:text-blue-400",
-        icon: "i-lucide-check-circle-2",
       },
       tip: {
         root: "border-yellow-600/20 bg-yellow-500/10 dark:border-yellow-800/20",
         title: "text-yellow-600 dark:text-yellow-400",
-        icon: "i-lucide-flame",
       },
       success: {
         root: "border-green-600/20 bg-green-500/10 dark:border-green-800/20",
         title: "text-green-600 dark:text-green-400",
-        icon: "i-lucide-check",
       },
       question: {
         root: "border-blue-600/20 bg-blue-500/10 dark:border-blue-800/20",
         title: "text-blue-600 dark:text-blue-400",
-        icon: "i-lucide-help-circle",
       },
       warning: {
         root: "border-orange-600/20 bg-orange-500/10 dark:border-orange-800/20",
         title: "text-orange-600 dark:text-orange-400",
-        icon: "i-lucide-alert-triangle",
       },
       failure: {
         root: "border-red-600/20 bg-red-500/10 dark:border-red-800/20",
         title: "text-red-600 dark:text-red-400",
-        icon: "i-lucide-x",
       },
       danger: {
         root: "border-red-600/20 bg-red-500/10 dark:border-red-800/20",
         title: "text-red-600 dark:text-red-400",
-        icon: "i-lucide-zap",
       },
       bug: {
         root: "border-red-600/20 bg-red-500/10 dark:border-red-800/20",
         title: "text-red-600 dark:text-red-400",
-        icon: "i-lucide-bug",
       },
-      example: {
-        icon: "i-lucide-list",
-      },
+      example: {},
       quote: {
         root: "border-zinc-600/20 bg-zinc-500/10 dark:border-zinc-800/20",
         title: "text-zinc-600 dark:text-zinc-400",
-        icon: "i-lucide-quote",
       },
     },
     foldable: {
@@ -99,6 +102,7 @@ type CalloutType = NonNullable<VariantProps<typeof callout>["type"]>
 type Callout<T extends CalloutType = CalloutType> = {
   type: T
   label: string
+  icon: Component<ComponentProps<"svg">>
 }
 
 type Callouts = {
@@ -112,110 +116,137 @@ export const callouts = {
   note: {
     type: "note",
     label: "Note",
+    icon: IconPencil,
   },
   abstract: {
     type: "abstract",
     label: "Abstract",
+    icon: IconClipboard,
   },
   summary: {
     type: "abstract",
     label: "Summary",
+    icon: IconClipboard,
   },
   tldr: {
     type: "abstract",
     label: "TL;DR",
+    icon: IconClipboard,
   },
   info: {
     type: "info",
     label: "Info",
+    icon: IconInfo,
   },
   todo: {
     type: "todo",
     label: "ToDo",
+    icon: IconCheckCircle2,
   },
   tip: {
     type: "tip",
     label: "Tip",
+    icon: IconFlame,
   },
   hint: {
     type: "tip",
     label: "Hint",
+    icon: IconFlame,
   },
   important: {
     type: "tip",
     label: "Important",
+    icon: IconFlame,
   },
   success: {
     type: "success",
     label: "Success",
+    icon: IconCheck,
   },
   check: {
     type: "success",
     label: "Check",
+    icon: IconCheck,
   },
   done: {
     type: "success",
     label: "Done",
+    icon: IconCheck,
   },
   question: {
     type: "question",
     label: "Question",
+    icon: IconHelpCircle,
   },
   help: {
     type: "question",
     label: "Help",
+    icon: IconHelpCircle,
   },
   faq: {
     type: "question",
     label: "FAQ",
+    icon: IconHelpCircle,
   },
   warning: {
     type: "warning",
     label: "Warning",
+    icon: IconTriangleAlert,
   },
   caution: {
     type: "warning",
     label: "Caution",
+    icon: IconTriangleAlert,
   },
   attention: {
     type: "warning",
     label: "Attention",
+    icon: IconTriangleAlert,
   },
   failure: {
     type: "failure",
     label: "Failure",
+    icon: IconX,
   },
   fail: {
     type: "failure",
     label: "Fail",
+    icon: IconX,
   },
   missing: {
     type: "failure",
     label: "Missing",
+    icon: IconX,
   },
   danger: {
     type: "danger",
     label: "Danger",
+    icon: IconZap,
   },
   error: {
     type: "danger",
     label: "Error",
+    icon: IconZap,
   },
   bug: {
     type: "bug",
     label: "Bug",
+    icon: IconBug,
   },
   example: {
     type: "example",
     label: "Example",
+    icon: IconList,
   },
   quote: {
     type: "quote",
     label: "Quote",
+    icon: IconQuote,
   },
   site: {
     type: "quote",
     label: "Site",
+    icon: IconQuote,
   },
 } as const satisfies Callouts
 
@@ -226,7 +257,6 @@ const getCallout = <Key extends string>(
   : (typeof callouts)["note"] => {
   if (type in callouts) {
     // @ts-expect-error callouts[type] exists
-
     return callouts[type]
   }
   // @ts-expect-error callouts.note is valid return value
@@ -243,13 +273,16 @@ export type CalloutProps = Omit<
 }
 
 export const Callout: Component<CalloutProps> = (props) => {
-  const [local, rest] = splitProps(
-    mergeProps(props, {
-      isFoldable: false,
-      defaultFolded: false,
-    }),
-    ["title", "type", "isFoldable", "defaultFolded"]
-  )
+  const merged = mergeProps(props, {
+    isFoldable: false,
+    defaultFolded: false,
+  })
+  const [local, rest] = splitProps(merged, [
+    "title",
+    "type",
+    "isFoldable",
+    "defaultFolded",
+  ])
 
   return (
     <CalloutRoot
@@ -327,10 +360,10 @@ export const CalloutTitle: Component<CalloutTitleProps> = (props) => {
       class={className().title({ class: local.class })}
       {...rest}
     >
-      <span class={className().icon()} />
+      <Dynamic component={calloutData().icon} />
       <div>{local.children ?? calloutData().label}</div>
       <Show when={local.isFoldable}>
-        <span class={className().foldIcon()} />
+        <Dynamic component={IconChevronRight} class={className().foldIcon()} />
       </Show>
     </Summary>
   )

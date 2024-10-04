@@ -8,7 +8,10 @@ draft: false
 publishedAt: 2023-12-11
 ---
 
-import { Callout } from "@/components/markdown"
+import concept from "./assets/concept.svg"
+import concept2 from "./assets/concept2.svg"
+
+import { Image } from "@/components/mdx-components"
 
 > [!caution] 注意事項
 > この記事は自分用の備忘録として書いたものです。
@@ -17,7 +20,7 @@ import { Callout } from "@/components/markdown"
 
 ## 主要概念
 
-![主要概念 || invert](./assets/concept.svg)
+<Image src={concept} alt="Dockerで登場する主要概念" title="主要概念" class="max-w-screen-sm" />
 
 - **Container**：
 
@@ -59,15 +62,14 @@ import { Callout } from "@/components/markdown"
    $ docker container exec <command>
    ```
 
-<Callout type="note" title="コラム: Container とは何なのか">
-  Containerとは、ホストマシン上で直接実行される隔離されたプロセスの集まりである。
-  この隔離はOSカーネルの仕事であり、 [kernel namespace と cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504) が利用されている。
-
-  Container はVMのようにOSの上でOSを実行するわけではないため、オーバーヘッドが少なく軽量である。さらに、通常のプロセスと同じくらい高速に起動できる。
-  しかし、Containerはカーネルが作り出している環境でOSは一つなので、異なるOSのシステム、プログラム等は動かせない。
-
-  > [技術評論社 | コンテナの仕組みとLinuxカーネルのコンテナ機能［1］名前空間とは？](https://gihyo.jp/admin/serial/01/linux_containers/0002)
-</Callout>
+> [!note] コラム: Container とは何なのか
+> Containerとは、ホストマシン上で直接実行される隔離されたプロセスの集まりである。
+> この隔離はOSカーネルの仕事であり、 [kernel namespace と cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504) が利用されている。
+>
+> Container はVMのようにOSの上でOSを実行するわけではないため、オーバーヘッドが少なく軽量である。さらに、通常のプロセスと同じくらい高速に起動できる。
+> しかし、Containerはカーネルが作り出している環境でOSは一つなので、異なるOSのシステム、プログラム等は動かせない。
+>
+> > [技術評論社 | コンテナの仕組みとLinuxカーネルのコンテナ機能［1］名前空間とは？](https://gihyo.jp/admin/serial/01/linux_containers/0002)
 
 ### 参考文献
 
@@ -88,18 +90,17 @@ https://zenn.dev/suzuki_hoge/books/2022-03-docker-practice-8ae36c33424b59/viewer
 | `run --name <名前>`                        | コンテナに名前をつけて起動                 |
 | `run --publish <host-machine>:<container>` | コンテナのポートをホストマシンに公開       |
 
-<Callout type="example" title="例）">
-  nginx のコンテナを、バックグラウンドで起動し、ホストマシンの 8080 番ポートに公開し、終了時にコンテナを削除する場合の例：
-
-  ```sh
-  $ docker container run \       # コンテナを起動するよ
-           --name web-server \   # 名前はweb-serverにするよ
-           --rm \                # 終了時にコンテナを削除してね
-           --detach \            # バックグラウンドで起動するよ
-           --publish 8080:80 \   # contaierの80番ポートをhostの8080番ポートに公開するよ
-           nginx:latest          # nginxのlatestイメージを使うよ
-  ```
-</Callout>
+> [!example] 例）
+> nginx のコンテナを、バックグラウンドで起動し、ホストマシンの 8080 番ポートに公開し、終了時にコンテナを削除する場合の例：
+>
+> ```sh
+> $ docker container run \       # コンテナを起動するよ
+>          --name web-server \   # 名前はweb-serverにするよ
+>          --rm \                # 終了時にコンテナを削除してね
+>          --detach \            # バックグラウンドで起動するよ
+>          --publish 8080:80 \   # contaierの80番ポートをhostの8080番ポートに公開するよ
+>          nginx:latest          # nginxのlatestイメージを使うよ
+> ```
 
 その他操作：
 
@@ -113,14 +114,13 @@ https://zenn.dev/suzuki_hoge/books/2022-03-docker-practice-8ae36c33424b59/viewer
 | `exec`       | 起動中のコンテナに対してコマンドを実行           |
 | `exec -it`   | 起動中のコンテナに対して対話環境でコマンドを実行 |
 
-<Callout type="example" title="例）">
-  `web-server` という名前の起動中のコンテナに対して、`echo 'Hello, World!'` というコマンドを bash で実行する場合の例：
-
-  ```sh
-  $ docker container exec web-server \
-           bash -c "echo 'Hello, World!'"
-  ```
-</Callout>
+> [!example] 例
+> `web-server` という名前の起動中のコンテナに対して、`echo 'Hello, World!'` というコマンドを bash で実行する場合の例：
+>
+> ```sh
+> $ docker container exec web-server \
+>          bash -c "echo 'Hello, World!'"
+> ```
 
 簡単のため、一部コマンドのみを記載している。詳しくは、[コマンドラインリファレンス](https://docs.docker.com/engine/reference/commandline/container_run/)を参照されたい。
 
@@ -138,15 +138,14 @@ https://docs.docker.jp/engine/reference/commandline/container_toc.html
 | `build --file <path-to-dockerfile>` | Dockerfileのパスを指定して、イメージをビルドする。                                           |
 | `build --tag <tag>`                 | タグ付けしてイメージをビルドする                                                             |
 
-<Callout type="example" title="例）">
-  `./Dockerfile`から、`my-ubuntu:v2` というタグをつけてイメージをビルドする場合の例：
-
-  ```sh
-  $ docker image build \
-           --tag my-ubuntu:v2 \
-           .
-  ```
-</Callout>
+> [!example] 例
+> `./Dockerfile`から、`my-ubuntu:v2` というタグをつけてイメージをビルドする場合の例：
+>
+> ```sh
+> $ docker image build \
+>          --tag my-ubuntu:v2 \
+>          .
+> ```
 
 その他操作：
 
@@ -174,32 +173,31 @@ https://docs.docker.jp/engine/reference/commandline/image_toc.html
 | `ENV <key>=<value>`           | 環境変数を設定する。作成した環境変数は、Container でも維持される |
 | `ARG <名前>[=<デフォルト値]>` | `docker build`時にユーザーが指定できる変数を定義する             |
 
-<Callout type="example" title="例）">
-  `ubuntu:latest` をベースとして、`./hello.sh` をコンテナ起動時に実行するイメージをビルドする場合の例：
-
-  ```dockerfile title="Dockerfile" showLineNumbers
-  # ベースとなるImageを指定する
-  FROM ubuntu:latest
-
-  # 以降の命令は、このディレクトリを作業ディレクトリとして実行される
-  WORKDIR /app
-
-  # 依存関係を更新し、curl をインストールする
-  RUN apt-get update && apt-get install -y \
-      curl \
-      && rm -rf /var/lib/apt/lists/*
-
-  # ホストマシンの`./hello.sh`を、Imageにコピーする
-  COPY ./hello.sh .
-
-  # コンテナ起動時に実行するコマンドを指定する
-  CMD ["/hello.sh"]
-  ```
-
-  - ビルド時のキャッシュは、レイヤー毎に行われる
-    e.g. 3行目で失敗した場合、1行目と2行目はキャッシュが利用される
-  - 完成した Image の Layer は、ベースとなる Image の Layer に加えて、Dockerfile の各命令に対応する Layer を重ねたものとなる
-</Callout>
+> [!example] 例）
+> `ubuntu:latest` をベースとして、`./hello.sh` をコンテナ起動時に実行するイメージをビルドする場合の例：
+>
+> ```dockerfile title="Dockerfile" showLineNumbers
+> # ベースとなるImageを指定する
+> FROM ubuntu:latest
+>
+> # 以降の命令は、このディレクトリを作業ディレクトリとして実行される
+> WORKDIR /app
+>
+> # 依存関係を更新し、curl をインストールする
+> RUN apt-get update && apt-get install -y \
+>     curl \
+>     && rm -rf /var/lib/apt/lists/*
+>
+> # ホストマシンの`./hello.sh`を、Imageにコピーする
+> COPY ./hello.sh .
+>
+> # コンテナ起動時に実行するコマンドを指定する
+> CMD ["/hello.sh"]
+> ```
+>
+> - ビルド時のキャッシュは、レイヤー毎に行われる
+>   e.g. 3行目で失敗した場合、1行目と2行目はキャッシュが利用される
+> - 完成した Image の Layer は、ベースとなる Image の Layer に加えて、Dockerfile の各命令に対応する Layer を重ねたものとなる
 
 ### 参考文献
 
@@ -240,23 +238,22 @@ https://docs.docker.jp/develop/develop-images/dockerfile_best-practices.html
     - `--volume <ボリューム名>:<マウント先(コンテナ上のパス)>`
     - `--mount type=volume,src=<ボリューム名>,dst=<マウント先(コンテナ上のパス)>`
 
-  <Callout type="example" title="例）">
-    `my-volume` という名前のボリュームを、`/var/lib/mysql` にマウントする場合の例：
-
-    ```sh
-    # --volumeオプションを使う場合
-    $ docker container run \
-             --volume my-volume:/var/lib/mysql \
-             my-container:db
-    ```
-
-    ```sh
-    # --mountオプションを使う場合
-    $ docker container run \
-             --mount type=volume,src=my-volume,dst=/var/lib/mysql \
-             my-container:db
-    ```
-  </Callout>
+  > [!example] 例）
+  > `my-volume` という名前のボリュームを、`/var/lib/mysql` にマウントする場合の例：
+  >
+  > ```sh
+  > # --volumeオプションを使う場合
+  > $ docker container run \
+  >          --volume my-volume:/var/lib/mysql \
+  >          my-container:db
+  > ```
+  >
+  > ```sh
+  > # --mountオプションを使う場合
+  > $ docker container run \
+  >          --mount type=volume,src=my-volume,dst=/var/lib/mysql \
+  >          my-container:db
+  > ```
 
 ### 参考文献
 
