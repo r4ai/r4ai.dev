@@ -1,18 +1,54 @@
 ---
 import type { HTMLAttributes } from "astro/types"
+import { Image } from "astro:assets"
 
+import IconRai from "@/assets/icon.jpg"
+import { Button } from "@/components/ui"
+import { Icon, IconRoot } from "@/components/ui/icon"
+import { SearchModal } from "@/features/search"
 import { cn } from "@/lib/utils"
 
-export type Props = HTMLAttributes<"header">
+import { MenuDrawer } from "./menu-drawer"
+
+export type Props = HTMLAttributes<"div">
 const { class: className, ...props } = Astro.props
 ---
 
-<header
-  class={cn("sticky top-4 z-30 my-4 text-foreground sm:hidden", className)}
+<div
+  class={cn("mx-auto max-w-fit my-4 text-foreground sm:hidden", className)}
   {...props}
 >
   <div
-    class="flex w-full flex-row items-center justify-between gap-5 rounded-full bg-background/60 px-4 py-2 backdrop-blur-xl"
+    class="flex flex-row items-center gap-24 rounded-full border bg-background/60 p-2 backdrop-blur-xl"
   >
+    <nav>
+      <ul class="flex flex-row items-center gap-5">
+        <li>
+          <Button
+            as="a"
+            variant="ghost"
+            class="flex h-10 flex-row gap-2 rounded-full px-2"
+            href="/"
+          >
+            <IconRoot class="size-7">
+              <Icon>
+                <Image src={IconRai} alt="r4ai" />
+              </Icon>
+            </IconRoot>
+            <span class="text-base">r4ai.dev</span>
+          </Button>
+        </li>
+      </ul>
+    </nav>
+    <div>
+      <ul class="flex flex-row gap-1">
+        <li>
+          <SearchModal client:load />
+        </li>
+        <li>
+          <MenuDrawer client:load />
+        </li>
+      </ul>
+    </div>
   </div>
-</header>
+</div>

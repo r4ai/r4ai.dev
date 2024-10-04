@@ -18,14 +18,14 @@ export const SearchModal: Component<SearchModalProps> = (props) => {
     <Dialog>
       <DialogTrigger
         as={(props: DialogTriggerProps) => (
-          <Button variant="ghost" size="icon" {...props}>
+          <Button variant="ghost" size="icon" class="rounded-full" {...props}>
             <IconSearch class="size-5" />
           </Button>
         )}
         {...props}
       />
       <DialogContent
-        class="!data-[expanded]:slide-in-from-top-1/10 !data-[closed]:slide-out-to-top-1/10 top-[10%] max-h-[80%] w-full max-w-screen-sm translate-y-0 border p-0"
+        class="!data-[expanded]:slide-in-from-top-1/10 !data-[closed]:slide-out-to-top-1/10 top-[10%] grid max-h-[80%] w-full max-w-screen-sm translate-y-0 grid-cols-1 grid-rows-1 border p-0"
         closeButton={false}
       >
         <Search />

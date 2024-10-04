@@ -1,18 +1,19 @@
-import { type Component, type ComponentProps, splitProps } from "solid-js"
+import {
+  type Component,
+  type ComponentProps,
+  type JSXElement,
+  splitProps,
+} from "solid-js"
 import { NoHydration } from "solid-js/web"
 
 export type ImageProps = Omit<ComponentProps<"img">, "src"> & {
-  src:
-    | {
-        avif?: string
-        webp?: string
-        fallback: string
-      }
-    | string
+  src?: string
+  children?: JSXElement
 }
 
 const ImageComponent: Component<ImageProps> = (props) => {
   const [local, rest] = splitProps(props, [
+    "children",
     "src",
     "class",
     "width",
@@ -23,23 +24,16 @@ const ImageComponent: Component<ImageProps> = (props) => {
 
   return (
     <picture>
-      {import.meta.env.PROD && typeof local.src === "object" && (
-        <>
-          {local.src.avif && (
-            <source srcset={local.src.avif} type="image/avif" />
-          )}
-          {local.src.webp && (
-            <source srcset={local.src.webp} type="image/webp" />
-          )}
-        </>
+      {local.src && (
+        <img
+          src={local.src}
+          class={local.class}
+          decoding={local.decoding ?? "async"}
+          loading={local.loading ?? "lazy"}
+          {...rest}
+        />
       )}
-      <img
-        src={typeof local.src === "object" ? local.src.fallback : local.src}
-        class={local.class}
-        decoding={local.decoding ?? "async"}
-        loading={local.loading ?? "lazy"}
-        {...rest}
-      />
+      {local.children}
     </picture>
   )
 }

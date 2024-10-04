@@ -1,37 +1,78 @@
 ---
 import type { HTMLAttributes } from "astro/types"
 
+import { Button } from "@/components/ui"
 import { ColorSchemeSelect } from "@/features/color-scheme"
 import { SearchModal } from "@/features/search"
 import { cn } from "@/lib/utils"
 
-export type Props = HTMLAttributes<"header">
+export type Props = HTMLAttributes<"div">
 const { class: className, ...props } = Astro.props
 ---
 
-<header
+<div
   class={cn(
-    "sticky top-4 z-30 mx-auto my-4 max-w-fit text-foreground",
+    "mx-auto my-4 max-w-fit text-foreground hidden sm:block",
     className
   )}
   {...props}
 >
   <div
-    class="flex flex-row items-center gap-5 rounded-full border bg-background/60 px-4 py-2 backdrop-blur-xl"
+    class="flex flex-row items-center gap-8 rounded-full border bg-background/60 p-2 backdrop-blur-xl"
   >
     <nav>
-      <ul class="flex flex-row items-center gap-5 px-2">
+      <ul class="flex flex-row items-center gap-0">
         <li>
-          <a href="/">Home</a>
+          <Button
+            as="a"
+            variant="ghost"
+            href="/"
+            class={cn(
+              "rounded-full px-2.5 pl-3 text-base text-muted-foreground",
+              Astro.url.pathname === "/" && "text-accent-foreground"
+            )}
+          >
+            Home
+          </Button>
+        </li>
+        <li class="peer">
+          <Button
+            as="a"
+            variant="ghost"
+            href="/posts"
+            class={cn(
+              "rounded-full px-2.5 text-base text-muted-foreground",
+              Astro.url.pathname === "/posts" && "text-accent-foreground"
+            )}
+          >
+            Posts
+          </Button>
         </li>
         <li>
-          <a href="/posts">Posts</a>
+          <Button
+            as="a"
+            variant="ghost"
+            href="/projects"
+            class={cn(
+              "rounded-full px-2.5 text-base text-muted-foreground",
+              Astro.url.pathname === "/projects" && "text-accent-foreground"
+            )}
+          >
+            Projects
+          </Button>
         </li>
         <li>
-          <a href="/projects">Projects</a>
-        </li>
-        <li>
-          <a href="/contact">Contact</a>
+          <Button
+            as="a"
+            variant="ghost"
+            href="/contact"
+            class={cn(
+              "rounded-full px-2.5 text-base text-muted-foreground",
+              Astro.url.pathname === "/contact" && "text-accent-foreground"
+            )}
+          >
+            Contact
+          </Button>
         </li>
       </ul>
     </nav>
@@ -46,4 +87,4 @@ const { class: className, ...props } = Astro.props
       </ul>
     </div>
   </div>
-</header>
+</div>

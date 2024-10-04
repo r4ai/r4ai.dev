@@ -44,7 +44,7 @@ export const Search: Component<SearchProps> = (props) => {
       <PagefindProvider>
         <SearchProvider>
           <div
-            class={cn("gap0 flex flex-col", local.class)}
+            class={cn("flex h-full flex-col", local.class)}
             {...rest}
             ref={rootRef}
           >
@@ -155,7 +155,7 @@ const SearchResults: Component<SearchResultsProps> = (props) => {
   }
 
   return (
-    <ol class="p-2">
+    <ol class="overflow-auto p-2">
       {query().length === 0 ? (
         <FallbackNoQuery />
       ) : (

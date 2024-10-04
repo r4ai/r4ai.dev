@@ -8,5 +8,7 @@ export type Props = HTMLAttributes<"header">
 const props = Astro.props
 ---
 
-<HeaderDesktop {...props} />
-<HeaderMobile {...props} />
+<header class="sticky top-4 z-30" {...props}>
+  <HeaderDesktop {...props} />
+  <HeaderMobile {...props} />
+</header>
