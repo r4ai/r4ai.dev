@@ -37,7 +37,7 @@ export type TableFooterProps = ComponentProps<"tfoot">
 export const TableFooter: Component<TableFooterProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
-    <tbody
+    <tfoot
       class={cn("bg-primary font-medium text-primary-foreground", local.class)}
       {...rest}
     />

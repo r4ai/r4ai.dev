@@ -19,6 +19,7 @@ import {
   TableCell,
   TableFooter,
   TableHead,
+  TableHeader,
   TableRow,
 } from "@/components/typography"
 import {
@@ -57,7 +58,7 @@ export const components = {
   img: Image,
   hr: Separator,
   table: Table,
-  thead: TableHead,
+  thead: TableHeader,
   tbody: TableBody,
   tfoot: TableFooter,
   tr: TableRow,
@@ -134,5 +135,6 @@ export {
   TableCell,
   TableFooter,
   TableHead,
+  TableHeader,
   TableRow,
 }
