@@ -1,0 +1,49 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { ColorSchemeSelect } from "@/features/color-scheme"
+import { SearchModal } from "@/features/search"
+import { cn } from "@/lib/utils"
+
+export type Props = HTMLAttributes<"header">
+const { class: className, ...props } = Astro.props
+---
+
+<header
+  class={cn(
+    "sticky top-4 z-30 mx-auto my-4 max-w-fit text-foreground",
+    className
+  )}
+  {...props}
+>
+  <div
+    class="flex flex-row items-center gap-5 rounded-full border bg-background/60 px-4 py-2 backdrop-blur-xl"
+  >
+    <nav>
+      <ul class="flex flex-row items-center gap-5 px-2">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/posts">Posts</a>
+        </li>
+        <li>
+          <a href="/projects">Projects</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <div>
+      <ul class="flex flex-row gap-1">
+        <li>
+          <ColorSchemeSelect client:load />
+        </li>
+        <li>
+          <SearchModal client:load />
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

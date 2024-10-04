@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "storybook-solidjs"
 
+import IconGithub from "~icons/simple-icons/github"
+
 import { LinkCard } from "./link-card"
 
 const meta = {
@@ -17,7 +19,7 @@ type Story = StoryObj<typeof meta>
 export const GitHub: Story = {
   args: {
     href: "https://github.com/r4ai",
-    icon: <span class="i-simple-icons-github size-5" />,
+    icon: IconGithub,
     title: "@r4ai",
     site: "GitHub",
   },

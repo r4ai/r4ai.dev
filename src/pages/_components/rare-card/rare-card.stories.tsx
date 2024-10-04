@@ -1,8 +1,8 @@
-import { Image } from "astro:assets"
 import type { Meta, StoryObj } from "storybook-solidjs"
 
-import IconBlobs from "@/assets/imgs/r4ai/icon-blobs.png"
+import iconBlobs from "@/assets/imgs/r4ai/icon-blobs.png?url"
 import { IconBlobsClipPath } from "@/assets/imgs/r4ai/icon-blobs-clip-path"
+import { Image } from "@/components/ui"
 
 import { RareCard } from "./rare-card"
 
@@ -33,7 +33,7 @@ export const Icon: Story = {
       <>
         <IconBlobsClipPath clipPathId="r4ai-icon-blobs-clip-path" />
         <Image
-          src={IconBlobs}
+          src={iconBlobs}
           class="aspect-[1132/1140] size-96 drop-shadow-lg"
           alt="Me"
         />
