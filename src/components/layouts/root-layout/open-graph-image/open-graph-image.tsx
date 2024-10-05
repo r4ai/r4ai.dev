@@ -1,16 +1,6 @@
 import fs from "node:fs/promises"
 
-import satori from "satori"
-import sharp from "sharp"
-
-declare module "solid-js" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-      tw?: string
-    }
-  }
-}
+import { buffer2url, render as renderSatori } from "@/lib/utils"
 
 type ReactLikeObject = {
   type: string
@@ -21,20 +11,13 @@ type ReactLikeObject = {
   }
 }
 
-const buffer2url = (buffer: Buffer) =>
-  `data:image/png;base64,${buffer.toString("base64")}`
-
 const titleFont = await fs.readFile(
   "src/assets/fonts/noto-sans-jp/static/NotoSansJP-Bold.ttf"
 )
 const bgAccentImage = await fs.readFile("src/assets/imgs/og/stripe.png")
 const bgImage = await fs.readFile("src/assets/imgs/og/bg.png")
 
-export type OGImageProps = {
-  title: string
-}
-
-export const OGImage = ({ title }: OGImageProps): ReactLikeObject => {
+export const OpenGraphImage = (): ReactLikeObject => {
   return {
     type: "div",
     props: {
@@ -69,7 +52,7 @@ export const OGImage = ({ title }: OGImageProps): ReactLikeObject => {
             style: {
               "text-shadow": "0 0 10px #000",
             },
-            children: [title],
+            children: ["r4ai.dev"],
           },
         },
         {
@@ -90,9 +73,8 @@ export const OGImage = ({ title }: OGImageProps): ReactLikeObject => {
 export const render = async <Props extends object>(
   component: (props: Props) => ReactLikeObject,
   props: Props
-) => {
-  // @ts-expect-error satori types are wrong
-  const svg = await satori(component(props), {
+) =>
+  renderSatori(component, props, {
     width: 1200,
     height: 630,
     fonts: [
@@ -104,6 +86,3 @@ export const render = async <Props extends object>(
       },
     ],
   })
-  const png = await sharp(Buffer.from(svg)).png().toBuffer()
-  return png
-}

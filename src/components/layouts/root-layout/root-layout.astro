@@ -12,14 +12,14 @@ import { SEO, type SEOProps } from "./seo"
 
 // Astro can't parse complex types
 // prettier-ignore
-export type Props = PartiallyPartial<SEOProps, "titleSuffix" | "favicon" | "locale"> & HTMLAttributes<"body">
+export type Props = PartiallyPartial<SEOProps, "titleSuffix" | "favicon" | "locale" | "image"> & HTMLAttributes<"body">
 
 const {
   title,
   titleSuffix = "r4ai",
   description,
   favicon = "/favicon.svg",
-  image,
+  image = new URL("/open-graph.png", Astro.url),
   locale = "ja_JP",
   url,
   og,

@@ -28,7 +28,7 @@ const { Content, headings } = await entry.render()
 <!-- todo: change example.com to valid ogp image url -->
 <RootLayout
   title={entry.data.title}
-  image={new URL("https://example.com")}
+  image={new URL(`${Astro.url.href}.png`)}
   og={{ type: "article" }}
 >
   <div class="my-12 grid gap-20" data-margin="true">

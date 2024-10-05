@@ -20,12 +20,9 @@ export type Props = {
   url?: URL
   og?: Partial<OpenGraphProps>
   twitter?:
-    | Partial<TwitterSummaryCard>
-    | Partial<TwitterSummaryLargeImageCard>
-    | PartiallyPartial<
-        TwitterPlayerCard,
-        "title" | "description" | "image" | "imageAlt"
-      >
+    | PartiallyPartial<TwitterSummaryCard, "title" | "description">
+    | PartiallyPartial<TwitterSummaryLargeImageCard, "title" | "description">
+    | PartiallyPartial<TwitterPlayerCard, "title" | "description">
     | PartiallyPartial<TwitterAppCard, "description">
 }
 const props = Astro.props
@@ -50,15 +47,8 @@ const twitter: TwitterCardProps | undefined =
   props.twitter?.card === "summary_large_image"
     ? {
         ...props.twitter,
-        card: props.twitter.card,
         title: props.twitter.title ?? props.title,
         description: props.twitter.description ?? props.description,
-        image:
-          props.twitter.image ??
-          (props.image instanceof URL ? props.image : props.image.url),
-        imageAlt:
-          props.twitter.imageAlt ??
-          (props.image instanceof URL ? undefined : props.image.alt),
       }
     : props.twitter?.card === "player"
       ? {
@@ -66,12 +56,8 @@ const twitter: TwitterCardProps | undefined =
           card: props.twitter.card,
           title: props.twitter.title ?? props.title,
           description: props.twitter.description ?? props.description,
-          image:
-            props.twitter.image ??
-            (props.image instanceof URL ? props.image : props.image.url),
-          imageAlt:
-            props.twitter.imageAlt ??
-            (props.image instanceof URL ? undefined : props.image.alt),
+          image: props.twitter.image,
+          imageAlt: props.twitter.imageAlt,
         }
       : props.twitter?.card === "app"
         ? {
