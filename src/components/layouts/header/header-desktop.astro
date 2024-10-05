@@ -42,7 +42,8 @@ const { class: className, ...props } = Astro.props
             href="/posts"
             class={cn(
               "rounded-full px-2.5 text-base text-muted-foreground",
-              Astro.url.pathname === "/posts" && "text-accent-foreground"
+              Astro.url.pathname.startsWith("/posts") &&
+                "text-accent-foreground"
             )}
           >
             Posts
@@ -55,7 +56,8 @@ const { class: className, ...props } = Astro.props
             href="/projects"
             class={cn(
               "rounded-full px-2.5 text-base text-muted-foreground",
-              Astro.url.pathname === "/projects" && "text-accent-foreground"
+              Astro.url.pathname.startsWith("/projects") &&
+                "text-accent-foreground"
             )}
           >
             Projects
@@ -68,7 +70,8 @@ const { class: className, ...props } = Astro.props
             href="/contact"
             class={cn(
               "rounded-full px-2.5 text-base text-muted-foreground",
-              Astro.url.pathname === "/contact" && "text-accent-foreground"
+              Astro.url.pathname.startsWith("/contact") &&
+                "text-accent-foreground"
             )}
           >
             Contact

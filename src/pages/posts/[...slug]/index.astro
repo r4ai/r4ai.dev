@@ -8,7 +8,7 @@ import { RootLayout } from "@/components/layouts"
 import { components } from "@/components/mdx-components"
 import { cn } from "@/lib/utils"
 
-import { PostHeader } from "./_components"
+import { PostHeader, TableOfContents } from "./_components"
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("posts", ({ data }) =>
@@ -22,7 +22,7 @@ export const getStaticPaths = (async () => {
 
 const { entry } = Astro.props
 
-const { Content } = await entry.render()
+const { Content, headings } = await entry.render()
 ---
 
 <!-- todo: change example.com to valid ogp image url -->
@@ -40,14 +40,29 @@ const { Content } = await entry.render()
       publishedAt={entry.data.publishedAt}
       updatedAt={entry.data.updatedAt}
     />
+    <div class="mx-auto w-full max-w-lg lg:hidden">
+      <TableOfContents class="mx-5" headings={headings} client:visible />
+    </div>
     <div
-      class={cn(
-        "*:w-full *:my-6 first:*:mt-0 [&>:is(ul,ol)_:is(li,li>*)]:my-4 mx-5",
-        "[&>:is(h1,h2):not(:first-child)]:mt-16",
-        "[&>:is(h3,h4):not(:first-child)]:mt-12"
-      )}
+      class="grid w-full grid-cols-[300px_minmax(0,1fr)_300px] gap-8 px-5 lg:px-8"
     >
-      <Content {components} />
+      <div
+        class={cn(
+          "col-start-1 col-span-3 lg:col-span-2 2xl:col-span-1 2xl:col-start-2",
+          "*:w-full *:my-6 first:*:mt-0 [&>:is(ul,ol)_:is(li,li>*)]:my-4",
+          "[&>:is(h1,h2):not(:first-child)]:mt-16",
+          "[&>:is(h3,h4):not(:first-child)]:mt-12"
+        )}
+      >
+        <Content {components} />
+      </div>
+      <div class="relative col-start-3">
+        <TableOfContents
+          class="sticky top-20 hidden max-h-[calc(100vh-10rem)] lg:block"
+          headings={headings}
+          client:visible
+        />
+      </div>
     </div>
   </div>
 </RootLayout>
