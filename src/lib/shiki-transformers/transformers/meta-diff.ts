@@ -18,7 +18,9 @@ type Line = Element & {
 
 const isLine = (line: ElementContent): line is Line =>
   isElement(line) &&
+  line.children[0] != null &&
   isElement(line.children[0]) &&
+  line.children[0].children[0] != null &&
   isText(line.children[0].children[0])
 
 const getDiffIndentSize = (hast: Element) => {
@@ -69,8 +71,9 @@ export const transformerMetaDiff = (): ShikiTransformer => ({
     for (const line of hast.children) {
       if (!isLine(line)) continue
 
-      const firstSpanValue = line.children[0].children[0].value
-      const firstChar = firstSpanValue.trim()[0]
+      const firstSpanValue = line.children[0].children[0]?.value
+      const firstChar = firstSpanValue?.trim()[0]
+      if (firstSpanValue == null || firstChar == null) continue
 
       // add "diff" and "add" or "remove" class to line
       switch (firstChar) {
@@ -93,7 +96,9 @@ export const transformerMetaDiff = (): ShikiTransformer => ({
         if (removedFirstSpanValue === "") {
           line.children.splice(0, 1)
         } else {
-          line.children[0].children[0].value = removedFirstSpanValue
+          if (line.children[0].children[0]) {
+            line.children[0].children[0].value = removedFirstSpanValue
+          }
         }
         toDeleteDiffIndentSize -= 1
       }
@@ -103,12 +108,14 @@ export const transformerMetaDiff = (): ShikiTransformer => ({
       //        ^^
       //        this is unnecessary spaces
       for (const span of line.children) {
-        const value = span.children[0].value
-        const toRemoveChars = value.slice(0, toDeleteDiffIndentSize)
-        for (const toRemoveChar of toRemoveChars) {
+        const value = span.children[0]?.value
+        const toRemoveChars = value?.slice(0, toDeleteDiffIndentSize)
+        for (const toRemoveChar of toRemoveChars ?? "") {
           if (toRemoveChar !== " ") return
           toDeleteDiffIndentSize -= 1
-          span.children[0].value = span.children[0].value.slice(1)
+          if (span.children[0] && span.children[0].value) {
+            span.children[0].value = span.children[0].value.slice(1)
+          }
         }
       }
     }

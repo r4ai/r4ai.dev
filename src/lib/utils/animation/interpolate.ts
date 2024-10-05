@@ -31,6 +31,8 @@ export const interpolate = <T extends Interpolatable>(
 
   if (Array.isArray(from) && Array.isArray(to)) {
     const result = from.map((fromItem, index) => {
+      if (to[index] == null)
+        throw new Error("Given values are not interpolatable")
       return interpolate(fromItem, to[index], ease, elapsed)
     })
     return result
