@@ -28,6 +28,7 @@
     "@formkit/tempo": "^0.1.2",
     "@kobalte/core": "^0.13.7",
     "@kobalte/utils": "^0.9.1",
+    "@modular-forms/solid": "0.23.0",
     "astro": "^4.16.2",
     "clsx": "^2.1.1",
     "katex": "^0.16.11",
@@ -38,7 +39,8 @@
     "solid-sonner": "^0.2.8",
     "tailwind-merge": "^2.5.3",
     "tailwind-variants": "^0.2.1",
-    "three": "^0.169.0"
+    "three": "^0.169.0",
+    "valibot": "0.42.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
@@ -48,7 +50,6 @@
     "@iconify-json/lucide": "^1.2.8",
     "@iconify-json/simple-icons": "^1.2.7",
     "@iconify/utils": "^2.1.33",
-    "@modular-forms/solid": "^0.24.1",
     "@r4ai/remark-callout": "^0.6.2",
     "@r4ai/remark-embed": "^0.3.1",
     "@shikijs/transformers": "^1.22.0",
@@ -118,7 +119,6 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "unplugin-icons": "^0.19.3",
-    "valibot": "^0.42.1",
     "vite": "^5.4.8",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.1.2",

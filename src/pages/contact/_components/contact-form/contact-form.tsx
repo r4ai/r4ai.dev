@@ -22,7 +22,7 @@ type ResponseSchema = {
   message: string
 }
 
-const contactFormSchema = v.object({
+const ContactFormSchema = v.object({
   name: v.pipe(v.string(), v.nonEmpty("Please enter your name")),
   email: v.pipe(
     v.string(),
@@ -33,7 +33,7 @@ const contactFormSchema = v.object({
   message: v.pipe(v.string(), v.nonEmpty("Please enter a message")),
 })
 
-type ContactForm = v.InferInput<typeof contactFormSchema>
+type ContactForm = v.InferInput<typeof ContactFormSchema>
 
 const openEmail = (values: ContactForm) => {
   const url = `mailto:r4ai.dev@gmail.com?subject=${encodeURIComponent(values.title)}&body=${encodeURIComponent(values.message)}`
@@ -42,7 +42,7 @@ const openEmail = (values: ContactForm) => {
 
 export const ContactForm = () => {
   const [contactForm, { Form, Field }] = createForm<ContactForm>({
-    validate: valiForm(contactFormSchema),
+    validate: valiForm(ContactFormSchema),
   })
 
   const handleSubmit: SubmitHandler<ContactForm> = async (values) => {
