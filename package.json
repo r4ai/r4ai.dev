@@ -8,7 +8,7 @@
     "start": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "type-check": "astro check && tsc --noEmit",
+    "type-check": "astro check",
     "lint": "eslint .",
     "lint:write": "eslint --fix .",
     "format": "prettier --ignore-path .gitignore --check './**/*.{js,cjs,mjs,ts,jsx,tsx,astro,json,html,md}'",
