@@ -30,6 +30,7 @@ import {
 import remarkInlineCode from "./src/lib/unified-plugins/remark-inline-code"
 import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
 import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://r4ai.dev",

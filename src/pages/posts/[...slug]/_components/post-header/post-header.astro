@@ -1,4 +1,6 @@
 ---
+import { icons as fluentEmojiIcons } from "@iconify-json/fluent-emoji"
+
 import { cn } from "@/lib/utils"
 import { getIconHtml } from "@/lib/utils"
 
@@ -26,7 +28,7 @@ const {
   updatedAt,
 } = Astro.props
 
-const iconHtml = await getIconHtml("fluent-emoji", icon)
+const iconHtml = await getIconHtml(fluentEmojiIcons, icon)
 ---
 
 <header
