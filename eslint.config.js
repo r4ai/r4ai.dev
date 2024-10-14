@@ -4,6 +4,8 @@ import eslint from "@eslint/js"
 import gitignore from "eslint-config-flat-gitignore"
 import eslintConfigPrettier from "eslint-config-prettier"
 import eslintPluginAstro from "eslint-plugin-astro"
+import simpleImportSort from "eslint-plugin-simple-import-sort"
+import solid from "eslint-plugin-solid/configs/typescript"
 import globals from "globals"
 import tsEslint from "typescript-eslint"
 
@@ -12,13 +14,23 @@ export default tsEslint.config(
   eslint.configs.recommended,
   ...tsEslint.configs.recommended,
   {
-    files: ["**/*.{ts,tsx,mts,cts,astro}"],
+    files: ["**/*.stories.{ts,tsx}"],
     rules: {
-      "no-undef": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
     },
   },
-  ...eslintPluginAstro.configs["flat/recommended"],
-  ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+  solid,
+  ...eslintPluginAstro.configs.recommended,
+  ...eslintPluginAstro.configs["jsx-a11y-strict"],
+  {
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
+    rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+    },
+  },
   eslintConfigPrettier,
   {
     languageOptions: {

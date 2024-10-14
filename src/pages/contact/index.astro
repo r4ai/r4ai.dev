@@ -1,16 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro"
-import { ContactForm } from "@/components/Form"
+import { RootLayout } from "@/components/layouts"
+
+import { ContactForm } from "./_components"
 ---
 
-<Layout title="Contact">
-  <main
-    class="container mx-auto my-12 flex max-w-xl grow flex-col gap-12"
-    data-pagefind-main
-  >
-    <div class="flex flex-col">
-      <h2 class="mx-auto font-times text-4.5xl font-black">Contact</h2>
-    </div>
+<RootLayout title="Contact">
+  <div class="container mx-auto mb-12 mt-6 grid max-w-xl gap-12">
+    <h1 class="mx-auto font-times text-4.5xl font-black">Contact</h1>
     <ContactForm client:load />
-  </main>
-</Layout>
+  </div>
+</RootLayout>

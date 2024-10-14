@@ -1,5 +1,5 @@
-import * as fs from "node:fs/promises"
 import { spawn } from "node:child_process"
+import * as fs from "node:fs/promises"
 
 const exec = (
   cmd: string,
@@ -7,9 +7,10 @@ const exec = (
   env?: NodeJS.ProcessEnv
 ): Promise<void> => {
   const command = cmd.split(" ")[0]
+  if (!command) throw new Error("Command is empty")
   const args = cmd.split(" ").slice(1)
   const promise: Promise<void> = new Promise((resolve) => {
-    console.log(`$ ${command} ${args}`)
+    console.log(`$ ${command} ${args.join(" ")}`)
 
     const childProcess = spawn(command, args, { cwd, env })
 
@@ -110,7 +111,7 @@ const downloadZipFile = async () => {
   const response = await fetch(
     "https://api.github.com/repos/yuru7/udev-gothic/releases/latest"
   )
-  const json: Releases = await response.json()
+  const json = (await response.json()) as Releases
 
   for (const asset of json.assets) {
     if (!asset.name.startsWith("UDEVGothic_v")) continue
@@ -138,8 +139,8 @@ const extructFontFiles = async (zipFileName: string, toCopyFonts: string[]) => {
 
 const convertFontFiles = async () => {
   console.log("[Log] Start converting font files...")
-  await exec("docker-compose up --build")
-  await exec("docker-compose down")
+  await exec("docker compose up --build")
+  await exec("docker compose down")
   console.log("[Log] Finished converting font files")
 }
 

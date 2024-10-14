@@ -1,12 +1,12 @@
 ---
 title: Astro プロジェクトの ESLint Flat Config への移行
-tags: 
+tags:
   - ESLint
   - Astro
   - TypeScript
   - TailwindCSS
   - Pretter
-icon: logos:eslint
+icon: hammer-and-wrench
 genre: article
 draft: false
 publishedAt: 2024-04-22
@@ -383,7 +383,7 @@ ESLint の VSCode Extension で、Flat Config を有効化する。
 
 ```js title=prettier.config.js showLineNumbers diff
   // @ts-check
-  
+
   /** @type {import("prettier").Options} */
 - module.exports = {
 + export default {

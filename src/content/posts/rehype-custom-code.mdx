@@ -1,7 +1,7 @@
 ---
 title: rehype-custom-code
 tags: []
-icon: fluent-emoji-flat:construction
+icon: construction
 genre: article
 draft: false
 publishedAt: 2023-11-23
@@ -15,10 +15,10 @@ fn main() {
 ```
 
 ```ts title="main.ts" showLineNumbers diff
-  const main = () => {
--     console.log("hello, wolrd!");
-+     console.log("Hello, world!");
-  }
+const main = () => {
+  ;-console.log("hello, wolrd!")
+  ;+console.log("Hello, world!")
+}
 ```
 
 ```java showLineNumbers

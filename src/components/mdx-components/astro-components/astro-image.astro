@@ -1,0 +1,18 @@
+---
+import { Image } from "astro:assets"
+
+import { Image as Figure } from "@/components/typography"
+import { cn } from "@/lib/utils"
+
+type ImageProps = Parameters<typeof Image>[0]
+
+export type Props = ImageProps & { imgClassName?: string }
+const { class: className, title, ...props } = Astro.props
+---
+
+<Figure {title}>
+  <Image
+    class={cn("mx-auto w-full max-w-screen-lg rounded-lg", className)}
+    {...props}
+  />
+</Figure>

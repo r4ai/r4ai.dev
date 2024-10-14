@@ -3,7 +3,7 @@ title: "Astro で Iconify を使うべく色々格闘した話"
 tags:
   - astro
   - iconify
-icon: game-icons:astronaut-helmet
+icon: astronaut
 genre: article
 draft: false
 publishedAt: 2023-09-05
@@ -17,27 +17,27 @@ updatedAt: 2023-11-24
 
 ```astro title=Icon.astro showLineNumbers
 ---
-import Iconify from "@iconify/iconify";
+import Iconify from "@iconify/iconify"
 
 interface Props {
-  icon: string;
-  class?: string;
+  icon: string
+  class?: string
 }
 
-const props = Astro.props;
+const props = Astro.props
 
 const getIconSvg = async (icon: string) => {
-  await Iconify.loadIcon(icon);
+  await Iconify.loadIcon(icon)
 
-  const iconData = Iconify.getIcon(icon);
-  if (!iconData) throw new Error(`Icon ${icon} not found`);
+  const iconData = Iconify.getIcon(icon)
+  if (!iconData) throw new Error(`Icon ${icon} not found`)
 
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${iconData.left} ${iconData.top} ${iconData.width} ${iconData.height}" fill="none" style="width:100%">` +
     iconData.body +
     "</svg>"
-  );
-};
+  )
+}
 ---
 
 <div set:html={await getIconSvg(props.icon)} class={props.class} />
@@ -55,13 +55,14 @@ const getIconSvg = async (icon: string) => {
 - `@iconify/tailwind`: iconの指定に変数を利用した際になぜか Icon が表示されず使えなかった。
 
   ```astro title=OK
-  <span class="fluent-emoji:robot" />
+  <span class="fluent-emoji:robot"></span>
   ```
 
   ```astro title=NG
   ---
-  const icon = "icon" + "-" + "[fluent-emoji--building-construction]";
+  const icon = "icon" + "-" + "[fluent-emoji--building-construction]"
   ---
+
   <span class={`${icon} text-8xl`}></span>
   ```
 

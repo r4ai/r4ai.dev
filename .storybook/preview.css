@@ -1,0 +1,12 @@
+.docs-story {
+  @apply bg-background;
+}
+
+html {
+  @apply h-full;
+}
+
+body.sb-main-fullscreen,
+body.sb-main-fullscreen #storybook-root {
+  @apply h-full;
+}

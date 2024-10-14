@@ -1,0 +1,83 @@
+.root {
+  @apply relative h-full w-full;
+  transform-style: preserve-3d;
+  perspective-origin: 50% 50%;
+  perspective: 1000px;
+}
+
+.wrapper {
+  @apply z-10 h-full w-full transition-opacity;
+}
+
+.card {
+  @apply z-0;
+}
+
+.overlay {
+  @apply absolute z-20 h-full w-full -translate-y-full;
+}
+
+.overlay-pattern {
+  background: repeating-radial-gradient(
+    circle at -150% -25%,
+    #ff0000,
+    #0011ff 3px,
+    #1eff00 3px
+  );
+  background-position: 50% 50%;
+  background-size: 120% 120%;
+  mix-blend-mode: color-dodge;
+  opacity: 0.3;
+}
+
+.overlay-color {
+  background: linear-gradient(
+    130deg,
+    transparent 18%,
+    #b654cc 20%,
+    transparent 42% 46%,
+    #404fbf 70%,
+    transparent
+  );
+  background-position: 50% 50%;
+  background-size: 200% 200%;
+  mix-blend-mode: overlay;
+}
+
+.overlay-highlight {
+  @apply transition-opacity duration-500;
+  background: radial-gradient(
+    circle at calc(var(--ratio-x) * 100%) calc(var(--ratio-y) * 100%),
+    hsl(0 0% 100% / 0.2),
+    transparent 40%
+  );
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+/* 3D Camera Effect */
+.wrapper {
+  transform: rotateX(calc((var(--ratio-y) - 0.5) * var(--angle)))
+    rotateY(calc((var(--ratio-x) - 0.5) * (-1 * var(--angle))));
+}
+
+/* .wrapper .overlay,
+.wrapper .card {
+  translate: calc((var(--ratio-x) - 0.5) * var(--angle))
+    calc((var(--ratio-y) - 0.5) * var(--angle));
+} */
+
+/* Horogram Effect */
+.wrapper:hover > .overlay-pattern {
+  background-position: calc(50% + (var(--ratio-x) * -50%))
+    calc(50% + ((var(--ratio-y) - 0.5) * -50%));
+}
+
+.wrapper > .overlay-color {
+  background-position: calc(50% + ((var(--ratio-x) - 0.5) * -50%))
+    calc(50% + ((var(--ratio-y) - 0.5) * -50%));
+}
+
+.wrapper:hover > .overlay-highlight {
+  opacity: 1;
+}
