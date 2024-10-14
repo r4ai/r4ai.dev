@@ -1,6 +1,7 @@
 import fs from "node:fs/promises"
 
 import { buffer2url, render as renderSatori } from "@/lib/utils"
+import type { SharpFn } from "@/lib/utils/open-graph"
 
 type ReactLikeObject = {
   type: string
@@ -70,10 +71,11 @@ export const OpenGraphImage = (): ReactLikeObject => {
 }
 
 export const render = async <Props extends object>(
+  sharp: SharpFn,
   component: (props: Props) => ReactLikeObject,
   props: Props
 ) =>
-  renderSatori(component, props, {
+  renderSatori(sharp, component, props, {
     width: 1200,
     height: 630,
     fonts: [

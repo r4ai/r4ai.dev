@@ -1,6 +1,7 @@
 import fs from "node:fs/promises"
 
 import { render as renderToPng } from "@/lib/utils"
+import type { SharpFn } from "@/lib/utils/open-graph"
 
 type ReactLikeObject = {
   type: string
@@ -80,10 +81,11 @@ export const OpenGraphImage = ({
 }
 
 export const render = async <Props extends object>(
+  sharp: SharpFn,
   component: (props: Props) => ReactLikeObject,
   props: Props
 ) =>
-  renderToPng(component, props, {
+  renderToPng(sharp, component, props, {
     width: 1200,
     height: 630,
     fonts: [

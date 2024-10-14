@@ -1,5 +1,5 @@
 export {
-  OpenGraphImage as OGImage,
-  type OpenGraphImageProps as OGImageProps,
+  OpenGraphImage,
+  type OpenGraphImageProps,
   render,
 } from "./open-graph-image"

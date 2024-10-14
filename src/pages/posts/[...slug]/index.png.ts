@@ -1,7 +1,8 @@
 import type { APIRoute } from "astro"
 import { getEntry } from "astro:content"
+import sharp from "sharp"
 
-import { OGImage, render } from "./_components"
+import { OpenGraphImage, render } from "./_components"
 
 export { getStaticPaths } from "./index.astro"
 
@@ -15,7 +16,7 @@ export const GET: APIRoute = async ({ params }) => {
     return NotFound()
   }
 
-  const image = await render(OGImage, { title: post.data.title })
+  const image = await render(sharp, OpenGraphImage, { title: post.data.title })
   return new Response(image, {
     headers: { "Content-Type": "image/png" },
   })
