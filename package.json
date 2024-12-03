@@ -17,9 +17,9 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.0",
-    "@astrojs/react": "^3.0.7",
-    "@astrojs/svelte": "^5.0.0",
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/react": "^4.0.0",
+    "@astrojs/svelte": "^7.0.0",
     "@astrojs/tailwind": "^5.0.3",
     "@extractus/oembed-extractor": "^4.0.3",
     "@floating-ui/react": "^0.26.12",
@@ -40,7 +40,7 @@
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",
     "@stackblitz/sdk": "^1.9.0",
-    "astro": "^4.0.3",
+    "astro": "^5.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "katex": "^0.16.10",
