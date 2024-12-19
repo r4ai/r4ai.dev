@@ -20,6 +20,7 @@ import {
 import { defineConfig } from "astro/config"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
+import { visualizer } from "rollup-plugin-visualizer"
 import icons from "unplugin-icons/vite"
 
 import {
@@ -47,7 +48,15 @@ export default defineConfig({
     "/posts/[...slug]/raw": "/posts/[...slug].mdx",
   },
   vite: {
-    plugins: [pagefind(), rawTransform(), icons({ compiler: "solid" })],
+    plugins: [
+      pagefind(),
+      rawTransform(),
+      icons({ compiler: "solid" }),
+      visualizer({
+        emitFile: true,
+        filename: "stats.html",
+      }),
+    ],
   },
   markdown: {
     remarkPlugins: [

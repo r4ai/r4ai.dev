@@ -86,6 +86,9 @@ importers:
       "@iconify-json/simple-icons":
         specifier: ^1.2.16
         version: 1.2.16
+      "@iconify/json":
+        specifier: ^2.2.285
+        version: 2.2.285
       "@iconify/types":
         specifier: 2.0.0
         version: 2.0.0
@@ -254,6 +257,9 @@ importers:
       remark-rehype:
         specifier: ^11.1.1
         version: 11.1.1
+      rollup-plugin-visualizer:
+        specifier: ^5.12.0
+        version: 5.12.0(rollup@4.24.0)
       sass:
         specifier: ^1.83.0
         version: 1.83.0
@@ -1309,6 +1315,12 @@ packages:
     resolution:
       {
         integrity: sha512-mnQ0Ih8CDIgOqbi0qz01AJNOeFVuGFRimelg3JmJtD0y5EpZVw+enPPcpcxJKipsRZ/oqhcP3AhYkF1kM7yomg==,
+      }
+
+  "@iconify/json@2.2.285":
+    resolution:
+      {
+        integrity: sha512-oyH9NQ3aMdPuBl7miNcX7IavISwv5o07O6MBTQhW+X1mvyzrGwTxFf5bZmGYOsH3yB0MDGZkir3v+JiQE3UInA==,
       }
 
   "@iconify/types@2.0.0":
@@ -7536,6 +7548,19 @@ packages:
         integrity: sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg==,
       }
 
+  rollup-plugin-visualizer@5.12.0:
+    resolution:
+      {
+        integrity: sha512-8/NU9jXcHRs7Nnj07PF2o4gjxmm9lXIrZ8r175bT9dK8qoLlvKTwRMArRCMgpMGlq8CTLugRvEmyMeMXIU2pNQ==,
+      }
+    engines: { node: ">=14" }
+    hasBin: true
+    peerDependencies:
+      rollup: 2.x || 3.x || 4.x
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
   rollup@4.24.0:
     resolution:
       {
@@ -9741,6 +9766,11 @@ snapshots:
   "@iconify-json/simple-icons@1.2.16":
     dependencies:
       "@iconify/types": 2.0.0
+
+  "@iconify/json@2.2.285":
+    dependencies:
+      "@iconify/types": 2.0.0
+      pathe: 1.1.2
 
   "@iconify/types@2.0.0": {}
 
@@ -14108,6 +14138,15 @@ snapshots:
 
   robust-predicates@3.0.2: {}
 
+  rollup-plugin-visualizer@5.12.0(rollup@4.24.0):
+    dependencies:
+      open: 8.4.2
+      picomatch: 2.3.1
+      source-map: 0.7.4
+      yargs: 17.7.2
+    optionalDependencies:
+      rollup: 4.24.0
+
   rollup@4.24.0:
     dependencies:
       "@types/estree": 1.0.6
@@ -14750,7 +14789,7 @@ snapshots:
 
   unplugin@1.14.1:
     dependencies:
-      acorn: 8.12.1
+      acorn: 8.14.0
       webpack-virtual-modules: 0.6.2
 
   unplugin@2.1.0:

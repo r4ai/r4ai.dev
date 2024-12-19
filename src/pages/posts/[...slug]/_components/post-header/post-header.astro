@@ -1,5 +1,5 @@
 ---
-import { icons as fluentEmojiIcons } from "@iconify-json/fluent-emoji"
+import * as fs from "node:fs/promises"
 
 import { cn } from "@/lib/utils"
 import { getIconHtml } from "@/lib/utils"
@@ -8,6 +8,12 @@ import { MdxFileLink } from "./mdx-file-link"
 import { PublishedAt } from "./published-at"
 import { Tags } from "./tags"
 import { UpdatedAt } from "./updated-at"
+
+const fluentEmojiIcons = JSON.parse(
+  await fs.readFile("./node_modules/@iconify-json/fluent-emoji/icons.json", {
+    encoding: "utf-8",
+  })
+)
 
 export type Props = {
   class?: string | undefined
