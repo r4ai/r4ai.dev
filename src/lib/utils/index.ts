@@ -1,6 +1,6 @@
 export * from "./animation"
 export { getLanguageFromLocale, type Language, type Locale } from "./i18n"
-export { type Collection, getIconHtml, getIcons } from "./icons"
+export { type Collection, getIconHtml } from "./icons"
 export { buffer2url, type ReactLikeObject, render } from "./open-graph"
 export { getPostEntries } from "./posts"
 export { isServer } from "./runtime"
