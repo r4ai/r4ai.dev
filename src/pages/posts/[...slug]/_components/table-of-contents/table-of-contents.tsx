@@ -3,8 +3,10 @@ import {
   type Component,
   type ComponentProps,
   createMemo,
+  createSignal,
   For,
   onMount,
+  type Setter,
   splitProps,
 } from "solid-js"
 import { tv } from "tailwind-variants"
@@ -50,11 +52,13 @@ export const TableOfContents: Component<TableOfContentsProps> = (props) => {
   const [local, rest] = splitProps(props, ["headings", "class"])
   const { root, heading, list, listItem } = tableOfContents()
 
+  const [activeId, setActiveId] = createSignal<string | null>(null)
+
   const minDepth = createMemo(() =>
     Math.min(...local.headings.map((heading) => heading.depth))
   )
 
-  onMount(() => initIntersectionObserver())
+  onMount(() => initIntersectionObserver(setActiveId))
 
   return (
     <div class={root({ class: local.class })} {...rest}>
@@ -69,7 +73,7 @@ export const TableOfContents: Component<TableOfContentsProps> = (props) => {
                 class={listItem({
                   depth: validateDepth(minDepth(), heading.depth),
                 })}
-                data-active="false"
+                data-active={activeId() === heading.slug ? "true" : "false"}
               >
                 {heading.text}
               </a>
@@ -84,7 +88,7 @@ export const TableOfContents: Component<TableOfContentsProps> = (props) => {
 const validateDepth = (minDepth: number, depth: number) =>
   Math.max(1, Math.min(6, depth - minDepth + 1)) as 1 | 2 | 3 | 4 | 5 | 6
 
-const initIntersectionObserver = () => {
+const initIntersectionObserver = (setActiveId: Setter<string | null>) => {
   let previousActiveElement: Element | null = null
   const observer = new IntersectionObserver((entries) => {
     const entry = entries.reduce((acc, cur) =>
@@ -94,9 +98,24 @@ const initIntersectionObserver = () => {
 
     const id = entry.target.getAttribute("id")
     const currentActiveElement = document.getElementById(`toc-${id}`)
-    console.log(currentActiveElement)
-    previousActiveElement?.setAttribute("data-active", "false")
-    currentActiveElement?.setAttribute("data-active", "true")
+
+    // This should never happen
+    if (!currentActiveElement) {
+      console.error(`Element with id ${id} not found in the table of contents`)
+      return
+    }
+
+    // First active element
+    if (
+      !previousActiveElement ||
+      !(previousActiveElement instanceof HTMLElement)
+    ) {
+      setActiveId(id)
+      previousActiveElement = currentActiveElement
+      return
+    }
+
+    setActiveId(id)
     previousActiveElement = currentActiveElement
   })
 

@@ -1,5 +1,3 @@
-import fs from "node:fs/promises"
-
 import { render as renderToPng } from "@/lib/utils"
 import type { SharpFn } from "@/lib/utils/open-graph"
 
@@ -15,18 +13,16 @@ type ReactLikeObject = {
 const buffer2url = (buffer: Buffer) =>
   `data:image/png;base64,${buffer.toString("base64")}`
 
-const titleFont = await fs.readFile(
-  "src/assets/fonts/noto-sans-jp/static/NotoSansJP-Bold.ttf"
-)
-const bgAccentImage = await fs.readFile("src/assets/imgs/og/stripe.png")
-const bgImage = await fs.readFile("src/assets/imgs/og/bg.png")
-
 export type OpenGraphImageProps = {
   title: string
+  bgAccentImage: Buffer<ArrayBufferLike>
+  bgImage: Buffer<ArrayBufferLike>
 }
 
 export const OpenGraphImage = ({
   title,
+  bgAccentImage,
+  bgImage,
 }: OpenGraphImageProps): ReactLikeObject => {
   return {
     type: "div",
@@ -80,10 +76,18 @@ export const OpenGraphImage = ({
   }
 }
 
+/**
+ * Render the OpenGraph image
+ * @param sharp - Sharp instance
+ * @param component - Component to render
+ * @param props - Props to pass to the component
+ * @param fonts - Fonts to use in the image
+ */
 export const render = async <Props extends object>(
   sharp: SharpFn,
   component: (props: Props) => ReactLikeObject,
-  props: Props
+  props: Props,
+  fonts: { NotoSansJP: Buffer<ArrayBufferLike> }
 ) =>
   renderToPng(sharp, component, props, {
     width: 1200,
@@ -91,7 +95,7 @@ export const render = async <Props extends object>(
     fonts: [
       {
         name: "Noto Sans JP",
-        data: titleFont,
+        data: fonts.NotoSansJP,
         weight: 800,
         style: "normal",
       },
