@@ -1,6 +1,6 @@
-import { z } from "zod"
+import { z } from "astro:content"
 
-const tagSchema = z.object({
+export const tagSchema = z.object({
   name: z.string(),
   twColor: z.string(),
 })

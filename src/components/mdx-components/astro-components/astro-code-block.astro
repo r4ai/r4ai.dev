@@ -1,0 +1,12 @@
+---
+import { CodeBlock, type CodeBlockProps } from "@/components/typography"
+
+export type Props = CodeBlockProps
+const props = Astro.props
+---
+
+<div>
+  <CodeBlock {...props} client:visible>
+    <slot />
+  </CodeBlock>
+</div>

@@ -1,7 +1,7 @@
 ---
 title: rehype-prety-code
 tags: []
-icon: fluent-emoji-flat:construction
+icon: construction
 genre: article
 draft: true
 publishedAt: 2023-11-04
@@ -19,13 +19,13 @@ Leverage the accuracy of VS Code's syntax highlighting engine and the popularity
 of its themes ecosystem — use any VS Code theme you want!
 
 ```js title="Perfect syntax highlighting"
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document"
 
 // 🔥 Super granular and accurate highlighting
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
   }
 
   render() {
@@ -37,7 +37,7 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 ```
@@ -48,34 +48,34 @@ export default class MyDocument extends Document {
 ## Line numbers and line highlighting are supported
 
 ```js {4} showLineNumbers
-import { useFloating } from "@floating-ui/react";
+import { useFloating } from "@floating-ui/react"
 
 function MyComponent() {
-  const { refs, floatingStyles } = useFloating();
+  const { refs, floatingStyles } = useFloating()
 
   return (
     <>
       <div ref={refs.setReference} />
       <div ref={refs.setFloating} style={floatingStyles} />
     </>
-  );
+  )
 }
 ```
 
 ## Word highlighting
 
 ```js /floatingStyles/
-import { useFloating } from "@floating-ui/react";
+import { useFloating } from "@floating-ui/react"
 
 function MyComponent() {
-  const { refs, floatingStyles } = useFloating();
+  const { refs, floatingStyles } = useFloating()
 
   return (
     <>
       <div ref={refs.setReference} />
       <div ref={refs.setFloating} style={floatingStyles} />
     </>
-  );
+  )
 }
 ```
 
@@ -89,7 +89,7 @@ For instance, if you had the following code block:
 
 ```js
 function getStringLength(str) {
-  return str.length;
+  return str.length
 }
 ```
 
@@ -131,12 +131,12 @@ npm install rehype-pretty-code shiki
 ## Usage
 
 ```js /rehypePrettyCode/
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
-import rehypePrettyCode from "rehype-pretty-code";
+import { unified } from "unified"
+import remarkParse from "remark-parse"
+import remarkGfm from "remark-gfm"
+import remarkRehype from "remark-rehype"
+import rehypeStringify from "rehype-stringify"
+import rehypePrettyCode from "rehype-pretty-code"
 
 async function main() {
   const file = await unified()
@@ -147,12 +147,12 @@ async function main() {
       // See Options section below.
     })
     .use(rehypeStringify)
-    .process("`const numbers = [1, 2, 3]{:js}`");
+    .process("`const numbers = [1, 2, 3]{:js}`")
 
-  console.log(String(file));
+  console.log(String(file))
 }
 
-main();
+main()
 ```
 
 ### MDX
@@ -161,14 +161,14 @@ The following example shows how to use this package with Next.js.
 
 ```js
 // next.config.mjs
-import fs from "node:fs";
-import nextMDX from "@next/mdx";
-import rehypePrettyCode from "rehype-pretty-code";
+import fs from "node:fs"
+import nextMDX from "@next/mdx"
+import rehypePrettyCode from "rehype-pretty-code"
 
 /** @type {import('rehype-pretty-code').Options} */
 const options = {
   // See Options section below.
-};
+}
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -176,12 +176,12 @@ const withMDX = nextMDX({
     remarkPlugins: [],
     rehypePlugins: [[rehypePrettyCode, options]],
   },
-});
+})
 
 /** @type {import('next').NextConfig} */
-const nextConfig = { reactStrictMode: true };
+const nextConfig = { reactStrictMode: true }
 
-export default withMDX(nextConfig);
+export default withMDX(nextConfig)
 ```
 
 > **Make sure you have disabled** the `mdxRs{:.meta.object-literal.key}` option
@@ -205,7 +205,7 @@ You can disable this setting if necessary:
 ```js
 const options = {
   grid: false,
-};
+}
 ```
 
 ### Theme
@@ -217,7 +217,7 @@ be specified as a plain string:
 ```js
 const options = {
   theme: "one-dark-pro",
-};
+}
 ```
 
 You can use your own theme as well by passing the theme JSON:
@@ -227,10 +227,10 @@ const options = {
   theme: JSON.parse(
     fs.readFileSync(
       new URL("./themes/moonlight-ii.json", import.meta.url),
-      "utf-8",
-    ),
+      "utf-8"
+    )
   ),
-};
+}
 ```
 
 #### Theme background
@@ -241,7 +241,7 @@ theme:
 ```js
 const options = {
   keepBackground: false,
-};
+}
 ```
 
 #### Default code language
@@ -254,7 +254,7 @@ In this case, you can specify a default language:
 ```js
 const options = {
   defaultLang: "plaintext",
-};
+}
 ```
 
 Or you can also specify default languages for inline code and code blocks
@@ -266,7 +266,7 @@ const options = {
     block: "plaintext",
     inline: "plaintext",
   },
-};
+}
 ```
 
 ### Meta strings
@@ -330,14 +330,14 @@ differently based on their id.
 
 ````md
 ```js /age/#v /name/#v /setAge/#s /setName/#s /50/#i /'Taylor'/#i
-const [age, setAge] = useState(50);
-const [name, setName] = useState("Taylor");
+const [age, setAge] = useState(50)
+const [name, setName] = useState("Taylor")
 ```
 ````
 
 ```js /age/#v /name/#v /setAge/#s /setName/#s /50/#i /'Taylor'/#i
-const [age, setAge] = useState(50);
-const [name, setName] = useState("Taylor");
+const [age, setAge] = useState(50)
+const [name, setName] = useState("Taylor")
 ```
 
 The chars `<span>{:html}` receives a `data-chars-id="<id>"` attribute to style
@@ -369,7 +369,7 @@ const options = {
   tokensMap: {
     fn: "entity.name.function",
   },
-};
+}
 ```
 
 ```md
@@ -463,7 +463,7 @@ const options = {
     dark: "github-dark-dimmed",
     light: "github-light",
   },
-};
+}
 ```
 
 The `<code>{:html}` and `<pre>{:html}` elements will have the data attribute
@@ -495,21 +495,21 @@ the [hAST elements](https://github.com/syntax-tree/hast#element) directly:
 ```js
 const options = {
   onVisitLine(element) {
-    console.log("Visited line");
+    console.log("Visited line")
   },
   onVisitHighlightedLine(element) {
-    console.log("Visited highlighted line");
+    console.log("Visited highlighted line")
   },
   onVisitHighlightedChars(element) {
-    console.log("Visited highlighted chars");
+    console.log("Visited highlighted chars")
   },
   onVisitTitle(element) {
-    console.log("Visited title");
+    console.log("Visited title")
   },
   onVisitCaption(element) {
-    console.log("Visited caption");
+    console.log("Visited caption")
   },
-};
+}
 ```
 
 ### Custom highlighter
@@ -527,7 +527,7 @@ This is helpful if you'd like to configure other Shiki options, such as
 `langs{:.meta.object-literal.key}`.
 
 ```js
-import { getHighlighter, BUNDLED_LANGUAGES } from "shiki";
+import { getHighlighter, BUNDLED_LANGUAGES } from "shiki"
 
 const options = {
   getHighlighter: (options) =>
@@ -542,7 +542,7 @@ const options = {
         },
       ],
     }),
-};
+}
 ```
 
 ### Filter meta string
@@ -555,7 +555,7 @@ string before the library starts parsing it.
 ```js
 const options = {
   filterMetaString: (string) => string.replace(/filename="[^"]*"/, ""),
-};
+}
 ```
 
 ## Deployment and client-side highlighting
@@ -571,9 +571,9 @@ Copy the following files to your public directory:
 Then set the CDN path:
 
 ```js
-import { setCDN } from "shiki";
+import { setCDN } from "shiki"
 
-setCDN("/");
+setCDN("/")
 ```
 
 This will allow Shiki to load the WASM file and themes from your public
@@ -581,11 +581,11 @@ directory to perform client-side highlighting.
 [More info here](https://github.com/atomiks/rehype-pretty-code/issues/95).
 
 ```js
-import { unified } from "unified";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import rehypePrettyCode from "rehype-pretty-code";
+import { unified } from "unified"
+import rehypeStringify from "rehype-stringify"
+import remarkParse from "remark-parse"
+import remarkRehype from "remark-rehype"
+import rehypePrettyCode from "rehype-pretty-code"
 
 export default async function processMarkdown(text) {
   return await unified()
@@ -593,7 +593,7 @@ export default async function processMarkdown(text) {
     .use(remarkRehype)
     .use(rehypePrettyCode)
     .use(rehypeStringify)
-    .process(text);
+    .process(text)
 }
 ```
 

@@ -1,9 +1,10 @@
-import { addDynamicIconSelectors } from "@iconify/tailwind"
+import containerQueries from "@tailwindcss/container-queries"
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
+import animate from "tailwindcss-animate"
 
 export default {
-  darkMode: ["class"],
+  darkMode: ["selector", "[data-color-scheme='dark']"],
   content: ["./src/**/*.{astro,js,jsx,ts,tsx,html,mdx}"],
   theme: {
     container: {
@@ -14,6 +15,13 @@ export default {
       },
     },
     extend: {
+      minWidth: {
+        "screen-sm": "640px",
+        "screen-md": "768px",
+        "screen-lg": "1024px",
+        "screen-xl": "1280px",
+        "screen-2xl": "1536px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -97,10 +105,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/container-queries"),
-    addDynamicIconSelectors(),
-  ],
+  plugins: [animate, containerQueries],
 } satisfies Config

@@ -1,0 +1,93 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+import { Button } from "@/components/ui"
+import { ColorSchemeSelect } from "@/features/color-scheme"
+import { SearchModal } from "@/features/search"
+import { cn } from "@/lib/utils"
+
+export type Props = HTMLAttributes<"div">
+const { class: className, ...props } = Astro.props
+---
+
+<div
+  class={cn(
+    "mx-auto my-4 max-w-fit text-foreground hidden sm:block",
+    className
+  )}
+  {...props}
+>
+  <div
+    class="flex flex-row items-center gap-8 rounded-full border bg-background/60 p-2 backdrop-blur-xl"
+  >
+    <nav>
+      <ul class="flex flex-row items-center gap-0">
+        <li>
+          <Button
+            as="a"
+            variant="ghost"
+            href="/"
+            class={cn(
+              "rounded-full px-2.5 pl-3 text-base text-muted-foreground",
+              Astro.url.pathname === "/" && "text-accent-foreground"
+            )}
+          >
+            Home
+          </Button>
+        </li>
+        <li class="peer">
+          <Button
+            as="a"
+            variant="ghost"
+            href="/posts"
+            class={cn(
+              "rounded-full px-2.5 text-base text-muted-foreground",
+              Astro.url.pathname.startsWith("/posts") &&
+                "text-accent-foreground"
+            )}
+          >
+            Posts
+          </Button>
+        </li>
+        <li>
+          <Button
+            as="a"
+            variant="ghost"
+            href="/projects"
+            class={cn(
+              "rounded-full px-2.5 text-base text-muted-foreground",
+              Astro.url.pathname.startsWith("/projects") &&
+                "text-accent-foreground"
+            )}
+          >
+            Projects
+          </Button>
+        </li>
+        <li>
+          <Button
+            as="a"
+            variant="ghost"
+            href="/contact"
+            class={cn(
+              "rounded-full px-2.5 text-base text-muted-foreground",
+              Astro.url.pathname.startsWith("/contact") &&
+                "text-accent-foreground"
+            )}
+          >
+            Contact
+          </Button>
+        </li>
+      </ul>
+    </nav>
+    <div>
+      <ul class="flex flex-row gap-1">
+        <li>
+          <ColorSchemeSelect client:load />
+        </li>
+        <li>
+          <SearchModal client:load />
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
