@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Node.js
-        uses: jdx/mise-action@v2
+        uses: jdx/mise-action@5bb8f8c1911837cf42064e6490e7634fc842ee7e # v2
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -26,9 +26,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Node.js
-        uses: jdx/mise-action@v2
+        uses: jdx/mise-action@5bb8f8c1911837cf42064e6490e7634fc842ee7e # v2
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -40,9 +40,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Node.js
-        uses: jdx/mise-action@v2
+        uses: jdx/mise-action@5bb8f8c1911837cf42064e6490e7634fc842ee7e # v2
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
