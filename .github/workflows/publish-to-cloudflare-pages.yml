@@ -17,9 +17,9 @@ jobs:
       deployments: write
     steps:
       - name: Checkout respository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Node.js
-        uses: jdx/mise-action@v2
+        uses: jdx/mise-action@5bb8f8c1911837cf42064e6490e7634fc842ee7e # v2
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -27,7 +27,7 @@ jobs:
       - name: Build website
         run: pnpm run build
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
