@@ -1,8 +1,11 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   format:
@@ -17,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Format
-        run: pnpm run format:check
+        run: pnpm run format
 
   lint:
     runs-on: ubuntu-24.04
@@ -44,5 +47,7 @@ jobs:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Type check
+        run: pnpm run type-check
       - name: Build
         run: pnpm run build

@@ -1,7 +1,8 @@
-import { z, defineCollection } from "astro:content"
+import { defineCollection, z } from "astro:content"
 
-export const postSchema = z
-  .object({
+const postCollection = defineCollection({
+  type: "content",
+  schema: z.object({
     title: z.string(),
     genre: z.enum(["article", "slide"]),
     icon: z.string(),
@@ -11,12 +12,7 @@ export const postSchema = z
     ogImage: z.string().optional(),
     updatedAt: z.date().optional(),
     link: z.string().optional(),
-  })
-  .strict()
-
-const postCollection = defineCollection({
-  type: "content",
-  schema: postSchema,
+  }),
 })
 
 export const collections = {

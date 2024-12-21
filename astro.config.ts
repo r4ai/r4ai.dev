@@ -1,106 +1,79 @@
-import { defineConfig } from "astro/config"
-import tailwind from "@astrojs/tailwind"
-import react from "@astrojs/react"
-import remarkMath from "remark-math"
-import rehypeKatex from "rehype-katex"
-import svelte from "@astrojs/svelte"
-import { fileURLToPath } from "node:url"
-import * as path from "node:path"
-import sirv from "sirv"
-
 import mdx from "@astrojs/mdx"
-import type { AstroIntegration, RemarkPlugins } from "astro"
+import solid from "@astrojs/solid-js"
+import tailwind from "@astrojs/tailwind"
 import {
-  rehypeCustomCode,
-  type RehypeCustomCodeOptions,
-} from "rehype-custom-code"
-import remarkMetaString from "remark-meta-string"
-import { remarkEmbed } from "./src/lib/remarkPlugins/remarkEmbed"
-import {
-  remarkCallout,
   type Options as RemarkCalloutOptions,
+  remarkCallout,
 } from "@r4ai/remark-callout"
+import remarkEmbed, { type RemarkEmbedOptions } from "@r4ai/remark-embed"
+import {
+  transformerLinkCard,
+  type TransformerLinkCardOptions,
+} from "@r4ai/remark-embed/transformers"
+import {
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers"
+import { defineConfig } from "astro/config"
+import rehypeKatex from "rehype-katex"
+import remarkMath from "remark-math"
+import { visualizer } from "rollup-plugin-visualizer"
+import icons from "unplugin-icons/vite"
 
-import * as pagefind from "pagefind"
-
-const pageFind = (): AstroIntegration => {
-  let outDir: string | undefined = undefined
-
-  return {
-    name: "pagefind",
-    hooks: {
-      "astro:config:setup": ({ config }) => {
-        outDir = fileURLToPath(config.outDir)
-      },
-      "astro:server:setup": async ({ server }) => {
-        if (!outDir) {
-          throw new Error("outDir is undefined")
-        }
-
-        const pagefindMiddleware = sirv(outDir, {
-          dev: true,
-          etag: true,
-          maxAge: 0,
-        })
-
-        server.middlewares.use((req, res, next) => {
-          if (req.url?.startsWith("/pagefind")) {
-            return pagefindMiddleware(req, res, next)
-          }
-          next()
-        })
-      },
-      "astro:build:done": async () => {
-        if (!outDir) {
-          throw new Error("outDir is undefined")
-        }
-
-        // Create a Pagefind search index to work with
-        const { index } = await pagefind.createIndex({})
-        if (!index) {
-          throw new Error("index is undefined")
-        }
-
-        // Index all HTML files in a directory
-        await index.addDirectory({
-          path: outDir,
-        })
-
-        // Write the index to disk
-        await index.writeFiles({
-          outputPath: path.join(outDir, "pagefind"),
-        })
-      },
-    },
-  }
-}
+import {
+  transformerLineNumbers,
+  transformerMetaDiff,
+  transformerTitle,
+} from "./src/lib/shiki-transformers"
+import remarkInlineCode from "./src/lib/unified-plugins/remark-inline-code"
+import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
+import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://r4ai.dev",
-  vite: {
-    ssr: {
-      noExternal: ["react-tweet"],
-    },
-  },
   prefetch: true,
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
-    react(),
-    svelte(),
     mdx(),
-    pageFind(),
+    solid(),
   ],
   redirects: {
-    "/posts/raw/[...slug]": "/posts/[...slug]/raw",
+    "/posts/raw/[...slug]": "/posts/[...slug].mdx",
+    "/posts/[...slug]/raw": "/posts/[...slug].mdx",
+  },
+  vite: {
+    plugins: [
+      pagefind(),
+      rawTransform(),
+      icons({ compiler: "solid" }),
+      visualizer({
+        emitFile: true,
+        filename: "stats.html",
+      }),
+    ],
   },
   markdown: {
     remarkPlugins: [
-      remarkMath as unknown as RemarkPlugins[number],
-      remarkMetaString as unknown as RemarkPlugins[number],
-      remarkEmbed,
+      remarkMath,
+      remarkInlineCode,
+      [
+        remarkEmbed,
+        {
+          transformers: [
+            transformerLinkCard({
+              tagName: () => "link-card",
+              properties: (og) => ({ og: JSON.stringify(og) }),
+              children: () => [],
+            } satisfies TransformerLinkCardOptions),
+          ],
+        } satisfies RemarkEmbedOptions,
+      ],
       [
         remarkCallout,
         {
@@ -128,26 +101,27 @@ export default defineConfig({
         } satisfies RemarkCalloutOptions,
       ],
     ],
-    rehypePlugins: [
-      rehypeKatex,
-      [
-        rehypeCustomCode,
-        {
-          shouldExportCodeAsProps: true,
-          shiki: {
-            themes: {
-              light: "github-light",
-              dark: "one-dark-pro",
-            },
-          },
-        } satisfies RehypeCustomCodeOptions,
-      ],
-    ],
+    rehypePlugins: [rehypeKatex],
     remarkRehype: {
       footnoteLabel: "脚注",
       footnoteLabelTagName: "h2",
       footnoteLabelProperties: {},
     },
-    syntaxHighlight: false,
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "one-dark-pro",
+      },
+      transformers: [
+        transformerMetaDiff(),
+        transformerMetaHighlight(),
+        transformerMetaWordHighlight(),
+        transformerNotationDiff(),
+        transformerNotationHighlight(),
+        transformerNotationWordHighlight(),
+        transformerLineNumbers(),
+        transformerTitle(),
+      ],
+    },
   },
 })

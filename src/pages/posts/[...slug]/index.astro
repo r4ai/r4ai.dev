@@ -1,128 +1,67 @@
 ---
-import Tooltip from "@/components/Tooltip.astro"
-import { getPostEntries, type Post } from "@/lib/posts"
-import Toc from "@/components/Toc.astro"
-import Icon from "@/components/Icon.astro"
-import {
-  Callout,
-  CalloutBody,
-  CalloutRoot,
-  CalloutTitle,
-} from "@/components/markdown"
-import { isDev } from "@/lib/dev"
-import PostLayout from "@/layouts/PostLayout.astro"
-import CodeBlock from "@/components/markdown/code_block/CodeBlock.astro"
-import Embed from "@/components/markdown/link/Embed.astro"
-import Blockquote from "@/components/markdown/Blockquote.astro"
-import CustomImage from "@/components/markdown/image/ImageComponent.astro"
-import { join } from "node:path"
+import "@/styles/katex.css"
 
-export async function getStaticPaths() {
-  const posts = await getPostEntries()
-  return posts
-}
+import type { GetStaticPaths } from "astro"
+import { getCollection } from "astro:content"
 
-type Props = Post["props"]
+import { RootLayout } from "@/components/layouts"
+import { components } from "@/components/mdx-components"
+import { cn } from "@/lib/utils"
+
+import { PostHeader, TableOfContents } from "./_components"
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("posts", ({ data }) =>
+    import.meta.env.DEV ? true : !data.draft
+  )
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}) satisfies GetStaticPaths
 
 const { entry } = Astro.props
+
 const { Content, headings } = await entry.render()
-
-const formatDate = (date: Date) =>
-  new Date(date).toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  })
-
-const ogImageUrl = new URL(join(Astro.url.pathname, "ogimage.png"), Astro.site)
 ---
 
-<PostLayout
+<RootLayout
   title={entry.data.title}
-  ogType="article"
-  ogImage={ogImageUrl}
-  twitterCard="summary_large_image"
+  image={new URL(`${Astro.url.href}.png`)}
+  og={{ type: "article" }}
 >
-  <main
-    class="mx-auto my-20 flex w-full max-w-5xl flex-col gap-16 px-6"
-    transition:name={`post-/posts/${entry.slug}`}
-    data-pagefind-main
-  >
-    <div class="flex flex-col items-center justify-center">
-      <Icon class="w-24" icon={entry.data.icon} pagefindImage />
-      <h1
-        class="mb-6 mt-4 text-center text-3xl font-black lg:text-4xl"
-        set:html={entry.data.title}
-      />
-      <div class="flex flex-col items-center justify-center gap-4">
-        <div class="flex flex-row gap-1 text-gray-500">
-          <p class="flex flex-row items-center gap-1">
-            <span class="icon-[lucide--calendar-days] text-xl"></span>
-            <span>{formatDate(entry.data.publishedAt)} に公開</span>
-          </p>
-          {
-            entry.data.updatedAt && (
-              <>
-                ・
-                <div>
-                  <Tooltip>
-                    <p slot="trigger" class="flex flex-row items-center gap-1">
-                      <span class="icon-[lucide--refresh-ccw] text-lg" />
-                      <span>{formatDate(entry.data.updatedAt)}</span>
-                    </p>
-                    <p
-                      slot="content"
-                      class="mt-7 rounded-lg bg-neutral-800 px-2 py-1 text-sm text-neutral-200"
-                    >
-                      最終更新日
-                    </p>
-                  </Tooltip>
-                </div>
-              </>
-            )
-          }
-        </div>
-        <div
-          class="flex flex-row gap-1 text-gray-500 transition hover:text-gray-700 dark:hover:text-gray-400"
-        >
-          <a
-            class="underline hover:cursor-pointer"
-            href={`/posts/${entry.slug}/raw`}
-          >
-            Markdownファイル
-            <span class="icon-[lucide--external-link]"></span>
-          </a>
-        </div>
-      </div>
+  <div class="my-12 grid w-full gap-20" data-margin="true">
+    <PostHeader
+      slug={entry.slug}
+      title={entry.data.title}
+      icon={entry.data.icon}
+      tags={entry.data.tags ?? []}
+      publishedAt={entry.data.publishedAt}
+      updatedAt={entry.data.updatedAt}
+    />
+    <div class="mx-auto w-full max-w-lg lg:hidden">
+      <TableOfContents class="mx-5" headings={headings} client:visible />
     </div>
     <div
-      class="mx-auto flex w-full max-w-full flex-col gap-12 md:flex-row md:gap-6 lg:gap-16"
+      class="grid w-full grid-cols-1 gap-8 px-5 md:grid-cols-[300px_minmax(0,1fr)_300px] lg:px-8"
     >
       <div
-        class="prose order-2 max-w-none flex-shrink flex-grow overflow-auto dark:prose-invert"
+        class={cn(
+          "col-start-1 col-span-3 lg:col-span-2 2xl:col-span-1 2xl:col-start-2",
+          "*:w-full *:my-6 first:*:mt-0 [&>:is(ul,ol)_:is(li,li>*)]:my-4",
+          "[&>:is(h1,h2):not(:first-child)]:mt-16",
+          "[&>:is(h3,h4):not(:first-child)]:mt-12"
+        )}
       >
-        {
-          entry.data.draft && isDev() && (
-            <Callout type="caution" title="この記事はドラフトです">
-              現在、ドラフトの記事を表示しています。プロダクションビルドには含まれません。
-            </Callout>
-          )
-        }
-        <Content
-          components={{
-            pre: CodeBlock,
-            embed: Embed,
-            blockquote: Blockquote,
-            img: CustomImage,
-            "callout-root": CalloutRoot,
-            "callout-title": CalloutTitle,
-            "callout-body": CalloutBody,
-          }}
+        <Content {components} />
+      </div>
+      <div class="relative col-start-3">
+        <TableOfContents
+          class="sticky top-20 hidden max-h-[calc(100vh-10rem)] lg:block"
+          headings={headings}
+          client:visible
         />
       </div>
-      <div class="order-1 w-full md:order-2 md:w-fit">
-        <Toc headings={headings} class="sticky top-20" />
-      </div>
     </div>
-  </main>
-</PostLayout>
+  </div>
+</RootLayout>

@@ -1,14 +1,25 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "exactOptionalPropertyTypes": false,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   },
-  "include": ["./src", "./astro.config.ts"],
+  "include": [
+    "src/**/*",
+    "scripts/**/*",
+    ".storybook/**/*",
+    "astro.config.ts",
+    "eslint.config.js",
+    "lint-staged.config.js",
+    "postcss.config.cjs",
+    "prettier.config.js",
+    "tailwind.config.ts"
+  ],
   "mdx": {
     "plugins": [
       ["remark-frontmatter", ["toml", "yaml"]],

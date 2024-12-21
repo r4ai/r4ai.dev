@@ -1,0 +1,79 @@
+---
+import type { PartiallyPartial } from "@/lib/utils"
+
+import { OpenGraph, type OpenGraphProps } from "./open-graph"
+import { TwitterCard, type TwitterCardProps } from "./twitter-card"
+import type {
+  TwitterAppCard,
+  TwitterPlayerCard,
+  TwitterSummaryCard,
+  TwitterSummaryLargeImageCard,
+} from "./twitter-card/twitter-card-schema"
+
+export type Props = {
+  title: string
+  titleSuffix?: string | undefined
+  description?: string
+  image: OpenGraphProps["image"]
+  locale: OpenGraphProps["locale"]
+  favicon: string
+  url?: URL
+  og?: Partial<OpenGraphProps>
+  twitter?:
+    | PartiallyPartial<TwitterSummaryCard, "title" | "description">
+    | PartiallyPartial<TwitterSummaryLargeImageCard, "title" | "description">
+    | PartiallyPartial<TwitterPlayerCard, "title" | "description">
+    | PartiallyPartial<TwitterAppCard, "description">
+}
+const props = Astro.props
+
+const title = props.titleSuffix
+  ? `${props.title} | ${props.titleSuffix}`
+  : props.title
+const url = props.url ?? Astro.url
+
+const og: OpenGraphProps = {
+  title: props.og?.title ?? props.title,
+  description: props.og?.description ?? props.description,
+  type: props.og?.type ?? "website",
+  siteName: props.og?.siteName,
+  locale: props.og?.locale,
+  image: props.og?.image ?? props.image,
+  url: props.og?.url ?? url,
+}
+
+const twitter: TwitterCardProps | undefined =
+  props.twitter?.card === "summary" ||
+  props.twitter?.card === "summary_large_image"
+    ? {
+        ...props.twitter,
+        title: props.twitter.title ?? props.title,
+        description: props.twitter.description ?? props.description,
+      }
+    : props.twitter?.card === "player"
+      ? {
+          ...props.twitter,
+          card: props.twitter.card,
+          title: props.twitter.title ?? props.title,
+          description: props.twitter.description ?? props.description,
+          image: props.twitter.image,
+          imageAlt: props.twitter.imageAlt,
+        }
+      : props.twitter?.card === "app"
+        ? {
+            ...props.twitter,
+            description: props.twitter.description ?? props.description,
+          }
+        : undefined
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href={props.favicon} />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="canonical" href={url.href} />
+<title>{title}</title>
+{props.description && <meta name="description" content={props.description} />}
+<OpenGraph {...og} />
+{twitter && <TwitterCard {...twitter} />}
