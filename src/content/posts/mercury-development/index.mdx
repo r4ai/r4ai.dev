@@ -1,0 +1,69 @@
+---
+title: Mercury という MDX ベースのスライド作成ツールを作っている話
+tags:
+  - Mercury
+  - MDX
+  - React
+  - Vite
+icon: construction
+genre: article
+draft: true
+publishedAt: 2024-12-21
+---
+
+https://github.com/r4ai/mercury
+
+## 概要
+
+Marcury は、MDX[^mdx] でスライドを作成するツールです。
+Slidev の MDX 版のようなものだと思ってください。
+
+次が実際にスライドを作成しているデモ動画です。
+
+<video controls class="rounded-lg">
+  <source
+    src="https://github.com/user-attachments/assets/cc946922-ba2d-4da4-9c8a-1baf63b97867"
+    type="video/mp4"
+  />
+</video>
+
+### 特徴
+
+Mercury は、以下のような特徴を持っています。
+
+- **柔軟なカスタマイズ機能**
+
+  - Reactコンポーネントを使ってスライドをカスタマイズ
+  - TailwindCSSなどでスタイリング可能
+
+- **高速なプレビュー機能**
+
+  - ファイルの変更を検知して自動でページを更新 (HMR)
+  - MercuryはViteのプラグインとして提供されるため、Viteの持つ強力な機能を利用可能
+
+- **スライドをウェブサイトとして公開可能**
+  - スライド全体が一つのSPAとして動作するため、GitHub Pagesなどで公開可能
+  - ブラウザの印刷機能を用いて、PDF出力も可能
+
+Vite のプラグインとして Marcury を実装することで、Vite の持つ強力な機能とエコシステムを利用可能にしました。
+
+また、大半の機能を React コンポーネントとして実装しているため、React の知識があればカスタマイズも容易です。
+例えば、各スライドのルーティングやレイアウト、コードブロック、数式などは全て React コンポーネントで実装されています。
+これらのコンポーネントを置き換えることで、スライドの見た目や機能を自由にカスタマイズできます。
+
+さらに、レンダラーを差し替えることで、React 以外に Svelte や SolidJS などのUIライブラリにも対応可能です（現時点では React でのみ動作確認済み）。
+
+### Slidev との違い
+
+| 特徴         | Mercury                               | Slidev   |
+| ------------ | ------------------------------------- | -------- |
+| 言語         | MDX                                   | Markdown |
+| UIライブラリ | React (今後 SolidJS などにも対応予定) | Vue      |
+| スタイル     | TailwindCSS                           | UnoCSS   |
+| ビルドツール | Vite                                  | Vite     |
+
+## アーキテクチャ
+
+[^mdx]:
+    文章を作るためのマークアップ言語（Markdown + JSX） \
+    https://mdxjs.com/
