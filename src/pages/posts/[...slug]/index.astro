@@ -25,13 +25,12 @@ const { entry } = Astro.props
 const { Content, headings } = await entry.render()
 ---
 
-<!-- todo: change example.com to valid ogp image url -->
 <RootLayout
   title={entry.data.title}
   image={new URL(`${Astro.url.href}.png`)}
   og={{ type: "article" }}
 >
-  <div class="my-12 grid gap-20" data-margin="true">
+  <div class="my-12 grid w-full gap-20" data-margin="true">
     <PostHeader
       slug={entry.slug}
       title={entry.data.title}
@@ -44,7 +43,7 @@ const { Content, headings } = await entry.render()
       <TableOfContents class="mx-5" headings={headings} client:visible />
     </div>
     <div
-      class="grid w-full grid-cols-[300px_minmax(0,1fr)_300px] gap-8 px-5 lg:px-8"
+      class="grid w-full grid-cols-1 gap-8 px-5 md:grid-cols-[300px_minmax(0,1fr)_300px] lg:px-8"
     >
       <div
         class={cn(
