@@ -1,0 +1,655 @@
+---
+title: MDX ベースのスライド作成ツールを作っている話
+tags:
+  - Mercury
+  - MDX
+  - React
+  - Vite
+icon: droplet
+genre: article
+draft: false
+publishedAt: 2024-12-22
+---
+
+import { Image } from "@/components/mdx-components"
+
+> 本記事は[東京理科大学プログラミングサークル Advent Calendar 2024](https://adventar.org/calendars/10939)の22日目です。
+
+## 概要
+
+> [!warning]
+> Mercury は現在制作中のライブラリであり、まだ一般に利用できる状態ではありません。\
+> ソースコードは [GitHub](https://github.com/r4ai/mercury) にて公開しているので、興味のある方はスターをつけていただけると嬉しいです。
+
+Marcury は、MDX[^mdx] でスライドを作成するツールです。\
+Slidev の MDX 版のようなものだと思ってください。
+
+次が実際にスライドを作成しているデモ動画です。
+
+<video controls class="rounded-lg">
+  <source
+    src="https://github.com/user-attachments/assets/cc946922-ba2d-4da4-9c8a-1baf63b97867"
+    type="video/mp4"
+  />
+</video>
+
+### 特徴
+
+Mercury は、以下のような特徴を持っています。
+
+- **柔軟なカスタマイズ機能**
+
+  - Reactコンポーネントを使ってスライドをカスタマイズ
+  - TailwindCSSなどでスタイリング可能
+
+- **高速なプレビュー機能**
+
+  - ファイルの変更を検知して自動でページを更新 (HMR)
+  - MercuryはViteのプラグインとして提供されるため、Viteの持つ強力な機能を利用可能
+
+- **スライドをウェブサイトとして公開可能**
+  - スライド全体が一つのSPAとして動作するため、GitHub Pagesなどで公開可能
+  - ブラウザの印刷機能を用いて、PDF出力も可能
+
+Vite のプラグインとして Marcury を実装することで、Vite の持つ強力な機能とエコシステムを利用可能にしました。
+
+また、大半の機能を React コンポーネントとして実装しているため、React の知識があればカスタマイズも容易です。
+例えば、各スライドのルーティングやレイアウト、コードブロック、数式などは全て React コンポーネントで実装されています。
+これらのコンポーネントを置き換えることで、スライドの見た目や機能を自由にカスタマイズできます。
+
+さらに、レンダラーを差し替えることで、React 以外に Svelte や SolidJS などのUIライブラリにも対応可能です（現時点では React でのみ動作確認済み）。
+
+### Slidev との違い
+
+| 特徴         | Mercury                               | Slidev   |
+| ------------ | ------------------------------------- | -------- |
+| 言語         | MDX                                   | Markdown |
+| UIライブラリ | React (今後 SolidJS などにも対応予定) | Vue      |
+| スタイル     | TailwindCSS                           | UnoCSS   |
+| ビルドツール | Vite                                  | Vite     |
+
+## アーキテクチャ
+
+import arch from "./assets/arch.svg"
+
+Mercury では、次のようにMDXをJSXに変換し、JSXをReactでレンダリングすることでスライドを作成します。
+
+<Image src={arch} alt="Mercury のアーキテクチャ" title="Mercury のアーキテクチャ" class="max-w-screen-sm bg-zinc-950 p-4 dark:bg-background" />
+
+そしてこの処理は、次のパッケージ群によって行われます。
+
+- `vite-plugin-mercury`: Mercury のコア機能を提供する Vite プラグイン
+  - MDX ファイルをインポートした際に、MDX を JSX に変換する
+    - MDX から JSX への変換は `@mdx-js/rollup` を利用
+    - 構文の拡張は、`remark` と `rehype` のプラグインを作成・利用することで行う
+- `remark-mercury`: Mercury の独自文法を解釈する remark プラグイン
+  - `---` で区切られた区間を1スライドとして解釈
+- `mercury-ui`: Mercury のデフォルトのUIライブラリ
+  - スライドのレイアウトや数式、コードブロック、リンクや見出しなどのコンポーネントを提供する
+
+### Markdown の構文の拡張
+
+Mercuryでは、remark のプラグインを作成して mdast (Markdown AST) を操作することで、Markdown の構文を拡張しています。
+
+デフォルトで、以下のプラグインが有効化されています。これらは、オプションから無効化することも可能です。
+
+- `remark-mercury`: Mercury の独自文法を解釈
+  - `---` で区切られた区間を1スライドとして解釈
+- `remark-gfm`: GitHub Flavored Markdown の構文を有効化
+- `remark-math`: 数式を有効化（`$`, `$$` で囲まれた数式を解釈）
+
+#### 数式の表示
+
+Mercury では、`remark-math` で解釈した数式を `react-katex` により KaTeX で表示しています。
+
+#### ソースコードのハイライト
+
+Marcury では、`rehype-shiki` を利用して、コードブロックのハイライトを行っています。
+
+また、Shiki の Transformer を利用することで、Diff や行・単語ハイライト、コードブロックのタイトル表示などの機能を提供しています。
+
+### Custom Components
+
+Mercury では、スライドの見た目や機能は全て React コンポーネントとして実装されています。
+
+例えば、次の MDX は、以下のような JSX へ変換されます[^mdx-to-jsx-example]。
+
+````mdx
+# Hello, World!
+
+- これはリストです
+- これもリストです
+
+---
+
+# 2枚目のスライド
+
+$$
+a^2 + b^2 = c^2
+$$
+
+```ts
+console.log("Hello, World!");
+```
+````
+
+```jsx
+import { Presentation } from "@r4ai/mercury-ui";
+
+const MDXContent = (props = {}) => {
+  const components = {
+    annotation: "annotation",
+    code: "code",
+    h1: "h1",
+    li: "li",
+    math: "math",
+    mi: "mi",
+    mn: "mn",
+    mo: "mo",
+    mrow: "mrow",
+    msup: "msup",
+    pre: "pre",
+    semantics: "semantics",
+    span: "span",
+    ul: "ul",
+    ...props.components
+  }
+  const { Presentation, Slide } = components;
+
+  return (
+    <Presentation slidesLength="2">
+      <Slide index="0">
+        <components.h1>Hello, World!</components.h1>
+        <components.ul>
+          <components.li>これはリストです</components.li>
+          <components.li>これもリストです</components.li>
+        </components.ul>
+      </Slide>
+      <Slide index="1">
+        <components.h1>2枚目のスライド</components.h1>
+        <components.span class="katex-display">
+          <components.span class="katex">
+            <components.span class="katex-mathml">{/* a^2 + b^2 = c^2 */}</components.span>
+            <components.span class="katex-html" aria-hidden="true">{/* a^2 + b^2 = c^2 */}</components.span>
+          </components.span>
+        </components.span>
+        <components.pre
+          class="shiki shiki-temes one-light material-theme-darker"
+          style={{
+            backgroundColor: "#FAFAFA",
+            "--shiki-dark-bg": "#212121",
+            color: "#383A42",
+            "--shiki-dark": "#EEFFFF"
+          }},
+          tabIndex: "0",
+        >
+          <components.code>
+            <components.span className="line">{/* console.log("Hello, World!") */}</components.span>
+          </components.code>
+        </components.pre>
+      </Slide>
+    </Presentation>
+  )
+}
+
+export default ({ components }) => <Presentation slidesLength={2} Content={MDXContent} components={components} />
+```
+
+このように、`h1` や `li` などの要素は、`props.components` として渡されたコンポーネントを使ってレンダリングされます。
+従って、`props`からこれらコンポーネントを差し替えることで、スライドの見た目や機能を自由にカスタマイズできます。
+
+例えば、次のように `components` を差し替えることで、スライドの見た目を変更できます。
+
+```tsx
+import { PresentationsProvider } from "@r4ai/mercury-ui"
+import React from "react"
+import ReactDOM from "react-dom/client"
+import Presentation from "./Presentation.mdx"
+import "katex/dist/katex.min.css"
+import "./main.css"
+import "@r4ai/mercury-ui/style.css"
+
+const Heading1 = (
+  props: React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLHeadingElement>,
+    HTMLHeadingElement
+  >,
+) => {
+  return <h1 className="text-4xl font-bold underline text-red-600" {...props} />
+}
+
+// biome-ignore lint/style/noNonNullAssertion: #root is always present in the DOM
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <PresentationsProvider>
+      <Presentation components={{ h1: Heading1 }} />
+    </PresentationsProvider>
+  </React.StrictMode>,
+)
+```
+
+`mercury-ui` で行っていることはこれらコンポーネントに対応するデフォルトの実装を提供することであり、Mercury の大半はこれらコンポーネントの実装によって成り立っています。
+
+例えば、スライドのルーティングやレイアウトは、wouter を使って次のように `<Presentation>` と `<Slide>` を実装することで実現しています。
+
+```tsx title=presentation-provider.tsx
+import { ThemeProvider } from "next-themes"
+import type { FC, ReactNode } from "react"
+import { Router, type RouterProps } from "wouter"
+
+type WithoutChildren<T> = Omit<T, "children">
+
+type ThemeProviderProps = Parameters<typeof ThemeProvider>[0]
+
+export type PresentationsProviderProps = {
+  children?: ReactNode
+
+  /**
+   * Props for the router component
+   *
+   * @see https://github.com/molefrog/wouter?tab=readme-ov-file#router-hookhook-parserfn-basebasepath-hrefsfn-
+   */
+  router?: WithoutChildren<RouterProps>
+
+  /**
+   * Props for the theme provider component
+   *
+   * @see https://github.com/pacocoursey/next-themes?tab=readme-ov-file#themeprovider
+   */
+  theme?: WithoutChildren<ThemeProviderProps>
+}
+
+export const PresentationsProvider: FC<PresentationsProviderProps> = ({
+  router,
+  theme,
+  children,
+}) => {
+  return (
+    <Router {...router}>
+      <ThemeProvider attribute="data-color-scheme" {...theme}>
+        {children}
+      </ThemeProvider>
+    </Router>
+  )
+}
+```
+
+```tsx title=presentation.tsx
+import type { MDXComponents, MDXContent } from "mdx/types"
+import type { FC } from "react"
+import { Redirect, Route, Switch } from "wouter"
+import { components as defaultComponents } from "../components"
+import { ControlMenu } from "../control-menu"
+import { Slide } from "../slide"
+
+export type PresentationProps = {
+  base?: string
+  slidesLength: number
+  components?: MDXComponents | undefined
+  Content: MDXContent
+}
+
+export const Presentation: FC<PresentationProps> = ({
+  base = "/",
+  slidesLength,
+  components,
+  Content,
+}) => {
+  return (
+    <Route path={base} nest>
+      <div className="h-full">
+        <Switch>
+          <Route path="/">
+            <Redirect to="/0" />
+          </Route>
+          <Content components={{ ...defaultComponents, ...components }} />
+        </Switch>
+        <ControlMenu
+          data-control-menu
+          className="absolute bottom-2 left-4"
+          slidesLength={slidesLength}
+        />
+      </div>
+    </Route>
+  )
+}
+```
+
+```tsx title=slide.tsx
+import { type FC, type ReactNode, useEffect, useId } from "react"
+import { Route as WouterRoute, useLocation } from "wouter"
+import { cn } from "../../libs/utils"
+
+export type SlideProps = {
+  index: number
+  route?: boolean
+  children?: ReactNode
+}
+
+export const Slide: FC<SlideProps> = ({ index, route = true, children }) => {
+  const id = useId()
+  const [location] = useLocation()
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: when scale changes, we need to update the transform
+  useEffect(() => {
+    const el = document.getElementById(id)
+    if (!el) return
+
+    resize(el)
+
+    window.addEventListener("resize", () => {
+      resize(el)
+    })
+  }, [id, location])
+
+  return (
+    <Route route={route} path={`/${index}`}>
+      <div
+        id={id}
+        data-slide
+        className={cn(
+          "my-auto aspect-[16/9] w-[960px] space-y-4 border p-8",
+          route &&
+            "-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 scale-[var(--slide-scale)]",
+          "print:top-0 print:left-0 print:h-[14.29cm] print:w-[25.4cm] print:translate-x-0 print:translate-y-0 print:scale-100",
+        )}
+      >
+        {children}
+      </div>
+    </Route>
+  )
+}
+
+type RouteProps = {
+  route: boolean
+  path: string
+  children: ReactNode
+}
+
+const Route: FC<RouteProps> = ({ route, path, children }) =>
+  route ? <WouterRoute path={path}>{children}</WouterRoute> : children
+
+const resize = (el: HTMLElement) => {
+  const elWidth = el?.offsetWidth
+  const elHeight = el?.offsetHeight
+  const viewportWidth = window.innerWidth
+  const viewportHeight = window.innerHeight
+
+  const widthScale = viewportWidth / elWidth
+  const heightScale = viewportHeight / elHeight
+  const scale = Math.min(widthScale, heightScale)
+
+  el?.style.setProperty("--slide-scale", scale.toString())
+}
+```
+
+## 使用例
+
+import ridaisai2024 from "./assets/ridaisai-2024.pdf?url"
+
+[examples ディレクトリ](https://github.com/r4ai/mercury/tree/main/examples) に、Mercury を使ったスライドの例があるので、興味のある方は見てみてください。
+
+例として、[MDXファイル](https://github.com/r4ai/mercury/blob/main/examples/ridaisai-2024/src/presentation.mdx?plain=1) とそれに対応するスライドのPDFを以下に示します。
+
+``````mdx
+{/* URL: https://github.com/r4ai/mercury/blob/main/examples/ridaisai-2024/src/presentation.mdx?plain=1 */}
+
+import { Button } from "@r4ai/mercury-ui"
+import { Title } from "./components/title"
+import { Center } from "./components/center"
+import { FireworkButton } from "./components/firework-button"
+import demoVideoLink from "./assets/demo-video-link.svg"
+import demoSlide from "./assets/demo-slide.png"
+import architecture from "./assets/arch.drawio.svg"
+import calloutDemo from "./assets/callout-demo.png"
+import ArrowBigRightIcon from "~icons/lucide/arrow-big-right"
+
+<Title
+  title="作ったもの in 2024"
+  affiliation="情報計算科学科 学部3年"
+  author="Rai"
+/>
+
+---
+
+# 作ったもの一覧
+
+1. `Mercury` (スライド作成ツール)
+2. `@r4ai/remark-callout` (MarkdownにCallout機能を追加するプラグイン)
+3. `alg.tus-ricora.com` (RICORA Programming Teamのウェブサイト)
+
+---
+
+<Center title="Mercury" description="スライド作成ツール" />
+
+---
+
+# Mercury / 概要
+
+- Marcuryは、MDXでスライドを作成できるツールです
+  - MDX: 文章を作るためのマークアップ言語 (Markdown + JSX)
+- このスライドもMercuryで作成しています
+
+<br />
+
+- **デモ動画**
+  - URL: https://github.com/user-attachments/assets/cc946922-ba2d-4da4-9c8a-1baf63b97867
+  - QRコード:
+
+    <img src={demoVideoLink} className="size-36" />
+
+---
+
+# Mercury / 特徴
+
+- **柔軟なカスタマイズ機能**
+  - Reactコンポーネントを使ってスライドをカスタマイズ
+  - TailwindCSSなどでスタイリング可能
+
+- **高速なプレビュー機能**
+  - ファイルの変更を検知して自動でページを更新 (HMR)
+  - MercuryはViteのプラグインとして提供されるため、Viteの持つ強力な機能を利用可能
+
+- **スライドをウェブサイトとして公開可能**
+  - スライド全体が一つのSPAとして動作するため、GitHub Pagesなどで公開可能
+  - ブラウザの印刷機能を用いて、PDF出力も可能
+
+---
+
+# Mercury / スライドの生成
+
+<div className="flex flex-row gap-4 justify-center items-center">
+  <div className="!text-xs">
+    ````mdx title=presentation.mdx
+    # slide 1
+
+    - 吾輩は猫である
+    - $e^{i\pi} + 1 = 0$
+
+    ```js
+    // print "Hello, world!"
+    console.log("Hello, world!");
+    ```
+
+    $\epsilon - \delta$ definition of limit:
+
+    $
+    \forall \epsilon > 0, \exists \delta > 0
+    \text{ s.t. } |x - a| < \delta
+    \Rightarrow
+    |f(x) - f(a)| < \epsilon
+    $
+    ````
+  </div>
+  <div className="flex flex-col gap-0 justify-center items-center font-bold">
+    生成
+    <ArrowBigRightIcon className="size-12" />
+  </div>
+  <div>
+    <img src={demoSlide} className="border-2" />
+  </div>
+</div>
+
+---
+
+# Mercury / ReactとTailwindCSSによるカスタマイズ
+
+<div class="space-y-8">
+  <div class="flex flex-row items-center gap-1">
+    <span class="text-red-600 underline">You</span>
+    <span class="text-green-500 italic hover:bg-red-400 font-serif">can</span>
+    <div class="bg-gradient-to-r from-cyan-600 to-blue-500 p-1 rounded-sm text-white animate-bounce">style</div>
+    <span class="border p-1 rounded-full hover:bg-muted font-mono">with</span>
+    <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-md p-1 animate-pulse">TailwindCSS</span>
+  </div>
+
+  <div class="flex flex-row gap-4 items-center">
+    <div>
+      You can use React components:
+    </div>
+    <FireworkButton>Click me</FireworkButton>
+    <FireworkButton variant="secondary">Click me</FireworkButton>
+    <FireworkButton variant="outline">Click me</FireworkButton>
+    <FireworkButton variant="ghost">Click me</FireworkButton>
+    <FireworkButton variant="link">Click me</FireworkButton>
+  </div>
+
+  ```tsx title=presentation.mdx
+  <div class="flex flex-row gap-4 items-center">
+    <div>
+      You can use React components:
+    </div>
+    <FireworkButton>Click me</FireworkButton>
+    <FireworkButton variant="secondary">Click me</FireworkButton>
+    <FireworkButton variant="outline">Click me</FireworkButton>
+    <FireworkButton variant="ghost">Click me</FireworkButton>
+    <FireworkButton variant="link">Click me</FireworkButton>
+  </div>
+  ```
+</div>
+
+---
+
+# Mercury / アーキテクチャ
+
+- Viteのpluginとして実装している
+- `.mdx`をimportした際に、以下の処理を行う
+
+<img src={architecture} />
+
+---
+
+import mercuryRepoLink from "./assets/mercury-repo.png"
+
+# @r4ai/remark-callout / 各種リンク
+
+- リポジトリ:
+  - https://github.com/r4ai/mercury
+
+    <img src={mercuryRepoLink} className="size-36" />
+
+- 本スライドに対応するMDXファイル:
+  - https://github.com/r4ai/mercury/blob/main/examples/ridaisai-2024/src/presentation.mdx
+
+---
+
+<Center title="@r4ai/remark-callout" description="MarkdownにCallout機能を追加するプラグイン" />
+
+---
+
+# @r4ai/remark-callout / 概要
+
+- MarkdownやMDXにCallout機能を追加するremarkプラグインです
+- 次のような記法でCalloutを追加できます
+
+<div className="flex flex-row gap-4 justify-center items-center">
+  <div>
+    ````mdx title=demo.md
+    > [!note]
+    > This is a note
+
+    > [!warning] you can write title here
+    > This is a warning
+    ````
+  </div>
+  <div className="flex flex-col gap-0 justify-center items-center font-bold">
+    生成
+    <ArrowBigRightIcon className="size-12" />
+  </div>
+  <div>
+    <img src={calloutDemo} className="border-2" />
+  </div>
+</div>
+
+---
+
+import remarkCalloutRepoLink from "./assets/remark-callout-repo.png"
+
+# @r4ai/remark-callout / 各種リンク
+
+- リポジトリ:
+  - https://github.com/r4ai/remark-callout
+
+    <img src={remarkCalloutRepoLink} className="size-36" />
+
+- ウェブサイト: https://r4ai.github.io/remark-callout/
+
+---
+
+<Center title="alg.tus-ricora.com" description="RICORA Programming Teamのウェブサイト" />
+
+---
+
+import blogArticleLink from "./assets/blog-article-link.png"
+import blogRepoLink from "./assets/blog-repo-link.png"
+import blogLink from "./assets/blog-link.png"
+
+# alg.tus-ricora.com / 概要
+
+- RICORA Programming Teamのウェブサイトです
+  - ブログや各種サークル情報の掲載を行っています
+
+- Astro, SolidJS, MDX などを用いて実装しています
+
+- 詳しくは次の記事にまとめています
+  - https://zenn.dev/ricora/articles/5a170c17933c3f
+
+    <img src={blogArticleLink} className="size-36" />
+
+<br />
+
+---
+
+# alg.tus-ricora.com / 各種リンク
+
+- リポジトリ:
+  - https://github.com/ricora/alg.tus-ricora.com
+
+    <img src={blogRepoLink} className="size-36" />
+
+- ウェブサイト:
+  - https://alg.tus-ricora.com/
+
+    <img src={blogLink} className="size-36" />
+
+---
+
+<Center title="ご清聴ありがとうございました" />
+``````
+
+<object data={ridaisai2024} type="application/pdf" width="100%" class="max-w-screen-lg mx-auto rounded-lg aspect-[3/2]" />
+
+## おわりに
+
+MDX と Vite を利用することで、少量のコードでスライド作成ツールを実装できることがわかりました。
+特に、MDXを利用することで機能の大半を React コンポーネントとして実装できたため、ウェブアプリを作成する感覚で Mercury を作成できました。
+さらに、Vite のプラグインとして実装したため、HMR など Vite の強力な機能をそのまま利用でき、簡易的な実装ながら実用的な機能を提供できていると考えています。
+まだまだ開発途中であり、機能の追加やバグの修正が必要ですが、今後も改善を続けていきたいと考えています。
+
+[^mdx]:
+    文章を作るためのマークアップ言語（Markdown + JSX） \
+    https://mdxjs.com/
+
+[^mdx-to-jsx-example]:
+    この例で記述されているJSXは実際に生成されるものを簡略化したものであり、実際のコードとは異なります。
+    実際のコードを確認したい場合は、[`vite-plugin-inspect`](https://www.npmjs.com/package/vite-plugin-inspect)等を利用して確認してください。
