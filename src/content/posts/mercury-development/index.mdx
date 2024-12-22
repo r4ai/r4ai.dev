@@ -192,7 +192,7 @@ const MDXContent = (props = {}) => {
   )
 }
 
-export default () => <Presentation slidesLength={2} Content={MDXContent} />
+export default ({ components }) => <Presentation slidesLength={2} Content={MDXContent} components={components} />
 ```
 
 このように、`h1` や `li` などの要素は、`props.components` として渡されたコンポーネントを使ってレンダリングされます。
