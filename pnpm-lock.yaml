@@ -283,8 +283,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.4.17)
       ts-essentials:
-        specifier: 10.0.3
-        version: 10.0.3(typescript@5.7.2)
+        specifier: 10.0.4
+        version: 10.0.4(typescript@5.7.2)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -4847,8 +4847,8 @@ packages:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
 
-  ts-essentials@10.0.3:
-    resolution: {integrity: sha512-/FrVAZ76JLTWxJOERk04fm8hYENDo0PWSP3YLQKxevLwWtxemGcl5JJEzN4iqfDlRve0ckyfFaOBu4xbNH/wZw==}
+  ts-essentials@10.0.4:
+    resolution: {integrity: sha512-lwYdz28+S4nicm+jFi6V58LaAIpxzhg9rLdgNC1VsdP/xiFBseGhF1M/shwCk6zMmwahBZdXcl34LVHrEang3A==}
     peerDependencies:
       typescript: '>=4.5.0'
     peerDependenciesMeta:
@@ -10926,7 +10926,7 @@ snapshots:
 
   ts-dedent@2.2.0: {}
 
-  ts-essentials@10.0.3(typescript@5.7.2):
+  ts-essentials@10.0.4(typescript@5.7.2):
     optionalDependencies:
       typescript: 5.7.2
 
