@@ -39,7 +39,7 @@
     "solid-sonner": "^0.2.8",
     "tailwind-merge": "^2.5.5",
     "tailwind-variants": "^0.3.0",
-    "three": "^0.171.0",
+    "three": "^0.172.0",
     "valibot": "1.0.0-beta.9"
   },
   "devDependencies": {
