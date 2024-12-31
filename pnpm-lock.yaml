@@ -63,8 +63,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(tailwindcss@3.4.17)
       three:
-        specifier: ^0.171.0
-        version: 0.171.0
+        specifier: ^0.172.0
+        version: 0.172.0
       valibot:
         specifier: 1.0.0-beta.9
         version: 1.0.0-beta.9(typescript@5.7.2)
@@ -4763,8 +4763,8 @@ packages:
   thenify@3.3.1:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
 
-  three@0.171.0:
-    resolution: {integrity: sha512-Y/lAXPaKZPcEdkKjh0JOAHVv8OOnv/NDJqm0wjfCzyQmfKxV7zvkwsnBgPBKTzJHToSOhRGQAGbPJObT59B/PQ==}
+  three@0.172.0:
+    resolution: {integrity: sha512-6HMgMlzU97MsV7D/tY8Va38b83kz8YJX+BefKjspMNAv0Vx6dxMogHOrnRl/sbMIs3BPUKijPqDqJ/+UwJbIow==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -10824,7 +10824,7 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
-  three@0.171.0: {}
+  three@0.172.0: {}
 
   tiny-inflate@1.0.3: {}
 
