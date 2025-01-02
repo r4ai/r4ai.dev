@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^4.0.2
-        version: 4.0.3(astro@5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 4.0.3(astro@5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/solid-js':
         specifier: ^5.0.0
         version: 5.0.1(@testing-library/jest-dom@6.5.0)(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(solid-js@1.9.3)(yaml@2.6.1)
       '@astrojs/tailwind':
         specifier: ^5.1.3
-        version: 5.1.4(astro@5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.17)
       '@corvu/drawer':
         specifier: ^0.2.2
         version: 0.2.2(solid-js@1.9.3)
@@ -34,7 +34,7 @@ importers:
         version: 0.25.0(solid-js@1.9.3)(typescript@5.7.2)
       astro:
         specifier: ^5.0.9
-        version: 5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
+        version: 5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2067,8 +2067,8 @@ packages:
     resolution: {integrity: sha512-F6NW1RJo5pp2kPnnM97M5Ohw8zAGjv83MpxHqfAochH68n/kiXN57+hYaNUCA7XkScoVNr6yzvly3hsY34TGfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  astro@5.1.1:
-    resolution: {integrity: sha512-prpWC2PRs4P3FKQg6gZaU+VNMqbZi5pDvORGB2nrjfRjkrvF6/l4BqhvkJ6YQ0Ohm5rIMVz8ljgaRI77mLHbwg==}
+  astro@5.1.2:
+    resolution: {integrity: sha512-+U5lXPEJZ6cQx0botGbPhzN6XGWRgDtXgy/RUkpTmUj18LW6pbzYo0O0k3hFWOazlI039bZ+4P2e/oSNlKzm0Q==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3972,8 +3972,8 @@ packages:
     resolution: {integrity: sha512-NXzu9aQJTAzbBqOt2hwsR63ea7yvxJc0PwN/zobNAudYfb1B7R08SzB4TsLeSbUCuG467NhnoT0oO6w1qRO+BA==}
     engines: {node: '>=18'}
 
-  p-timeout@6.1.3:
-    resolution: {integrity: sha512-UJUyfKbwvr/uZSV6btANfb+0t/mOhKV/KXcCUTp8FcQI+v/0d+wXqH4htrW0E4rR6WiEO/EPvUFiV9D5OI4vlw==}
+  p-timeout@6.1.4:
+    resolution: {integrity: sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg==}
     engines: {node: '>=14.16'}
 
   p-try@2.2.0:
@@ -5190,6 +5190,14 @@ packages:
       vite:
         optional: true
 
+  vitefu@1.0.5:
+    resolution: {integrity: sha512-h4Vflt9gxODPFNGPwp4zAMZRpZR7eslzwH2c5hn5kNZ5rhnKyRJ50U+yGCdc2IRaBs8O4haIgLNGrV5CrpMsCA==}
+    peerDependencies:
+      vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    peerDependenciesMeta:
+      vite:
+        optional: true
+
   vitest-matchmedia-mock@1.0.6:
     resolution: {integrity: sha512-UUU0YY6BpmcuD2p4DpUVUP0afKuxHX6YAQs5J5skP+ksm+yXJHi9kSN5eOQuC0TFVTuXnIFPl0U9vGPNgnzA1g==}
 
@@ -5557,12 +5565,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.0.3(astro@5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/mdx@4.0.3(astro@5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/markdown-remark': 6.0.1
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
       es-module-lexer: 1.6.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.4
@@ -5600,9 +5608,9 @@ snapshots:
       - tsx
       - yaml
 
-  '@astrojs/tailwind@5.1.4(astro@5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.17)':
+  '@astrojs/tailwind@5.1.4(astro@5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.17)':
     dependencies:
-      astro: 5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1)
       autoprefixer: 10.4.20(postcss@8.4.49)
       postcss: 8.4.49
       postcss-load-config: 4.0.2(postcss@8.4.49)
@@ -7368,7 +7376,7 @@ snapshots:
       - supports-color
       - typescript
 
-  astro@5.1.1(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1):
+  astro@5.1.2(@types/node@22.10.3)(jiti@1.21.7)(rollup@4.29.1)(sass@1.83.0)(typescript@5.7.2)(yaml@2.6.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.2
@@ -7421,7 +7429,7 @@ snapshots:
       unstorage: 1.14.4
       vfile: 6.0.3
       vite: 6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1)
-      vitefu: 1.0.4(vite@6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1))
+      vitefu: 1.0.5(vite@6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1))
       which-pm: 3.0.0
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
@@ -9889,9 +9897,9 @@ snapshots:
   p-queue@8.0.1:
     dependencies:
       eventemitter3: 5.0.1
-      p-timeout: 6.1.3
+      p-timeout: 6.1.4
 
-  p-timeout@6.1.3: {}
+  p-timeout@6.1.4: {}
 
   p-try@2.2.0: {}
 
@@ -11187,6 +11195,10 @@ snapshots:
       yaml: 2.6.1
 
   vitefu@1.0.4(vite@6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1)):
+    optionalDependencies:
+      vite: 6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1)
+
+  vitefu@1.0.5(vite@6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1)):
     optionalDependencies:
       vite: 6.0.6(@types/node@22.10.3)(jiti@1.21.7)(sass@1.83.0)(yaml@2.6.1)
 
