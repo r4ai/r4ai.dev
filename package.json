@@ -124,7 +124,7 @@
     "vite-plugin-solid": "2.11.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "2.1.8",
-    "vitest-matchmedia-mock": "1.0.6",
+    "vitest-matchmedia-mock": "2.0.0",
     "zod": "3.24.1"
   },
   "packageManager": "pnpm@9.15.2"
