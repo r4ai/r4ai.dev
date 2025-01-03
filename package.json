@@ -71,7 +71,7 @@
     "@types/hast": "3.0.4",
     "@types/lint-staged": "13.3.0",
     "@types/mdast": "4.0.4",
-    "@types/node": "22.10.4",
+    "@types/node": "22.10.5",
     "@types/three": "0.171.0",
     "@typescript-eslint/parser": "8.19.0",
     "esbuild": "0.24.2",
