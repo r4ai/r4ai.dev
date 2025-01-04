@@ -313,8 +313,8 @@ importers:
         specifier: 2.1.8
         version: 2.1.8(@types/node@22.10.5)(sass@1.83.1)
       vitest-matchmedia-mock:
-        specifier: 1.0.6
-        version: 1.0.6(@types/node@22.10.5)(sass@1.83.1)
+        specifier: 2.0.0
+        version: 2.0.0(@types/node@22.10.5)(sass@1.83.1)
       zod:
         specifier: 3.24.1
         version: 3.24.1
@@ -5198,8 +5198,8 @@ packages:
       vite:
         optional: true
 
-  vitest-matchmedia-mock@1.0.6:
-    resolution: {integrity: sha512-UUU0YY6BpmcuD2p4DpUVUP0afKuxHX6YAQs5J5skP+ksm+yXJHi9kSN5eOQuC0TFVTuXnIFPl0U9vGPNgnzA1g==}
+  vitest-matchmedia-mock@2.0.0:
+    resolution: {integrity: sha512-zyR5VaHRftUSNjcfbQFbaFT2rvvJUqFUl1QqnzIKPw0zzun34od4A8t+Ck1Jro2C6/1PNdacESutVZ4QGBuUIw==}
 
   vitest@2.1.8:
     resolution: {integrity: sha512-1vBKTZskHw/aosXqQUlVWWlGUxSJR8YtiyZDJAFeW2kPAeX6S3Sool0mjspO+kXLuxVWlEDDowBAeqeAQefqLQ==}
@@ -11202,7 +11202,7 @@ snapshots:
     optionalDependencies:
       vite: 6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.6.1)
 
-  vitest-matchmedia-mock@1.0.6(@types/node@22.10.5)(sass@1.83.1):
+  vitest-matchmedia-mock@2.0.0(@types/node@22.10.5)(sass@1.83.1):
     dependencies:
       vitest: 2.1.8(@types/node@22.10.5)(sass@1.83.1)
     transitivePeerDependencies:
