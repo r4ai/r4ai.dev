@@ -82,8 +82,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2
       '@iconify-json/lucide':
-        specifier: 1.2.21
-        version: 1.2.21
+        specifier: 1.2.22
+        version: 1.2.22
       '@iconify-json/simple-icons':
         specifier: 1.2.18
         version: 1.2.18
@@ -920,8 +920,8 @@ packages:
   '@iconify-json/fluent-emoji@1.2.2':
     resolution: {integrity: sha512-nunoN4CbvR395D4wDSJTxZz04j6LxvGm/lHpOj4GPiIT4uqSjgOwoOTzEliu91BnfK1Gn1UO7os50NzuYD3qwg==}
 
-  '@iconify-json/lucide@1.2.21':
-    resolution: {integrity: sha512-Oi9bVtaDaiUg4DpmuFWO4bihwXvxFW47KYFUWEGRsqAWijnODTXIO24F2YNlz+k9WvdIr3RsOFiuNIoEzMPsRQ==}
+  '@iconify-json/lucide@1.2.22':
+    resolution: {integrity: sha512-sHRN/UFVTPTKCA9dVdO34OydvAf5d3CmT16a/U2+VzogI1uIsBXoYILU5oHGFMMq12aMJ65zgr1YOJCI0glxeg==}
 
   '@iconify-json/simple-icons@1.2.18':
     resolution: {integrity: sha512-ae4ig7fxNXME1wl5og7Ocp82TM4jyz6IsOyI8GrteSbvHR9gaPu2Z01Amn5V/xo1Y7A7/+EH/3Ovpy2az/gYbg==}
@@ -1527,10 +1527,10 @@ packages:
       react-dom:
         optional: true
 
-  '@storybook/builder-vite@8.5.0-beta.7':
-    resolution: {integrity: sha512-D1HrfF34ASsrw4PBFgHBn66Xi5rkwOVsfW8ffVku8N3+pw2udjzwV8CuWYn1r5WJmGwjFQbUFt2+pi1zuWjkyQ==}
+  '@storybook/builder-vite@8.5.0-beta.8':
+    resolution: {integrity: sha512-eFBMcawmDBDzOk9kWqquCttl9yfxYIQU6WQKYZDtfMzylzwWoHhdiHfN7uAUOmgA5RneLknYIu0rTzWoy9wBrw==}
     peerDependencies:
-      storybook: ^8.5.0-beta.7
+      storybook: ^8.5.0-beta.8
       vite: ^4.0.0 || ^5.0.0 || ^6.0.0
 
   '@storybook/core@8.5.0-beta.7':
@@ -1546,10 +1546,10 @@ packages:
     peerDependencies:
       storybook: ^8.4.7
 
-  '@storybook/csf-plugin@8.5.0-beta.7':
-    resolution: {integrity: sha512-GGlF8N8zHFSMier7kKIyPyLA6uEAfQvRXNlOBjZNTcDXQEyq+Ts9kjA7Ii7y41M8jQwzC15VKlwvib0iXGuMWw==}
+  '@storybook/csf-plugin@8.5.0-beta.8':
+    resolution: {integrity: sha512-gpv2SD7Af0GkQuPN8PMw24hXhkRfZnRCPg10ZHAG+fdGfElXwZjxSThioBTULk5tpssZfJ8rIwFnXBOSTrOGxw==}
     peerDependencies:
-      storybook: ^8.5.0-beta.7
+      storybook: ^8.5.0-beta.8
 
   '@storybook/csf@0.1.12':
     resolution: {integrity: sha512-9/exVhabisyIVL0VxTCxo01Tdm8wefIXKXfltAPTSr8cbLn5JAxGQ6QV3mjdecLGEOucfoVhAKtJfVHxEK1iqw==}
@@ -6060,7 +6060,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.21':
+  '@iconify-json/lucide@1.2.22':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -6674,9 +6674,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.5.0-beta.7(storybook@8.5.0-beta.7(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.7.0))':
+  '@storybook/builder-vite@8.5.0-beta.8(storybook@8.5.0-beta.7(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.7.0))':
     dependencies:
-      '@storybook/csf-plugin': 8.5.0-beta.7(storybook@8.5.0-beta.7(prettier@3.4.2))
+      '@storybook/csf-plugin': 8.5.0-beta.8(storybook@8.5.0-beta.7(prettier@3.4.2))
       browser-assert: 1.2.1
       storybook: 8.5.0-beta.7(prettier@3.4.2)
       ts-dedent: 2.2.0
@@ -6707,7 +6707,7 @@ snapshots:
       storybook: 8.5.0-beta.7(prettier@3.4.2)
       unplugin: 1.16.0
 
-  '@storybook/csf-plugin@8.5.0-beta.7(storybook@8.5.0-beta.7(prettier@3.4.2))':
+  '@storybook/csf-plugin@8.5.0-beta.8(storybook@8.5.0-beta.7(prettier@3.4.2))':
     dependencies:
       storybook: 8.5.0-beta.7(prettier@3.4.2)
       unplugin: 1.16.0
@@ -10693,7 +10693,7 @@ snapshots:
 
   storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(solid-js@1.9.3)(storybook@8.5.0-beta.7(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.7.0)):
     dependencies:
-      '@storybook/builder-vite': 8.5.0-beta.7(storybook@8.5.0-beta.7(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.7.0))
+      '@storybook/builder-vite': 8.5.0-beta.8(storybook@8.5.0-beta.7(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.7.0))
       magic-string: 0.30.17
       vite-plugin-solid: 2.11.0(@testing-library/jest-dom@6.5.0)(solid-js@1.9.3)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(sass@1.83.1)(yaml@2.7.0))
     transitivePeerDependencies:
