@@ -66,8 +66,8 @@ importers:
         specifier: ^0.172.0
         version: 0.172.0
       valibot:
-        specifier: 1.0.0-beta.11
-        version: 1.0.0-beta.11(typescript@5.7.3)
+        specifier: 1.0.0-beta.12
+        version: 1.0.0-beta.12(typescript@5.7.3)
     devDependencies:
       '@astrojs/check':
         specifier: 0.9.4
@@ -5101,8 +5101,8 @@ packages:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
 
-  valibot@1.0.0-beta.11:
-    resolution: {integrity: sha512-Ztl5Iks1Ql7Z6CwkS5oyqguN3G8tmUiNlsHpqbDt6DLMpm+eu+n8Q7f921gI3uHvNZ8xDVkd4cEJP5t+lELOfw==}
+  valibot@1.0.0-beta.12:
+    resolution: {integrity: sha512-j3WIxJ0pmUFMfdfUECn3YnZPYOiG0yHYcFEa/+RVgo0I+MXE3ToLt7gNRLtY5pwGfgNmsmhenGZfU5suu9ijUA==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -6289,7 +6289,7 @@ snapshots:
   '@modular-forms/solid@0.25.0(solid-js@1.9.4)(typescript@5.7.3)':
     dependencies:
       solid-js: 1.9.4
-      valibot: 1.0.0-beta.11(typescript@5.7.3)
+      valibot: 1.0.0-beta.12(typescript@5.7.3)
     transitivePeerDependencies:
       - typescript
 
@@ -11204,7 +11204,7 @@ snapshots:
 
   uuid@9.0.1: {}
 
-  valibot@1.0.0-beta.11(typescript@5.7.3):
+  valibot@1.0.0-beta.12(typescript@5.7.3):
     optionalDependencies:
       typescript: 5.7.3
 
