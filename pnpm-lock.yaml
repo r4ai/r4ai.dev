@@ -73,8 +73,8 @@ importers:
         specifier: 0.9.4
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.4.2)(typescript@5.7.3)
       '@chromatic-com/storybook':
-        specifier: 3.2.3
-        version: 3.2.3(react@18.3.1)(storybook@8.5.0(prettier@3.4.2))
+        specifier: 3.2.4
+        version: 3.2.4(react@18.3.1)(storybook@8.5.0(prettier@3.4.2))
       '@eslint/js':
         specifier: 9.18.0
         version: 9.18.0
@@ -504,8 +504,8 @@ packages:
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
 
-  '@chromatic-com/storybook@3.2.3':
-    resolution: {integrity: sha512-3+hfANx79kIjP1qrOSLxpoAXOiYUA0S7A0WI0A24kASrv7USFNNW8etR5TjUilMb0LmqKUn3wDwUK2h6aceQ9g==}
+  '@chromatic-com/storybook@3.2.4':
+    resolution: {integrity: sha512-5/bOOYxfwZ2BktXeqcCpOVAoR6UCoeART5t9FVy22hoo8F291zOuX4y3SDgm10B1GVU/ZTtJWPT2X9wZFlxYLg==}
     engines: {node: '>=16.0.0', yarn: '>=1.22.18'}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
@@ -1527,10 +1527,10 @@ packages:
       react-dom:
         optional: true
 
-  '@storybook/builder-vite@8.6.0-alpha.1':
-    resolution: {integrity: sha512-14mIpBx5oxjliGokiejGxUGReG0UNQwrkeu4FiObX8QQWl94/eCO9ExxdyYPNjMx7OfOfhqwIL3SQnoChp+2yA==}
+  '@storybook/builder-vite@8.6.0-beta.0':
+    resolution: {integrity: sha512-rKg9QjiQXI13RojahajmQC1VIPxdgSRYo8WeGls1tGrnn8GtAyE3y49SVPtk9sJvP1wW17qI0nq38xnJ3arEWw==}
     peerDependencies:
-      storybook: ^8.6.0-alpha.1
+      storybook: ^8.6.0-beta.0
       vite: ^4.0.0 || ^5.0.0 || ^6.0.0
 
   '@storybook/core@8.5.0':
@@ -1546,10 +1546,10 @@ packages:
     peerDependencies:
       storybook: ^8.5.0
 
-  '@storybook/csf-plugin@8.6.0-alpha.1':
-    resolution: {integrity: sha512-Us0p0WaM4QUigPTQ9pRjfUM8PtuflPriuN51FFlTiJDmLF/OEmr/AvWnYhET6RZCYD4p912TVJN/t2xig+nMdA==}
+  '@storybook/csf-plugin@8.6.0-beta.0':
+    resolution: {integrity: sha512-vSov6A/XGg3FsHlV9EXE6bcxDai2i1Pbf5cq6bdU56VGopucJUsw5GFOTSCD65+Yh+hofe1BKoX2RAnA1z3ETQ==}
     peerDependencies:
-      storybook: ^8.6.0-alpha.1
+      storybook: ^8.6.0-beta.0
 
   '@storybook/csf@0.1.12':
     resolution: {integrity: sha512-9/exVhabisyIVL0VxTCxo01Tdm8wefIXKXfltAPTSr8cbLn5JAxGQ6QV3mjdecLGEOucfoVhAKtJfVHxEK1iqw==}
@@ -5803,7 +5803,7 @@ snapshots:
 
   '@chevrotain/utils@11.0.3': {}
 
-  '@chromatic-com/storybook@3.2.3(react@18.3.1)(storybook@8.5.0(prettier@3.4.2))':
+  '@chromatic-com/storybook@3.2.4(react@18.3.1)(storybook@8.5.0(prettier@3.4.2))':
     dependencies:
       chromatic: 11.22.0
       filesize: 10.1.6
@@ -6709,9 +6709,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.6.0-alpha.1(storybook@8.5.0(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
+  '@storybook/builder-vite@8.6.0-beta.0(storybook@8.5.0(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
     dependencies:
-      '@storybook/csf-plugin': 8.6.0-alpha.1(storybook@8.5.0(prettier@3.4.2))
+      '@storybook/csf-plugin': 8.6.0-beta.0(storybook@8.5.0(prettier@3.4.2))
       browser-assert: 1.2.1
       storybook: 8.5.0(prettier@3.4.2)
       ts-dedent: 2.2.0
@@ -6742,7 +6742,7 @@ snapshots:
       storybook: 8.5.0(prettier@3.4.2)
       unplugin: 1.16.1
 
-  '@storybook/csf-plugin@8.6.0-alpha.1(storybook@8.5.0(prettier@3.4.2))':
+  '@storybook/csf-plugin@8.6.0-beta.0(storybook@8.5.0(prettier@3.4.2))':
     dependencies:
       storybook: 8.5.0(prettier@3.4.2)
       unplugin: 1.16.1
@@ -10765,7 +10765,7 @@ snapshots:
 
   storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(solid-js@1.9.4)(storybook@8.5.0(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)):
     dependencies:
-      '@storybook/builder-vite': 8.6.0-alpha.1(storybook@8.5.0(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+      '@storybook/builder-vite': 8.6.0-beta.0(storybook@8.5.0(prettier@3.4.2))(vite@6.0.7(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
       magic-string: 0.30.17
       vite-plugin-solid: 2.11.0(@testing-library/jest-dom@6.5.0)(solid-js@1.9.4)(vite@6.0.7(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
     transitivePeerDependencies:
