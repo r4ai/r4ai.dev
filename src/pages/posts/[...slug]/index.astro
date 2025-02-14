@@ -1,24 +1,14 @@
 ---
 import "@/styles/katex.css"
 
-import type { GetStaticPaths } from "astro"
-import { getCollection } from "astro:content"
-
 import { RootLayout } from "@/components/layouts"
 import { components } from "@/components/mdx-components"
 import { cn } from "@/lib/utils"
 
 import { PostHeader, TableOfContents } from "./_components"
+import { getStaticPaths } from "./_lib/routing"
 
-export const getStaticPaths = (async () => {
-  const posts = await getCollection("posts", ({ data }) =>
-    import.meta.env.DEV ? true : !data.draft
-  )
-  return posts.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }))
-}) satisfies GetStaticPaths
+export { getStaticPaths }
 
 const { entry } = Astro.props
 
