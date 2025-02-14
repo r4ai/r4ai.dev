@@ -46,7 +46,7 @@
     "@astrojs/check": "0.9.4",
     "@chromatic-com/storybook": "3.2.4",
     "@eslint/js": "9.18.0",
-    "@iconify-json/fluent-emoji": "1.2.2",
+    "@iconify-json/fluent-emoji": "1.2.3",
     "@iconify-json/lucide": "1.2.23",
     "@iconify-json/simple-icons": "1.2.20",
     "@iconify/types": "2.0.0",
