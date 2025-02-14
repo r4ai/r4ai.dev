@@ -123,7 +123,7 @@
     "vite": "6.0.7",
     "vite-plugin-solid": "2.11.0",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "2.1.8",
+    "vitest": "2.1.9",
     "vitest-matchmedia-mock": "2.0.0",
     "zod": "3.24.1"
   },
