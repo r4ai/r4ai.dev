@@ -43,6 +43,10 @@ export default defineConfig({
     mdx(),
     solid(),
   ],
+  redirects: {
+    "/posts/raw/[...slug]": "/posts/[...slug].mdx",
+    "/posts/[...slug]/raw": "/posts/[...slug].mdx",
+  },
   vite: {
     plugins: [
       pagefind(),
