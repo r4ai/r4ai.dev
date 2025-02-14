@@ -19,7 +19,7 @@ jobs:
       - name: Checkout respository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Node.js
-        uses: jdx/mise-action@249c01ba271e19fa76eede7f766161cc95ace489 # v2
+        uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
