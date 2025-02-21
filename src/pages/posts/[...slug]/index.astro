@@ -20,6 +20,9 @@ export const getStaticPaths = (async () => {
   }))
 }) satisfies GetStaticPaths
 
+const removeTrailingSlash = (path: string) =>
+  path.endsWith("/") ? path.slice(0, -1) : path
+
 const { entry } = Astro.props
 
 const { Content, headings } = await entry.render()
@@ -27,7 +30,7 @@ const { Content, headings } = await entry.render()
 
 <RootLayout
   title={entry.data.title}
-  image={new URL(`${Astro.url.href}.png`)}
+  image={new URL(`${removeTrailingSlash(Astro.url.href)}.png`)}
   og={{ type: "article" }}
 >
   <div class="my-12 grid w-full gap-20" data-margin="true">

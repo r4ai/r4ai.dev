@@ -1,18 +1,10 @@
-import fs from "node:fs/promises"
-
 import type { APIRoute } from "astro"
 import { getEntry } from "astro:content"
 import sharp from "sharp"
 
-import { OpenGraphImage, render } from "./_components"
+import { OpenGraphImage, render } from "@/components/open-graph-images"
 
 export { getStaticPaths } from "./index.astro"
-
-const titleFont = await fs.readFile(
-  "src/assets/fonts/noto-sans-jp/static/NotoSansJP-Bold.ttf"
-)
-const bgAccentImage = await fs.readFile("src/assets/imgs/og/stripe.png")
-const bgImage = await fs.readFile("src/assets/imgs/og/bg.png")
 
 export const GET: APIRoute = async ({ params }) => {
   if (!params.slug) {
@@ -24,12 +16,9 @@ export const GET: APIRoute = async ({ params }) => {
     return NotFound()
   }
 
-  const image = await render(
-    sharp,
-    OpenGraphImage,
-    { title: post.data.title, bgAccentImage, bgImage },
-    { NotoSansJP: titleFont }
-  )
+  const image = await render(sharp, OpenGraphImage, {
+    title: post.data.title,
+  })
   return new Response(image, {
     headers: { "Content-Type": "image/png" },
   })
