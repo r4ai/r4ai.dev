@@ -1,28 +1,20 @@
-import { render as renderToPng } from "@/lib/utils"
-import type { SharpFn } from "@/lib/utils/open-graph"
-
-type ReactLikeObject = {
-  type: string
-  props: Record<string, unknown> & {
-    tw?: string
-    style?: Record<string, string>
-    children?: (ReactLikeObject | string)[]
-  }
-}
-
-const buffer2url = (buffer: Buffer) =>
-  `data:image/png;base64,${buffer.toString("base64")}`
+import {
+  bgAccentImage as defaultBgAccentImage,
+  bgImage as defaultBgImage,
+  buffer2url,
+  type ReactLikeObject,
+} from "../shared"
 
 export type OpenGraphImageProps = {
   title: string
-  bgAccentImage: Buffer<ArrayBufferLike>
-  bgImage: Buffer<ArrayBufferLike>
+  bgAccentImage?: Buffer<ArrayBufferLike>
+  bgImage?: Buffer<ArrayBufferLike>
 }
 
 export const OpenGraphImage = ({
   title,
-  bgAccentImage,
-  bgImage,
+  bgAccentImage = defaultBgAccentImage,
+  bgImage = defaultBgImage,
 }: OpenGraphImageProps): ReactLikeObject => {
   return {
     type: "div",
@@ -75,29 +67,3 @@ export const OpenGraphImage = ({
     },
   }
 }
-
-/**
- * Render the OpenGraph image
- * @param sharp - Sharp instance
- * @param component - Component to render
- * @param props - Props to pass to the component
- * @param fonts - Fonts to use in the image
- */
-export const render = async <Props extends object>(
-  sharp: SharpFn,
-  component: (props: Props) => ReactLikeObject,
-  props: Props,
-  fonts: { NotoSansJP: Buffer<ArrayBufferLike> }
-) =>
-  renderToPng(sharp, component, props, {
-    width: 1200,
-    height: 630,
-    fonts: [
-      {
-        name: "Noto Sans JP",
-        data: fonts.NotoSansJP,
-        weight: 800,
-        style: "normal",
-      },
-    ],
-  })
