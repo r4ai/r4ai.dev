@@ -66,8 +66,8 @@ importers:
         specifier: ^0.172.0
         version: 0.172.0
       valibot:
-        specifier: 1.0.0-beta.12
-        version: 1.0.0-beta.12(typescript@5.7.3)
+        specifier: 1.0.0-rc.1
+        version: 1.0.0-rc.1(typescript@5.7.3)
     devDependencies:
       '@astrojs/check':
         specifier: 0.9.4
@@ -1554,10 +1554,10 @@ packages:
       react-dom:
         optional: true
 
-  '@storybook/builder-vite@8.6.0-beta.6':
-    resolution: {integrity: sha512-spVSiKfinW9WjTGd3cIP5E9t2S+7MZzlcid4jYbY+1F+NPTjQrzyzccCpBEDcDolGfF6NbO0zRV7KdJxqPoKmg==}
+  '@storybook/builder-vite@8.6.0-beta.7':
+    resolution: {integrity: sha512-2hLO42Jro/AQOSZbz7NFa45Rd/PLwG/VGdMaRgYMwwBx1mtXbrYTJqMqm3DDjeEo6gJ/ZDoj9TWeoJ7ItBVS8A==}
     peerDependencies:
-      storybook: ^8.6.0-beta.6
+      storybook: ^8.6.0-beta.7
       vite: ^4.0.0 || ^5.0.0 || ^6.0.0
 
   '@storybook/core@8.6.0-beta.6':
@@ -1573,10 +1573,10 @@ packages:
     peerDependencies:
       storybook: ^8.5.0
 
-  '@storybook/csf-plugin@8.6.0-beta.6':
-    resolution: {integrity: sha512-I9+1E0bPYwN4k9xo2B2kUVBh3nlgweH8SGZNkOhbCsh9uM9beVs/hPvycfMhMHJ4dK5OBG4a5dk+6y5ZCX0t7w==}
+  '@storybook/csf-plugin@8.6.0-beta.7':
+    resolution: {integrity: sha512-6FMS3cr9KbjAFWoU25gTx8L3WhxicBUrCTsXWPzT5nROqU5cREghCFoDqAAx3K8m69tS64B8Z3Kng3sxMFI6XQ==}
     peerDependencies:
-      storybook: ^8.6.0-beta.6
+      storybook: ^8.6.0-beta.7
 
   '@storybook/csf@0.1.12':
     resolution: {integrity: sha512-9/exVhabisyIVL0VxTCxo01Tdm8wefIXKXfltAPTSr8cbLn5JAxGQ6QV3mjdecLGEOucfoVhAKtJfVHxEK1iqw==}
@@ -5157,8 +5157,8 @@ packages:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
 
-  valibot@1.0.0-beta.12:
-    resolution: {integrity: sha512-j3WIxJ0pmUFMfdfUECn3YnZPYOiG0yHYcFEa/+RVgo0I+MXE3ToLt7gNRLtY5pwGfgNmsmhenGZfU5suu9ijUA==}
+  valibot@1.0.0-rc.1:
+    resolution: {integrity: sha512-bTHNpeeQ403xS7qGHF/tw3EC/zkZOU5VdkfIsmRDu1Sp+BJNTNCm6m5HlwOgyW/03lofP+uQiq3R+Poo9wiCEg==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -6353,7 +6353,7 @@ snapshots:
   '@modular-forms/solid@0.25.0(solid-js@1.9.4)(typescript@5.7.3)':
     dependencies:
       solid-js: 1.9.4
-      valibot: 1.0.0-beta.12(typescript@5.7.3)
+      valibot: 1.0.0-rc.1(typescript@5.7.3)
     transitivePeerDependencies:
       - typescript
 
@@ -6806,9 +6806,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.6.0-beta.6(storybook@8.6.0-beta.6(prettier@3.4.2))(vite@6.1.1(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
+  '@storybook/builder-vite@8.6.0-beta.7(storybook@8.6.0-beta.6(prettier@3.4.2))(vite@6.1.1(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
     dependencies:
-      '@storybook/csf-plugin': 8.6.0-beta.6(storybook@8.6.0-beta.6(prettier@3.4.2))
+      '@storybook/csf-plugin': 8.6.0-beta.7(storybook@8.6.0-beta.6(prettier@3.4.2))
       browser-assert: 1.2.1
       storybook: 8.6.0-beta.6(prettier@3.4.2)
       ts-dedent: 2.2.0
@@ -6840,7 +6840,7 @@ snapshots:
       storybook: 8.6.0-beta.6(prettier@3.4.2)
       unplugin: 1.16.1
 
-  '@storybook/csf-plugin@8.6.0-beta.6(storybook@8.6.0-beta.6(prettier@3.4.2))':
+  '@storybook/csf-plugin@8.6.0-beta.7(storybook@8.6.0-beta.6(prettier@3.4.2))':
     dependencies:
       storybook: 8.6.0-beta.6(prettier@3.4.2)
       unplugin: 1.16.1
@@ -10902,7 +10902,7 @@ snapshots:
 
   storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(solid-js@1.9.4)(storybook@8.6.0-beta.6(prettier@3.4.2))(vite@6.1.1(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)):
     dependencies:
-      '@storybook/builder-vite': 8.6.0-beta.6(storybook@8.6.0-beta.6(prettier@3.4.2))(vite@6.1.1(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+      '@storybook/builder-vite': 8.6.0-beta.7(storybook@8.6.0-beta.6(prettier@3.4.2))(vite@6.1.1(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
       magic-string: 0.30.17
       vite-plugin-solid: 2.11.2(@testing-library/jest-dom@6.5.0)(solid-js@1.9.4)(vite@6.1.1(@types/node@22.10.7)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
     transitivePeerDependencies:
@@ -11341,7 +11341,7 @@ snapshots:
 
   uuid@9.0.1: {}
 
-  valibot@1.0.0-beta.12(typescript@5.7.3):
+  valibot@1.0.0-rc.1(typescript@5.7.3):
     optionalDependencies:
       typescript: 5.7.3
 
