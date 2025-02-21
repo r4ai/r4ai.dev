@@ -190,8 +190,8 @@ importers:
         specifier: 0.14.5
         version: 0.14.5(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3)
       eslint-plugin-storybook:
-        specifier: 0.11.2
-        version: 0.11.2(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3)
+        specifier: 0.11.3
+        version: 0.11.3(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3)
       fast-check:
         specifier: 3.23.2
         version: 3.23.2
@@ -2848,11 +2848,12 @@ packages:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
       typescript: '>=4.8.4'
 
-  eslint-plugin-storybook@0.11.2:
-    resolution: {integrity: sha512-0Z4DUklJrC+GHjCRXa7PYfPzWC15DaVnwaOYenpgXiCEijXPZkLKCms+rHhtoRcWccP7Z8DpOOaP1gc3P9oOwg==}
+  eslint-plugin-storybook@0.11.3:
+    resolution: {integrity: sha512-gDBnBZiyk4ZG7OMSJRaHBcuJ8TMCXgMIQ3HB/XvtN0SvSio2ZOIeYD3yGj39g/DbyCe/Bg02j/ip9tWlDEs82A==}
     engines: {node: '>= 18'}
     peerDependencies:
       eslint: '>=8'
+      typescript: '>=4.8.4 <5.8.0'
 
   eslint-scope@8.2.0:
     resolution: {integrity: sha512-PHlWUfG6lvPc3yvP5A4PNyBL1W8fkDUccmI21JUu/+GKZBoH/W5u6usENXUrWFRsyoW5ACUjFGgAFQp5gUlb/A==}
@@ -8473,15 +8474,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-storybook@0.11.2(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3):
+  eslint-plugin-storybook@0.11.3(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3):
     dependencies:
       '@storybook/csf': 0.1.13
       '@typescript-eslint/utils': 8.24.0(eslint@9.18.0(jiti@1.21.7))(typescript@5.7.3)
       eslint: 9.18.0(jiti@1.21.7)
       ts-dedent: 2.2.0
+      typescript: 5.7.3
     transitivePeerDependencies:
       - supports-color
-      - typescript
 
   eslint-scope@8.2.0:
     dependencies:
