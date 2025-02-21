@@ -108,7 +108,7 @@
     "sass": "1.83.4",
     "satori": "0.12.0",
     "sharp": "0.33.5",
-    "sirv": "3.0.0",
+    "sirv": "3.0.1",
     "storybook": "8.6.0-beta.6",
     "storybook-solidjs": "1.0.0-beta.6",
     "storybook-solidjs-vite": "1.0.0-beta.6",
