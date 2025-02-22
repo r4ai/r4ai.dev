@@ -50,7 +50,7 @@
     "@iconify-json/lucide": "1.2.26",
     "@iconify-json/simple-icons": "1.2.25",
     "@iconify/types": "2.0.0",
-    "@iconify/utils": "2.2.1",
+    "@iconify/utils": "2.3.0",
     "@r4ai/remark-callout": "0.6.2",
     "@r4ai/remark-embed": "0.5.0",
     "@shikijs/transformers": "2.5.0",
