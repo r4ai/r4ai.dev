@@ -19,14 +19,14 @@ export const ProjectCard = (props: ProjectCardProps) => {
   return (
     <div
       class={cn(
-        "col-span-2 row-span-2 rounded-xl border",
+        "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
         props.hasImage ? "relative" : "flex flex-col items-center",
         props.class
       )}
     >
       <div
         class={cn(
-          "flex w-full flex-row items-center justify-between gap-8 rounded-b-xl border-zinc-700 px-8 py-4 text-lg font-bold backdrop-blur-xl",
+          "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl border-zinc-700 px-8 py-4 text-lg font-bold backdrop-blur-xl",
           props.theme === "light" && "border-zinc-300",
           props.hasImage
             ? "absolute bottom-0 rounded-b-xl border-t"
@@ -61,7 +61,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
             {props.description}
           </p>
         </div>
-        <div class="flex flex-row flex-wrap items-center justify-end gap-3">
+        <div class="ml-auto flex flex-row flex-wrap items-center justify-end gap-3">
           <For each={props.links}>
             {({ href, label }) => <LinkButton href={href}>{label}</LinkButton>}
           </For>

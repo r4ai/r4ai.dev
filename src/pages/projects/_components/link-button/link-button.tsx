@@ -15,7 +15,7 @@ export const LinkButton = (props: LinkButtonProps) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      {props.children}
+      <span class="inline-block">{props.children}</span>
       <IconExternalLink class="size-4" />
     </a>
   )

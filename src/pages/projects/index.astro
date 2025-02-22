@@ -15,9 +15,9 @@ import { ProjectCard } from "./_components"
     <p class="mx-auto mb-8 text-center text-lg">
       今までに作成したライブラリ、アプリケーション、ウェブサイト等の一覧です
     </p>
-    <div class="grid grid-cols-6 grid-rows-[repeat(6,200px)] gap-8">
+    <div class="grid grid-cols-6 gap-8">
       <ProjectCard
-        class="col-span-3 row-span-2"
+        class="col-span-6 row-span-2 lg:col-span-3"
         title="alg.tus-ricora.com"
         description="RICORA Programming Team のウェブサイト"
         year="2024-2025"
@@ -37,7 +37,7 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-3 row-span-2"
+        class="col-span-6 row-span-2 lg:col-span-3"
         title="@r4ai/remark-callout"
         description="Obsidian風のCallout記法をMarkdownに追加するRemarkプラグイン"
         year="2024-2025"
@@ -53,7 +53,7 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-2 row-span-2"
+        class="col-span-6 row-span-2 md:col-span-3 xl:col-span-2"
         title="@r4ai/remark-embed"
         description="リンクカードや埋め込みコンテンツをMarkdownに追加するRemarkプラグイン"
         year="2024-2025"
@@ -69,7 +69,7 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-2 row-span-1"
+        class="col-span-6 row-span-1 md:col-span-3 xl:col-span-2"
         title="@r4ai/rehype-graphviz"
         description="Markdown内のGraphvizで記述された図をレンダリングするプラグイン"
         year="2024-2025"
@@ -81,7 +81,7 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-2 row-span-1"
+        class="col-span-6 row-span-1 md:col-span-3 xl:col-span-2"
         title="Ao"
         description="Wasmを出力するコンパイル型プログラミング言語"
         year="2024-2025"
@@ -97,7 +97,7 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-2 row-span-1"
+        class="col-span-6 row-span-1 md:col-span-3 xl:col-span-2"
         title="typst-code-info"
         description="Typstのコードブロックに、キャプションや行番号、Diffハイライト等の機能を追加するライブラリ"
         year="2024"
@@ -109,9 +109,9 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-2 row-span-1"
+        class="col-span-6 row-span-1 md:col-span-3 xl:col-span-2"
         title="ゆめみパスポート フロントエンド"
-        description="ゆめみパスポート フロントエンドコーディング試験"
+        description="ゆめみパスポートのフロントエンドコーディング試験で作成した、都道府県別の総人口推移グラフ"
         year="2024"
         links={[
           {
@@ -121,7 +121,7 @@ import { ProjectCard } from "./_components"
         ]}
       />
       <ProjectCard
-        class="col-span-3 row-span-2"
+        class="col-span-6 row-span-2 lg:col-span-3"
         title="Shuiro"
         description="Wasmを利用したプログラム採点システム"
         year="2024-2025"
@@ -138,14 +138,14 @@ import { ProjectCard } from "./_components"
         theme="light"
       />
       <ProjectCard
-        class="col-span-3 row-span-2"
+        class="col-span-6 row-span-2 lg:col-span-3"
         title="r4ai.dev"
         description="自身のブログ兼ポートフォリオ（このサイト）"
         year="2023-2025"
         image={{
           src: R4aiDev,
           alt: "r4ai.devのトップページ",
-          class: "px-36",
+          class: "md:px-36",
         }}
         links={[
           {
