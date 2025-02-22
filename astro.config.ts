@@ -116,7 +116,7 @@ export default defineConfig({
         transformerMetaDiff(),
         transformerMetaHighlight(),
         transformerMetaWordHighlight(),
-        transformerNotationDiff(),
+        transformerNotationDiff({ matchAlgorithm: "v3" }),
         transformerNotationHighlight(),
         transformerNotationWordHighlight(),
         transformerLineNumbers(),
