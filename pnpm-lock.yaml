@@ -91,8 +91,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       '@iconify/utils':
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.3.0
+        version: 2.3.0
       '@r4ai/remark-callout':
         specifier: 0.6.2
         version: 0.6.2
@@ -332,14 +332,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@antfu/install-pkg@0.4.1':
-    resolution: {integrity: sha512-T7yB5QNG29afhWVkVq7XeIMBa5U/vs9mX69YqayXypPRmYzUmzwnYltplHmPtZ4HPCn+sQKeXW8I47wCbuBOjw==}
-
   '@antfu/install-pkg@1.0.0':
     resolution: {integrity: sha512-xvX6P/lo1B3ej0OsaErAjqgFYzYVcJpamjLAFLYh9vRJngBrMoUG7aVnrGTeqM7yxbyTD5p3F2+0/QUEh8Vzhw==}
-
-  '@antfu/utils@0.7.10':
-    resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
 
   '@antfu/utils@8.1.1':
     resolution: {integrity: sha512-Mex9nXf9vR6AhcXmMrlz/HVgYYZpVGJ6YlPgwl7UnaFpnshXs6EK/oa5Gpf3CzENMjkvEx2tQtntGnb7UtSTOQ==}
@@ -934,9 +928,6 @@ packages:
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
-
-  '@iconify/utils@2.2.1':
-    resolution: {integrity: sha512-0/7J7hk4PqXmxo5PDBDxmnecw5PxklZJfNjIVG9FM0mEfVrvfudS22rYWsqVk6gR3UJ/mSYS90X4R3znXnqfNA==}
 
   '@iconify/utils@2.3.0':
     resolution: {integrity: sha512-GmQ78prtwYW6EtzXRU1rY+KwOKfz32PD7iJh6Iyqw68GiKuoZ2A6pRtzWONz5VQJbp50mEjXh/7NkumtrAgRKA==}
@@ -3579,10 +3570,6 @@ packages:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
     engines: {node: '>=6'}
 
-  local-pkg@0.5.1:
-    resolution: {integrity: sha512-9rrA30MRRP3gBD3HTGnC6cDFpaE1kVDWxWgqWJUN0RvDNAo+Nz/9GxB+nHOH0ifbVFy0hSA1V6vFDvnx54lTEQ==}
-    engines: {node: '>=14'}
-
   local-pkg@1.0.0:
     resolution: {integrity: sha512-bbgPw/wmroJsil/GgL4qjDzs5YLTBMQ99weRsok1XCDccQeehbHA/I1oRvk2NPtr7KGZgT/Y5tPRnAtMqeG2Kg==}
     engines: {node: '>=14'}
@@ -3875,9 +3862,6 @@ packages:
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
-
-  mlly@1.7.3:
-    resolution: {integrity: sha512-xUsx5n/mN0uQf4V548PKQ+YShA4/IW0KI1dZhrNrPCLG+xizETbHTkOa1f8/xut9JRPp8kQuMnz0oqwkTiLo/A==}
 
   mlly@1.7.4:
     resolution: {integrity: sha512-qmdSIPC4bDJXgZTCR7XosJiNKySV7O215tsPtDN9iEO/7q/76b/ijtgRu/+epFXSJhijtTCCGp3DWS549P3xKw==}
@@ -5538,17 +5522,10 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@antfu/install-pkg@0.4.1':
-    dependencies:
-      package-manager-detector: 0.2.8
-      tinyexec: 0.3.2
-
   '@antfu/install-pkg@1.0.0':
     dependencies:
       package-manager-detector: 0.2.8
       tinyexec: 0.3.2
-
-  '@antfu/utils@0.7.10': {}
 
   '@antfu/utils@8.1.1': {}
 
@@ -6143,19 +6120,6 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify/types@2.0.0': {}
-
-  '@iconify/utils@2.2.1':
-    dependencies:
-      '@antfu/install-pkg': 0.4.1
-      '@antfu/utils': 0.7.10
-      '@iconify/types': 2.0.0
-      debug: 4.4.0
-      globals: 15.14.0
-      kolorist: 1.8.0
-      local-pkg: 0.5.1
-      mlly: 1.7.3
-    transitivePeerDependencies:
-      - supports-color
 
   '@iconify/utils@2.3.0':
     dependencies:
@@ -9304,14 +9268,9 @@ snapshots:
       pify: 4.0.1
       strip-bom: 3.0.0
 
-  local-pkg@0.5.1:
-    dependencies:
-      mlly: 1.7.3
-      pkg-types: 1.3.0
-
   local-pkg@1.0.0:
     dependencies:
-      mlly: 1.7.3
+      mlly: 1.7.4
       pkg-types: 1.3.0
 
   locate-path@5.0.0:
@@ -9581,7 +9540,7 @@ snapshots:
   mermaid@11.4.1:
     dependencies:
       '@braintree/sanitize-url': 7.1.1
-      '@iconify/utils': 2.2.1
+      '@iconify/utils': 2.3.0
       '@mermaid-js/parser': 0.3.0
       '@types/d3': 7.4.3
       cytoscape: 3.30.4
@@ -9911,13 +9870,6 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  mlly@1.7.3:
-    dependencies:
-      acorn: 8.14.0
-      pathe: 1.1.2
-      pkg-types: 1.3.0
-      ufo: 1.5.4
-
   mlly@1.7.4:
     dependencies:
       acorn: 8.14.0
@@ -10171,7 +10123,7 @@ snapshots:
   pkg-types@1.3.0:
     dependencies:
       confbox: 0.1.8
-      mlly: 1.7.3
+      mlly: 1.7.4
       pathe: 1.1.2
 
   points-on-curve@0.2.0: {}
