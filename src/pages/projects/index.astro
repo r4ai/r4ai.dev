@@ -1,10 +1,159 @@
 ---
+import AlgTusRicoraCom from "@/assets/imgs/projects/alg.tus-ricora.com.png"
+import R4aiDev from "@/assets/imgs/projects/r4ai.dev.png"
+import RemarkCallout from "@/assets/imgs/projects/remark-callout.png"
+import RemarkEmbed from "@/assets/imgs/projects/remark-embed.png"
+import Shuiro from "@/assets/imgs/projects/shuiro.png"
 import { RootLayout } from "@/components/layouts"
+
+import { ProjectCard } from "./_components"
 ---
 
 <RootLayout title="Projects">
-  <div class="container mx-auto mb-12 mt-6 grid max-w-xl gap-12">
+  <div class="container mx-auto mb-12 mt-6 grid max-w-screen-2xl gap-12">
     <h1 class="mx-auto font-times text-4.5xl font-black">Projects</h1>
-    <p class="mx-auto">Work in progress...</p>
+    <p class="mx-auto mb-8 text-center text-lg">
+      今までに作成したライブラリ、アプリケーション、ウェブサイト等の一覧です
+    </p>
+    <div class="grid grid-cols-6 grid-rows-[repeat(6,200px)] gap-8">
+      <ProjectCard
+        class="col-span-3 row-span-2"
+        title="alg.tus-ricora.com"
+        description="RICORA Programming Team のウェブサイト"
+        year="2024-2025"
+        image={{
+          src: AlgTusRicoraCom,
+          alt: "alg.tus-ricora.comのトップページ",
+        }}
+        links={[
+          {
+            href: "https://zenn.dev/ricora/articles/5a170c17933c3f",
+            label: "紹介記事",
+          },
+          {
+            href: "https://github.com/ricora/alg.tus-ricora.com",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-3 row-span-2"
+        title="@r4ai/remark-callout"
+        description="Obsidian風のCallout記法をMarkdownに追加するRemarkプラグイン"
+        year="2024-2025"
+        image={{
+          src: RemarkCallout,
+          alt: "@r4ai/remark-calloutで作成されたサンプル",
+        }}
+        links={[
+          {
+            href: "https://github.com/r4ai/remark-callout",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-2 row-span-2"
+        title="@r4ai/remark-embed"
+        description="リンクカードや埋め込みコンテンツをMarkdownに追加するRemarkプラグイン"
+        year="2024-2025"
+        image={{
+          src: RemarkEmbed,
+          alt: "@r4ai/remark-embedで作成されたサンプル",
+        }}
+        links={[
+          {
+            href: "https://github.com/r4ai/remark-embed",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-2 row-span-1"
+        title="@r4ai/rehype-graphviz"
+        description="Markdown内のGraphvizで記述された図をレンダリングするプラグイン"
+        year="2024-2025"
+        links={[
+          {
+            href: "https://github.com/r4ai/rehype-graphviz",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-2 row-span-1"
+        title="Ao"
+        description="Wasmを出力するコンパイル型プログラミング言語"
+        year="2024-2025"
+        links={[
+          {
+            href: "/posts/ao-development",
+            label: "紹介スライド",
+          },
+          {
+            href: "https://github.com/ricora/ao",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-2 row-span-1"
+        title="typst-code-info"
+        description="Typstのコードブロックに、キャプションや行番号、Diffハイライト等の機能を追加するライブラリ"
+        year="2024"
+        links={[
+          {
+            href: "https://github.com/r4ai/typst-code-info",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-2 row-span-1"
+        title="ゆめみパスポート フロントエンド"
+        description="ゆめみパスポート フロントエンドコーディング試験"
+        year="2024"
+        links={[
+          {
+            href: "https://github.com/r4ai/yumemi-passport-frontend",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-3 row-span-2"
+        title="Shuiro"
+        description="Wasmを利用したプログラム採点システム"
+        year="2024-2025"
+        image={{
+          src: Shuiro,
+          alt: "Shuiroの問題解答画面",
+        }}
+        links={[
+          {
+            href: "https://github.com/shuiro-dev/shuiro",
+            label: "GitHub",
+          },
+        ]}
+        theme="light"
+      />
+      <ProjectCard
+        class="col-span-3 row-span-2"
+        title="r4ai.dev"
+        description="自身のブログ兼ポートフォリオ（このサイト）"
+        year="2023-2025"
+        image={{
+          src: R4aiDev,
+          alt: "r4ai.devのトップページ",
+          class: "px-36",
+        }}
+        links={[
+          {
+            href: "https://github.com/r4ai/r4ai.dev",
+            label: "GitHub",
+          },
+        ]}
+      />
+    </div>
   </div>
 </RootLayout>
