@@ -85,7 +85,7 @@
     "eslint-plugin-solid": "0.14.5",
     "eslint-plugin-storybook": "0.11.3",
     "fast-check": "3.23.2",
-    "globals": "15.14.0",
+    "globals": "15.15.0",
     "husky": "9.1.7",
     "knitwork": "1.2.0",
     "lint-staged": "15.4.3",
