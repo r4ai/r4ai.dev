@@ -45,7 +45,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.4",
     "@chromatic-com/storybook": "3.2.4",
-    "@eslint/js": "9.18.0",
+    "@eslint/js": "9.21.0",
     "@iconify-json/fluent-emoji": "1.2.3",
     "@iconify-json/lucide": "1.2.26",
     "@iconify-json/simple-icons": "1.2.25",
@@ -75,7 +75,7 @@
     "@types/three": "0.172.0",
     "@typescript-eslint/parser": "8.20.0",
     "esbuild": "0.24.2",
-    "eslint": "9.18.0",
+    "eslint": "9.21.0",
     "eslint-config-flat-gitignore": "1.0.1",
     "eslint-config-prettier": "10.0.1",
     "eslint-define-config": "2.1.0",
