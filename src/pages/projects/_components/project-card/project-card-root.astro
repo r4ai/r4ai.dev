@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets"
+
+import { cn } from "@/lib/utils"
+
+import { ProjectCard, type ProjectCardProps } from "./project-card"
+
+type ImageProps = Parameters<typeof Image>[0]
+
+export type Props = Omit<ProjectCardProps, "image" | "hasImage"> & {
+  image?: ImageProps
+}
+const { image, ...props } = Astro.props
+const projectCardProps = { ...(props as ProjectCardProps), hasImage: !!image }
+---
+
+<ProjectCard {...projectCardProps as ProjectCardProps}>
+  {
+    image && (
+      <Image
+        {...image}
+        class={cn("size-full rounded-xl object-cover object-top", image.class)}
+      />
+    )
+  }
+</ProjectCard>
