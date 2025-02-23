@@ -97,8 +97,8 @@ importers:
         specifier: 0.6.2
         version: 0.6.2
       '@r4ai/remark-embed':
-        specifier: 0.3.1
-        version: 0.3.1
+        specifier: 0.5.0
+        version: 0.5.0(typescript@5.7.3)
       '@shikijs/transformers':
         specifier: 1.29.2
         version: 1.29.2
@@ -1229,8 +1229,8 @@ packages:
     resolution: {integrity: sha512-yRj0dzEqdGYquJqTcr68CtAAh47AamWGMbZwiXBTeH6tf2MAh3Rc8C3xYhsRHKX91j9h5JZPTV2YLv+zL08AHQ==}
     engines: {node: '>=16'}
 
-  '@r4ai/remark-embed@0.3.1':
-    resolution: {integrity: sha512-pyVKu7qU7xn6K0buSJ6BBvLQwEroyjysuhLgdHcRM1CM+aiioHh0gnuforAyHMrrtIkQtG38yOmfE8ymsPBjwA==}
+  '@r4ai/remark-embed@0.5.0':
+    resolution: {integrity: sha512-VFnTavW8huGGX2N6NgwQXpSgZgouRCLsEvhjZIuQ1EIj+CUze3cogg8S+7BYQIu42etQPttiEvSWJIcZD+q8gg==}
     engines: {node: '>=16'}
 
   '@rollup/pluginutils@5.1.4':
@@ -6391,15 +6391,17 @@ snapshots:
       defu: 6.1.4
       unist-util-visit: 5.0.0
 
-  '@r4ai/remark-embed@0.3.1':
+  '@r4ai/remark-embed@0.5.0(typescript@5.7.3)':
     dependencies:
       defu: 6.1.4
       hast-util-from-html-isomorphic: 2.0.0
       unfurl.js: 6.4.0
       unist-util-visit: 5.0.0
+      valibot: 1.0.0-rc.1(typescript@5.7.3)
     transitivePeerDependencies:
       - encoding
       - supports-color
+      - typescript
 
   '@rollup/pluginutils@5.1.4(rollup@4.34.6)':
     dependencies:
