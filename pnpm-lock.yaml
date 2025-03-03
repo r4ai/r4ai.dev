@@ -40,7 +40,7 @@ importers:
         version: 2.1.1
       katex:
         specifier: ^0.16.18
-        version: 0.16.19
+        version: 0.16.21
       mermaid:
         specifier: ^11.4.1
         version: 11.4.1
@@ -1527,10 +1527,10 @@ packages:
       react-dom:
         optional: true
 
-  '@storybook/builder-vite@8.6.0-beta.7':
-    resolution: {integrity: sha512-2hLO42Jro/AQOSZbz7NFa45Rd/PLwG/VGdMaRgYMwwBx1mtXbrYTJqMqm3DDjeEo6gJ/ZDoj9TWeoJ7ItBVS8A==}
+  '@storybook/builder-vite@9.0.0-alpha.1':
+    resolution: {integrity: sha512-uIcc85jwjZNHJuUrWqs5ADB2ge+4mMTIblJf+6gvqYMMj53MyzDtpci7pkT2daKcO03n2VB6pcjW21T/LEqL3g==}
     peerDependencies:
-      storybook: ^8.6.0-beta.7
+      storybook: ^9.0.0-alpha.1
       vite: ^4.0.0 || ^5.0.0 || ^6.0.0
 
   '@storybook/core@8.6.0-beta.7':
@@ -1546,10 +1546,10 @@ packages:
     peerDependencies:
       storybook: ^8.5.8
 
-  '@storybook/csf-plugin@8.6.0-beta.7':
-    resolution: {integrity: sha512-6FMS3cr9KbjAFWoU25gTx8L3WhxicBUrCTsXWPzT5nROqU5cREghCFoDqAAx3K8m69tS64B8Z3Kng3sxMFI6XQ==}
+  '@storybook/csf-plugin@9.0.0-alpha.1':
+    resolution: {integrity: sha512-ax1VSSbm/5k2XQWe15A4VItG5iUM85pQmRP2p4tlS76bDIOLCuHwzYKuGmb4ILOQFM3UQAH3obHFeOaKpcTuog==}
     peerDependencies:
-      storybook: ^8.6.0-beta.7
+      storybook: ^9.0.0-alpha.1
 
   '@storybook/csf@0.1.12':
     resolution: {integrity: sha512-9/exVhabisyIVL0VxTCxo01Tdm8wefIXKXfltAPTSr8cbLn5JAxGQ6QV3mjdecLGEOucfoVhAKtJfVHxEK1iqw==}
@@ -3481,8 +3481,8 @@ packages:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
 
-  katex@0.16.19:
-    resolution: {integrity: sha512-3IA6DYVhxhBabjSLTNO9S4+OliA3Qvb8pBQXMfC4WxXJgLwZgnfDl0BmB4z6nBMdznBsZ+CGM8DrGZ5hcguDZg==}
+  katex@0.16.21:
+    resolution: {integrity: sha512-XvqR7FgOHtWupfMiigNzmh+MgUVmDGU2kXZm899ZkPfcuoPuFxyHmXsgATDpFZDAXCI8tvinaVcDo8PIIJSo4A==}
     hasBin: true
 
   kebab-case@1.0.2:
@@ -6705,9 +6705,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.6.0-beta.7(storybook@8.6.0-beta.7(prettier@3.5.2))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
+  '@storybook/builder-vite@9.0.0-alpha.1(storybook@8.6.0-beta.7(prettier@3.5.2))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
     dependencies:
-      '@storybook/csf-plugin': 8.6.0-beta.7(storybook@8.6.0-beta.7(prettier@3.5.2))
+      '@storybook/csf-plugin': 9.0.0-alpha.1(storybook@8.6.0-beta.7(prettier@3.5.2))
       browser-assert: 1.2.1
       storybook: 8.6.0-beta.7(prettier@3.5.2)
       ts-dedent: 2.2.0
@@ -6739,7 +6739,7 @@ snapshots:
       storybook: 8.6.0-beta.7(prettier@3.5.2)
       unplugin: 1.16.1
 
-  '@storybook/csf-plugin@8.6.0-beta.7(storybook@8.6.0-beta.7(prettier@3.5.2))':
+  '@storybook/csf-plugin@9.0.0-alpha.1(storybook@8.6.0-beta.7(prettier@3.5.2))':
     dependencies:
       storybook: 8.6.0-beta.7(prettier@3.5.2)
       unplugin: 1.16.1
@@ -9143,7 +9143,7 @@ snapshots:
       object.assign: 4.1.7
       object.values: 1.2.1
 
-  katex@0.16.19:
+  katex@0.16.21:
     dependencies:
       commander: 8.3.0
 
@@ -9511,7 +9511,7 @@ snapshots:
       dagre-d3-es: 7.0.11
       dayjs: 1.11.13
       dompurify: 3.2.3
-      katex: 0.16.19
+      katex: 0.16.21
       khroma: 2.1.0
       lodash-es: 4.17.21
       marked: 13.0.3
@@ -9612,7 +9612,7 @@ snapshots:
     dependencies:
       '@types/katex': 0.16.7
       devlop: 1.1.0
-      katex: 0.16.19
+      katex: 0.16.21
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
@@ -10316,7 +10316,7 @@ snapshots:
       '@types/katex': 0.16.7
       hast-util-from-html-isomorphic: 2.0.0
       hast-util-to-text: 4.0.2
-      katex: 0.16.19
+      katex: 0.16.21
       unist-util-visit-parents: 6.0.1
       vfile: 6.0.3
 
@@ -10780,7 +10780,7 @@ snapshots:
 
   storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(solid-js@1.9.5)(storybook@8.6.0-beta.7(prettier@3.5.2))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)):
     dependencies:
-      '@storybook/builder-vite': 8.6.0-beta.7(storybook@8.6.0-beta.7(prettier@3.5.2))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+      '@storybook/builder-vite': 9.0.0-alpha.1(storybook@8.6.0-beta.7(prettier@3.5.2))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       magic-string: 0.30.17
       vite-plugin-solid: 2.11.2(@testing-library/jest-dom@6.5.0)(solid-js@1.9.5)(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
     transitivePeerDependencies:
