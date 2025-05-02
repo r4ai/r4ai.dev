@@ -45,9 +45,9 @@ const {
       {twitter}
       {url}
     />
+    <script is:inline set:html={initColorSchemeScript} />
   </head>
   <body class="flex min-h-full flex-col bg-background text-foreground">
-    <script is:inline set:html={initColorSchemeScript} />
     <Header />
     <main class={cn("flex-1", className)} data-pagefind-body>
       <slot />
