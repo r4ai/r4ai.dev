@@ -73,8 +73,8 @@ importers:
         specifier: 0.9.4
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.5.2)(typescript@5.7.3)
       '@chromatic-com/storybook':
-        specifier: 3.2.4
-        version: 3.2.4(react@18.3.1)(storybook@8.6.0-beta.7(prettier@3.5.2))
+        specifier: 3.2.6
+        version: 3.2.6(react@18.3.1)(storybook@8.6.0-beta.7(prettier@3.5.2))
       '@eslint/js':
         specifier: 9.21.0
         version: 9.21.0
@@ -504,8 +504,8 @@ packages:
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
 
-  '@chromatic-com/storybook@3.2.4':
-    resolution: {integrity: sha512-5/bOOYxfwZ2BktXeqcCpOVAoR6UCoeART5t9FVy22hoo8F291zOuX4y3SDgm10B1GVU/ZTtJWPT2X9wZFlxYLg==}
+  '@chromatic-com/storybook@3.2.6':
+    resolution: {integrity: sha512-FDmn5Ry2DzQdik+eq2sp/kJMMT36Ewe7ONXUXM2Izd97c7r6R/QyGli8eyh/F0iyqVvbLveNYFyF0dBOJNwLqw==}
     engines: {node: '>=16.0.0', yarn: '>=1.22.18'}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
@@ -5804,7 +5804,7 @@ snapshots:
 
   '@chevrotain/utils@11.0.3': {}
 
-  '@chromatic-com/storybook@3.2.4(react@18.3.1)(storybook@8.6.0-beta.7(prettier@3.5.2))':
+  '@chromatic-com/storybook@3.2.6(react@18.3.1)(storybook@8.6.0-beta.7(prettier@3.5.2))':
     dependencies:
       chromatic: 11.22.0
       filesize: 10.1.6
