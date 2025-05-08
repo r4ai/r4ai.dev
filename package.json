@@ -103,7 +103,7 @@
     "remark-gfm": "4.0.1",
     "remark-math": "6.0.0",
     "remark-parse": "11.0.0",
-    "remark-rehype": "11.1.1",
+    "remark-rehype": "11.1.2",
     "rollup-plugin-visualizer": "5.14.0",
     "sass": "1.85.0",
     "satori": "0.12.1",
