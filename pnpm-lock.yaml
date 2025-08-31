@@ -61,7 +61,7 @@ importers:
         version: 2.6.0
       tailwind-variants:
         specifier: ^0.3.0
-        version: 0.3.0(tailwindcss@3.4.17)
+        version: 0.3.1(tailwindcss@3.4.17)
       three:
         specifier: ^0.172.0
         version: 0.172.0
@@ -275,7 +275,7 @@ importers:
         version: 1.0.0-beta.6(solid-js@1.9.5)
       storybook-solidjs-vite:
         specifier: 1.0.0-beta.6
-        version: 1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(solid-js@1.9.5)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+        version: 1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.5)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       tailwindcss:
         specifier: 3.4.17
         version: 3.4.17
@@ -1047,9 +1047,15 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
+  '@jridgewell/gen-mapping@0.3.13':
+    resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
+
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
     engines: {node: '>=6.0.0'}
+
+  '@jridgewell/remapping@2.3.5':
+    resolution: {integrity: sha512-LI9u/+laYG4Ds1TDKSJW2YPrIlcVYOwi2fUC6xB43lueCjgxV4lffOCZCtYFiH6TNOX+tQKXx97T4IKHbhyHEQ==}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -1062,8 +1068,14 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
 
+  '@jridgewell/sourcemap-codec@1.5.5':
+    resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@jridgewell/trace-mapping@0.3.30':
+    resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
 
   '@kobalte/core@0.13.8':
     resolution: {integrity: sha512-Im3nJYeFdvfihybqRoWeURxb+ksgHJWa+znHV0Niv8tKOwsg/IzIJmPqg1w6BKsINX5GKuIZKfEn8H6AVJSTCQ==}
@@ -1527,11 +1539,11 @@ packages:
       react-dom:
         optional: true
 
-  '@storybook/builder-vite@9.0.0-beta.11':
-    resolution: {integrity: sha512-jaa6KaKjmmOxozotDieuH7Qcc5KyIBQhwMHoh9YSinqmAoHdLKQSrPEEpluEjwoMW+BDPRVYLAMWiXmemuDTRg==}
+  '@storybook/builder-vite@10.0.0-beta.0':
+    resolution: {integrity: sha512-IGd75RO4YR7ofOZWqND2dYHrKLjwN05+mM1xfrucb2SoQzjbNXvFNVVxtOCBmqsarjmrMKLKHuRgFzU41vs43g==}
     peerDependencies:
-      storybook: ^9.0.0-beta.11
-      vite: ^5.0.0 || ^6.0.0
+      storybook: ^10.0.0-beta.0
+      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
 
   '@storybook/core@8.6.0-beta.7':
     resolution: {integrity: sha512-Qdq6Qamqq/vZBHOTkoW3ef6rYMgPlVghsFYv28J4hBRBPnv0FJWHp4Y918ziw1w9kOp6X+l77fpS9xzJeMXN4w==}
@@ -1541,15 +1553,28 @@ packages:
       prettier:
         optional: true
 
+  '@storybook/csf-plugin@10.0.0-beta.0':
+    resolution: {integrity: sha512-2vFHbbnp/yGWt4p53OO5swDVZzmOp3HkJEbhc1zE9BW3YcX0mG8Gh2sd7K0+Io04uoupwJpawTz8VDdKfYkJUA==}
+    peerDependencies:
+      esbuild: '*'
+      rollup: '*'
+      storybook: ^10.0.0-beta.0
+      vite: '*'
+      webpack: '*'
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+
   '@storybook/csf-plugin@8.5.8':
     resolution: {integrity: sha512-9p+TFutbvtPYEmg14UsvqBDWKP/p/+OkIdi+gkwCMw0yiJF/+7ErMHDB0vr5SpJpU7SFQmfpY2c/LaglEtaniw==}
     peerDependencies:
       storybook: ^8.5.8
-
-  '@storybook/csf-plugin@9.0.0-beta.11':
-    resolution: {integrity: sha512-nkx1/8KnJ/SPrZtVc0tlJJwDZA9B7CAx2vNNKK36cdcOxq5sHzu9ahfQs7RiY12W3nHiAoAuYAlHITTY15ujsQ==}
-    peerDependencies:
-      storybook: ^9.0.0-beta.11
 
   '@storybook/csf@0.1.12':
     resolution: {integrity: sha512-9/exVhabisyIVL0VxTCxo01Tdm8wefIXKXfltAPTSr8cbLn5JAxGQ6QV3mjdecLGEOucfoVhAKtJfVHxEK1iqw==}
@@ -1976,6 +2001,11 @@ packages:
 
   acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.15.0:
+    resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -4089,6 +4119,10 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
+  picomatch@4.0.3:
+    resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
+    engines: {node: '>=12'}
+
   pidtree@0.6.0:
     resolution: {integrity: sha512-eG2dWTVw5bzqGRztnHExczNxt5VGsE6OwTeCG3fdUf9KBsZzO3R5OIIIzWR+iZA0NtZ+RDVdaoE2dK1cn6jH4g==}
     engines: {node: '>=0.10'}
@@ -4690,6 +4724,7 @@ packages:
   storybook-solidjs@1.0.0-beta.6:
     resolution: {integrity: sha512-QlnDo0zljwr/GToBe+JmRrw9dsmY8mR1RzRa7ugG0PPzzLVMU9hL1rqtT6qnVVIjqZTMCce3FNCxPZLrxQZaWA==}
     engines: {node: '>=18.0.0'}
+    deprecated: 'This package is deprecated. Use storybook-solidjs-vite instead: https://www.npmjs.com/package/storybook-solidjs-vite'
     peerDependencies:
       solid-js: ^1.9.3
 
@@ -4790,11 +4825,14 @@ packages:
     resolution: {integrity: sha512-vrozgXDQwYO72vHjUb/HnFbQx1exDjoKzqx23aXEg2a9VIg2TSFZ8FmeZpTjUCFMYw7mpX4BE2SFu8wI7asYsw==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  tailwind-merge@2.5.4:
+    resolution: {integrity: sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==}
+
   tailwind-merge@2.6.0:
     resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
 
-  tailwind-variants@0.3.0:
-    resolution: {integrity: sha512-ho2k5kn+LB1fT5XdNS3Clb96zieWxbStE9wNLK7D0AV64kdZMaYzAKo0fWl6fXLPY99ffF9oBJnIj5escEl/8A==}
+  tailwind-variants@0.3.1:
+    resolution: {integrity: sha512-krn67M3FpPwElg4FsZrOQd0U26o7UDH/QOkK8RNaiCCrr052f6YJPBUfNKnPo/s/xRzNPtv1Mldlxsg8Tb46BQ==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
@@ -5039,6 +5077,10 @@ packages:
 
   unplugin@2.2.0:
     resolution: {integrity: sha512-m1ekpSwuOT5hxkJeZGRxO7gXbXT3gF26NjQ7GdVHoLoF8/nopLcd/QfPigpCy7i51oFHiRJg/CyHhj4vs2+KGw==}
+    engines: {node: '>=18.12.0'}
+
+  unplugin@2.3.9:
+    resolution: {integrity: sha512-2dcbZq6aprwXTkzptq3k5qm5B8cvpjG9ynPd5fyM2wDJuuF7PeUK64Sxf0d+X1ZyDOeGydbNzMqBSIVlH8GIfA==}
     engines: {node: '>=18.12.0'}
 
   unstorage@1.14.4:
@@ -6207,11 +6249,21 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
+  '@jridgewell/gen-mapping@0.3.13':
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.5
+      '@jridgewell/trace-mapping': 0.3.30
+
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
       '@jridgewell/set-array': 1.2.1
       '@jridgewell/sourcemap-codec': 1.5.0
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@jridgewell/remapping@2.3.5':
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.30
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
@@ -6219,10 +6271,17 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
+  '@jridgewell/sourcemap-codec@1.5.5': {}
+
   '@jridgewell/trace-mapping@0.3.25':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@jridgewell/trace-mapping@0.3.30':
+    dependencies:
+      '@jridgewell/resolve-uri': 3.1.2
+      '@jridgewell/sourcemap-codec': 1.5.5
 
   '@kobalte/core@0.13.8(solid-js@1.9.5)':
     dependencies:
@@ -6710,13 +6769,16 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@9.0.0-beta.11(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
+  '@storybook/builder-vite@10.0.0-beta.0(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
     dependencies:
-      '@storybook/csf-plugin': 9.0.0-beta.11(storybook@8.6.0-beta.7(prettier@3.5.3))
-      browser-assert: 1.2.1
+      '@storybook/csf-plugin': 10.0.0-beta.0(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       storybook: 8.6.0-beta.7(prettier@3.5.3)
       ts-dedent: 2.2.0
       vite: 6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - webpack
 
   '@storybook/core@8.6.0-beta.7(prettier@3.5.3)(storybook@8.6.0-beta.7(prettier@3.5.3))':
     dependencies:
@@ -6739,12 +6801,16 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@storybook/csf-plugin@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3))':
+  '@storybook/csf-plugin@10.0.0-beta.0(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
     dependencies:
       storybook: 8.6.0-beta.7(prettier@3.5.3)
-      unplugin: 1.16.1
+      unplugin: 2.3.9
+    optionalDependencies:
+      esbuild: 0.24.2
+      rollup: 4.34.6
+      vite: 6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)
 
-  '@storybook/csf-plugin@9.0.0-beta.11(storybook@8.6.0-beta.7(prettier@3.5.3))':
+  '@storybook/csf-plugin@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3))':
     dependencies:
       storybook: 8.6.0-beta.7(prettier@3.5.3)
       unplugin: 1.16.1
@@ -7307,6 +7373,8 @@ snapshots:
       acorn: 8.14.0
 
   acorn@8.14.0: {}
+
+  acorn@8.15.0: {}
 
   ajv@6.12.6:
     dependencies:
@@ -10069,6 +10137,8 @@ snapshots:
 
   picomatch@4.0.2: {}
 
+  picomatch@4.0.3: {}
+
   pidtree@0.6.0: {}
 
   pify@2.3.0: {}
@@ -10785,17 +10855,20 @@ snapshots:
 
   std-env@3.8.0: {}
 
-  storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(solid-js@1.9.5)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)):
+  storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.5)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)):
     dependencies:
-      '@storybook/builder-vite': 9.0.0-beta.11(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+      '@storybook/builder-vite': 10.0.0-beta.0(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       magic-string: 0.30.17
       vite-plugin-solid: 2.11.2(@testing-library/jest-dom@6.5.0)(solid-js@1.9.5)(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
     transitivePeerDependencies:
       - '@testing-library/jest-dom'
+      - esbuild
+      - rollup
       - solid-js
       - storybook
       - supports-color
       - vite
+      - webpack
 
   storybook-solidjs@1.0.0-beta.6(solid-js@1.9.5):
     dependencies:
@@ -10917,11 +10990,13 @@ snapshots:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
 
+  tailwind-merge@2.5.4: {}
+
   tailwind-merge@2.6.0: {}
 
-  tailwind-variants@0.3.0(tailwindcss@3.4.17):
+  tailwind-variants@0.3.1(tailwindcss@3.4.17):
     dependencies:
-      tailwind-merge: 2.6.0
+      tailwind-merge: 2.5.4
       tailwindcss: 3.4.17
 
   tailwindcss-animate@1.0.7(tailwindcss@3.4.17):
@@ -11187,6 +11262,13 @@ snapshots:
   unplugin@2.2.0:
     dependencies:
       acorn: 8.14.0
+      webpack-virtual-modules: 0.6.2
+
+  unplugin@2.3.9:
+    dependencies:
+      '@jridgewell/remapping': 2.3.5
+      acorn: 8.15.0
+      picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
   unstorage@1.14.4:
