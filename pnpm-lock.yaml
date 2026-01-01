@@ -274,8 +274,8 @@ importers:
         specifier: 1.0.0-beta.7
         version: 1.0.0-beta.7(@storybook/test@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3)))(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))
       storybook-solidjs-vite:
-        specifier: 1.0.0-beta.6
-        version: 1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+        specifier: 1.0.0-beta.7
+        version: 1.0.0-beta.7(@storybook/test@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3)))(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite-plugin-solid@2.11.2(@testing-library/jest-dom@6.5.0)(solid-js@1.9.10)(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       tailwindcss:
         specifier: 3.4.17
         version: 3.4.17
@@ -4756,9 +4756,14 @@ packages:
   std-env@3.8.0:
     resolution: {integrity: sha512-Bc3YwwCB+OzldMxOXJIIvC6cPRWr/LxOp48CdQTOkPyk/t4JWWJbrilwBd7RJzKV8QW7tJkcgAmeuLLJugl5/w==}
 
-  storybook-solidjs-vite@1.0.0-beta.6:
-    resolution: {integrity: sha512-+gggXbzmM+p1dA5EdvlfzMPzIB6Nar1WAzDND63wJeDfqHfpL+yYZqewEJm5woLhMLCqhBIMjfei/TXgjVDJXg==}
+  storybook-solidjs-vite@1.0.0-beta.7:
+    resolution: {integrity: sha512-YOTsycsXi1KXOa/nNHbKNvKMELiygDfLQEL1D7yBIW6IhScRgXEIQGttJ8eeYqe43Mofi53U544AOIIF9btEzw==}
     engines: {node: '>=18'}
+    peerDependencies:
+      solid-js: ~1.9.0
+      storybook: '*'
+      vite: ^4.0.0 || ^5.0.0 || ^6.0.0
+      vite-plugin-solid: ^2.10.0
 
   storybook-solidjs@1.0.0-beta.7:
     resolution: {integrity: sha512-PgquZC4FiNPCDOIXuXYOco01vMHCXBBAr3Y/a9ylF4+0vOTcL2RAqieUmTbZhBxVWZIm+nPIyOlz8UqhwcgLtQ==}
@@ -10938,20 +10943,21 @@ snapshots:
 
   std-env@3.8.0: {}
 
-  storybook-solidjs-vite@1.0.0-beta.6(@testing-library/jest-dom@6.5.0)(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)):
+  storybook-solidjs-vite@1.0.0-beta.7(@storybook/test@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3)))(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite-plugin-solid@2.11.2(@testing-library/jest-dom@6.5.0)(solid-js@1.9.10)(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)):
     dependencies:
       '@storybook/builder-vite': 10.2.0-alpha.10(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+      '@storybook/types': 9.0.0-alpha.1(storybook@8.6.0-beta.7(prettier@3.5.3))
       magic-string: 0.30.17
+      solid-js: 1.9.10
+      storybook: 8.6.0-beta.7(prettier@3.5.3)
+      storybook-solidjs: 1.0.0-beta.7(@storybook/test@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3)))(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))
+      vite: 6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)
       vite-plugin-solid: 2.11.2(@testing-library/jest-dom@6.5.0)(solid-js@1.9.10)(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
     transitivePeerDependencies:
-      - '@testing-library/jest-dom'
+      - '@storybook/test'
       - esbuild
       - msw
       - rollup
-      - solid-js
-      - storybook
-      - supports-color
-      - vite
       - webpack
 
   storybook-solidjs@1.0.0-beta.7(@storybook/test@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3)))(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3)):
