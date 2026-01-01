@@ -1,4 +1,4 @@
-import { isServer } from "@/lib/utils"
+import { isServer } from "@/lib/utils/runtime"
 
 export const MEDIA_QUERY_PREFERS_DARK = "(prefers-color-scheme: dark)"
 export const MEDIA_QUERY_PREFERS_LIGHT = "(prefers-color-scheme: light)"

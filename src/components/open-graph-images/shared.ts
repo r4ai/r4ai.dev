@@ -1,7 +1,6 @@
 import fs from "node:fs/promises"
 
-import { render as renderToPng } from "@/lib/utils"
-import type { SharpFn } from "@/lib/utils/open-graph"
+import { render as renderToPng, type SharpFn } from "@/lib/utils/open-graph"
 
 export type ReactLikeObject = {
   type: string
