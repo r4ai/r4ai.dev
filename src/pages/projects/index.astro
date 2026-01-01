@@ -1,5 +1,7 @@
 ---
 import AlgTusRicoraCom from "@/assets/imgs/projects/alg.tus-ricora.com.png"
+import Mercury from "@/assets/imgs/projects/mercury.png"
+import Order from "@/assets/imgs/projects/order.png"
 import R4aiDev from "@/assets/imgs/projects/r4ai.dev.png"
 import RemarkCallout from "@/assets/imgs/projects/remark-callout.png"
 import RemarkEmbed from "@/assets/imgs/projects/remark-embed.png"
@@ -20,7 +22,7 @@ import { ProjectCard } from "./_components"
         class="col-span-6 row-span-2 lg:col-span-3"
         title="alg.tus-ricora.com"
         description="RICORA Programming Team のウェブサイト"
-        year="2024-2025"
+        year="2024-2026"
         image={{
           src: AlgTusRicoraCom,
           alt: "alg.tus-ricora.comのトップページ",
@@ -38,9 +40,54 @@ import { ProjectCard } from "./_components"
       />
       <ProjectCard
         class="col-span-6 row-span-2 lg:col-span-3"
+        title="Mercury"
+        description="MDXからスライドを作成するライブラリ"
+        year="2025-2026"
+        image={{
+          src: Mercury,
+          alt: "Mercuryのウェブサイトのトップページ",
+        }}
+        links={[
+          {
+            href: "https://mercury.r4ai.dev/",
+            label: "Webサイト",
+          },
+          {
+            href: "https://github.com/r4ai/mercury",
+            label: "GitHub",
+          },
+          {
+            href: "https://r4ai.dev/posts/mercury-development",
+            label: "紹介記事",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-6 row-span-2 lg:col-span-3"
+        title="Order"
+        description="学園祭の模擬店のための注文・在庫管理システム"
+        year="2025-2026"
+        image={{
+          src: Order,
+          alt: "Orderの商品の登録画面です。画面上部には在庫状況のサマリーが表示され、総商品数や在庫切れの商品数をひと目で把握できます。登録フォームでは商品名、画像、価格、在庫数、タグを設定できます。",
+        }}
+        links={[
+          {
+            href: "https://zenn.dev/ricora/articles/9cd4eb6bfcea13",
+            label: "紹介記事",
+          },
+          {
+            href: "https://github.com/ricora/order",
+            label: "GitHub",
+          },
+        ]}
+        theme="light"
+      />
+      <ProjectCard
+        class="col-span-6 row-span-2 lg:col-span-3"
         title="@r4ai/remark-callout"
         description="Obsidian風のCallout記法をMarkdownに追加するRemarkプラグイン"
-        year="2024-2025"
+        year="2024-2026"
         image={{
           src: RemarkCallout,
           alt: "@r4ai/remark-calloutで作成されたサンプル",
@@ -141,7 +188,7 @@ import { ProjectCard } from "./_components"
         class="col-span-6 row-span-2 lg:col-span-3"
         title="r4ai.dev"
         description="自身のブログ兼ポートフォリオ（このサイト）"
-        year="2023-2025"
+        year="2023-2026"
         image={{
           src: R4aiDev,
           alt: "r4ai.devのトップページ",
