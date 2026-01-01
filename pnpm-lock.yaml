@@ -81,8 +81,8 @@ importers:
         specifier: 1.2.7
         version: 1.2.7
       "@iconify-json/lucide":
-        specifier: 1.2.70
-        version: 1.2.70
+        specifier: 1.2.82
+        version: 1.2.82
       "@iconify-json/simple-icons":
         specifier: 1.2.53
         version: 1.2.53
@@ -1359,10 +1359,10 @@ packages:
         integrity: sha512-D8G6bKAyIsyxP1rzZtIWr/gg/fO4Rg1+DyCWlfqKK4h8W+4Em/Y0P6QYgJUQTlUcagzJvSyg+9OBv4hz4Hc/QA==,
       }
 
-  "@iconify-json/lucide@1.2.70":
+  "@iconify-json/lucide@1.2.82":
     resolution:
       {
-        integrity: sha512-56s9NdBKgshywVY1e4gOcxzAbU1J649e/jLHBJU1tyNqRs7mFLVEGwj2mmzHJ5YAZB5Tsngi4f/ocTBPlG06ZA==,
+        integrity: sha512-fHZWegspOZonl5GNTvOkHsjnTMdSslFh3EzpzUtRyLxO8bOonqk2OTU3hCl0k4VXzViMjqpRK3X1sotnuBXkFA==,
       }
 
   "@iconify-json/simple-icons@1.2.53":
@@ -10695,7 +10695,7 @@ snapshots:
     dependencies:
       "@iconify/types": 2.0.0
 
-  "@iconify-json/lucide@1.2.70":
+  "@iconify-json/lucide@1.2.82":
     dependencies:
       "@iconify/types": 2.0.0
 
@@ -12024,7 +12024,7 @@ snapshots:
     dependencies:
       "@vitest/spy": 3.2.4
       estree-walker: 3.0.3
-      magic-string: 0.30.17
+      magic-string: 0.30.21
     optionalDependencies:
       vite: 6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.1)
 
