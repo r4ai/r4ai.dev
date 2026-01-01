@@ -64,7 +64,7 @@ const constantFoldingPlugin = ({
 export const rawTransformPlugin = (): Plugin => {
   return {
     name: "raw-transformed",
-    transform: async (code, id) => {
+    transform: async function (code, id) {
       if (!id.endsWith("?transform")) return
       const buildResult = await build({
         stdin: {
@@ -77,8 +77,18 @@ export const rawTransformPlugin = (): Plugin => {
         write: false,
         minify: true,
         treeShaking: true,
+        metafile: true,
         plugins: [constantFoldingPlugin({ platform: "browser" })],
       })
+      for (const input of Object.keys(buildResult.metafile?.inputs ?? {})) {
+        // esbuild uses "<stdin>" for the virtual entry, skip it.
+        if (input === "<stdin>") continue
+        const resolvedInput = path.resolve(input)
+        if (resolvedInput.includes(`${path.sep}node_modules${path.sep}`))
+          continue
+        // Watch actual source deps so ?transform updates when they change.
+        this.addWatchFile(resolvedInput)
+      }
       const transformed = buildResult.outputFiles[0]?.text ?? ""
       return {
         code: `export default ${genString(transformed, { singleQuotes: false })}`,
