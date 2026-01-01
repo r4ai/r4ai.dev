@@ -1,7 +1,10 @@
 import fs from "node:fs/promises"
 
-import { buffer2url, render as renderSatori } from "@/lib/utils"
-import type { SharpFn } from "@/lib/utils/open-graph"
+import {
+  buffer2url,
+  render as renderSatori,
+  type SharpFn,
+} from "@/lib/utils/open-graph"
 
 type ReactLikeObject = {
   type: string
