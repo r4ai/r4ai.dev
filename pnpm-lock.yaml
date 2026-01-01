@@ -79,8 +79,8 @@ importers:
         specifier: 9.21.0
         version: 9.21.0
       '@iconify-json/fluent-emoji':
-        specifier: 1.2.6
-        version: 1.2.6
+        specifier: 1.2.7
+        version: 1.2.7
       '@iconify-json/lucide':
         specifier: 1.2.70
         version: 1.2.70
@@ -920,8 +920,8 @@ packages:
     resolution: {integrity: sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==}
     engines: {node: '>=18.18'}
 
-  '@iconify-json/fluent-emoji@1.2.6':
-    resolution: {integrity: sha512-TFkiu9IyryZT1ZQCI/P9Tr9moswv7uzHrj53a08a7zdbmrAFYdm3h3yNAVRC+9N+mrWJsgclhOXVlr75N1kKKQ==}
+  '@iconify-json/fluent-emoji@1.2.7':
+    resolution: {integrity: sha512-D8G6bKAyIsyxP1rzZtIWr/gg/fO4Rg1+DyCWlfqKK4h8W+4Em/Y0P6QYgJUQTlUcagzJvSyg+9OBv4hz4Hc/QA==}
 
   '@iconify-json/lucide@1.2.70':
     resolution: {integrity: sha512-56s9NdBKgshywVY1e4gOcxzAbU1J649e/jLHBJU1tyNqRs7mFLVEGwj2mmzHJ5YAZB5Tsngi4f/ocTBPlG06ZA==}
@@ -6160,7 +6160,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.2': {}
 
-  '@iconify-json/fluent-emoji@1.2.6':
+  '@iconify-json/fluent-emoji@1.2.7':
     dependencies:
       '@iconify/types': 2.0.0
 
