@@ -30,8 +30,8 @@ importers:
         specifier: ^0.9.1
         version: 0.9.1(solid-js@1.9.10)
       '@modular-forms/solid':
-        specifier: 0.25.0
-        version: 0.25.0(solid-js@1.9.10)(typescript@5.7.3)
+        specifier: 0.25.1
+        version: 0.25.1(solid-js@1.9.10)(typescript@5.7.3)
       astro:
         specifier: ^5.0.9
         version: 5.1.2(@types/node@22.13.5)(jiti@1.21.7)(rollup@4.34.6)(sass@1.85.0)(typescript@5.7.3)(yaml@2.7.0)
@@ -1097,8 +1097,8 @@ packages:
   '@mermaid-js/parser@0.6.3':
     resolution: {integrity: sha512-lnjOhe7zyHjc+If7yT4zoedx2vo4sHaTmtkl1+or8BRTnCtDmcTpAjpzDSfCZrshM5bCoz0GyidzadJAH1xobA==}
 
-  '@modular-forms/solid@0.25.0':
-    resolution: {integrity: sha512-fmahVRnYSjQGxWwkuTqOLb4OnleIeu2ROU9iE3Ln7Z4KA829iLgTLQBHE/SIB4ZfkDuS8XLbN8Dn+7m+D6XimA==}
+  '@modular-forms/solid@0.25.1':
+    resolution: {integrity: sha512-issNZ3xl4tj+1K7KT4dNTQaRq5SmVUXgUPeGTMjtrAzCeTnwM/u6vUxSuTY2bcMw4GzTxreFXLx1xMMhrFkt0A==}
     peerDependencies:
       solid-js: ^1.3.1
 
@@ -6418,7 +6418,7 @@ snapshots:
     dependencies:
       langium: 3.3.1
 
-  '@modular-forms/solid@0.25.0(solid-js@1.9.10)(typescript@5.7.3)':
+  '@modular-forms/solid@0.25.1(solid-js@1.9.10)(typescript@5.7.3)':
     dependencies:
       solid-js: 1.9.10
       valibot: 1.0.0-rc.1(typescript@5.7.3)

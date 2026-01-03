@@ -28,7 +28,7 @@
     "@formkit/tempo": "^0.1.2",
     "@kobalte/core": "^0.13.7",
     "@kobalte/utils": "^0.9.1",
-    "@modular-forms/solid": "0.25.0",
+    "@modular-forms/solid": "0.25.1",
     "astro": "^5.0.9",
     "clsx": "^2.1.1",
     "katex": "^0.16.18",
