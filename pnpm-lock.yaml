@@ -19,7 +19,7 @@ importers:
         version: 5.1.5(astro@5.1.2(@types/node@22.13.5)(jiti@1.21.7)(rollup@4.34.6)(sass@1.85.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.19)
       '@corvu/drawer':
         specifier: ^0.2.2
-        version: 0.2.3(solid-js@1.9.10)
+        version: 0.2.4(solid-js@1.9.10)
       '@formkit/tempo':
         specifier: ^0.1.2
         version: 0.1.2
@@ -518,8 +518,8 @@ packages:
     peerDependencies:
       solid-js: ^1.8
 
-  '@corvu/drawer@0.2.3':
-    resolution: {integrity: sha512-ZCEwJF5Rca2s9qhAlFWB7Y3uVTYClNKRek5xMfUT6fEJ+evPCp5N7oxv3eqxv1iLSlu7/JZTee/Wi4QkOsNmiw==}
+  '@corvu/drawer@0.2.4':
+    resolution: {integrity: sha512-7jQoGZ8ROB9CmXam2nMY2wEskU3IoFwZQywkF/7vrBc/edGsPv7mOVQ1GN6G+4nd7nrMZ3UtqHAhmRh9V0azlw==}
     peerDependencies:
       solid-js: ^1.8
 
@@ -894,8 +894,17 @@ packages:
   '@floating-ui/core@1.6.9':
     resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
 
+  '@floating-ui/core@1.7.3':
+    resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
+
   '@floating-ui/dom@1.6.13':
     resolution: {integrity: sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==}
+
+  '@floating-ui/dom@1.7.4':
+    resolution: {integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==}
+
+  '@floating-ui/utils@0.2.10':
+    resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
@@ -1401,8 +1410,8 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
 
-  '@solid-primitives/memo@1.4.0':
-    resolution: {integrity: sha512-Q0eSnGnhzbUPUNES2OOcEj6qF/9YZntoq04nmQEAIp6QhKdpAsH9mNFrVQtB1by41H/QndNui7Yd2wjI7PUpPA==}
+  '@solid-primitives/memo@1.4.3':
+    resolution: {integrity: sha512-CA+n9yaoqbYm+My5tY2RWb6EE16tVyehM4GzwQF4vCwvjYPAYk1JSRIVuMC0Xuj5ExD2XQJE5E2yAaKY2HTUsg==}
     peerDependencies:
       solid-js: ^1.6.12
 
@@ -1426,8 +1435,8 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
 
-  '@solid-primitives/scheduled@1.5.0':
-    resolution: {integrity: sha512-RVw24IRNh1FQ4DCMb3OahB70tXIwc5vH8nhR4nNPsXwUPQeuOkLsDI5BlxaPk0vyZgqw9lDpufgI3HnPwplgDw==}
+  '@solid-primitives/scheduled@1.5.2':
+    resolution: {integrity: sha512-/j2igE0xyNaHhj6kMfcUQn5rAVSTLbAX+CDEBm25hSNBmNiHLu2lM7Usj2kJJ5j36D67bE8wR1hBNA8hjtvsQA==}
     peerDependencies:
       solid-js: ^1.6.12
 
@@ -1443,6 +1452,11 @@ packages:
 
   '@solid-primitives/utils@6.3.0':
     resolution: {integrity: sha512-e7hTlJ1Ywh2+g/Qug+n4L1mpfxsikoIS4/sHE2EK9WatQt8UJqop/vE6bsLnXlU1xuhb/jo94Ah5Y27rd4wP7A==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/utils@6.3.2':
+    resolution: {integrity: sha512-hZ/M/qr25QOCcwDPOHtGjxTD8w2mNyVAYvcfgwzBHq2RwNqHNdDNsMZYap20+ruRwW4A3Cdkczyoz0TSxLCAPQ==}
     peerDependencies:
       solid-js: ^1.6.12
 
@@ -1542,10 +1556,10 @@ packages:
       react-dom:
         optional: true
 
-  '@storybook/builder-vite@10.2.0-alpha.10':
-    resolution: {integrity: sha512-6GeWRiN+f+N54KwxWhOVNUW5uSlFS1rvEHtr16RUPYJfavJ+c+ofxCnlTTHKBkpoGIeGJoVFgKzKKzO3CHszJg==}
+  '@storybook/builder-vite@10.2.0-alpha.14':
+    resolution: {integrity: sha512-PZQ0oSVSfKaGe+h48MSGoH3wmcYRPbcmuX8G7GLORViW+x7gILLr0e3D5MF5C9rc4BHpfxikaXa3Gq5krUYeKQ==}
     peerDependencies:
-      storybook: ^10.2.0-alpha.10
+      storybook: ^10.2.0-alpha.14
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0
 
   '@storybook/core@8.6.0-beta.7':
@@ -1556,12 +1570,12 @@ packages:
       prettier:
         optional: true
 
-  '@storybook/csf-plugin@10.2.0-alpha.10':
-    resolution: {integrity: sha512-YqrHdYf8ylAfmlKyUtsLVOE7XjbsicLAOhScH2mdnVdwf3zpI3oa+ek+OLJzXJhPEdlGRbN8NB1M3q58uOVc1A==}
+  '@storybook/csf-plugin@10.2.0-alpha.14':
+    resolution: {integrity: sha512-uACCM01OIzeBPOFeNDygxjIqLTlYDQHpzVvMveRz8kcHrP+1jOi6Cq5efMXMmmtb2ltwhr39bblkqLcZCz0lkg==}
     peerDependencies:
       esbuild: '*'
       rollup: '*'
-      storybook: ^10.2.0-alpha.10
+      storybook: ^10.2.0-alpha.14
       vite: '*'
       webpack: '*'
     peerDependenciesMeta:
@@ -4702,8 +4716,8 @@ packages:
     peerDependencies:
       solid-js: ^1.8
 
-  solid-focus-trap@0.1.8:
-    resolution: {integrity: sha512-HbyCCfyytaOUJcKzAI3iRBincqCErUHA2J680nP9TftNbHsk0vVAmOd702iNlvNMORcu0XlV2mdZnGxkKg1ITA==}
+  solid-focus-trap@0.1.9:
+    resolution: {integrity: sha512-LTyNki6GUJPRLXV5uMWPkYClB07SUMubbr2EkAddiR0CJCF/I283txilMU9RURSr/P8EewMfXWu2o3aWrK7A5A==}
     peerDependencies:
       solid-js: ^1.8
 
@@ -5940,27 +5954,27 @@ snapshots:
     dependencies:
       '@corvu/utils': 0.4.2(solid-js@1.9.10)
       solid-dismissible: 0.1.1(solid-js@1.9.10)
-      solid-focus-trap: 0.1.8(solid-js@1.9.10)
+      solid-focus-trap: 0.1.9(solid-js@1.9.10)
       solid-js: 1.9.10
       solid-presence: 0.2.0(solid-js@1.9.10)
       solid-prevent-scroll: 0.1.10(solid-js@1.9.10)
 
-  '@corvu/drawer@0.2.3(solid-js@1.9.10)':
+  '@corvu/drawer@0.2.4(solid-js@1.9.10)':
     dependencies:
       '@corvu/dialog': 0.2.4(solid-js@1.9.10)
       '@corvu/utils': 0.4.2(solid-js@1.9.10)
-      '@solid-primitives/memo': 1.4.0(solid-js@1.9.10)
+      '@solid-primitives/memo': 1.4.3(solid-js@1.9.10)
       solid-js: 1.9.10
       solid-transition-size: 0.1.4(solid-js@1.9.10)
 
   '@corvu/utils@0.3.2(solid-js@1.9.10)':
     dependencies:
-      '@floating-ui/dom': 1.6.13
+      '@floating-ui/dom': 1.7.4
       solid-js: 1.9.10
 
   '@corvu/utils@0.4.2(solid-js@1.9.10)':
     dependencies:
-      '@floating-ui/dom': 1.6.13
+      '@floating-ui/dom': 1.7.4
       solid-js: 1.9.10
 
   '@dimforge/rapier3d-compat@0.12.0': {}
@@ -6187,10 +6201,21 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.9
 
+  '@floating-ui/core@1.7.3':
+    dependencies:
+      '@floating-ui/utils': 0.2.10
+
   '@floating-ui/dom@1.6.13':
     dependencies:
       '@floating-ui/core': 1.6.9
       '@floating-ui/utils': 0.2.9
+
+  '@floating-ui/dom@1.7.4':
+    dependencies:
+      '@floating-ui/core': 1.7.3
+      '@floating-ui/utils': 0.2.10
+
+  '@floating-ui/utils@0.2.10': {}
 
   '@floating-ui/utils@0.2.9': {}
 
@@ -6674,10 +6699,10 @@ snapshots:
       '@solid-primitives/utils': 6.3.0(solid-js@1.9.10)
       solid-js: 1.9.10
 
-  '@solid-primitives/memo@1.4.0(solid-js@1.9.10)':
+  '@solid-primitives/memo@1.4.3(solid-js@1.9.10)':
     dependencies:
-      '@solid-primitives/scheduled': 1.5.0(solid-js@1.9.10)
-      '@solid-primitives/utils': 6.3.0(solid-js@1.9.10)
+      '@solid-primitives/scheduled': 1.5.2(solid-js@1.9.10)
+      '@solid-primitives/utils': 6.3.2(solid-js@1.9.10)
       solid-js: 1.9.10
 
   '@solid-primitives/props@3.2.0(solid-js@1.9.10)':
@@ -6703,7 +6728,7 @@ snapshots:
       '@solid-primitives/utils': 6.3.0(solid-js@1.9.10)
       solid-js: 1.9.10
 
-  '@solid-primitives/scheduled@1.5.0(solid-js@1.9.10)':
+  '@solid-primitives/scheduled@1.5.2(solid-js@1.9.10)':
     dependencies:
       solid-js: 1.9.10
 
@@ -6718,6 +6743,10 @@ snapshots:
       solid-js: 1.9.10
 
   '@solid-primitives/utils@6.3.0(solid-js@1.9.10)':
+    dependencies:
+      solid-js: 1.9.10
+
+  '@solid-primitives/utils@6.3.2(solid-js@1.9.10)':
     dependencies:
       solid-js: 1.9.10
 
@@ -6844,9 +6873,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@10.2.0-alpha.10(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
+  '@storybook/builder-vite@10.2.0-alpha.14(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
     dependencies:
-      '@storybook/csf-plugin': 10.2.0-alpha.10(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+      '@storybook/csf-plugin': 10.2.0-alpha.14(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       '@vitest/mocker': 3.2.4(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       storybook: 8.6.0-beta.7(prettier@3.5.3)
       ts-dedent: 2.2.0
@@ -6878,7 +6907,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@storybook/csf-plugin@10.2.0-alpha.10(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
+  '@storybook/csf-plugin@10.2.0-alpha.14(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))':
     dependencies:
       storybook: 8.6.0-beta.7(prettier@3.5.3)
       unplugin: 2.3.11
@@ -10908,7 +10937,7 @@ snapshots:
       '@corvu/utils': 0.4.2(solid-js@1.9.10)
       solid-js: 1.9.10
 
-  solid-focus-trap@0.1.8(solid-js@1.9.10):
+  solid-focus-trap@0.1.9(solid-js@1.9.10):
     dependencies:
       '@corvu/utils': 0.4.2(solid-js@1.9.10)
       solid-js: 1.9.10
@@ -10968,7 +10997,7 @@ snapshots:
 
   storybook-solidjs-vite@1.0.0-beta.7(@storybook/test@8.5.8(storybook@8.6.0-beta.7(prettier@3.5.3)))(esbuild@0.24.2)(rollup@4.34.6)(solid-js@1.9.10)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite-plugin-solid@2.11.10(@testing-library/jest-dom@6.5.0)(solid-js@1.9.10)(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0)):
     dependencies:
-      '@storybook/builder-vite': 10.2.0-alpha.10(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
+      '@storybook/builder-vite': 10.2.0-alpha.14(esbuild@0.24.2)(rollup@4.34.6)(storybook@8.6.0-beta.7(prettier@3.5.3))(vite@6.1.1(@types/node@22.13.5)(jiti@1.21.7)(sass@1.85.0)(yaml@2.7.0))
       '@storybook/types': 9.0.0-alpha.1(storybook@8.6.0-beta.7(prettier@3.5.3))
       magic-string: 0.30.17
       solid-js: 1.9.10
