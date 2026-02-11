@@ -5,6 +5,7 @@ const postCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     genre: z.enum(["article", "slide"]),
+    category: z.enum(["tech", "hobby"]).optional(),
     icon: z.string(),
     draft: z.boolean(),
     publishedAt: z.date(),
