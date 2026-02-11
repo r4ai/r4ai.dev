@@ -19,7 +19,7 @@ export type PostListFilterItem = {
   href: string
   icon: string
   alt: string
-  publishedAt: string
+  publishedAtText: string
   category: PostCategory
 }
 
@@ -39,7 +39,7 @@ const PostGrid: Component<PostGridProps> = (props) => {
               icon={post.icon}
               href={post.href}
               alt={post.alt}
-              publishedAt={new Date(post.publishedAt)}
+              publishedAtText={post.publishedAtText}
             />
           )}
         </For>
