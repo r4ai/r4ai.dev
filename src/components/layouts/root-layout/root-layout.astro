@@ -2,6 +2,7 @@
 import "@/styles/global.css"
 
 import type { HTMLAttributes } from "astro/types"
+import { ClientRouter } from "astro:transitions"
 
 import { Footer, Header } from "@/components/layouts"
 import { Toaster } from "@/components/ui"
@@ -45,10 +46,19 @@ const {
       {twitter}
       {url}
     />
+    <ClientRouter />
     <script is:inline set:html={initColorSchemeScript} data-cfasync="false" />
+    <script is:inline>
+      document.addEventListener("astro:before-swap", (e) => {
+        const colorScheme = document.documentElement.dataset.colorScheme
+        if (colorScheme) {
+          e.newDocument.documentElement.dataset.colorScheme = colorScheme
+        }
+      })
+    </script>
   </head>
   <body class="flex min-h-full flex-col bg-background text-foreground">
-    <Header />
+    <Header transition:persist />
     <main class={cn("flex-1", className)} data-pagefind-body>
       <slot />
     </main>
