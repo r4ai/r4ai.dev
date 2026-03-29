@@ -1,2 +1,2 @@
 export * from "./post-card"
-export * from "./post-list-filter"
+export * from "./post-list"

@@ -11,9 +11,8 @@ import {
 import { PostCard } from "../post-card"
 
 type PostCategory = "tech" | "hobby"
-type PostFilter = "all" | PostCategory
 
-export type PostListFilterItem = {
+export type PostListItem = {
   title: string
   tags: string[]
   href: string
@@ -24,7 +23,7 @@ export type PostListFilterItem = {
 }
 
 type PostGridProps = {
-  posts: PostListFilterItem[]
+  posts: PostListItem[]
 }
 
 const PostGrid: Component<PostGridProps> = (props) => {
@@ -53,27 +52,21 @@ const PostGrid: Component<PostGridProps> = (props) => {
   )
 }
 
-export type PostListFilterProps = {
-  posts: PostListFilterItem[]
+export type PostListProps = {
+  posts: PostListItem[]
 }
 
-export const PostListFilter: Component<PostListFilterProps> = (props) => {
-  const getFilteredPosts = (filter: PostFilter) =>
-    filter === "all"
-      ? props.posts
-      : props.posts.filter((post) => post.category === filter)
+export const PostList: Component<PostListProps> = (props) => {
+  const getFilteredPosts = (filter: PostCategory) =>
+    props.posts.filter((post) => post.category === filter)
 
   return (
-    <Tabs defaultValue="all" class="space-y-6">
+    <Tabs defaultValue="tech" class="space-y-8">
       <TabsList class="mx-auto max-w-sm">
-        <TabsTrigger value="all">All</TabsTrigger>
         <TabsTrigger value="tech">Tech</TabsTrigger>
         <TabsTrigger value="hobby">Hobby</TabsTrigger>
         <TabsIndicator />
       </TabsList>
-      <TabsContent value="all">
-        <PostGrid posts={getFilteredPosts("all")} />
-      </TabsContent>
       <TabsContent value="tech">
         <PostGrid posts={getFilteredPosts("tech")} />
       </TabsContent>

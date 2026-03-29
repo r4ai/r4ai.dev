@@ -5,7 +5,7 @@ import { type CollectionEntry, getCollection } from "astro:content"
 
 import { RootLayout } from "@/components/layouts"
 
-import { PostCard, PostListFilter } from "./_components"
+import { PostList } from "./_components"
 
 const DEFAULT_ICON = "memo"
 
@@ -46,10 +46,8 @@ const posts = await Promise.all(
     },
   }))
 )
-const articlePosts = posts
-  .filter((post) => post.props.entry.data.genre === "article")
-  .sort(byPublishedAtDesc)
-const articlePostItems = articlePosts.map((post) => ({
+
+const selectedPosts = posts.sort(byPublishedAtDesc).map((post) => ({
   title: post.props.entry.data.title,
   tags: post.props.entry.data.tags ?? [],
   icon: post.props.entry.data.svg,
@@ -58,33 +56,13 @@ const articlePostItems = articlePosts.map((post) => ({
   publishedAtText: format(post.props.entry.data.publishedAt, "long"),
   category: post.props.entry.data.category,
 }))
-const slidePosts = posts
-  .filter((post) => post.props.entry.data.genre === "slide")
-  .sort(byPublishedAtDesc)
 ---
 
 <RootLayout title="Posts">
   <div class="container mx-auto mb-12 mt-6 grid gap-24">
-    <section class="space-y-6">
+    <section class="flex flex-col items-center gap-8">
       <h2 class="text-center font-times text-4.5xl font-black">Posts</h2>
-      <PostListFilter posts={articlePostItems} client:load />
-    </section>
-    <section class="space-y-6">
-      <h2 class="text-center font-times text-4.5xl font-black">Slides</h2>
-      <div class="mx-auto grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-        {
-          slidePosts.flatMap((post) => (
-            <PostCard
-              title={post.props.entry.data.title}
-              tags={post.props.entry.data.tags ?? []}
-              icon={post.props.entry.data.svg}
-              href={`/posts/${post.params.slug}`}
-              alt={post.props.entry.data.icon}
-              publishedAt={post.props.entry.data.publishedAt}
-            />
-          ))
-        }
-      </div>
+      <PostList posts={selectedPosts} client:load />
     </section>
   </div>
 </RootLayout>
