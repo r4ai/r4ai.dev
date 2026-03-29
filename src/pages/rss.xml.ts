@@ -3,7 +3,10 @@ import type { APIContext } from "astro"
 import { getCollection } from "astro:content"
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection("posts", ({ data }) => !data.draft)
+  const posts = await getCollection(
+    "posts",
+    ({ data }) => (import.meta.env.DEV ? true : !data.draft)
+  )
 
   return rss({
     title: "r4ai.dev",
