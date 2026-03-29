@@ -9,7 +9,8 @@ export type PostCardProps = {
   href: string
   icon: string
   alt: string
-  publishedAt: Date
+  publishedAt?: Date
+  publishedAtText?: string
   shouldInvert?: boolean
 }
 
@@ -48,7 +49,8 @@ export const PostCard: Component<PostCardProps> = (props) => {
           </For>
         </ul>
         <div class="ml-auto mt-auto pt-1 text-sm text-muted-foreground">
-          {format(props.publishedAt, "long")}
+          {props.publishedAtText ??
+            (props.publishedAt ? format(props.publishedAt, "long") : "")}
         </div>
       </div>
     </a>
