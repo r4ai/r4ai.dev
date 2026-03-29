@@ -3,9 +3,8 @@ import type { APIContext } from "astro"
 import { getCollection } from "astro:content"
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection(
-    "posts",
-    ({ data }) => (import.meta.env.DEV ? true : !data.draft)
+  const posts = await getCollection("posts", ({ data }) =>
+    import.meta.env.DEV ? true : !data.draft
   )
 
   return rss({
@@ -22,7 +21,7 @@ export async function GET(context: APIContext) {
       .map((post) => ({
         title: post.data.title,
         pubDate: post.data.publishedAt,
-        link: `/posts/${post.slug}`,
+        link: `/posts/${post.slug}/`,
       })),
     customData: `<language>ja</language>`,
   })
