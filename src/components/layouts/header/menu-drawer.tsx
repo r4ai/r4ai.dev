@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/drawer"
 import { ColorSchemeSelect } from "@/features/color-scheme"
 import IconMenu from "~icons/lucide/menu"
+import IconRss from "~icons/lucide/rss"
 
 export const MenuDrawer: Component = () => {
   return (
@@ -67,6 +68,17 @@ export const MenuDrawer: Component = () => {
                   class="w-full rounded-full text-base"
                 >
                   Contact
+                </Button>
+              </li>
+              <li>
+                <Button
+                  as="a"
+                  href="/rss.xml"
+                  variant="ghost"
+                  class="w-full rounded-full text-base"
+                >
+                  <IconRss class="mr-2 size-4" />
+                  RSS
                 </Button>
               </li>
             </ul>
