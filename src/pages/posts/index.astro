@@ -18,14 +18,8 @@ const byPublishedAtDesc = (
 ) =>
   new Date(b.props.entry.data.publishedAt).getTime() -
   new Date(a.props.entry.data.publishedAt).getTime()
-const getPostCategory = (entry: CollectionEntry<"posts">): PostCategory => {
-  if (entry.data.category) {
-    return entry.data.category
-  }
-
-  return entry.slug === "moza-r3-review" ? "hobby" : "tech"
-}
-
+const getPostCategory = (entry: CollectionEntry<"posts">): PostCategory =>
+  entry.data.category ?? "tech"
 const posts = await Promise.all(
   (
     await getCollection("posts", ({ data }) =>
