@@ -5,6 +5,7 @@ import { Button } from "@/components/ui"
 import { ColorSchemeSelect } from "@/features/color-scheme"
 import { SearchModal } from "@/features/search"
 import { cn } from "@/lib/utils"
+import IconRss from "~icons/lucide/rss"
 
 export type Props = HTMLAttributes<"div">
 const { class: className, ...props } = Astro.props
@@ -83,6 +84,18 @@ const { class: className, ...props } = Astro.props
       <ul class="flex flex-row gap-1">
         <li>
           <ColorSchemeSelect client:load />
+        </li>
+        <li>
+          <Button
+            as="a"
+            variant="ghost"
+            size="icon"
+            href="/rss.xml"
+            class="rounded-full"
+            aria-label="RSS Feed"
+          >
+            <IconRss class="size-5" />
+          </Button>
         </li>
         <li>
           <SearchModal client:load />
