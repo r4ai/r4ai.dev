@@ -6,6 +6,8 @@ import R4aiDev from "@/assets/imgs/projects/r4ai.dev.png"
 import RemarkCallout from "@/assets/imgs/projects/remark-callout.png"
 import RemarkEmbed from "@/assets/imgs/projects/remark-embed.png"
 import Shuiro from "@/assets/imgs/projects/shuiro.png"
+import ACRN from "@/assets/imgs/projects/tinnitus-reducer-acrn.png"
+import ZeroGesture from "@/assets/imgs/projects/zero-gesture.png"
 import { RootLayout } from "@/components/layouts"
 
 import { ProjectCard } from "./_components"
@@ -163,6 +165,62 @@ import { ProjectCard } from "./_components"
         links={[
           {
             href: "https://github.com/r4ai/yumemi-passport-frontend",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-6 row-span-2 md:col-span-3 xl:col-span-2"
+        title="Zero Gesture"
+        description="Windows向けの軽量なマウスジェスチャーアプリ。Tauri 製で、パフォーマンスが重視される部分では Windows API を直接利用している"
+        year="2026"
+        image={{
+          src: ZeroGesture,
+          alt: "Zero Gestureの画面",
+        }}
+        links={[
+          {
+            href: "https://github.com/r4ai/zero-gesture",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-6 row-span-2 md:col-span-3 xl:col-span-2"
+        title="Tinnitus Reducer ACRN"
+        description="ACRN 療法による耳鳴り軽減を目的とした Web アプリ"
+        year="2023"
+        image={{
+          src: ACRN,
+          alt: "Tinnitus Reducer ACRNの画面",
+        }}
+        links={[
+          {
+            href: "https://github.com/r4ai/tinnitus-reducer-acrn",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-6 row-span-1 md:col-span-3 xl:col-span-2"
+        title="BG - RS2 Bridge"
+        description="Minecraft Mod。Building Gadget が Refined Storage 2 のネットワークに対してアイテム・流体を出し入れできるようにする"
+        year="2026"
+        links={[
+          {
+            href: "https://github.com/r4ai/building-gadget-refined-storage",
+            label: "GitHub",
+          },
+        ]}
+      />
+      <ProjectCard
+        class="col-span-6 row-span-1 md:col-span-3 xl:col-span-2"
+        title="vacuum"
+        description="ビルド成果物や依存関係キャッシュを再帰的に削除する CLI ツール"
+        year="2026"
+        links={[
+          {
+            href: "https://github.com/r4ai/vacuum",
             label: "GitHub",
           },
         ]}
