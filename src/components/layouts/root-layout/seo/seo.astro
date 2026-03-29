@@ -76,7 +76,7 @@ const twitter: TwitterCardProps | undefined =
   rel="alternate"
   type="application/rss+xml"
   title="r4ai.dev RSS Feed"
-  href="/rss.xml"
+  href={new URL("rss.xml", Astro.site)}
 />
 <link rel="canonical" href={url.href} />
 <title>{title}</title>
