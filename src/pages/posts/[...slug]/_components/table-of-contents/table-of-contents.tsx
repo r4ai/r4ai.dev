@@ -13,11 +13,11 @@ import { tv } from "tailwind-variants"
 
 const tableOfContents = tv({
   slots: {
-    root: "border p-4 rounded-lg space-y-2",
+    root: "border p-4 rounded-lg space-y-2 max-h-[calc(100vh-10rem)] overflow-y-auto",
     heading: "font-bold",
     list: "list-none",
     listItem:
-      "text-muted-foreground hover:text-accent-foreground transition data-[active=true]:text-accent-foreground data-[active=true]:font-bold",
+      "block w-full break-words text-muted-foreground hover:text-accent-foreground transition data-[active=true]:text-accent-foreground data-[active=true]:font-bold",
   },
   variants: {
     depth: {
