@@ -12,7 +12,9 @@ import { SEO, type SEOProps } from "./seo"
 
 // Astro can't parse complex types
 // prettier-ignore
-export type Props = PartiallyPartial<SEOProps, "titleSuffix" | "favicon" | "locale" | "image"> & HTMLAttributes<"body">
+export type Props = PartiallyPartial<SEOProps, "titleSuffix" | "favicon" | "locale" | "image"> & HTMLAttributes<"body"> & {
+  pagefindBody?: boolean
+}
 
 const {
   title,
@@ -21,6 +23,7 @@ const {
   favicon = "/favicon.svg",
   image = new URL("/open-graph.png", Astro.url),
   locale = "ja_JP",
+  pagefindBody = true,
   url,
   og,
   twitter,
@@ -49,7 +52,10 @@ const {
   </head>
   <body class="flex min-h-full flex-col bg-background text-foreground">
     <Header />
-    <main class={cn("flex-1", className)} data-pagefind-body>
+    <main
+      class={cn("flex-1", className)}
+      {...pagefindBody ? { "data-pagefind-body": true } : {}}
+    >
       <slot />
     </main>
     <Footer />

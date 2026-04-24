@@ -4,7 +4,7 @@ import { getCollection } from "astro:content"
 
 export async function GET(context: APIContext) {
   const posts = await getCollection("posts", ({ data }) =>
-    import.meta.env.DEV ? true : !data.draft
+    import.meta.env.DEV ? !data.internal : !data.draft && !data.internal
   )
 
   return rss({

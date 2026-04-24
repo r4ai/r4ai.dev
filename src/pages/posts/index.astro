@@ -23,7 +23,7 @@ const getPostCategory = (entry: CollectionEntry<"posts">): PostCategory =>
 const posts = await Promise.all(
   (
     await getCollection("posts", ({ data }) =>
-      import.meta.env.DEV ? true : !data.draft
+      import.meta.env.DEV ? !data.internal : !data.draft && !data.internal
     )
   ).map(async (entry) => ({
     params: { slug: entry.slug },

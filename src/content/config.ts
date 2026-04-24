@@ -8,6 +8,7 @@ const postCollection = defineCollection({
     category: z.enum(["tech", "hobby"]).optional(),
     icon: z.string(),
     draft: z.boolean(),
+    internal: z.boolean().default(false),
     publishedAt: z.date(),
     tags: z.array(z.string()).optional(),
     ogImage: z.string().optional(),
