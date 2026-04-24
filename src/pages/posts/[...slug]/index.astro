@@ -33,7 +33,7 @@ const { Content, headings } = await entry.render()
   image={new URL(`${removeTrailingSlash(Astro.url.href)}.png`)}
   og={{ type: "article" }}
 >
-  <div class="my-12 grid w-full gap-20" data-margin="true">
+  <div class="my-12 grid w-full gap-20" data-margin="true" data-pagefind-body>
     <PostHeader
       slug={entry.slug}
       title={entry.data.title}
