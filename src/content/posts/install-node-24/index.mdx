@@ -1,0 +1,462 @@
+---
+title: mise を使って Node.js 24 を導入する完全ガイド
+tags: []
+icon: desktop-computer
+genre: article
+draft: false
+internal: true
+publishedAt: 2026-04-24
+---
+
+> 最終更新: 2026年4月時点の最新情報に基づいています。
+>
+> 本記事は全て Claude Sonnet 4.6 により生成しています。 \
+> 情報の正確性は一切保証されていません。
+
+## mise とは？
+
+**mise**（ミーズ、mise-en-place）は、Node.js・Python・Goなど複数のプログラミング言語やツールのバージョンを一元管理できるツールです。`nvm` や `asdf` の後継として人気が高く、高速でシンプルな操作が特長です。
+
+Node.js 24 は **2025年5月にリリース、同年10月に Active LTS（長期サポート版）** になりました。2028年4月まで公式サポートが続く安定バージョンです。
+
+
+## 目次
+
+- [macOS 向け手順](#macos-向け手順)
+- [Linux（Ubuntu / Debian）向け手順](#linuxubuntu--debian向け手順)
+- [Linux（Fedora / RHEL 系）向け手順](#linuxfedora--rhel-系向け手順)
+- [Windows 向け手順（WSL2 経由・推奨）](#windows-向け手順wsl2-経由推奨)
+- [Node.js 24 のインストール（共通）](#nodejs-24-のインストール共通)
+- [よくある質問 / トラブルシュート](#よくある質問--トラブルシュート)
+
+
+## macOS 向け手順
+
+### 前提条件
+
+- macOS 12 Monterey 以降を推奨
+- ターミナル（標準の「ターミナル.app」または iTerm2 など）が使えること
+
+
+### ステップ 1：Homebrew のインストール（まだ入っていない場合）
+
+Homebrew は macOS 向けのパッケージマネージャーです。すでに入っている方はスキップしてください。
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+インストール後、画面に表示される「Next steps」に従って PATH を設定してください（Apple Silicon Mac の場合は特に重要です）。
+
+確認：
+
+```bash
+brew --version
+```
+
+バージョン番号が表示されれば OK です。
+
+
+### ステップ 2：mise のインストール
+
+Homebrew を使う方法が macOS では最も推奨されています。
+
+```bash
+brew install mise
+```
+
+> **curl スクリプトで入れたい場合（Homebrew を使わない場合）：**
+> ```bash
+> curl https://mise.run | sh
+> ```
+> この場合、バイナリは `~/.local/bin/mise` に置かれます。
+
+
+### ステップ 3：シェルへの組み込み（アクティベーション）
+
+使っているシェルに合わせて、以下のコマンドを**1行だけ**実行してください。
+
+**Zsh（macOS のデフォルト）：**
+
+```bash
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+```
+
+**Bash：**
+
+```bash
+echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+```
+
+**Fish：**
+
+```bash
+echo '~/.local/bin/mise activate fish | source' >> ~/.config/fish/config.fish
+```
+
+設定を反映させます：
+
+```bash
+# Zsh の場合
+source ~/.zshrc
+
+# Bash の場合
+source ~/.bashrc
+```
+
+> **ターミナルを再起動する**のが一番確実です。
+
+
+### ステップ 4：インストールの確認
+
+```bash
+mise --version
+```
+
+バージョン番号（例：`2026.x.x`）が表示されれば mise は正常にインストールされています。
+
+```bash
+mise doctor
+```
+
+このコマンドで設定に問題がないかチェックできます。警告や問題があれば画面に表示されます。
+
+
+次は「[Node.js 24 のインストール（共通）](#nodejs-24-のインストール共通)」へ進んでください。
+
+
+## Linux（Ubuntu / Debian）向け手順
+
+### 前提条件
+
+- Ubuntu 20.04 以降、または Debian 10 以降
+- `curl` コマンドが使えること（入っていない場合は `sudo apt install curl` で導入）
+
+
+### ステップ 1：mise のインストール
+
+**方法 A：公式インストールスクリプト（最もシンプル）**
+
+```bash
+curl https://mise.run | sh
+```
+
+バイナリは `~/.local/bin/mise` に置かれます。
+
+**方法 B：apt パッケージマネージャーで入れる（apt で一括管理したい場合）**
+
+```bash
+sudo install -dm 755 /etc/apt/keyrings
+wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg 1>/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
+sudo apt update
+sudo apt install -y mise
+```
+
+
+### ステップ 2：シェルへの組み込み（アクティベーション）
+
+**Bash（Ubuntu のデフォルト）：**
+
+```bash
+echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+> apt でインストールした場合は `~/.local/bin/mise` の部分を `mise` に変えても構いません。
+
+**Zsh：**
+
+```bash
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**Fish：**
+
+```bash
+echo '~/.local/bin/mise activate fish | source' >> ~/.config/fish/config.fish
+```
+
+
+### ステップ 3：インストールの確認
+
+```bash
+mise --version
+mise doctor
+```
+
+バージョン番号が表示され、`mise doctor` でエラーが出なければ OK です。
+
+
+次は「[Node.js 24 のインストール（共通）](#nodejs-24-のインストール共通)」へ進んでください。
+
+
+## Linux（Fedora / RHEL 系）向け手順
+
+### 前提条件
+
+- Fedora 38 以降、または RHEL/CentOS Stream 9 以降
+
+
+### ステップ 1：mise のインストール
+
+**Fedora 41 以降 / RHEL 9 以降（dnf）：**
+
+```bash
+sudo dnf install -y mise
+```
+
+**それ以前の Fedora / RHEL（yum）：**
+
+```bash
+yum install -y yum-utils
+yum-config-manager --add-repo https://mise.jdx.dev/rpm/mise.repo
+yum install -y mise
+```
+
+**curl スクリプトでインストールする方法（どのディストリビューションでも使えます）：**
+
+```bash
+curl https://mise.run | sh
+```
+
+
+### ステップ 2：シェルへの組み込み（アクティベーション）
+
+**Bash：**
+
+```bash
+echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**Zsh：**
+
+```bash
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+
+### ステップ 3：インストールの確認
+
+```bash
+mise --version
+mise doctor
+```
+
+
+次は「[Node.js 24 のインストール（共通）](#nodejs-24-のインストール共通)」へ進んでください。
+
+
+## Windows 向け手順（WSL2 経由・推奨）
+
+> **なぜ WSL2 を使うのか？**
+> Windows ネイティブ版の mise は存在しますが、動作が不安定なケースが多く、公式ドキュメントでも WSL2 (Windows Subsystem for Linux) 経由での利用が推奨されています。WSL2 を使うと Windows 上で本物の Linux 環境が動き、mise を含む Linux 向けツールをそのまま使えます。
+
+
+### ステップ 1：WSL2 を有効にする
+
+**対象：Windows 10（Build 19041 以降）または Windows 11**
+
+まず自分の Windows バージョンを確認します。キーボードで `Win + R` を押して `winver` と入力し、Enter を押すとビルド番号が確認できます。
+
+PowerShell を**管理者として**開きます（スタートメニューで「PowerShell」を検索し、右クリック→「管理者として実行」）。
+
+以下のコマンドを実行します：
+
+```powershell
+wsl --install
+```
+
+このコマンド1つで、WSL2 の有効化・Linux カーネルのインストール・Ubuntu のインストールがまとめて行われます。
+
+実行後、**PC を再起動**してください。
+
+> **Ubuntu 以外のディストリビューションを使いたい場合：**
+> ```powershell
+> wsl --install -d Ubuntu-24.04
+> ```
+
+
+### ステップ 2：Ubuntu の初期設定
+
+再起動後、スタートメニューから「Ubuntu」を起動します（またはコマンドプロンプト・PowerShell で `wsl` と入力）。
+
+初回起動時に Linux のユーザー名とパスワードの設定を求められます。
+
+```
+Enter new UNIX username: （好きなユーザー名を入力）
+New password: （パスワードを入力 ※入力しても画面には表示されません）
+Retype new password: （同じパスワードをもう一度）
+```
+
+設定が完了したら、パッケージを最新化しておきます：
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+
+### ステップ 3：mise のインストール（WSL の Ubuntu 上で）
+
+Ubuntu のターミナル上で以下を実行します：
+
+```bash
+curl https://mise.run | sh
+```
+
+
+### ステップ 4：シェルへの組み込み（アクティベーション）
+
+```bash
+echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+
+### ステップ 5：インストールの確認
+
+```bash
+mise --version
+mise doctor
+```
+
+バージョン番号が表示されれば成功です。
+
+> **VS Code を使っている方へ：**
+> VS Code の「Remote - WSL」拡張機能をインストールすると、WSL 内の環境を VS Code から快適に操作できます。VS Code のターミナルが自動的に WSL に接続されます。
+
+
+次は「[Node.js 24 のインストール（共通）](#nodejs-24-のインストール共通)」へ進んでください。
+
+
+## Node.js 24 のインストール（共通）
+
+ここからの手順は macOS・Linux・Windows（WSL）すべてで共通です。
+
+### Node.js 24 のステータスについて
+
+Node.js 24 は 2025年10月28日に **Active LTS（長期サポート版）** になりました。2028年4月まで公式サポートが続く、現時点で最も推奨されるバージョンです。
+
+
+### ステップ 1：Node.js 24 をインストールして、グローバルのデフォルトに設定する
+
+```bash
+mise use --global node@24
+```
+
+このコマンド1つで「インストール」と「デフォルト設定」が同時に行われます。
+
+インストール中は進捗が表示されます。完了まで少し待ってください。
+
+
+### ステップ 2：インストールの確認
+
+```bash
+node --version
+```
+
+`v24.x.x`（x は数字）と表示されれば成功です。
+
+```bash
+npm --version
+```
+
+Node.js 24 には npm 11 が同梱されています。バージョンが表示されれば正常です。
+
+
+### ステップ 3（任意）：特定のバージョンを指定したい場合
+
+Node.js 24 の最新パッチバージョンを使いたい場合は `node@24` で常に最新の 24.x を取得できます。特定のバージョンを固定したい場合：
+
+```bash
+# 特定バージョンを指定する例
+mise use --global node@24.2.0
+```
+
+インストール済みのバージョン一覧を確認するには：
+
+```bash
+mise list node
+```
+
+
+### プロジェクトごとに Node.js バージョンを切り替える
+
+プロジェクトのディレクトリ内で以下を実行すると、そのプロジェクト専用のバージョンが設定されます：
+
+```bash
+cd /path/to/your-project
+mise use node@22   # このプロジェクトでは Node.js 22 を使う
+```
+
+これにより、プロジェクトルートに `mise.toml` ファイルが作成されます。チームメンバーもこのファイルを使えば同じバージョンを再現できます。
+
+
+## よくある質問 / トラブルシュート
+
+
+### `mise: command not found` と表示される
+
+シェルへのアクティベーションが反映されていない可能性があります。ターミナルを完全に閉じて再度開くか、以下を実行してください：
+
+```bash
+# Bash の場合
+source ~/.bashrc
+
+# Zsh の場合
+source ~/.zshrc
+```
+
+それでも解決しない場合、curl でインストールした場合はフルパスで試してみてください：
+
+```bash
+~/.local/bin/mise --version
+```
+
+
+### `node: command not found` と表示される
+
+mise は正常でも node が見つからない場合、アクティベーションが正しく動いていない可能性があります。
+
+```bash
+mise doctor
+```
+
+を実行して問題を確認してください。
+
+また、シェルの設定ファイル（`.bashrc` や `.zshrc`）に `eval "$(mise activate ...)"` の行が追加されているか確認してください。
+
+
+### mise のバージョンを最新にアップデートしたい
+
+```bash
+mise self-update
+```
+
+Homebrew でインストールした場合は：
+
+```bash
+brew upgrade mise
+```
+
+
+### Node.js をアンインストールしたい
+
+```bash
+mise uninstall node@24
+```
+
+
+### 現在の設定状況を確認したい
+
+```bash
+mise current
+```
+
+現在アクティブになっているツールとバージョンの一覧が表示されます。
+
+
+以上で mise を使った Node.js 24 の導入は完了です。何か問題が発生した場合は [mise 公式ドキュメント](https://mise.jdx.dev) も参照してください。
