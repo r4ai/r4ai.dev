@@ -43,8 +43,8 @@ const { Content, headings } = await entry.render()
       publishedAt={entry.data.publishedAt}
       updatedAt={entry.data.updatedAt}
     />
-    <div class="mx-auto w-full max-w-lg lg:hidden">
-      <TableOfContents class="mx-5" headings={headings} client:visible />
+    <div class="w-full lg:hidden">
+      <TableOfContents class="w-full" headings={headings} client:visible />
     </div>
     <div
       class="grid w-full grid-cols-1 gap-8 px-5 md:grid-cols-[300px_minmax(0,1fr)_300px] lg:px-8"

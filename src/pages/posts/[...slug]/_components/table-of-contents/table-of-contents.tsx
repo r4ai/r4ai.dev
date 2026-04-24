@@ -13,7 +13,7 @@ import { tv } from "tailwind-variants"
 
 const tableOfContents = tv({
   slots: {
-    root: "border p-4 rounded-lg space-y-2 max-h-[calc(100vh-10rem)] overflow-y-auto",
+    root: "w-full border p-4 rounded-lg space-y-2 max-h-none overflow-visible lg:max-h-[calc(100vh-10rem)] lg:overflow-y-auto",
     heading: "font-bold",
     list: "list-none",
     listItem:
