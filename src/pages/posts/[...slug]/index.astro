@@ -43,7 +43,7 @@ const { Content, headings } = await entry.render()
       publishedAt={entry.data.publishedAt}
       updatedAt={entry.data.updatedAt}
     />
-    <div class="w-full lg:hidden">
+    <div class="w-full px-5 lg:hidden">
       <TableOfContents class="w-full" headings={headings} client:visible />
     </div>
     <div
