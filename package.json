@@ -128,7 +128,7 @@
     "vitest-matchmedia-mock": "2.0.3",
     "zod": "3.25.76"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.33.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
