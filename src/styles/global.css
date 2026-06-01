@@ -2,6 +2,22 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@font-face {
+  font-family: "UDEV Gothic LG";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/UDEVGothic/UDEVGothicLG-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "UDEV Gothic LG";
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/UDEVGothic/UDEVGothicLG-Italic.woff2") format("woff2");
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
