@@ -26,6 +26,7 @@ export type Props = {
     | PartiallyPartial<TwitterAppCard, "description">
 }
 const props = Astro.props
+const faviconType = props.favicon.endsWith(".svg") ? "image/svg+xml" : undefined
 
 const title = props.titleSuffix
   ? `${props.title} | ${props.titleSuffix}`
@@ -68,7 +69,7 @@ const twitter: TwitterCardProps | undefined =
 ---
 
 <meta charset="utf-8" />
-<link rel="icon" type="image/svg+xml" href={props.favicon} />
+<link rel="icon" type={faviconType} href={props.favicon} />
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
