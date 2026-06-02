@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && pagefind --site dist --glob '{index.html,contact/index.html,posts/index.html,projects/index.html,posts/*/index.html}'",
     "preview": "astro preview",
     "type-check": "astro check",
     "lint": "eslint .",

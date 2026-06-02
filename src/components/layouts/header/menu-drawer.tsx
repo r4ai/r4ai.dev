@@ -8,7 +8,7 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { ColorSchemeSelect } from "@/features/color-scheme"
+import { ColorSchemeSelect } from "@/features/color-scheme/components/color-scheme-select/color-scheme-select"
 import IconMenu from "~icons/lucide/menu"
 import IconRss from "~icons/lucide/rss"
 

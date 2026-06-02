@@ -5,7 +5,7 @@ import {
   splitProps,
 } from "solid-js"
 import * as THREE from "three"
-import { OrbitControls } from "three/examples/jsm/Addons.js"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 
 import { cn } from "@/lib/utils"
 
