@@ -21,7 +21,14 @@ import { Cube, LinkCard, RareCard } from "./_components"
       client:load
     >
       <IconBlobsClipPath clipPathId="r4ai-icon-blobs-clip-path" />
-      <Image src={IconBlobs} class="drop-shadow-lg" alt="r4ai" />
+      <Image
+        src={IconBlobs}
+        class="drop-shadow-lg"
+        alt="r4ai"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
     </RareCard>
     <section class="col-span-4 my-auto sm:col-start-5 sm:col-end-9">
       <h1 class="font-times text-5xl font-black text-foreground sm:text-6xl">
