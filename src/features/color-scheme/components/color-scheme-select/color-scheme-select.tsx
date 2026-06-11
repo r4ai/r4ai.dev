@@ -8,7 +8,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ColorSchemeProvider, useColorScheme } from "@/features/color-scheme"
+import { ColorSchemeProvider } from "@/features/color-scheme/contexts/color-scheme-context"
+import { useColorScheme } from "@/features/color-scheme/hooks/use-color-scheme"
 import { cn } from "@/lib/utils"
 import IconLaptopMinimal from "~icons/lucide/laptop-minimal"
 import IconMoonStar from "~icons/lucide/moon-star"

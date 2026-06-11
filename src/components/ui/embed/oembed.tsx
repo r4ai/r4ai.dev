@@ -11,6 +11,12 @@ type OEmbedProperties = {
   oEmbed: string
 }
 
+type OEmbedElement = {
+  tagName: string
+  properties: OEmbedProperties
+  children: []
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const call = async <T,>(
   fn: T,
@@ -29,9 +35,21 @@ export type OEmbedProps = {
 
 const OEmbedInternal: Component<OEmbedProps> = (props) => {
   const [oEmbed] = createResource(async () => {
-    const { transformerOEmbed } = await import(
-      "@r4ai/remark-embed/transformers/oembed"
-    )
+    if (!import.meta.env.SSR) return undefined
+
+    const modulePath = "@r4ai/remark-embed/transformers/oembed"
+    const { transformerOEmbed } = (await import(modulePath)) as {
+      transformerOEmbed: (options: {
+        video: (url: URL, oEmbed: unknown) => OEmbedElement
+        rich: (url: URL, oEmbed: unknown) => OEmbedElement
+      }) => {
+        match: ((url: URL) => boolean | Promise<boolean>) | boolean
+        tagName: ((url: URL) => string | Promise<string>) | string
+        properties:
+          | ((url: URL) => OEmbedProperties | Promise<OEmbedProperties>)
+          | OEmbedProperties
+      }
+    }
     const transformer = transformerOEmbed({
       video: (url, oEmbed) => ({
         tagName: "oembed-video",
@@ -64,7 +82,7 @@ const OEmbedInternal: Component<OEmbedProps> = (props) => {
       )) as OEmbedProperties
       return { tagName, properties }
     } catch (error) {
-      console.error(error)
+      if (import.meta.env.DEV) console.error(error)
       return undefined
     }
   })
