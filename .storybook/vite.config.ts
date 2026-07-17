@@ -8,6 +8,11 @@ import pagefind from "../src/lib/vite-plugins/vite-plugin-pagefind"
 import rawTransform from "../src/lib/vite-plugins/vite-plugin-raw-transform"
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@storybook/test": "storybook/test",
+    },
+  },
   plugins: [
     tsConfigPath({ root: path.dirname(import.meta.dirname) }),
     pagefind(),

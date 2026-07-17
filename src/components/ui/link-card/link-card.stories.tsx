@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { LinkCard } from "./link-card"
 
@@ -6,6 +6,11 @@ const meta = {
   title: "UI/LinkCard",
   component: LinkCard,
   tags: ["autodocs"],
+  args: {
+    og: undefined,
+    url: "https://example.com/",
+    image: {},
+  },
 } satisfies Meta<typeof LinkCard>
 export default meta
 

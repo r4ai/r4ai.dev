@@ -7,17 +7,16 @@ const config: StorybookConfig = {
   ],
   addons: [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
+    "@storybook/addon-docs",
     "@storybook/addon-themes",
     "@storybook/addon-a11y",
-    "@storybook/addon-interactions",
   ],
   framework: {
     name: "storybook-solidjs-vite",
     options: {
       builder: {
-        viteConfigPath: ".storybook/vite.config.ts",
+        viteConfigPath:
+          process.env.STORYBOOK_VITE_CONFIG ?? ".storybook/vite.config.ts",
       },
     },
   },
