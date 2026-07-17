@@ -1,4 +1,11 @@
-import { type Component, type ComponentProps, splitProps } from "solid-js"
+import {
+  children,
+  type Component,
+  type ComponentProps,
+  Show,
+  splitProps,
+} from "solid-js"
+import { Dynamic } from "solid-js/web"
 
 import { cn } from "@/lib/utils"
 
@@ -92,11 +99,18 @@ export const TableCell: Component<TableCellProps> = (props) => {
 export type TableCaptionProps = ComponentProps<"caption">
 
 export const TableCaption: Component<TableCaptionProps> = (props) => {
-  const [local, rest] = splitProps(props, ["class"])
+  const [local, rest] = splitProps(props, ["class", "children"])
+  const resolved = children(() => local.children)
+
   return (
-    <caption
-      class={cn("mt-4 text-sm text-muted-foreground", local.class)}
-      {...rest}
-    />
+    <Show when={resolved()}>
+      <Dynamic
+        component="caption"
+        class={cn("mt-4 text-sm text-muted-foreground", local.class)}
+        {...rest}
+      >
+        {resolved()}
+      </Dynamic>
+    </Show>
   )
 }

@@ -31,7 +31,10 @@ export const OpenGraphImage = ({
             src: buffer2url(bgImage),
             width: 1200,
             height: 630,
-            tw: "absolute object-cover opacity-80",
+            tw: "absolute opacity-80",
+            style: {
+              objectFit: "cover",
+            },
           },
         },
         {
@@ -40,7 +43,10 @@ export const OpenGraphImage = ({
             src: buffer2url(bgAccentImage),
             width: 1200,
             height: 900,
-            tw: "absolute object-cover -top-36",
+            tw: "absolute -top-36",
+            style: {
+              objectFit: "cover",
+            },
           },
         },
         {

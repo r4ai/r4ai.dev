@@ -30,12 +30,16 @@ import {
   CalloutTitle,
   type CalloutTitleProps,
   LinkCard,
-  OEmbed,
+} from "@/components/ui"
+import { OEmbed } from "@/components/ui/embed/oembed"
+import {
   OEmbedRich,
   type OEmbedRichProps,
+} from "@/components/ui/embed/oembed-rich"
+import {
   OEmbedVideo,
   type OEmbedVideoProps,
-} from "@/components/ui"
+} from "@/components/ui/embed/oembed-video"
 
 const H1 = (props: ComponentProps<"h1">) => <Heading level="h1" {...props} />
 const H2 = (props: ComponentProps<"h2">) => <Heading level="h2" {...props} />

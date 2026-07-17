@@ -1,0 +1,46 @@
+---
+import IconAstronaut from "~icons/fluent-emoji/astronaut"
+import IconBlueCircle from "~icons/fluent-emoji/blue-circle"
+import IconBuildingConstruction from "~icons/fluent-emoji/building-construction"
+import IconConstruction from "~icons/fluent-emoji/construction"
+import IconDesktopComputer from "~icons/fluent-emoji/desktop-computer"
+import IconDroplet from "~icons/fluent-emoji/droplet"
+import IconHammerAndWrench from "~icons/fluent-emoji/hammer-and-wrench"
+import IconHeadstone from "~icons/fluent-emoji/headstone"
+import IconJapaneseSymbolForBeginner from "~icons/fluent-emoji/japanese-symbol-for-beginner"
+import IconLinkedPaperclips from "~icons/fluent-emoji/linked-paperclips"
+import IconPen from "~icons/fluent-emoji/pen"
+import IconPenguin from "~icons/fluent-emoji/penguin"
+import IconRacingCar from "~icons/fluent-emoji/racing-car"
+import IconRobot from "~icons/fluent-emoji/robot"
+import IconSnowflake from "~icons/fluent-emoji/snowflake"
+import IconWhale from "~icons/fluent-emoji/whale"
+
+export type Props = {
+  icon: string
+}
+
+const icons = {
+  astronaut: IconAstronaut,
+  "blue-circle": IconBlueCircle,
+  "building-construction": IconBuildingConstruction,
+  construction: IconConstruction,
+  "desktop-computer": IconDesktopComputer,
+  droplet: IconDroplet,
+  "hammer-and-wrench": IconHammerAndWrench,
+  headstone: IconHeadstone,
+  "japanese-symbol-for-beginner": IconJapaneseSymbolForBeginner,
+  "linked-paperclips": IconLinkedPaperclips,
+  pen: IconPen,
+  penguin: IconPenguin,
+  "racing-car": IconRacingCar,
+  robot: IconRobot,
+  snowflake: IconSnowflake,
+  whale: IconWhale,
+}
+
+const { icon } = Astro.props
+const Icon = icons[icon as keyof typeof icons] ?? IconConstruction
+---
+
+<Icon class="mx-auto size-[1em] text-6xl lg:text-7xl" />
