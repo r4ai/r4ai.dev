@@ -12,22 +12,29 @@ export type ProjectCardProps = {
   hasImage: boolean
   children?: JSXElement
   links: { label: string; href: string }[]
-  theme?: "light" | "dark"
+  isBackgroundDark?: boolean
 }
 
 export const ProjectCard = (props: ProjectCardProps) => {
+  const isBackgroundDark = () => props.isBackgroundDark ?? true
+
   return (
     <div
       class={cn(
         "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
-        props.hasImage ? "relative" : "flex flex-col items-center",
+        props.hasImage
+          ? "relative"
+          : cn(
+              "flex flex-col items-center",
+              isBackgroundDark() ? "bg-zinc-900" : "bg-white"
+            ),
         props.class
       )}
     >
       <div
         class={cn(
           "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl border-zinc-700 px-8 py-4 text-lg font-bold backdrop-blur-xl",
-          props.theme === "light" && "border-zinc-300",
+          !isBackgroundDark() && "border-zinc-300",
           props.hasImage
             ? "absolute bottom-0 rounded-b-xl border-t"
             : "h-full rounded-xl"
@@ -37,16 +44,16 @@ export const ProjectCard = (props: ProjectCardProps) => {
           <div>
             <h2
               class={cn(
-                "mr-2 inline-block text-xl font-bold text-white",
-                props.theme === "light" && "text-black"
+                "mr-2 inline-block text-xl font-bold",
+                isBackgroundDark() ? "text-white" : "text-black"
               )}
             >
               {props.title}
             </h2>
             <span
               class={cn(
-                "inline-block text-sm text-zinc-400",
-                props.theme === "light" && "text-zinc-500"
+                "inline-block text-sm",
+                isBackgroundDark() ? "text-zinc-400" : "text-zinc-500"
               )}
             >
               {props.year}
@@ -54,8 +61,8 @@ export const ProjectCard = (props: ProjectCardProps) => {
           </div>
           <p
             class={cn(
-              "text-sm text-zinc-400",
-              props.theme === "light" && "text-zinc-600"
+              "text-sm",
+              isBackgroundDark() ? "text-zinc-400" : "text-zinc-600"
             )}
           >
             {props.description}
