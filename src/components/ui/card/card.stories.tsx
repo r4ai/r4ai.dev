@@ -1,5 +1,5 @@
 import { type ComponentProps, For } from "solid-js"
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import {
   Button,

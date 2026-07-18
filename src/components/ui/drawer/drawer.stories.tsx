@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js"
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import IconMinus from "~icons/lucide/minus"
 import IconPlus from "~icons/lucide/plus"
