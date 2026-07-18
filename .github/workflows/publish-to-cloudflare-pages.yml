@@ -10,11 +10,10 @@ on:
       - main
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
-      deployments: write
     steps:
       - name: Checkout respository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -26,6 +25,32 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build website
         run: pnpm run build
+      - name: Archive build output
+        run: |
+          tar --create --file dist.tar --format=posix dist
+          sha256sum dist.tar >dist.tar.sha256
+      - name: Upload build output
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: cloudflare-pages-build
+          path: |
+            dist.tar
+            dist.tar.sha256
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      deployments: write
+    steps:
+      - name: Download build output
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: cloudflare-pages-build
+      - name: Verify and extract build output
+        run: |
+          sha256sum --check dist.tar.sha256
+          tar --extract --file dist.tar
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1
         with:
