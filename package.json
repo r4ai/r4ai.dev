@@ -46,7 +46,7 @@
     "valibot": "1.0.0-rc.1"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.4",
+    "@astrojs/check": "0.9.9",
     "@eslint/js": "9.39.4",
     "@iconify-json/fluent-emoji": "1.2.7",
     "@iconify-json/lucide": "1.2.102",
