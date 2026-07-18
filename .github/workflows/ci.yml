@@ -83,13 +83,22 @@ jobs:
           MISE_NODE_COREPACK: true
       - name: Install pull request dependencies
         run: pnpm install --frozen-lockfile
-      - name: Prepare base Storybook configuration
+      - name: Detect existing VRT baseline
         if: env.VRT_APPROVED != 'true'
+        id: vrt-baseline
+        run: |
+          if test -f .vrt/base/playwright.vrt.config.ts; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Prepare base Storybook configuration
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: cp -R .storybook .vrt/base/.storybook-vrt
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Build base Storybook
-        if: env.VRT_APPROVED != 'true'
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: >-
           pnpm exec storybook build
           --config-dir .vrt/base/.storybook-vrt
@@ -97,17 +106,17 @@ jobs:
         env:
           STORYBOOK_VITE_CONFIG: .vrt/base/.storybook-vrt/vite.config.ts
       - name: Capture reference snapshots
-        if: env.VRT_APPROVED != 'true'
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: pnpm run test:vrt:update
         env:
           STORYBOOK_STATIC_DIR: .vrt/base/storybook-static
       - name: Build pull request Storybook
         run: pnpm run build-storybook
       - name: Compare visual snapshots
-        if: env.VRT_APPROVED != 'true'
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: pnpm run test:vrt
-      - name: Verify approved visual snapshots
-        if: env.VRT_APPROVED == 'true'
+      - name: Verify approved or initial visual snapshots
+        if: env.VRT_APPROVED == 'true' || steps.vrt-baseline.outputs.available == 'false'
         run: pnpm run test:vrt:update
       - name: Upload visual regression report
         if: always()

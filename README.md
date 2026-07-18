@@ -27,6 +27,8 @@ same GitHub Actions runner and with the same Storybook toolchain. The
 `Storybook VRT` job fails when pixels change and uploads the expected, actual,
 and diff images in the `storybook-vrt-report` artifact. No external visual
 testing service or committed OS-specific baseline images are required.
+When VRT is introduced for the first time, the job bootstraps by checking that
+every story renders successfully; comparisons start with the next pull request.
 
 After reviewing an intentional visual change in the failed run's artifact, add
 the `vrt-approved` label to the pull request. The label event verifies that every

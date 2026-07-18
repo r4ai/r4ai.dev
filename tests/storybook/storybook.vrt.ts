@@ -36,9 +36,7 @@ test("all Storybook stories match their visual snapshots", async ({
         { waitUntil: "load" }
       )
 
-      await expect(page.locator("body")).toHaveClass(
-        /sb-show-(?:main|errordisplay)/
-      )
+      await expect(page.locator("body")).toHaveClass(/sb-show-main/)
       await page.evaluate(async () => {
         await document.fonts.ready
         await Promise.all(
