@@ -12,29 +12,25 @@ export type ProjectCardProps = {
   hasImage: boolean
   children?: JSXElement
   links: { label: string; href: string }[]
-  isBackgroundDark?: boolean
+  isImageBackgroundDark?: boolean
 }
 
 export const ProjectCard = (props: ProjectCardProps) => {
-  const isBackgroundDark = () => props.isBackgroundDark ?? true
+  const isImageBackgroundDark = () => props.isImageBackgroundDark ?? true
 
   return (
     <div
       class={cn(
         "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
-        props.hasImage
-          ? "relative"
-          : cn(
-              "flex flex-col items-center",
-              isBackgroundDark() ? "bg-zinc-900" : "bg-white"
-            ),
+        props.hasImage ? "relative" : "flex flex-col items-center bg-card",
         props.class
       )}
     >
       <div
         class={cn(
-          "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl border-zinc-700 px-8 py-4 text-lg font-bold backdrop-blur-xl",
-          !isBackgroundDark() && "border-zinc-300",
+          "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl px-8 py-4 text-lg font-bold backdrop-blur-xl",
+          props.hasImage &&
+            (isImageBackgroundDark() ? "border-zinc-700" : "border-zinc-300"),
           props.hasImage
             ? "absolute bottom-0 rounded-b-xl border-t"
             : "h-full rounded-xl"
@@ -45,7 +41,11 @@ export const ProjectCard = (props: ProjectCardProps) => {
             <h2
               class={cn(
                 "mr-2 inline-block text-xl font-bold",
-                isBackgroundDark() ? "text-white" : "text-black"
+                props.hasImage
+                  ? isImageBackgroundDark()
+                    ? "text-white"
+                    : "text-black"
+                  : "text-card-foreground"
               )}
             >
               {props.title}
@@ -53,7 +53,11 @@ export const ProjectCard = (props: ProjectCardProps) => {
             <span
               class={cn(
                 "inline-block text-sm",
-                isBackgroundDark() ? "text-zinc-400" : "text-zinc-500"
+                props.hasImage
+                  ? isImageBackgroundDark()
+                    ? "text-zinc-400"
+                    : "text-zinc-500"
+                  : "text-muted-foreground"
               )}
             >
               {props.year}
@@ -62,7 +66,11 @@ export const ProjectCard = (props: ProjectCardProps) => {
           <p
             class={cn(
               "text-sm",
-              isBackgroundDark() ? "text-zinc-400" : "text-zinc-600"
+              props.hasImage
+                ? isImageBackgroundDark()
+                  ? "text-zinc-400"
+                  : "text-zinc-600"
+                : "text-muted-foreground"
             )}
           >
             {props.description}
