@@ -33,4 +33,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: r4ai-dev
           directory: ./dist
+          wranglerVersion: "3.90.0"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
