@@ -2,9 +2,9 @@ import "./preview.css"
 import "../src/styles/global.css"
 
 import { withThemeByDataAttribute } from "@storybook/addon-themes"
-import { themes } from "@storybook/theming"
 import type { Component } from "solid-js"
-import type { Preview } from "storybook-solidjs"
+import { themes } from "storybook/theming"
+import type { Preview } from "storybook-solidjs-vite"
 
 const preview: Preview = {
   parameters: {

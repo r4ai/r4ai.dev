@@ -6,6 +6,7 @@ dist/
 
 # dependencies
 node_modules/
+.pnpm-store/
 
 # logs
 npm-debug.log*
@@ -24,3 +25,9 @@ pnpm-debug.log*
 *:Zone.Identifier
 
 *storybook.log
+
+# Storybook visual regression testing
+storybook-static/
+playwright-report/
+test-results/
+.vrt/

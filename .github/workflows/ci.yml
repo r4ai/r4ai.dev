@@ -5,6 +5,11 @@ on:
     branches:
       - main
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
   workflow_dispatch:
 
 jobs:
@@ -51,3 +56,98 @@ jobs:
         run: pnpm run type-check
       - name: Build
         run: pnpm run build
+
+  storybook-vrt:
+    name: Storybook VRT
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      VRT_APPROVED: ${{ github.event.action == 'labeled' && github.event.label.name == 'vrt-approved' }}
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Checkout base revision
+        if: env.VRT_APPROVED != 'true'
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: .vrt/base
+      - name: Setup Node.js
+        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+        env:
+          MISE_NODE_COREPACK: true
+      - name: Install pull request dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test VRT support
+        run: pnpm run test:vrt:unit
+      - name: Detect existing VRT baseline
+        if: env.VRT_APPROVED != 'true'
+        id: vrt-baseline
+        run: |
+          if test -f .vrt/base/playwright.vrt.config.ts; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Prepare base Storybook configuration
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
+        run: cp -R .storybook .vrt/base/.storybook-vrt
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build base Storybook
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
+        run: >-
+          pnpm exec storybook build
+          --config-dir .vrt/base/.storybook-vrt
+          --output-dir .vrt/base/storybook-static
+        env:
+          STORYBOOK_VITE_CONFIG: .vrt/base/.storybook-vrt/vite.config.ts
+      - name: Capture reference snapshots
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
+        run: pnpm run test:vrt:update
+        env:
+          STORYBOOK_STATIC_DIR: .vrt/base/storybook-static
+      - name: Build pull request Storybook
+        run: pnpm run build-storybook
+      - name: Compare visual snapshots
+        if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
+        run: pnpm run test:vrt
+      - name: Verify approved or initial visual snapshots
+        if: env.VRT_APPROVED == 'true' || steps.vrt-baseline.outputs.available == 'false'
+        run: pnpm run test:vrt:update
+      - name: Upload visual regression report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: storybook-vrt-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  storybook-vrt-clear-approval:
+    name: Clear Storybook VRT approval
+    if: >-
+      always() &&
+      github.event_name == 'pull_request' &&
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'vrt-approved'
+    needs: storybook-vrt
+    runs-on: ubuntu-24.04
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Remove consumed approval label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: >-
+          gh api
+          --method DELETE
+          "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels/vrt-approved"

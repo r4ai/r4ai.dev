@@ -1,6 +1,6 @@
 import type { ComponentProps } from "solid-js"
 import { toast } from "solid-sonner"
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Button } from "@/components/ui"
 

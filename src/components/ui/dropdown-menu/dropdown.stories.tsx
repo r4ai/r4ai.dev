@@ -1,6 +1,6 @@
 import type { DropdownMenuSubTriggerProps } from "@kobalte/core/dropdown-menu"
 import type { Component, JSX } from "solid-js"
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Button } from "@/components/ui/button"
 

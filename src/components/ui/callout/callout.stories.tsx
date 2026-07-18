@@ -1,5 +1,5 @@
 import { For } from "solid-js"
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { CodeBlock, InlineCode, Paragraph } from "@/components/typography"
 
@@ -11,6 +11,9 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+  },
+  args: {
+    type: "note",
   },
 } satisfies Meta<typeof Callout>
 export default meta

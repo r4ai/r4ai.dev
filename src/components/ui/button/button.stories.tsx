@@ -1,5 +1,5 @@
-import { fn } from "@storybook/test"
-import type { Meta, StoryObj } from "storybook-solidjs"
+import { fn } from "storybook/test"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Button } from "./button"
 

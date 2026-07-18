@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { Heading, Paragraph, Section } from ".."
 
@@ -8,6 +8,9 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+  },
+  args: {
+    level: "1",
   },
 } satisfies Meta<typeof Section>
 export default meta

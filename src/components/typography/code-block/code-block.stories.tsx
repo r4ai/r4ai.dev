@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import { CodeBlock, type CodeBlockProps } from "./code-block"
 
@@ -10,6 +10,9 @@ const meta = {
     </div>
   ),
   tags: ["autodocs"],
+  args: {
+    lang: "rust",
+  },
 } satisfies Meta<typeof CodeBlock>
 export default meta
 

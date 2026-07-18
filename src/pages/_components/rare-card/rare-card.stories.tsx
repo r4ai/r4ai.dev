@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "storybook-solidjs"
+import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
 import iconBlobs from "@/assets/imgs/r4ai/icon-blobs.png?url"
 import { IconBlobsClipPath } from "@/assets/imgs/r4ai/icon-blobs-clip-path"
