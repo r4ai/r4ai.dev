@@ -1,5 +1,6 @@
-import type { OEmbedRich as OEmbedRichType } from "@r4ai/remark-embed/transformers"
-import { type Component, createMemo } from "solid-js"
+import type { Component } from "solid-js"
+
+import { Link, Paragraph } from "@/components/typography"
 
 export type OEmbedRichProps = {
   url: string
@@ -8,15 +9,9 @@ export type OEmbedRichProps = {
 
 // todo: add storybook
 export const OEmbedRich: Component<OEmbedRichProps> = (props) => {
-  const oEmbed = createMemo(() => JSON.parse(props.oEmbed) as OEmbedRichType)
   return (
-    <div
-      class="mx-auto w-full max-w-screen-md *:!mx-auto *:!h-full *:!w-full"
-      style={{
-        "aspect-ratio": `${oEmbed().width}/${oEmbed().height}`,
-      }}
-      // eslint-disable-next-line solid/no-innerhtml
-      innerHTML={oEmbed().html}
-    />
+    <Paragraph>
+      <Link href={props.url}>{props.url}</Link>
+    </Paragraph>
   )
 }
