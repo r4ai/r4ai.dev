@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test"
 
+import {
+  installStorybookLifecycleObserver,
+  waitForStorybookLifecycle,
+} from "./storybook-lifecycle"
+
 interface StoryIndexEntry {
   id: string
   name: string
@@ -29,12 +34,15 @@ test("all Storybook stories match their visual snapshots", async ({
 
   expect(stories.length).toBeGreaterThan(0)
 
+  await page.addInitScript(installStorybookLifecycleObserver)
+
   for (const story of stories) {
     await test.step(`${story.title} / ${story.name}`, async () => {
       await page.goto(
         `/iframe.html?id=${encodeURIComponent(story.id)}&viewMode=story`,
         { waitUntil: "load" }
       )
+      await page.evaluate(waitForStorybookLifecycle)
 
       await expect(page.locator("body")).toHaveClass(/sb-show-main/)
       await page.evaluate(async () => {

@@ -12,6 +12,7 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm run preview`         | Preview your build locally, before deploying     |
 | `pnpm run storybook`       | Start Storybook at `localhost:6006`              |
 | `pnpm run build-storybook` | Build Storybook to `./storybook-static/`         |
+| `pnpm run test:vrt:unit`   | Test the Storybook VRT lifecycle and workflow    |
 | `pnpm run test:vrt`        | Compare Storybook visual snapshots               |
 | `pnpm run test:vrt:update` | Capture Storybook visual snapshots               |
 | `pnpm run lint:fix`        | Run ESLint on the `./src/` directory             |
@@ -32,14 +33,16 @@ every story renders successfully; comparisons start with the next pull request.
 
 After reviewing an intentional visual change in the failed run's artifact, add
 the `vrt-approved` label to the pull request. The label event verifies that every
-story can still be rendered and marks the current head revision as approved. A
-later push triggers a fresh comparison, even if the label remains attached.
+story can still be rendered and marks the current head revision as approved.
+The workflow removes the label after consuming it, so a later push triggers a
+fresh comparison and the label can be added again to approve that new revision.
 
 To run the same capture and comparison flow locally:
 
 ```sh
 pnpm exec playwright install chromium
 pnpm run build-storybook
+pnpm run test:vrt:unit
 pnpm run test:vrt:update
 pnpm run test:vrt
 ```

@@ -18,6 +18,7 @@
     "astro": "astro",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
+    "test:vrt:unit": "node --test tests/storybook/*.node-test.ts",
     "test:vrt": "playwright test --config=playwright.vrt.config.ts",
     "test:vrt:update": "playwright test --config=playwright.vrt.config.ts --update-snapshots"
   },
