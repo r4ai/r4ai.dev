@@ -7,10 +7,6 @@ import {
 } from "@r4ai/remark-callout"
 import remarkEmbed, { type RemarkEmbedOptions } from "@r4ai/remark-embed"
 import {
-  transformerLinkCard,
-  type TransformerLinkCardOptions,
-} from "@r4ai/remark-embed/transformers"
-import {
   transformerMetaHighlight,
   transformerMetaWordHighlight,
   transformerNotationDiff,
@@ -29,6 +25,10 @@ import {
   transformerTitle,
 } from "./src/lib/shiki-transformers"
 import remarkInlineCode from "./src/lib/unified-plugins/remark-inline-code"
+import {
+  createLinkCardTransformer,
+  loadLinkMetadata,
+} from "./src/lib/unified-plugins/remark-link-card"
 import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
 import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
 
@@ -66,11 +66,15 @@ export default defineConfig({
         remarkEmbed,
         {
           transformers: [
-            transformerLinkCard({
-              tagName: () => "link-card",
-              properties: (og) => ({ og: JSON.stringify(og) }),
-              children: () => [],
-            } satisfies TransformerLinkCardOptions),
+            createLinkCardTransformer(
+              {
+                timeoutMs: 10_000,
+                tagName: () => "link-card",
+                properties: (og) => ({ og: JSON.stringify(og) }),
+                children: () => [],
+              },
+              { loadMetadata: loadLinkMetadata }
+            ),
           ],
         } satisfies RemarkEmbedOptions,
       ],
