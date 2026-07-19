@@ -26,7 +26,7 @@ const posts = await Promise.all(
       import.meta.env.DEV ? !data.internal : !data.draft && !data.internal
     )
   ).map(async (entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: {
       entry: {
         ...entry,
