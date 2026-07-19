@@ -1,5 +1,5 @@
 # 使用する基本イメージ
-FROM debian:bookworm-20260421@sha256:8a8cd02c5912770b4980228a54d4aff9e4f986f1eb2525d2d371dec5232cefcc
+FROM debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
