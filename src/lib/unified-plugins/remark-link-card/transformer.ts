@@ -1,53 +1,22 @@
 import type { Transformer } from "@r4ai/remark-embed"
-import type { ElementContent, Properties } from "hast"
+import type {
+  LinkInfo,
+  TransformerLinkCardOptions,
+} from "@r4ai/remark-embed/transformers/link-card"
+import type { unfurl } from "unfurl.js"
 
-export type LinkMetadata = {
-  title?: string
-  description?: string
-  favicon?: string
-  open_graph?: {
-    url?: string
-    title?: string
-    description?: string
-    images?: Array<{
-      url?: string
-      alt?: string
-    }>
-  }
-  twitter_card?: {
-    title?: string
-    description?: string
-    images?: Array<{
-      url?: string
-      alt?: string
-    }>
-  }
-}
-
-export type LinkInfo = {
-  url: string
-  title?: string
-  description?: string
-  favicon?: string
-  image: {
-    src?: string
-    alt?: string
-  }
-}
+export type LinkMetadata = Partial<Awaited<ReturnType<typeof unfurl>>>
 
 export type LinkMetadataLoader = (
   url: URL,
   signal: AbortSignal
 ) => Promise<LinkMetadata | null>
 
-export type LinkCardTransformerOptions = {
-  timeoutMs: number
-  tagName: (info: Readonly<LinkInfo>) => string | Promise<string>
-  properties: (info: Readonly<LinkInfo>) => Properties | Promise<Properties>
-  children: (
-    info: Readonly<LinkInfo>
-  ) => ElementContent[] | Promise<ElementContent[]>
-}
+export type LinkCardTransformerOptions =
+  Required<TransformerLinkCardOptions> & {
+    timeoutMs: number
+    timeoutStrategy: "per-request" | "shared"
+  }
 
 type LinkCardTransformerDependencies = {
   loadMetadata: LinkMetadataLoader
@@ -61,32 +30,36 @@ export const createLinkCardTransformer = (
     throw new RangeError("timeoutMs must be a positive integer")
   }
 
-  const metadataCache = new Map<string, LinkMetadata>()
-  const loadingCache = new Map<string, Promise<LinkMetadata | null>>()
-  let requestSignal: AbortSignal | undefined
+  const metadataCache = new Map<string, Promise<LinkMetadata | null>>()
+  let sharedSignal: AbortSignal | undefined
 
-  const getMetadata = async (url: URL) => {
-    const cached = metadataCache.get(url.href)
-    if (cached != null) return cached
-
-    let loading = loadingCache.get(url.href)
-    if (loading == null) {
-      requestSignal ??= AbortSignal.timeout(options.timeoutMs)
-      loading = dependencies.loadMetadata(url, requestSignal)
-      loadingCache.set(url.href, loading)
+  const getSignal = () => {
+    if (options.timeoutStrategy === "per-request") {
+      return AbortSignal.timeout(options.timeoutMs)
     }
-
-    try {
-      const metadata = await loading
-      if (metadata != null) metadataCache.set(url.href, metadata)
-      return metadata
-    } finally {
-      loadingCache.delete(url.href)
-    }
+    return (sharedSignal ??= AbortSignal.timeout(options.timeoutMs))
   }
 
-  const getInfo = (url: URL) => {
-    const metadata = metadataCache.get(url.href)
+  const getMetadata = (url: URL) => {
+    let metadata = metadataCache.get(url.href)
+    if (metadata != null) return metadata
+
+    metadata = dependencies.loadMetadata(url, getSignal()).then(
+      (result) => {
+        if (result == null) metadataCache.delete(url.href)
+        return result
+      },
+      (error: unknown) => {
+        metadataCache.delete(url.href)
+        throw error
+      }
+    )
+    metadataCache.set(url.href, metadata)
+    return metadata
+  }
+
+  const getInfo = async (url: URL) => {
+    const metadata = await getMetadata(url)
     if (metadata == null) {
       throw new Error(`No metadata found for ${url.href}`)
     }
@@ -96,9 +69,9 @@ export const createLinkCardTransformer = (
   return {
     name: "link-card",
     match: async (url) => (await getMetadata(url)) != null,
-    tagName: async (url) => options.tagName(getInfo(url)),
-    properties: async (url) => options.properties(getInfo(url)),
-    children: async (url) => options.children(getInfo(url)),
+    tagName: async (url) => options.tagName(await getInfo(url)),
+    properties: async (url) => options.properties(await getInfo(url)),
+    children: async (url) => options.children(await getInfo(url)),
   }
 }
 

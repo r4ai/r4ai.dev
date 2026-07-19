@@ -1,10 +1,6 @@
 import { unfurl } from "unfurl.js"
 
-import type { LinkMetadata, LinkMetadataLoader } from "./transformer.ts"
-
-type UnfurlOptions = NonNullable<Parameters<typeof unfurl>[1]>
-type UnfurlFetch = NonNullable<UnfurlOptions["fetch"]>
-type UnfurlResponse = Awaited<ReturnType<UnfurlFetch>>
+import type { LinkMetadataLoader } from "./transformer.ts"
 
 const requestHeaders = {
   Accept: "text/html, application/xhtml+xml",
@@ -12,19 +8,13 @@ const requestHeaders = {
 }
 
 export const loadLinkMetadata: LinkMetadataLoader = async (url, signal) => {
-  const fetchWithSignal: UnfurlFetch = async (input) => {
-    const response = await fetch(input, {
-      headers: requestHeaders,
-      redirect: "follow",
-      signal,
-    })
-    return response as unknown as UnfurlResponse
-  }
-
-  const metadata = await unfurl(url.href, {
-    fetch: fetchWithSignal,
+  return unfurl(url.href, {
+    fetch: (input) =>
+      fetch(input, {
+        headers: requestHeaders,
+        redirect: "follow",
+        signal,
+      }),
     oembed: false,
   })
-
-  return metadata as LinkMetadata
 }

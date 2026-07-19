@@ -69,6 +69,10 @@ export default defineConfig({
             createLinkCardTransformer(
               {
                 timeoutMs: 10_000,
+                timeoutStrategy:
+                  process.env.NODE_ENV === "development"
+                    ? "per-request"
+                    : "shared",
                 tagName: () => "link-card",
                 properties: (og) => ({ og: JSON.stringify(og) }),
                 children: () => [],

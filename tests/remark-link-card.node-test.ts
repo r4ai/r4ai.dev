@@ -67,6 +67,7 @@ test("reuses metadata after the first successful request", async () => {
   const transformer = createLinkCardTransformer(
     {
       timeoutMs: 1_000,
+      timeoutStrategy: "shared",
       tagName: () => "link-card",
       properties: (info) => ({ title: info.title }),
       children: () => [],
@@ -96,6 +97,7 @@ test("shares an in-flight request for duplicate links", async () => {
   const transformer = createLinkCardTransformer(
     {
       timeoutMs: 1_000,
+      timeoutStrategy: "shared",
       tagName: () => "link-card",
       properties: () => ({}),
       children: () => [],
@@ -122,6 +124,7 @@ test("retries metadata after a failed request", async () => {
   const transformer = createLinkCardTransformer(
     {
       timeoutMs: 1_000,
+      timeoutStrategy: "shared",
       tagName: () => "link-card",
       properties: () => ({}),
       children: () => [],
@@ -137,19 +140,20 @@ test("retries metadata after a failed request", async () => {
 
 test("shares one timeout budget across sequential requests", async () => {
   const keepEventLoopAlive = setTimeout(() => {}, 200)
-  const loadMetadata: LinkMetadataLoader = async (_, signal) =>
-    new Promise((_, reject) => {
-      if (signal.aborted) {
-        reject(signal.reason)
-        return
-      }
+  const signals: AbortSignal[] = []
+  const loadMetadata: LinkMetadataLoader = async (_, signal) => {
+    signals.push(signal)
+    if (signal.aborted) throw signal.reason
+    return new Promise((_, reject) => {
       signal.addEventListener("abort", () => reject(signal.reason), {
         once: true,
       })
     })
+  }
   const transformer = createLinkCardTransformer(
     {
       timeoutMs: 50,
+      timeoutStrategy: "shared",
       tagName: () => "link-card",
       properties: () => ({}),
       children: () => [],
@@ -164,23 +168,74 @@ test("shares one timeout budget across sequential requests", async () => {
         error instanceof DOMException && error.name === "TimeoutError"
     )
 
-    const secondStartedAt = performance.now()
     await assert.rejects(
       transformer.match(new URL("https://example.com/second")),
       (error: unknown) =>
         error instanceof DOMException && error.name === "TimeoutError"
     )
-    assert.ok(performance.now() - secondStartedAt < 25)
+    assert.equal(signals.length, 2)
+    assert.equal(signals[1], signals[0])
+    assert.equal(signals[1]?.aborted, true)
   } finally {
     clearTimeout(keepEventLoopAlive)
   }
 })
 
-test("does not transform links without metadata", async () => {
-  const loadMetadata: LinkMetadataLoader = async () => null
+test("starts a fresh timeout budget for later development requests", async () => {
+  const keepEventLoopAlive = setTimeout(() => {}, 200)
+  const signals: AbortSignal[] = []
+  const loadMetadata: LinkMetadataLoader = async (url, signal) => {
+    assert.equal(signal.aborted, false)
+    signals.push(signal)
+    return { title: url.href }
+  }
+  const transformer = createLinkCardTransformer(
+    {
+      timeoutMs: 20,
+      timeoutStrategy: "per-request",
+      tagName: () => "link-card",
+      properties: () => ({}),
+      children: () => [],
+    },
+    { loadMetadata }
+  )
+
+  try {
+    assert.equal(
+      await transformer.match(new URL("https://example.com/first")),
+      true
+    )
+    const [firstSignal] = signals
+    assert.ok(firstSignal)
+    await new Promise<void>((resolve) => {
+      if (firstSignal.aborted) {
+        resolve()
+        return
+      }
+      firstSignal.addEventListener("abort", () => resolve(), { once: true })
+    })
+
+    assert.equal(
+      await transformer.match(new URL("https://example.com/later")),
+      true
+    )
+    assert.equal(signals.length, 2)
+    assert.notEqual(signals[1], firstSignal)
+  } finally {
+    clearTimeout(keepEventLoopAlive)
+  }
+})
+
+test("does not cache missing metadata", async () => {
+  let callCount = 0
+  const loadMetadata: LinkMetadataLoader = async () => {
+    callCount += 1
+    return null
+  }
   const transformer = createLinkCardTransformer(
     {
       timeoutMs: 1_000,
+      timeoutStrategy: "shared",
       tagName: () => "link-card",
       properties: () => ({}),
       children: () => [],
@@ -189,6 +244,8 @@ test("does not transform links without metadata", async () => {
   )
 
   assert.equal(await transformer.match(new URL("https://example.com")), false)
+  assert.equal(await transformer.match(new URL("https://example.com")), false)
+  assert.equal(callCount, 2)
 })
 
 test("rejects invalid timeout values", () => {
@@ -197,6 +254,7 @@ test("rejects invalid timeout values", () => {
       createLinkCardTransformer(
         {
           timeoutMs: 0,
+          timeoutStrategy: "shared",
           tagName: () => "link-card",
           properties: () => ({}),
           children: () => [],
