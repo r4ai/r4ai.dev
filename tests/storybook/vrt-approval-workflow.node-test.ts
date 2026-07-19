@@ -21,3 +21,14 @@ test("clears a consumed VRT approval label in an isolated job", () => {
   assert.doesNotMatch(cleanupJob, /actions\/checkout/)
   assert.doesNotMatch(cleanupJob, /pnpm/)
 })
+
+test("builds the VRT baseline with base revision dependencies", () => {
+  const vrtJob = workflow.match(
+    /^ {2}storybook-vrt:\n(?<body>[\s\S]*?)(?=^ {2}\S|(?![\s\S]))/m
+  )?.groups?.body
+
+  assert.ok(vrtJob, "missing storybook-vrt job")
+  assert.match(vrtJob, /pnpm --dir \.vrt\/base install --frozen-lockfile/)
+  assert.match(vrtJob, /pnpm --dir \.vrt\/base run build-storybook/)
+  assert.doesNotMatch(vrtJob, /cp -R \.storybook/)
+})

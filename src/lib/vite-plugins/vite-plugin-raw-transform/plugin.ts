@@ -15,10 +15,7 @@ const constantFoldingPlugin = ({
     setup(build) {
       build.onLoad({ filter: /\.(js|ts|jsx|tsx)$/ }, async (args) => {
         const ext = path.extname(args.path).slice(1) as
-          | "js"
-          | "ts"
-          | "jsx"
-          | "tsx"
+          "js" | "ts" | "jsx" | "tsx"
         let source = await readFile(args.path, "utf-8")
 
         // Replace `typeof window === "undefined"` with `true` or `false` depending on the platform

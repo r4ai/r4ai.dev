@@ -26,11 +26,11 @@ import IconZap from "~icons/lucide/zap"
 
 export const callout = tv({
   slots: {
-    root: "bg-card group mx-auto max-w-screen-md space-y-2 rounded-xl border p-4",
+    root: "bg-card group mx-auto max-w-(--breakpoint-md) space-y-2 rounded-xl border p-4",
     title: "flex flex-row items-center gap-2.5 font-bold",
     foldIcon: "shrink-0 transition-transform group-open:rotate-90",
     body: [
-      "*:my-4 last:*:mb-0 first:*:mt-4 [&>:is(ul,ol)_:is(li,li>*)]:my-2",
+      "*:my-4 *:last:mb-0 *:first:mt-4 [&>:is(ul,ol)_:is(li,li>*)]:my-2",
       "[&>:is(h1,h2):not(:first-child)]:mt-12",
       "[&>:is(h3,h4):not(:first-child)]:mt-9",
     ],

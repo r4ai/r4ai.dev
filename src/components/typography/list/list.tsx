@@ -10,7 +10,7 @@ export const List: Component<ListProps> = (props) => {
   return (
     <ul
       class={cn(
-        "group mx-auto max-w-screen-md list-disc pl-6 [&>li]:mt-2",
+        "group mx-auto max-w-(--breakpoint-md) list-disc pl-6 [&>li]:mt-2",
         local.class
       )}
       {...rest}
@@ -34,7 +34,7 @@ export const OrderedList: Component<OrderedListPRops> = (props) => {
   return (
     <ol
       class={cn(
-        "mx-auto max-w-screen-md list-decimal pl-6 [&>li]:mt-2",
+        "mx-auto max-w-(--breakpoint-md) list-decimal pl-6 [&>li]:mt-2",
         local.class
       )}
       {...rest}

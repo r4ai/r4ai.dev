@@ -8,6 +8,9 @@ export const Paragraph: Component<ParagraphProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
 
   return (
-    <p class={cn("mx-auto max-w-screen-md leading-7", local.class)} {...rest} />
+    <p
+      class={cn("mx-auto max-w-(--breakpoint-md) leading-7", local.class)}
+      {...rest}
+    />
   )
 }

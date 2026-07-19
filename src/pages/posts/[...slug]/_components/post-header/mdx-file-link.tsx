@@ -14,7 +14,7 @@ export const MdxFileLink: Component<MdxFileLinkProps> = (props) => {
     <div
       {...rest}
       class={cn(
-        "mx-auto flex flex-row gap-1 text-muted-foreground transition hover:text-foreground",
+        "text-muted-foreground hover:text-foreground mx-auto flex flex-row gap-1 transition",
         local.class
       )}
     >

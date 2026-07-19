@@ -16,9 +16,7 @@
     "astro.config.ts",
     "eslint.config.js",
     "lint-staged.config.js",
-    "postcss.config.cjs",
-    "prettier.config.js",
-    "tailwind.config.ts"
+    "prettier.config.js"
   ],
   "mdx": {
     "plugins": [
