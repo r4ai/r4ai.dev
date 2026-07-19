@@ -94,19 +94,14 @@ jobs:
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Prepare base Storybook configuration
+      - name: Install base revision dependencies
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: cp -R .storybook .vrt/base/.storybook-vrt
+        run: pnpm --dir .vrt/base install --frozen-lockfile
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Build base Storybook
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: >-
-          pnpm exec storybook build
-          --config-dir .vrt/base/.storybook-vrt
-          --output-dir .vrt/base/storybook-static
-        env:
-          STORYBOOK_VITE_CONFIG: .vrt/base/.storybook-vrt/vite.config.ts
+        run: pnpm --dir .vrt/base run build-storybook
       - name: Capture reference snapshots
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: pnpm run test:vrt:update

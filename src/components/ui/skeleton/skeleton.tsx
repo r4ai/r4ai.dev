@@ -9,7 +9,7 @@ export const Skeleton: Component<SkeletonProps> = (props) => {
 
   return (
     <div
-      class={cn("animate-pulse rounded-md bg-primary/10", local.class)}
+      class={cn("bg-primary/10 animate-pulse rounded-md", local.class)}
       {...rest}
     />
   )

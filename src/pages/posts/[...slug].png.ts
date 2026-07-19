@@ -4,7 +4,7 @@ import sharp from "sharp"
 
 import { OpenGraphImage, render } from "@/components/open-graph-images"
 
-export { getStaticPaths } from "./index.astro"
+export { getStaticPaths } from "./[...slug]/index.astro"
 
 export const GET: APIRoute = async ({ params }) => {
   if (!params.slug) {

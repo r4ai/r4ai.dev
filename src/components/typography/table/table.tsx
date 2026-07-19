@@ -7,7 +7,7 @@ export type TableProps = ComponentProps<"table">
 export const Table: Component<TableProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
-    <div class="mx-auto max-w-screen-md overflow-auto">
+    <div class="mx-auto max-w-(--breakpoint-md) overflow-auto">
       <table
         class={cn("w-full caption-bottom text-sm", local.class)}
         {...rest}
@@ -38,7 +38,7 @@ export const TableFooter: Component<TableFooterProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
     <tfoot
-      class={cn("bg-primary font-medium text-primary-foreground", local.class)}
+      class={cn("bg-primary text-primary-foreground font-medium", local.class)}
       {...rest}
     />
   )
@@ -51,7 +51,7 @@ export const TableRow: Component<TableRowProps> = (props) => {
   return (
     <tr
       class={cn(
-        "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
         local.class
       )}
       {...rest}
@@ -66,7 +66,7 @@ export const TableHead: Component<TableHeadProps> = (props) => {
   return (
     <th
       class={cn(
-        "h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "text-muted-foreground h-10 px-2 text-left align-middle font-medium has-[[role=checkbox]]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
         local.class
       )}
       {...rest}
@@ -81,7 +81,7 @@ export const TableCell: Component<TableCellProps> = (props) => {
   return (
     <td
       class={cn(
-        "p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "p-2 align-middle has-[[role=checkbox]]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
         local.class
       )}
       {...rest}
@@ -95,7 +95,7 @@ export const TableCaption: Component<TableCaptionProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
     <caption
-      class={cn("mt-4 text-sm text-muted-foreground", local.class)}
+      class={cn("text-muted-foreground mt-4 text-sm", local.class)}
       {...rest}
     />
   )

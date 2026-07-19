@@ -20,9 +20,7 @@ type Story = StoryObj<typeof meta>
 
 export const Square: Story = {
   args: {
-    children: (
-      <div class="size-96 bg-gradient-to-br from-rose-500 to-rose-400" />
-    ),
+    children: <div class="size-96 bg-linear-to-br from-rose-500 to-rose-400" />,
   },
 }
 
@@ -34,7 +32,7 @@ export const Icon: Story = {
         <IconBlobsClipPath clipPathId="r4ai-icon-blobs-clip-path" />
         <Image
           src={iconBlobs}
-          class="aspect-[1132/1140] size-96 drop-shadow-lg"
+          class="aspect-1132/1140 size-96 drop-shadow-lg"
           alt="Me"
         />
       </>

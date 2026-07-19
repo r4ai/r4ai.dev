@@ -28,13 +28,13 @@ export const Heading = <Level extends HeadingLevel>(
 }
 
 const heading = tv({
-  base: "mx-auto max-w-screen-md scroll-m-20 tracking-tight",
+  base: "mx-auto max-w-(--breakpoint-md) scroll-m-20 tracking-tight",
   variants: {
     level: {
       h1: "text-4xl font-extrabold lg:text-5xl",
-      h2: "border-b pb-2 text-3xl font-semibold group-data-[margin=true]:[&:not(:first-child)]:mt-10",
-      h3: "text-2xl font-semibold group-data-[margin=true]:[&:not(:first-child)]:mt-8",
-      h4: "text-xl font-semibold group-data-[margin=true]:[&:not(:first-child)]:mt-8",
+      h2: "border-b pb-2 text-3xl font-semibold not-first:group-data-[margin=true]:mt-10",
+      h3: "text-2xl font-semibold not-first:group-data-[margin=true]:mt-8",
+      h4: "text-xl font-semibold not-first:group-data-[margin=true]:mt-8",
     },
   },
 })

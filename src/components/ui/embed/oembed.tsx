@@ -29,9 +29,8 @@ export type OEmbedProps = {
 
 const OEmbedInternal: Component<OEmbedProps> = (props) => {
   const [oEmbed] = createResource(async () => {
-    const { transformerOEmbed } = await import(
-      "@r4ai/remark-embed/transformers/oembed"
-    )
+    const { transformerOEmbed } =
+      await import("@r4ai/remark-embed/transformers/oembed")
     const transformer = transformerOEmbed({
       video: (url, oEmbed) => ({
         tagName: "oembed-video",

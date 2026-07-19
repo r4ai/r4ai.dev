@@ -13,7 +13,7 @@ export const Tags: Component<TagsProps> = (props) => {
     <div
       {...rest}
       class={cn(
-        "mx-auto flex max-w-screen-sm flex-row flex-wrap items-center justify-center gap-2 text-muted-foreground",
+        "text-muted-foreground mx-auto flex max-w-(--breakpoint-sm) flex-row flex-wrap items-center justify-center gap-2",
         local.class
       )}
     >
