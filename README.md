@@ -12,6 +12,7 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm run preview`         | Preview your build locally, before deploying     |
 | `pnpm run storybook`       | Start Storybook at `localhost:6006`              |
 | `pnpm run build-storybook` | Build Storybook to `./storybook-static/`         |
+| `pnpm run test:ci:unit`    | Test safeguards for bounded CI builds            |
 | `pnpm run test:vrt:unit`   | Test the Storybook VRT lifecycle and workflow    |
 | `pnpm run test:vrt`        | Compare Storybook visual snapshots               |
 | `pnpm run test:vrt:update` | Capture Storybook visual snapshots               |

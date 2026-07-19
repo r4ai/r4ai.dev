@@ -43,6 +43,7 @@ jobs:
 
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -52,6 +53,8 @@ jobs:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Test CI safeguards
+        run: pnpm run test:ci:unit
       - name: Type check
         run: pnpm run type-check
       - name: Build
