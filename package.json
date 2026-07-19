@@ -43,7 +43,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwind-variants": "^0.3.0",
     "three": "^0.180.0",
-    "valibot": "1.0.0-rc.1"
+    "valibot": "1.4.2"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",

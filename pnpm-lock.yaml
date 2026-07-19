@@ -69,8 +69,8 @@ importers:
         specifier: ^0.180.0
         version: 0.180.0
       valibot:
-        specifier: 1.0.0-rc.1
-        version: 1.0.0-rc.1(typescript@5.7.3)
+        specifier: 1.4.2
+        version: 1.4.2(typescript@5.7.3)
     devDependencies:
       '@astrojs/check':
         specifier: 0.9.4
@@ -5256,8 +5256,8 @@ packages:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
-  valibot@1.0.0-rc.1:
-    resolution: {integrity: sha512-bTHNpeeQ403xS7qGHF/tw3EC/zkZOU5VdkfIsmRDu1Sp+BJNTNCm6m5HlwOgyW/03lofP+uQiq3R+Poo9wiCEg==}
+  valibot@1.4.2:
+    resolution: {integrity: sha512-gjdCvJ6d3RyHAneqxMYMW9QMCwYMb3jpOO0IyHZV1bnRHFBHrX3VkIILt5XYR0WhwHiH7Mty8ovuPZ/O3gamrg==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -6538,7 +6538,7 @@ snapshots:
   '@modular-forms/solid@0.25.1(solid-js@1.9.14)(typescript@5.7.3)':
     dependencies:
       solid-js: 1.9.14
-      valibot: 1.0.0-rc.1(typescript@5.7.3)
+      valibot: 1.4.2(typescript@5.7.3)
     transitivePeerDependencies:
       - typescript
 
@@ -6660,7 +6660,7 @@ snapshots:
       hast-util-from-html-isomorphic: 2.0.0
       unfurl.js: 6.4.0
       unist-util-visit: 5.1.0
-      valibot: 1.0.0-rc.1(typescript@5.7.3)
+      valibot: 1.4.2(typescript@5.7.3)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -11358,7 +11358,7 @@ snapshots:
 
   uuid@11.1.0: {}
 
-  valibot@1.0.0-rc.1(typescript@5.7.3):
+  valibot@1.4.2(typescript@5.7.3):
     optionalDependencies:
       typescript: 5.7.3
 
