@@ -49,11 +49,11 @@ export const Default: Story = {
               </CardDescription>
             </CardHeader>
             <CardContent class="space-y-2">
-              <TextFieldRoot class="space-y-1 [&>*+*]:mt-1">
+              <TextFieldRoot class="[&>*+*]:mt-1">
                 <TextFieldLabel>Name</TextFieldLabel>
                 <TextField />
               </TextFieldRoot>
-              <TextFieldRoot class="space-y-1 [&>*+*]:mt-1">
+              <TextFieldRoot class="[&>*+*]:mt-1">
                 <TextFieldLabel>Username</TextFieldLabel>
                 <TextField />
               </TextFieldRoot>
@@ -72,11 +72,11 @@ export const Default: Story = {
               </CardDescription>
             </CardHeader>
             <CardContent class="space-y-2">
-              <TextFieldRoot class="space-y-1 [&>*+*]:mt-1">
+              <TextFieldRoot class="[&>*+*]:mt-1">
                 <TextFieldLabel>Current password</TextFieldLabel>
                 <TextField />
               </TextFieldRoot>
-              <TextFieldRoot class="space-y-1 [&>*+*]:mt-1">
+              <TextFieldRoot class="[&>*+*]:mt-1">
                 <TextFieldLabel>New password</TextFieldLabel>
                 <TextField />
               </TextFieldRoot>

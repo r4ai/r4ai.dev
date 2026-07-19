@@ -18,7 +18,7 @@ export const TextFieldRoot = <T extends ValidComponent = "div">(
 
   return (
     <TextFieldPrimitive.Root
-      class={cn("flex flex-col gap-2", local.class)}
+      class={cn("[&>*+*]:mt-2", local.class)}
       {...rest}
     />
   )
