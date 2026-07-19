@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
-import { TextField, TextFieldRoot } from "./text-field"
+import { TextField, TextFieldLabel, TextFieldRoot } from "./text-field"
 
 const meta = {
   title: "UI/TextField",
@@ -16,6 +16,7 @@ export const Default: Story = {
   args: {
     children: (
       <TextFieldRoot class="mx-auto w-full max-w-xs">
+        <TextFieldLabel>Email</TextFieldLabel>
         <TextField type="email" placeholder="Email" />
       </TextFieldRoot>
     ),

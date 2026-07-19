@@ -17,7 +17,10 @@ export const TextFieldRoot = <T extends ValidComponent = "div">(
   const [local, rest] = splitProps(props as TextFieldRootProps, ["class"])
 
   return (
-    <TextFieldPrimitive.Root class={cn("space-y-2", local.class)} {...rest} />
+    <TextFieldPrimitive.Root
+      class={cn("flex flex-col gap-2", local.class)}
+      {...rest}
+    />
   )
 }
 
