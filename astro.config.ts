@@ -42,6 +42,14 @@ export default defineConfig({
     "/posts/[...slug]/raw": "/posts/[...slug].mdx",
   },
   vite: {
+    resolve: {
+      noExternal: [
+        /^@corvu\//,
+        /^@kobalte\//,
+        /^@modular-forms\/solid(?:\/|$)/,
+        /^solid-(?!js(?:\/|$))/,
+      ],
+    },
     plugins: [
       tailwindcss(),
       pagefind(),
