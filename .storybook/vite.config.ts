@@ -1,5 +1,6 @@
 import path from "node:path"
 
+import tailwindcss from "@tailwindcss/vite"
 import icons from "unplugin-icons/vite"
 import { defineConfig } from "vite"
 import tsConfigPath from "vite-tsconfig-paths"
@@ -14,6 +15,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    tailwindcss(),
     tsConfigPath({ root: path.dirname(import.meta.dirname) }),
     pagefind(),
     rawTransform(),

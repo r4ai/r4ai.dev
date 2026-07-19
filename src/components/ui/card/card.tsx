@@ -11,7 +11,7 @@ export const Card = (props: CardProps) => {
   return (
     <div
       class={cn(
-        "rounded-xl border bg-card text-card-foreground shadow",
+        "bg-card text-card-foreground rounded-xl border shadow-sm",
         local.class
       )}
       {...rest}
@@ -36,7 +36,7 @@ export const CardTitle = (props: CardTitleProps) => {
 
   return (
     <h1
-      class={cn("font-semibold leading-none tracking-tight", local.class)}
+      class={cn("leading-none font-semibold tracking-tight", local.class)}
       {...rest}
     />
   )
@@ -48,7 +48,7 @@ export const CardDescription = (props: CardDescriptionProps) => {
   const [local, rest] = splitProps(props, ["class"])
 
   return (
-    <h3 class={cn("text-sm text-muted-foreground", local.class)} {...rest} />
+    <h3 class={cn("text-muted-foreground text-sm", local.class)} {...rest} />
   )
 }
 

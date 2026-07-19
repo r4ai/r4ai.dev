@@ -104,7 +104,7 @@ export const Cube: Component<CubeProps> = (props) => {
 
   return (
     <div
-      class={cn("aspect-square *:bg-background", local.class)}
+      class={cn("*:bg-background aspect-square", local.class)}
       ref={ref}
       {...rest}
     />

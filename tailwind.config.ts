@@ -1,4 +1,3 @@
-import containerQueries from "@tailwindcss/container-queries"
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
 import animate from "tailwindcss-animate"
@@ -89,6 +88,15 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
         mono: ["UDEV Gothic LG", ...defaultTheme.fontFamily.mono],
         times: ["Times New Roman", "Times", "serif"],
       },
@@ -105,5 +113,5 @@ export default {
       },
     },
   },
-  plugins: [animate, containerQueries],
+  plugins: [animate],
 } satisfies Config

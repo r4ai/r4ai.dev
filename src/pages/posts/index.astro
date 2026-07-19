@@ -53,9 +53,9 @@ const selectedPosts = posts.sort(byPublishedAtDesc).map((post) => ({
 ---
 
 <RootLayout title="Posts">
-  <div class="container mx-auto mb-12 mt-6 grid gap-24">
+  <div class="container mx-auto mt-6 mb-12 grid gap-24">
     <section class="flex flex-col items-center gap-8">
-      <h2 class="text-center font-times text-4.5xl font-black">Posts</h2>
+      <h2 class="font-times text-4.5xl text-center font-black">Posts</h2>
       <PostList posts={selectedPosts} client:load />
     </section>
   </div>

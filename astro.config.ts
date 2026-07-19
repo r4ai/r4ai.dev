@@ -1,6 +1,5 @@
 import mdx from "@astrojs/mdx"
 import solid from "@astrojs/solid-js"
-import tailwind from "@astrojs/tailwind"
 import {
   type Options as RemarkCalloutOptions,
   remarkCallout,
@@ -17,6 +16,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers"
+import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
@@ -36,19 +36,14 @@ import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
 export default defineConfig({
   site: "https://r4ai.dev",
   prefetch: true,
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    mdx(),
-    solid(),
-  ],
+  integrations: [mdx(), solid()],
   redirects: {
     "/posts/raw/[...slug]": "/posts/[...slug].mdx",
     "/posts/[...slug]/raw": "/posts/[...slug].mdx",
   },
   vite: {
     plugins: [
+      tailwindcss(),
       pagefind(),
       rawTransform(),
       icons({ compiler: "solid" }),

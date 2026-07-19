@@ -22,7 +22,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
     <div
       class={cn(
         "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
-        props.hasImage ? "relative" : "flex flex-col items-center bg-card",
+        props.hasImage ? "relative" : "bg-card flex flex-col items-center",
         props.class
       )}
     >
