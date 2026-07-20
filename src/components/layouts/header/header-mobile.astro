@@ -32,7 +32,7 @@ const { class: className, ...props } = Astro.props
           >
             <IconRoot class="size-7">
               <Icon>
-                <Image src={IconRai} alt="r4ai" />
+                <Image src={IconRai} alt="r4ai" width={64} height={64} />
               </Icon>
             </IconRoot>
             <span class="text-base">r4ai.dev</span>
@@ -43,10 +43,10 @@ const { class: className, ...props } = Astro.props
     <div>
       <ul class="flex flex-row gap-1">
         <li>
-          <SearchModal client:load />
+          <SearchModal client:visible />
         </li>
         <li>
-          <MenuDrawer client:load />
+          <MenuDrawer client:visible />
         </li>
       </ul>
     </div>

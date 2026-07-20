@@ -1,5 +1,6 @@
 ---
 import { RootLayout } from "@/components/layouts"
+import { Toaster } from "@/components/ui"
 
 import { ContactForm } from "./_components"
 ---
@@ -9,4 +10,5 @@ import { ContactForm } from "./_components"
     <h1 class="mx-auto font-times text-4.5xl font-black">Contact</h1>
     <ContactForm client:load />
   </div>
+  <Toaster client:only="solid-js" />
 </RootLayout>
