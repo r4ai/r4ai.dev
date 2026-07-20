@@ -1,15 +1,45 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
+  "extends": ["config:best-practices", "schedule:weekly"],
+  "timezone": "Asia/Tokyo",
+  "updateNotScheduled": false,
+  "prConcurrentLimit": 3,
+  "platformAutomerge": false,
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "pr"
   },
   "packageRules": [
     {
-      "description": "Wait for npm releases to mature before opening update branches",
+      "description": "Wait for npm releases to mature",
       "matchDatasources": ["npm"],
       "minimumReleaseAge": "3 days",
-      "internalChecksFilter": "strict"
+      "internalChecksFilter": "strict",
+      "prCreation": "not-pending"
+    },
+    {
+      "description": "Automerge stable non-major npm updates",
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "groupName": "stable non-major npm updates",
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Group 0.x npm updates for review",
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "/^0\\./",
+      "groupName": "0.x npm updates",
+      "automerge": false
+    },
+    {
+      "description": "Require dashboard approval for major updates",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "automerge": false
     }
   ],
   "automerge": false
