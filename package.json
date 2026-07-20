@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
-    "@eslint/js": "9.39.4",
+    "@eslint/js": "9.39.5",
     "@iconify-json/fluent-emoji": "1.2.7",
     "@iconify-json/lucide": "1.2.117",
     "@iconify-json/simple-icons": "1.2.90",
@@ -72,7 +72,7 @@
     "@types/three": "0.180.0",
     "@typescript-eslint/parser": "8.24.1",
     "esbuild": "0.27.4",
-    "eslint": "9.39.4",
+    "eslint": "9.39.5",
     "eslint-config-flat-gitignore": "2.3.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-define-config": "2.1.0",
