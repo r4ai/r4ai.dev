@@ -73,7 +73,7 @@
     "@types/mdast": "4.0.4",
     "@types/node": "22.20.1",
     "@types/three": "0.180.0",
-    "@typescript-eslint/parser": "8.24.1",
+    "@typescript-eslint/parser": "8.64.0",
     "esbuild": "0.27.4",
     "eslint": "9.39.5",
     "eslint-config-flat-gitignore": "2.3.0",
@@ -113,7 +113,7 @@
     "tailwindcss-animate": "1.0.7",
     "ts-essentials": "10.2.1",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.24.1",
+    "typescript-eslint": "8.64.0",
     "unified": "11.0.5",
     "unfurl.js": "6.4.0",
     "unist-util-visit": "5.1.0",
@@ -124,5 +124,5 @@
     "vitest-matchmedia-mock": "2.0.3",
     "zod": "4.4.3"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.34.5"
 }
