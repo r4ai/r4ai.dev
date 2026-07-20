@@ -32,13 +32,13 @@ export const render = async <Props extends object>(
   component: (props: Props) => ReactLikeObject,
   props: Props,
   options: SatoriOptions
-): Promise<Buffer> => {
+): Promise<Uint8Array<ArrayBuffer>> => {
   // @ts-expect-error satori types are wrong
   const svg = await satori(component(props), options)
   const png = await sharp(Buffer.from(svg), { unlimited: true })
     .png()
     .toBuffer()
-  return png
+  return new Uint8Array(png)
 }
 
 export const buffer2url = (buffer: Buffer) =>
