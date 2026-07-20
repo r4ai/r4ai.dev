@@ -38,13 +38,13 @@ import { Cube, LinkCard, RareCard } from "./_components"
         I'm Rai
       </h1>
       <p
-        class="mt-4 font-mono text-lg font-medium italic text-zinc-700 dark:text-zinc-400"
+        class="mt-4 font-mono text-lg font-medium text-zinc-700 italic dark:text-zinc-400"
       >
         nemui desu.
       </p>
     </section>
     <h2
-      class="col-span-4 mb-6 mt-12 font-mono text-2xl font-semibold sm:col-span-8"
+      class="col-span-4 mt-12 mb-6 font-mono text-2xl font-semibold sm:col-span-8"
     >
       自己紹介
     </h2>
@@ -77,15 +77,15 @@ import { Cube, LinkCard, RareCard } from "./_components"
       </div>
     </div>
     <div class="col-span-4">
-      <Cube client:visible />
+      <Cube client:visible={{ rootMargin: "200px" }} />
     </div>
     <h2
-      class="col-span-4 mb-6 mt-16 font-mono text-2xl font-semibold sm:col-span-8"
+      class="col-span-4 mt-16 mb-6 font-mono text-2xl font-semibold sm:col-span-8"
     >
       使える技術
     </h2>
     <div class="text-foreground col-span-4 font-mono text-base sm:col-span-5">
-      <p class="not-first:mt-6 leading-7">言語:</p>
+      <p class="leading-7 not-first:mt-6">言語:</p>
       <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
         <li>JavaScript / TypeScript</li>
         <li>Rust</li>
@@ -93,13 +93,13 @@ import { Cube, LinkCard, RareCard } from "./_components"
         <li>OCaml</li>
         <li>Python</li>
       </ul>
-      <p class="not-first:mt-6 leading-7">Webフレームワーク:</p>
+      <p class="leading-7 not-first:mt-6">Webフレームワーク:</p>
       <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
         <li>React / Next.js / Waku</li>
         <li>SolidJS / SolidStart</li>
         <li>Svelte / SvelteKit</li>
       </ul>
-      <p class="not-first:mt-6 leading-7">その他:</p>
+      <p class="leading-7 not-first:mt-6">その他:</p>
       <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
         <li>LLVM</li>
         <li>Git</li>
@@ -107,7 +107,7 @@ import { Cube, LinkCard, RareCard } from "./_components"
       </ul>
     </div>
     <h2
-      class="col-span-4 mb-6 mt-12 font-mono text-2xl font-semibold sm:col-span-8"
+      class="col-span-4 mt-12 mb-6 font-mono text-2xl font-semibold sm:col-span-8"
     >
       記事・スライド
     </h2>
