@@ -67,17 +67,13 @@ export const Cube: Component<CubeProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   let ref: HTMLDivElement | undefined
 
-  // Set up scene
-  const { scene, cube } = setupScene()
-
-  // Set up camera
-  const camera = setupCamera()
-
-  // Set up renderer
-  const renderer = new THREE.WebGLRenderer({ alpha: true })
-
   onMount(() => {
     if (!ref) return
+
+    // WebGL is browser-only, so defer all Three.js setup until hydration.
+    const { scene, cube } = setupScene()
+    const camera = setupCamera()
+    const renderer = new THREE.WebGLRenderer({ alpha: true })
 
     // Set up controls
     const controls = new OrbitControls(camera, ref)
