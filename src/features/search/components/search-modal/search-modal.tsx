@@ -25,7 +25,7 @@ export const SearchModal: Component<SearchModalProps> = (props) => {
         {...props}
       />
       <DialogContent
-        class="!data-[expanded]:slide-in-from-top-1/10 !data-[closed]:slide-out-to-top-1/10 max-w-(--breakpoint-sm) top-[10%] grid max-h-[80%] w-full translate-y-0 grid-cols-1 grid-rows-1 border p-0"
+        class="!data-[expanded]:slide-in-from-top-1/10 !data-[closed]:slide-out-to-top-1/10 top-[10%] grid max-h-[80%] w-full max-w-(--breakpoint-sm) translate-y-0 grid-cols-1 grid-rows-1 border p-0"
         closeButton={false}
       >
         <Search />

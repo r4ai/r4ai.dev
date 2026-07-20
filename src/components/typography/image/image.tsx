@@ -28,7 +28,7 @@ export const Image: Component<ImageProps> = (props) => {
       {(local.src || local.srcset) && (
         <img
           class={cn(
-            "max-w-(--breakpoint-lg) mx-auto w-full rounded-lg",
+            "mx-auto w-full max-w-(--breakpoint-lg) rounded-lg",
             local.class
           )}
           decoding={local.decoding ?? "async"}

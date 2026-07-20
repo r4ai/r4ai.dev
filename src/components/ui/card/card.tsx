@@ -36,7 +36,7 @@ export const CardTitle = (props: CardTitleProps) => {
 
   return (
     <h1
-      class={cn("font-semibold leading-none tracking-tight", local.class)}
+      class={cn("leading-none font-semibold tracking-tight", local.class)}
       {...rest}
     />
   )

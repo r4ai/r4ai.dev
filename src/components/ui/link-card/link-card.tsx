@@ -27,13 +27,13 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
   )
 
   return (
-    <div class="max-w-(--breakpoint-md) mx-auto h-36 w-full">
+    <div class="mx-auto h-36 w-full max-w-(--breakpoint-md)">
       <a
         class="bg-muted/25 hover:bg-muted dark:hover:bg-muted/50 flex min-h-full flex-row items-center rounded-lg border not-italic transition"
         href={url()}
         {...props}
       >
-        <div class="flex min-w-0 flex-1 flex-col justify-between gap-2 overflow-auto break-all px-3 md:px-5">
+        <div class="flex min-w-0 flex-1 flex-col justify-between gap-2 overflow-auto px-3 break-all md:px-5">
           <p class="line-clamp-2 text-base font-bold">{title()}</p>
           {description() && (
             <p class="text-muted-foreground line-clamp-3 text-sm">

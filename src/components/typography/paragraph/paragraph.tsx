@@ -9,7 +9,7 @@ export const Paragraph: Component<ParagraphProps> = (props) => {
 
   return (
     <p
-      class={cn("max-w-(--breakpoint-md) mx-auto leading-7", local.class)}
+      class={cn("mx-auto max-w-(--breakpoint-md) leading-7", local.class)}
       {...rest}
     />
   )

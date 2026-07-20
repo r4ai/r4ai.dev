@@ -22,7 +22,7 @@ export const Default: Story = {
         <SwitchControl>
           <SwitchThumb />
         </SwitchControl>
-        <SwitchLabel class="data-disabled:cursor-not-allowed data-disabled:opacity-70 text-sm font-medium leading-none">
+        <SwitchLabel class="text-sm leading-none font-medium data-disabled:cursor-not-allowed data-disabled:opacity-70">
           Airplane Mode
         </SwitchLabel>
       </Switch>

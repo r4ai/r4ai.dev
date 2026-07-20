@@ -31,14 +31,14 @@ export const DrawerContent = <T extends ValidComponent = "div">(
   return (
     <DrawerPrimitive.Portal>
       <DrawerPrimitive.Overlay
-        class="data-transitioning:transition-colors data-transitioning:duration-200 fixed inset-0 z-50"
+        class="fixed inset-0 z-50 data-transitioning:transition-colors data-transitioning:duration-200"
         style={{
           "background-color": `hsl(var(--background) / ${0.8 * ctx.openPercentage()})`,
         }}
       />
       <DrawerPrimitive.Content
         class={cn(
-          "bg-background data-transitioning:transition-transform data-transitioning:duration-200 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-xl border after:absolute after:inset-x-0 after:top-full after:h-[50%] after:bg-inherit md:select-none",
+          "bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-xl border after:absolute after:inset-x-0 after:top-full after:h-[50%] after:bg-inherit data-transitioning:transition-transform data-transitioning:duration-200 md:select-none",
           local.class
         )}
         {...rest}
@@ -85,7 +85,7 @@ export const DrawerLabel = <T extends ValidComponent = "h2">(
   return (
     <DrawerPrimitive.Label
       class={cn(
-        "text-lg font-semibold leading-none tracking-tight",
+        "text-lg leading-none font-semibold tracking-tight",
         local.class
       )}
       {...rest}

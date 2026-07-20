@@ -30,7 +30,7 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
   let preRef: HTMLPreElement | undefined
 
   return (
-    <div class="bg-muted max-w-(--breakpoint-md) relative mx-auto w-full rounded-xl border bg-zinc-50 dark:bg-zinc-900/75">
+    <div class="bg-muted relative mx-auto w-full max-w-(--breakpoint-md) rounded-xl border bg-zinc-50 dark:bg-zinc-900/75">
       <div class="peer">
         {props.title && (
           <CodeBlockTitle lang={props.lang}>{props.title}</CodeBlockTitle>
@@ -97,8 +97,8 @@ const CopyButton: Component<CopyButtonProps> = (props) => {
           <Button
             {...tooltipProps}
             class={cn(
-              "absolute right-2 top-2 z-20 text-zinc-400 hover:text-black dark:text-zinc-600 dark:hover:text-zinc-300",
-              "opacity-0 hover:opacity-100 peer-hover:opacity-100",
+              "absolute top-2 right-2 z-20 text-zinc-400 hover:text-black dark:text-zinc-600 dark:hover:text-zinc-300",
+              "opacity-0 peer-hover:opacity-100 hover:opacity-100",
               props.class
             )}
             size="icon"

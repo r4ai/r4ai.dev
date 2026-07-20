@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>
 
 export const Square: Story = {
   args: {
-    children: <div class="bg-linear-to-br size-96 from-rose-500 to-rose-400" />,
+    children: <div class="size-96 bg-linear-to-br from-rose-500 to-rose-400" />,
   },
 }
 

@@ -102,7 +102,7 @@ const SearchInput: Component = () => {
       <input
         tabIndex={0}
         type="text"
-        class="outline-hidden w-full bg-transparent"
+        class="w-full bg-transparent outline-hidden"
         placeholder="Search..."
         value={query()}
         onInput={(e) => setQuery(e.currentTarget.value)}
@@ -253,7 +253,7 @@ const SearchResultPresenter: Component<SearchResultPresenterProps> = (
     <li>
       <a
         class={cn(
-          "outline-hidden flex flex-row gap-1.5 rounded-lg p-2",
+          "flex flex-row gap-1.5 rounded-lg p-2 outline-hidden",
           local.class
         )}
         href={local.href}

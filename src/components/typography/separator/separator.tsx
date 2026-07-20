@@ -7,6 +7,6 @@ export type SeparatorProps = ComponentProps<"hr">
 export const Separator: Component<SeparatorProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
-    <hr class={cn("max-w-(--breakpoint-md) mx-auto", local.class)} {...rest} />
+    <hr class={cn("mx-auto max-w-(--breakpoint-md)", local.class)} {...rest} />
   )
 }

@@ -23,7 +23,7 @@ export const DialogOverlay = <T extends ValidComponent = "div">(
   return (
     <DialogPrimitive.Overlay
       class={cn(
-        "bg-background/80 data-expanded:animate-in data-closed:animate-out data-closed:fade-out-0 data-expanded:fade-in-0 backdrop-blur-xs fixed inset-0 z-50",
+        "bg-background/80 data-expanded:animate-in data-closed:animate-out data-closed:fade-out-0 data-expanded:fade-in-0 fixed inset-0 z-50 backdrop-blur-xs",
         local.class
       )}
       {...rest}
@@ -59,14 +59,14 @@ export const DialogContent = <T extends ValidComponent = "div">(
       <div class="fixed inset-0 z-50 flex items-center justify-center">
         <DialogPrimitive.Content
           class={cn(
-            "data-[closed]:slide-out-to-top-48/100 data-[expanded]:slide-in-from-top-48/100 bg-background data-expanded:animate-in data-closed:animate-out data-closed:fade-out-0 data-expanded:fade-in-0 data-closed:zoom-out-95 data-expanded:zoom-in-95 data-closed:slide-out-to-left-1/2 data-expanded:slide-in-from-left-1/2 fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border p-6 shadow-lg duration-200 sm:rounded-lg md:w-full",
+            "data-[closed]:slide-out-to-top-48/100 data-[expanded]:slide-in-from-top-48/100 bg-background data-expanded:animate-in data-closed:animate-out data-closed:fade-out-0 data-expanded:fade-in-0 data-closed:zoom-out-95 data-expanded:zoom-in-95 data-closed:slide-out-to-left-1/2 data-expanded:slide-in-from-left-1/2 fixed top-[50%] left-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border p-6 shadow-lg duration-200 sm:rounded-lg md:w-full",
             local.class
           )}
           {...rest}
         >
           {local.children}
           {local.closeButton && (
-            <DialogPrimitive.CloseButton class="transition-(box-shadow opacity) focus:ring-1.5 ring-offset-background focus:ring-ring focus:outline-hidden absolute right-4 top-4 rounded-sm bg-transparent opacity-70 hover:opacity-100 focus:ring-offset-2 disabled:pointer-events-none">
+            <DialogPrimitive.CloseButton class="transition-(box-shadow opacity) focus:ring-1.5 ring-offset-background focus:ring-ring absolute top-4 right-4 rounded-sm bg-transparent opacity-70 hover:opacity-100 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

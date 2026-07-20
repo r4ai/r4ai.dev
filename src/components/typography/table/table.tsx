@@ -7,7 +7,7 @@ export type TableProps = ComponentProps<"table">
 export const Table: Component<TableProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
   return (
-    <div class="max-w-(--breakpoint-md) mx-auto overflow-auto">
+    <div class="mx-auto max-w-(--breakpoint-md) overflow-auto">
       <table
         class={cn("w-full caption-bottom text-sm", local.class)}
         {...rest}
@@ -66,7 +66,7 @@ export const TableHead: Component<TableHeadProps> = (props) => {
   return (
     <th
       class={cn(
-        "text-muted-foreground *:[[role=checkbox]]:translate-y-[2px] h-10 px-2 text-left align-middle font-medium has-[[role=checkbox]]:pr-0",
+        "text-muted-foreground h-10 px-2 text-left align-middle font-medium has-[[role=checkbox]]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
         local.class
       )}
       {...rest}
@@ -81,7 +81,7 @@ export const TableCell: Component<TableCellProps> = (props) => {
   return (
     <td
       class={cn(
-        "*:[[role=checkbox]]:translate-y-[2px] p-2 align-middle has-[[role=checkbox]]:pr-0",
+        "p-2 align-middle has-[[role=checkbox]]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
         local.class
       )}
       {...rest}
