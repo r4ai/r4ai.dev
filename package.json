@@ -117,7 +117,7 @@
     "unplugin-icons": "23.0.1",
     "vite": "8.1.5",
     "vite-plugin-solid": "2.11.12",
-    "vitest": "3.2.4",
+    "vitest": "3.2.7",
     "vitest-matchmedia-mock": "2.0.3",
     "zod": "4.4.3"
   },
