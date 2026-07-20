@@ -3,6 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=24.16.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -18,7 +21,7 @@
     "astro": "astro",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
-    "test:ci:unit": "node --test tests/remark-link-card.node-test.ts scripts/security/*.test.mjs",
+    "test:ci:unit": "node --test tests/remark-link-card.node-test.ts scripts/security/*.test.ts",
     "test:vrt:unit": "node --test tests/storybook/*.node-test.ts",
     "test:vrt": "playwright test --config=playwright.vrt.config.ts",
     "test:vrt:update": "playwright test --config=playwright.vrt.config.ts --update-snapshots"

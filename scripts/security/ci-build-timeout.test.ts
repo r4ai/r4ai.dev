@@ -17,7 +17,7 @@ for (const [name, workflowUrl] of Object.entries(workflows)) {
       /^ {2}build:\n(?:(?!^ {2}\S).*(?:\n|$))*/m
     )?.[0]
 
-    assert.notEqual(buildJob, undefined)
+    assert.ok(buildJob)
     assert.match(buildJob, /^ {4}timeout-minutes: 10$/m)
   })
 }

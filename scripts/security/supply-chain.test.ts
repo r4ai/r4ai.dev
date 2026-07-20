@@ -8,7 +8,52 @@ const workflowUrls = [
     "../../.github/workflows/publish-to-cloudflare-pages.yml",
     import.meta.url
   ),
-]
+] as const
+
+type RenovateRule = {
+  description?: string
+  matchDatasources?: string[]
+  minimumReleaseAge?: string
+  internalChecksFilter?: string
+  prCreation?: string
+  matchUpdateTypes?: string[]
+  matchCurrentVersion?: string
+  groupName?: string
+  automerge?: boolean
+  automergeType?: string
+  dependencyDashboardApproval?: boolean
+}
+
+type RenovateConfig = {
+  extends: string[]
+  timezone: string
+  updateNotScheduled: boolean
+  prConcurrentLimit: number
+  platformAutomerge: boolean
+  lockFileMaintenance: {
+    enabled: boolean
+    automerge: boolean
+    automergeType: string
+  }
+  packageRules: RenovateRule[]
+  automerge: boolean
+}
+
+const readRenovateConfig = async (): Promise<RenovateConfig> =>
+  JSON.parse(
+    await readFile(new URL("../../renovate.json", import.meta.url), "utf8")
+  ) as RenovateConfig
+
+const findRule = (
+  config: RenovateConfig,
+  description: string
+): RenovateRule => {
+  const rule = config.packageRules.find(
+    (candidate) => candidate.description === description
+  )
+  assert.ok(rule, `Renovate rule not found: ${description}`)
+  return rule
+}
 
 test("all GitHub Actions are pinned to immutable commit SHAs", async () => {
   for (const workflowUrl of workflowUrls) {
@@ -18,7 +63,11 @@ test("all GitHub Actions are pinned to immutable commit SHAs", async () => {
     ]
 
     assert.notEqual(actionRefs.length, 0)
-    for (const [, action, ref] of actionRefs) {
+    for (const match of actionRefs) {
+      const action = match[1]
+      const ref = match[2]
+      assert.ok(action)
+      assert.ok(ref)
       assert.match(
         ref,
         /^[0-9a-f]{40}$/,
@@ -72,10 +121,21 @@ test("pnpm enforces dependency freshness, trust, and build-script policy", async
   assert.match(config, /^allowBuilds:/m)
 })
 
-test("Renovate batches dependency updates into a weekly window", async () => {
-  const config = JSON.parse(
-    await readFile(new URL("../../renovate.json", import.meta.url), "utf8")
+test("security tests run on the Node release with native type stripping", async () => {
+  const toolVersions = await readFile(
+    new URL("../../.tool-versions", import.meta.url),
+    "utf8"
   )
+  const packageJson = JSON.parse(
+    await readFile(new URL("../../package.json", import.meta.url), "utf8")
+  ) as { engines?: { node?: string } }
+
+  assert.match(toolVersions, /^nodejs 24\.\d+\.\d+$/m)
+  assert.equal(packageJson.engines?.node, ">=24.16.0")
+})
+
+test("Renovate batches dependency updates into a weekly window", async () => {
+  const config = await readRenovateConfig()
 
   assert.ok(config.extends.includes("schedule:weekly"))
   assert.equal(config.timezone, "Asia/Tokyo")
@@ -84,12 +144,8 @@ test("Renovate batches dependency updates into a weekly window", async () => {
 })
 
 test("Renovate waits for npm releases to mature", async () => {
-  const config = JSON.parse(
-    await readFile(new URL("../../renovate.json", import.meta.url), "utf8")
-  )
-  const maturityRule = config.packageRules.find(
-    (rule) => rule.description === "Wait for npm releases to mature"
-  )
+  const config = await readRenovateConfig()
+  const maturityRule = findRule(config, "Wait for npm releases to mature")
 
   assert.deepEqual(maturityRule.matchDatasources, ["npm"])
   assert.equal(maturityRule.minimumReleaseAge, "3 days")
@@ -98,15 +154,9 @@ test("Renovate waits for npm releases to mature", async () => {
 })
 
 test("Renovate automerges only mature, stable non-major npm updates", async () => {
-  const config = JSON.parse(
-    await readFile(new URL("../../renovate.json", import.meta.url), "utf8")
-  )
-  const stableRule = config.packageRules.find(
-    (rule) => rule.description === "Automerge stable non-major npm updates"
-  )
-  const unstableRule = config.packageRules.find(
-    (rule) => rule.description === "Group 0.x npm updates for review"
-  )
+  const config = await readRenovateConfig()
+  const stableRule = findRule(config, "Automerge stable non-major npm updates")
+  const unstableRule = findRule(config, "Group 0.x npm updates for review")
 
   assert.equal(config.automerge, false)
   assert.equal(config.platformAutomerge, false)
@@ -122,12 +172,10 @@ test("Renovate automerges only mature, stable non-major npm updates", async () =
 })
 
 test("Renovate automerges lockfile maintenance but gates major updates", async () => {
-  const config = JSON.parse(
-    await readFile(new URL("../../renovate.json", import.meta.url), "utf8")
-  )
-  const majorRule = config.packageRules.find(
-    (rule) =>
-      rule.description === "Require dashboard approval for major updates"
+  const config = await readRenovateConfig()
+  const majorRule = findRule(
+    config,
+    "Require dashboard approval for major updates"
   )
 
   assert.equal(config.lockFileMaintenance.enabled, true)
