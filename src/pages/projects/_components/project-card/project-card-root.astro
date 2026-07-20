@@ -5,12 +5,17 @@ import { Picture } from "astro:assets"
 import { cn } from "@/lib/utils"
 
 import { ProjectCard, type ProjectCardProps } from "./project-card"
+import {
+  LARGE_PROJECT_CARD_IMAGE_SIZES,
+  PROJECT_CARD_IMAGE_WIDTHS,
+} from "./project-card-image"
 
 type ImageProps = {
   src: ImageMetadata
   alt: string
   loading?: "eager" | "lazy"
   fetchpriority?: "high" | "low" | "auto"
+  sizes?: string
   class?: string
 }
 
@@ -25,8 +30,8 @@ const pictureProps = image
       alt: image.alt,
       loading: image.loading,
       fetchpriority: image.fetchpriority,
-      widths: [400, 800],
-      sizes: "(min-width: 768px) 50vw, 100vw",
+      widths: [...PROJECT_CARD_IMAGE_WIDTHS],
+      sizes: image.sizes ?? LARGE_PROJECT_CARD_IMAGE_SIZES,
       class: cn("size-full rounded-xl object-cover object-top", image.class),
     }
   : undefined
