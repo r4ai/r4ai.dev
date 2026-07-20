@@ -57,10 +57,11 @@ export default defineConfig({
       pagefind(),
       rawTransform(),
       icons({ compiler: "solid" }),
-      visualizer({
-        emitFile: true,
-        filename: "stats.html",
-      }),
+      process.env.ANALYZE === "true" &&
+        visualizer({
+          emitFile: true,
+          filename: "stats.html",
+        }),
     ],
   },
   markdown: {
