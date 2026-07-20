@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro"
 import { getEntry } from "astro:content"
 
-export { getStaticPaths } from "./index.astro"
+export { getStaticPaths } from "./[...slug]/index.astro"
 
 export const GET: APIRoute = async ({ params }) => {
   const { slug } = params

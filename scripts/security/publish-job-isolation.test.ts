@@ -19,11 +19,11 @@ test("Cloudflare credentials are isolated from the build job", async () => {
 
   assert.notEqual(buildStart, -1)
   assert.notEqual(deployStart, -1)
-  assert.doesNotMatch(buildJob, /CLOUDFLARE_|cloudflare\/pages-action/)
+  assert.doesNotMatch(buildJob, /CLOUDFLARE_|cloudflare\/wrangler-action/)
   assert.match(buildJob, /actions\/upload-artifact@[0-9a-f]{40}/)
 
   const deployJob = workflow.slice(deployStart)
   assert.match(deployJob, /actions\/download-artifact@[0-9a-f]{40}/)
   assert.match(deployJob, /sha256sum --check dist\.tar\.sha256/)
-  assert.match(deployJob, /CLOUDFLARE_|cloudflare\/pages-action/)
+  assert.match(deployJob, /CLOUDFLARE_|cloudflare\/wrangler-action/)
 })

@@ -67,7 +67,7 @@ export const Default: Story = {
             </svg>
             <div class="flex-1 space-y-1">
               <p class="text-sm font-medium leading-none">Push Notifications</p>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 Send notifications to device.
               </p>
             </div>
@@ -86,7 +86,7 @@ export const Default: Story = {
                     <p class="text-sm font-medium leading-none">
                       {notification.title}
                     </p>
-                    <p class="text-sm text-muted-foreground">
+                    <p class="text-muted-foreground text-sm">
                       {notification.description}
                     </p>
                   </div>

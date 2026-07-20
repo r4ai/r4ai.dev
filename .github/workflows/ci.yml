@@ -12,12 +12,17 @@ on:
       - labeled
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   format:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       - name: Setup Node.js
         uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
         env:
@@ -32,6 +37,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       - name: Setup Node.js
         uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
         env:
@@ -43,15 +50,20 @@ jobs:
 
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       - name: Setup Node.js
         uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Test CI safeguards
+        run: pnpm run test:ci:unit
       - name: Type check
         run: pnpm run type-check
       - name: Build
@@ -71,12 +83,14 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
       - name: Checkout base revision
         if: env.VRT_APPROVED != 'true'
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: .vrt/base
+          persist-credentials: false
       - name: Setup Node.js
         uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
         env:
@@ -94,19 +108,14 @@ jobs:
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Prepare base Storybook configuration
+      - name: Install base revision dependencies
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: cp -R .storybook .vrt/base/.storybook-vrt
+        run: pnpm --dir .vrt/base install --frozen-lockfile
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Build base Storybook
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: >-
-          pnpm exec storybook build
-          --config-dir .vrt/base/.storybook-vrt
-          --output-dir .vrt/base/storybook-static
-        env:
-          STORYBOOK_VITE_CONFIG: .vrt/base/.storybook-vrt/vite.config.ts
+        run: pnpm --dir .vrt/base run build-storybook
       - name: Capture reference snapshots
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: pnpm run test:vrt:update

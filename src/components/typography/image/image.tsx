@@ -27,7 +27,10 @@ export const Image: Component<ImageProps> = (props) => {
     <figure class="grid justify-center space-y-2">
       {(local.src || local.srcset) && (
         <img
-          class={cn("mx-auto w-full max-w-screen-lg rounded-lg", local.class)}
+          class={cn(
+            "max-w-(--breakpoint-lg) mx-auto w-full rounded-lg",
+            local.class
+          )}
           decoding={local.decoding ?? "async"}
           loading={local.loading ?? "lazy"}
           src={local.src}
@@ -37,7 +40,9 @@ export const Image: Component<ImageProps> = (props) => {
       )}
       {local.children}
       {local.title && (
-        <ImageCaption class="max-w-screen-md">{local.title}</ImageCaption>
+        <ImageCaption class="max-w-(--breakpoint-md)">
+          {local.title}
+        </ImageCaption>
       )}
     </figure>
   )
@@ -55,7 +60,7 @@ export const ImageCaption = <T extends ValidComponent = "figcaption">(
   return (
     <Polymorphic
       as={local.as ?? "figcaption"}
-      class={cn("mx-auto w-fit italic text-muted-foreground", local.class)}
+      class={cn("text-muted-foreground mx-auto w-fit italic", local.class)}
       {...rest}
     />
   )

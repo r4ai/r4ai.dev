@@ -31,19 +31,19 @@ export const DrawerContent = <T extends ValidComponent = "div">(
   return (
     <DrawerPrimitive.Portal>
       <DrawerPrimitive.Overlay
-        class="fixed inset-0 z-50 data-[transitioning]:transition-colors data-[transitioning]:duration-200"
+        class="data-transitioning:transition-colors data-transitioning:duration-200 fixed inset-0 z-50"
         style={{
           "background-color": `hsl(var(--background) / ${0.8 * ctx.openPercentage()})`,
         }}
       />
       <DrawerPrimitive.Content
         class={cn(
-          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-xl border bg-background after:absolute after:inset-x-0 after:top-full after:h-[50%] after:bg-inherit data-[transitioning]:transition-transform data-[transitioning]:duration-200 md:select-none",
+          "bg-background data-transitioning:transition-transform data-transitioning:duration-200 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-xl border after:absolute after:inset-x-0 after:top-full after:h-[50%] after:bg-inherit md:select-none",
           local.class
         )}
         {...rest}
       >
-        <div class="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+        <div class="bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full" />
         {local.children}
       </DrawerPrimitive.Content>
     </DrawerPrimitive.Portal>
@@ -104,7 +104,7 @@ export const DrawerDescription = <T extends ValidComponent = "p">(
 
   return (
     <DrawerPrimitive.Description
-      class={cn("text-sm text-muted-foreground", local.class)}
+      class={cn("text-muted-foreground text-sm", local.class)}
       {...rest}
     />
   )

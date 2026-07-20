@@ -17,7 +17,7 @@ const tableOfContents = tv({
     heading: "font-bold",
     list: "list-none",
     listItem:
-      "block w-full break-words text-muted-foreground hover:text-accent-foreground transition data-[active=true]:text-accent-foreground data-[active=true]:font-bold",
+      "block w-full wrap-break-word text-muted-foreground hover:text-accent-foreground transition data-[active=true]:text-accent-foreground data-[active=true]:font-bold",
   },
   variants: {
     depth: {

@@ -39,7 +39,7 @@ const iconHtml = await getIconHtml(fluentEmojiIcons, icon)
 
 <header
   class={cn(
-    "grid items-center justify-center container max-w-screen-lg",
+    "grid items-center justify-center container max-w-(--breakpoint-lg)",
     className
   )}
 >
@@ -50,7 +50,7 @@ const iconHtml = await getIconHtml(fluentEmojiIcons, icon)
   />
   <div class="grid items-center justify-center gap-4">
     {tags.length > 0 && <Tags {tags} />}
-    <div class="mx-auto flex flex-row gap-1 text-muted-foreground">
+    <div class="text-muted-foreground mx-auto flex flex-row gap-1">
       <PublishedAt {publishedAt} />
       {
         updatedAt && (

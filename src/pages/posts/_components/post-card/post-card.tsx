@@ -18,7 +18,7 @@ export const PostCard: Component<PostCardProps> = (props) => {
   return (
     <a
       href={props.href}
-      class="flex flex-row gap-4 rounded-xl border p-4 font-mono transition hover:bg-muted dark:hover:bg-muted/60"
+      class="hover:bg-muted dark:hover:bg-muted/60 flex flex-row gap-4 rounded-xl border p-4 font-mono transition"
     >
       <div class="">
         <svg
@@ -39,7 +39,7 @@ export const PostCard: Component<PostCardProps> = (props) => {
             {(tag, index) => (
               <li
                 class={cn(
-                  "inline-block text-sm text-muted-foreground before:content-['#']",
+                  "text-muted-foreground inline-block text-sm before:content-['#']",
                   index() < props.tags.length - 1 && "mr-2"
                 )}
               >
@@ -48,7 +48,7 @@ export const PostCard: Component<PostCardProps> = (props) => {
             )}
           </For>
         </ul>
-        <div class="ml-auto mt-auto pt-1 text-sm text-muted-foreground">
+        <div class="text-muted-foreground ml-auto mt-auto pt-1 text-sm">
           {props.publishedAtText ??
             (props.publishedAt ? format(props.publishedAt, "long") : "")}
         </div>

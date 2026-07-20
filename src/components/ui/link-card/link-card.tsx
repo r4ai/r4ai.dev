@@ -27,16 +27,16 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
   )
 
   return (
-    <div class="mx-auto h-36 w-full max-w-screen-md">
+    <div class="max-w-(--breakpoint-md) mx-auto h-36 w-full">
       <a
-        class="flex min-h-full flex-row items-center rounded-lg border bg-muted/25 not-italic transition hover:bg-muted dark:hover:bg-muted/50"
+        class="bg-muted/25 hover:bg-muted dark:hover:bg-muted/50 flex min-h-full flex-row items-center rounded-lg border not-italic transition"
         href={url()}
         {...props}
       >
         <div class="flex min-w-0 flex-1 flex-col justify-between gap-2 overflow-auto break-all px-3 md:px-5">
           <p class="line-clamp-2 text-base font-bold">{title()}</p>
           {description() && (
-            <p class="line-clamp-3 text-sm text-muted-foreground">
+            <p class="text-muted-foreground line-clamp-3 text-sm">
               {description()}
             </p>
           )}
@@ -54,7 +54,7 @@ export const LinkCard: Component<LinkCardProps> = (props) => {
             ) : (
               <span class="i-lucide-globe size-4" />
             )}
-            <p class="truncate text-foreground/75">{new URL(url()).hostname}</p>
+            <p class="text-foreground/75 truncate">{new URL(url()).hostname}</p>
           </div>
         </div>
         {image()?.src && (

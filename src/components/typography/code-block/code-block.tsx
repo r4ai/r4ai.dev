@@ -30,13 +30,13 @@ export const CodeBlock: Component<CodeBlockProps> = (props) => {
   let preRef: HTMLPreElement | undefined
 
   return (
-    <div class="relative mx-auto w-full max-w-screen-md rounded-xl border bg-muted bg-zinc-50 dark:bg-zinc-900/75">
+    <div class="bg-muted max-w-(--breakpoint-md) relative mx-auto w-full rounded-xl border bg-zinc-50 dark:bg-zinc-900/75">
       <div class="peer">
         {props.title && (
           <CodeBlockTitle lang={props.lang}>{props.title}</CodeBlockTitle>
         )}
         <pre
-          class={cn("shiki !m-0 grid overflow-auto py-4", local.class)}
+          class={cn("shiki m-0! grid overflow-auto py-4", local.class)}
           ref={(el) => {
             preRef = el
             if (typeof local.ref === "function") {

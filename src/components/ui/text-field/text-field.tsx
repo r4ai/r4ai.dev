@@ -17,15 +17,18 @@ export const TextFieldRoot = <T extends ValidComponent = "div">(
   const [local, rest] = splitProps(props as TextFieldRootProps, ["class"])
 
   return (
-    <TextFieldPrimitive.Root class={cn("space-y-2", local.class)} {...rest} />
+    <TextFieldPrimitive.Root
+      class={cn("[&>*+*]:mt-2", local.class)}
+      {...rest}
+    />
   )
 }
 
 const textfieldLabel = tv({
-  base: "text-sm data-[disabled]:cursor-not-allowed data-[disabled]:opacity-70 font-medium",
+  base: "text-sm data-disabled:cursor-not-allowed data-disabled:opacity-70 font-medium",
   variants: {
     label: {
-      true: "data-[invalid]:text-destructive",
+      true: "data-invalid:text-destructive",
     },
     error: {
       true: "text-destructive",
@@ -114,7 +117,7 @@ export const TextField = <T extends ValidComponent = "input">(
   return (
     <TextFieldPrimitive.Input
       class={cn(
-        "focus-visible:ring-1.5 flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-shadow file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+        "focus-visible:ring-1.5 border-input placeholder:text-muted-foreground focus-visible:ring-ring shadow-xs focus-visible:outline-hidden flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm transition-shadow file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:cursor-not-allowed disabled:opacity-50",
         local.class
       )}
       {...rest}

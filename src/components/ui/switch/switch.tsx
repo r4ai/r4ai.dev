@@ -30,10 +30,10 @@ export const SwitchControl = <T extends ValidComponent = "input">(
 
   return (
     <>
-      <SwitchPrimitive.Input class="[&:focus-visible+div]:outline-none [&:focus-visible+div]:ring-2 [&:focus-visible+div]:ring-ring [&:focus-visible+div]:ring-offset-2 [&:focus-visible+div]:ring-offset-background" />
+      <SwitchPrimitive.Input class="[&:focus-visible+div]:ring-ring [&:focus-visible+div]:ring-offset-background [&:focus-visible+div]:outline-hidden [&:focus-visible+div]:ring-2 [&:focus-visible+div]:ring-offset-2" />
       <SwitchPrimitive.Control
         class={cn(
-          "transition-(color background-color box-shadow) inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full bg-input p-[2px] shadow-sm data-[disabled]:cursor-not-allowed data-[checked]:bg-primary data-[disabled]:opacity-50",
+          "transition-(color background-color box-shadow) bg-input data-checked:bg-primary shadow-xs data-disabled:cursor-not-allowed data-disabled:opacity-50 inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-[9999px] p-[2px]",
           local.class
         )}
         {...rest}
@@ -58,7 +58,7 @@ export const SwitchThumb = <T extends ValidComponent = "div">(
   return (
     <SwitchPrimitive.Thumb
       class={cn(
-        "pointer-events-none block h-5 w-5 translate-x-0 rounded-full bg-background shadow-lg ring-0 transition-transform data-[checked]:translate-x-5",
+        "bg-background data-checked:translate-x-5 pointer-events-none block h-5 w-5 translate-x-0 rounded-[9999px] shadow-lg ring-0 transition-transform",
         local.class
       )}
       {...rest}

@@ -12,7 +12,7 @@ const { class: className, title, ...props } = Astro.props
 
 <Figure {title}>
   <Image
-    class={cn("mx-auto w-full max-w-screen-lg rounded-lg", className)}
+    class={cn("mx-auto w-full max-w-(--breakpoint-lg) rounded-lg", className)}
     {...props}
   />
 </Figure>

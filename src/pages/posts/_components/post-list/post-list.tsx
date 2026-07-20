@@ -44,7 +44,7 @@ const PostGrid: Component<PostGridProps> = (props) => {
         </For>
       </div>
       <Show when={props.posts.length === 0}>
-        <p class="text-center text-muted-foreground">
+        <p class="text-muted-foreground text-center">
           No posts found in this category.
         </p>
       </Show>

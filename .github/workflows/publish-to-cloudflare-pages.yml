@@ -12,11 +12,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
       - name: Checkout respository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       - name: Setup Node.js
         uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
         env:
@@ -39,6 +42,9 @@ jobs:
 
   deploy:
     needs: build
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-24.04
     permissions:
       deployments: write
@@ -52,11 +58,14 @@ jobs:
           sha256sum --check dist.tar.sha256
           tar --extract --file dist.tar
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: r4ai-dev
-          directory: ./dist
+          command: >-
+            pages deploy ./dist
+            --project-name=r4ai-dev
+            --branch=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+            --commit-hash=${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           wranglerVersion: "3.90.0"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

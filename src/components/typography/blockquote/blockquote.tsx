@@ -10,7 +10,7 @@ export const Blockquote: Component<BlockquoteProps> = (props) => {
   return (
     <blockquote
       class={cn(
-        "mx-auto max-w-screen-md space-y-4 border-l-[3px] border-zinc-300 pl-4 text-muted-foreground dark:border-zinc-700",
+        "text-muted-foreground max-w-(--breakpoint-md) mx-auto flex flex-col gap-y-4 border-l-[3px] border-zinc-300 pl-4 dark:border-zinc-700",
         local.class
       )}
       {...rest}

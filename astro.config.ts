@@ -1,15 +1,11 @@
+import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
 import solid from "@astrojs/solid-js"
-import tailwind from "@astrojs/tailwind"
 import {
   type Options as RemarkCalloutOptions,
   remarkCallout,
 } from "@r4ai/remark-callout"
 import remarkEmbed, { type RemarkEmbedOptions } from "@r4ai/remark-embed"
-import {
-  transformerLinkCard,
-  type TransformerLinkCardOptions,
-} from "@r4ai/remark-embed/transformers"
 import {
   transformerMetaHighlight,
   transformerMetaWordHighlight,
@@ -17,6 +13,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers"
+import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
 import rehypeKatex from "rehype-katex"
 import remarkMath from "remark-math"
@@ -29,6 +26,10 @@ import {
   transformerTitle,
 } from "./src/lib/shiki-transformers"
 import remarkInlineCode from "./src/lib/unified-plugins/remark-inline-code"
+import {
+  createLinkCardTransformer,
+  loadLinkMetadata,
+} from "./src/lib/unified-plugins/remark-link-card"
 import pagefind from "./src/lib/vite-plugins/vite-plugin-pagefind"
 import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
 
@@ -36,77 +37,92 @@ import rawTransform from "./src/lib/vite-plugins/vite-plugin-raw-transform"
 export default defineConfig({
   site: "https://r4ai.dev",
   prefetch: true,
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    mdx(),
-    solid(),
-  ],
+  compressHTML: true,
+  integrations: [mdx(), solid()],
   redirects: {
     "/posts/raw/[...slug]": "/posts/[...slug].mdx",
     "/posts/[...slug]/raw": "/posts/[...slug].mdx",
   },
   vite: {
+    resolve: {
+      noExternal: [
+        /^@corvu\//,
+        /^@kobalte\//,
+        /^@modular-forms\/solid(?:\/|$)/,
+        /^solid-(?!js(?:\/|$))/,
+      ],
+    },
     plugins: [
+      tailwindcss(),
       pagefind(),
       rawTransform(),
       icons({ compiler: "solid" }),
-      visualizer({
-        emitFile: true,
-        filename: "stats.html",
-      }),
+      process.env.ANALYZE === "true" &&
+        visualizer({
+          emitFile: true,
+          filename: "stats.html",
+        }),
     ],
   },
   markdown: {
-    remarkPlugins: [
-      remarkMath,
-      remarkInlineCode,
-      [
-        remarkEmbed,
-        {
-          transformers: [
-            transformerLinkCard({
-              tagName: () => "link-card",
-              properties: (og) => ({ og: JSON.stringify(og) }),
-              children: () => [],
-            } satisfies TransformerLinkCardOptions),
-          ],
-        } satisfies RemarkEmbedOptions,
-      ],
-      [
-        remarkCallout,
-        {
-          root: (callout) => {
-            return {
-              tagName: "callout-root",
+    processor: unified({
+      remarkPlugins: [
+        remarkMath,
+        remarkInlineCode,
+        [
+          remarkEmbed,
+          {
+            transformers: [
+              createLinkCardTransformer(
+                {
+                  timeoutMs: 10_000,
+                  timeoutStrategy:
+                    process.env.NODE_ENV === "development"
+                      ? "per-request"
+                      : "shared",
+                  tagName: () => "link-card",
+                  properties: (og) => ({ og: JSON.stringify(og) }),
+                  children: () => [],
+                },
+                { loadMetadata: loadLinkMetadata }
+              ),
+            ],
+          } satisfies RemarkEmbedOptions,
+        ],
+        [
+          remarkCallout,
+          {
+            root: (callout) => {
+              return {
+                tagName: "callout-root",
+                properties: {
+                  type: callout.type,
+                  isFoldable: callout.isFoldable.toString(),
+                  defaultFolded: callout.defaultFolded?.toString(),
+                },
+              }
+            },
+            title: (callout) => ({
+              tagName: "callout-title",
               properties: {
                 type: callout.type,
                 isFoldable: callout.isFoldable.toString(),
-                defaultFolded: callout.defaultFolded?.toString(),
               },
-            }
-          },
-          title: (callout) => ({
-            tagName: "callout-title",
-            properties: {
-              type: callout.type,
-              isFoldable: callout.isFoldable.toString(),
-            },
-          }),
-          body: () => ({
-            tagName: "callout-body",
-            properties: {},
-          }),
-        } satisfies RemarkCalloutOptions,
+            }),
+            body: () => ({
+              tagName: "callout-body",
+              properties: {},
+            }),
+          } satisfies RemarkCalloutOptions,
+        ],
       ],
-    ],
-    rehypePlugins: [rehypeKatex],
-    remarkRehype: {
-      footnoteLabel: "脚注",
-      footnoteLabelTagName: "h2",
-      footnoteLabelProperties: {},
-    },
+      rehypePlugins: [rehypeKatex],
+      remarkRehype: {
+        footnoteLabel: "脚注",
+        footnoteLabelTagName: "h2",
+        footnoteLabelProperties: {},
+      },
+    }),
     shikiConfig: {
       themes: {
         light: "github-light",

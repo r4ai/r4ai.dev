@@ -102,7 +102,7 @@ const SearchInput: Component = () => {
       <input
         tabIndex={0}
         type="text"
-        class="w-full bg-transparent outline-none"
+        class="outline-hidden w-full bg-transparent"
         placeholder="Search..."
         value={query()}
         onInput={(e) => setQuery(e.currentTarget.value)}
@@ -253,20 +253,20 @@ const SearchResultPresenter: Component<SearchResultPresenterProps> = (
     <li>
       <a
         class={cn(
-          "flex flex-row gap-1.5 rounded-lg p-2 outline-none",
+          "outline-hidden flex flex-row gap-1.5 rounded-lg p-2",
           local.class
         )}
         href={local.href}
         {...rest}
       >
         <div>{local.icon}</div>
-        <div class="grow space-y-1">
+        <div class="flex grow flex-col gap-y-1">
           <p class="font-bold">{local.title}</p>
           {typeof local.excerpt === "string" ? (
             <p
               class={cn(
-                "text-sm text-muted-foreground",
-                "[&_mark]:bg-transparent [&_mark]:font-bold [&_mark]:text-blue-500 [&_mark]:dark:text-lime-300"
+                "text-muted-foreground text-sm",
+                "[&_mark]:bg-transparent [&_mark]:font-bold [&_mark]:text-blue-500 dark:[&_mark]:text-lime-300"
               )}
               // eslint-disable-next-line solid/no-innerhtml
               innerHTML={local.excerpt}
@@ -283,7 +283,7 @@ const SearchResultPresenter: Component<SearchResultPresenterProps> = (
 const SearchFooter: Component = () => {
   return (
     <div class="flex flex-row justify-between border-t px-4 py-3">
-      <ul class="flex flex-row gap-4 text-sm text-muted-foreground">
+      <ul class="text-muted-foreground flex flex-row gap-4 text-sm">
         <li>
           <Kbd class="text-xs">Enter</Kbd> to select
         </li>
@@ -295,7 +295,7 @@ const SearchFooter: Component = () => {
           <Kbd class="text-xs">Esc</Kbd> to close
         </li>
       </ul>
-      <div class="text-sm text-muted-foreground">
+      <div class="text-muted-foreground text-sm">
         Search by{" "}
         <a href="https://pagefind.app/" class="hover:underline">
           Pagefind
@@ -307,6 +307,6 @@ const SearchFooter: Component = () => {
 
 const LoadingPresenter: ParentComponent = (props) => (
   <div class="flex flex-col items-center">
-    <p class="my-8 text-muted-foreground">{props.children}</p>
+    <p class="text-muted-foreground my-8">{props.children}</p>
   </div>
 )
