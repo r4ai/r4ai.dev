@@ -10,7 +10,7 @@ import ACRN from "@/assets/imgs/projects/tinnitus-reducer-acrn.png"
 import ZeroGesture from "@/assets/imgs/projects/zero-gesture.png"
 import { RootLayout } from "@/components/layouts"
 
-import { ProjectCard } from "./_components"
+import { COMPACT_PROJECT_CARD_IMAGE_SIZES, ProjectCard } from "./_components"
 ---
 
 <RootLayout title="Projects">
@@ -115,6 +115,7 @@ import { ProjectCard } from "./_components"
         image={{
           src: RemarkEmbed,
           alt: "@r4ai/remark-embedで作成されたサンプル",
+          sizes: COMPACT_PROJECT_CARD_IMAGE_SIZES,
         }}
         links={[
           {
@@ -183,6 +184,7 @@ import { ProjectCard } from "./_components"
         image={{
           src: ZeroGesture,
           alt: "Zero Gestureの画面",
+          sizes: COMPACT_PROJECT_CARD_IMAGE_SIZES,
         }}
         links={[
           {
@@ -199,6 +201,7 @@ import { ProjectCard } from "./_components"
         image={{
           src: ACRN,
           alt: "Tinnitus Reducer ACRNの画面",
+          sizes: COMPACT_PROJECT_CARD_IMAGE_SIZES,
         }}
         links={[
           {

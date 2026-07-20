@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "storybook-solidjs-vite"
 
+import graphvizImage from "@/assets/imgs/graphviz_in_vscode_dev.png?url"
+import ricoraImage from "@/assets/imgs/projects/alg.tus-ricora.com.png?url"
+import iconBlobsImage from "@/assets/imgs/r4ai/icon-blobs.png?url"
+
 import { LinkCard } from "./link-card"
 
 const meta = {
@@ -20,9 +24,9 @@ export const Ricora: Story = {
   args: {
     title: "2024年度の春の成果報告会を行いました",
     url: "https://alg.tus-ricora.com/posts/lt-20240412/",
-    favicon: "https://alg.tus-ricora.com/favicon.svg",
+    favicon: "/favicon.svg",
     image: {
-      src: "https://alg.tus-ricora.com/posts/lt-20240412.png",
+      src: ricoraImage,
     },
   },
 }
@@ -32,9 +36,9 @@ export const Vite: Story = {
     title: "はじめに",
     description: "次世代フロントエンドツール",
     url: "https://vitejs.dev/",
-    favicon: "https://ja.vitejs.dev/logo.svg",
+    favicon: "/favicon.svg",
     image: {
-      src: "https://vitejs.dev/og-image.png",
+      src: iconBlobsImage,
     },
   },
 }
@@ -46,8 +50,8 @@ export const Mdx: Story = {
     description:
       "MDX lets you use JSX in your markdown content. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast.",
     image: {
-      src: "https://mdxjs.com/og.png",
+      src: graphvizImage,
     },
-    favicon: "https://mdxjs.com/icon.svg",
+    favicon: "/favicon.svg",
   },
 }

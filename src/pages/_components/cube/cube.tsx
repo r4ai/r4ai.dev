@@ -1,12 +1,15 @@
 import {
   type Component,
   type ComponentProps,
+  createSignal,
   onMount,
+  Show,
   splitProps,
 } from "solid-js"
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/Addons.js"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 
 export type CubeProps = Omit<ComponentProps<"div">, "ref"> & {
@@ -65,19 +68,17 @@ const setupCamera = () => {
 
 export const Cube: Component<CubeProps> = (props) => {
   const [local, rest] = splitProps(props, ["class"])
+  const [isReady, setIsReady] = createSignal(false)
   let ref: HTMLDivElement | undefined
-
-  // Set up scene
-  const { scene, cube } = setupScene()
-
-  // Set up camera
-  const camera = setupCamera()
-
-  // Set up renderer
-  const renderer = new THREE.WebGLRenderer({ alpha: true })
+  let canvasHost: HTMLDivElement | undefined
 
   onMount(() => {
-    if (!ref) return
+    if (!ref || !canvasHost) return
+
+    // WebGL is browser-only, so defer all Three.js setup until hydration.
+    const { scene, cube } = setupScene()
+    const camera = setupCamera()
+    const renderer = new THREE.WebGLRenderer({ alpha: true })
 
     // Set up controls
     const controls = new OrbitControls(camera, ref)
@@ -87,7 +88,8 @@ export const Cube: Component<CubeProps> = (props) => {
     // Initial render
     renderer.setAnimationLoop(animate(scene, camera, controls, renderer, cube))
     rerender(camera, renderer, ref)
-    ref.appendChild(renderer.domElement)
+    canvasHost.appendChild(renderer.domElement)
+    setIsReady(true)
 
     // Rerender on resize
     const resizeObserver = new ResizeObserver(() =>
@@ -96,7 +98,7 @@ export const Cube: Component<CubeProps> = (props) => {
     resizeObserver.observe(ref)
 
     return () => {
-      ref.removeChild(renderer.domElement)
+      canvasHost?.removeChild(renderer.domElement)
       renderer.dispose()
       resizeObserver.disconnect()
     }
@@ -104,9 +106,15 @@ export const Cube: Component<CubeProps> = (props) => {
 
   return (
     <div
-      class={cn("*:bg-background aspect-square", local.class)}
+      class={cn("*:bg-background relative aspect-square", local.class)}
+      aria-busy={!isReady()}
       ref={ref}
       {...rest}
-    />
+    >
+      <div ref={canvasHost} class="absolute inset-0" />
+      <Show when={!isReady()}>
+        <Skeleton class="absolute inset-0 h-full w-full" aria-hidden="true" />
+      </Show>
+    </div>
   )
 }

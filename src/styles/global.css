@@ -128,7 +128,7 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url("/fonts/UDEVGothic/UDEVGothicLG-Regular.woff2") format("woff2");
+  src: url("/fonts/UDEVGothic/UDEVGothicLG-Regular.subset.woff2") format("woff2");
 }
 
 :root {

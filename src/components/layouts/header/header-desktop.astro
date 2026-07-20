@@ -83,7 +83,7 @@ const { class: className, ...props } = Astro.props
     <div>
       <ul class="flex flex-row gap-1">
         <li>
-          <ColorSchemeSelect client:load />
+          <ColorSchemeSelect client:visible />
         </li>
         <li>
           <Button
@@ -98,7 +98,7 @@ const { class: className, ...props } = Astro.props
           </Button>
         </li>
         <li>
-          <SearchModal client:load />
+          <SearchModal client:visible />
         </li>
       </ul>
     </div>
