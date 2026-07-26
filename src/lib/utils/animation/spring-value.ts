@@ -97,8 +97,6 @@ export function calculateSpring(
 ): SpringedValue<Interpolatable> {
   const values: SpringInputs = [currentVelocity, currentValue, targetValue]
 
-  // Apply scalar spring physics to numeric leaves while preserving the shape:
-  // { x: 1, scale: [1, 2] } stays { x: number, scale: number[] }.
   if (areNumbers(values)) {
     return calculateNumber(options, ...values, deltaTime)
   }
@@ -177,8 +175,8 @@ const calculateRecord = (
 
   const velocity: InterpolatableRecord = {}
   const value: InterpolatableRecord = {}
-  // Rebuild both outputs with the source keys:
-  // { x: springX } -> velocity.x and value.x.
+  // e.g. ["x", { velocity: 1, value: 2 }]
+  //   -> velocity.x = 1, value.x = 2
   for (const [key, springed] of springedEntries) {
     velocity[key] = springed.velocity
     value[key] = springed.value
@@ -193,8 +191,8 @@ const calculateRecord = (
 
 export function createZeroValue<T extends Interpolatable>(value: T): T
 export function createZeroValue(value: Interpolatable): Interpolatable {
-  // Mirror the input shape with zero-valued numeric leaves:
-  // { x: 1, scale: [1, 2] } -> { x: 0, scale: [0, 0] }.
+  // e.g. { x: 1, scale: [1, 2] }
+  //   -> { x: 0, scale: [0, 0] }
   if (typeof value === "number") return 0
   if (Array.isArray(value)) return value.map(createZeroValue)
   if (!isInterpolatableRecord(value)) {

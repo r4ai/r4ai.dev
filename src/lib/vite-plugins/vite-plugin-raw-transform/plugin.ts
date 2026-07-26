@@ -52,10 +52,9 @@ const constantFoldingPlugin = ({
   }
 }
 
-// esbuild names the virtual entry "<stdin>". Only local source dependencies
-// belong in Vite's watch graph; node_modules would add redundant rebuilds.
 const getWatchFiles = (metafile: Metafile) =>
   Object.keys(metafile.inputs)
+    // esbuild uses "<stdin>" for the virtual entry, skip it.
     .filter((input) => input !== "<stdin>")
     .map((input) => path.resolve(input))
     .filter((input) => !input.includes(`${path.sep}node_modules${path.sep}`))
@@ -108,7 +107,7 @@ export const rawTransformPlugin = (): Plugin => {
       if (!buildResult.metafile) {
         throw new Error("esbuild did not return the requested metafile")
       }
-      // Rebuild the ?transform module when an imported local source changes.
+      // Watch actual source deps so ?transform updates when they change.
       for (const watchFile of getWatchFiles(buildResult.metafile)) {
         this.addWatchFile(watchFile)
       }

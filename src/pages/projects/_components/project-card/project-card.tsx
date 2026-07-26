@@ -16,8 +16,6 @@ export type ProjectCardProps = {
 
 type ProjectCardAppearance = "plain" | "dark-image" | "light-image"
 
-// Collapse the two input flags into the only three visual states.
-// `hasImage: false` always selects "plain", regardless of the background tone.
 const projectCard = tv({
   slots: {
     root: "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
@@ -54,6 +52,10 @@ const projectCard = tv({
   },
 })
 
+// hasImage  isImageBackgroundDark  appearance
+// false     -                      plain
+// true      false                  light-image
+// true      true | undefined       dark-image
 const getAppearance = (
   hasImage: boolean,
   isImageBackgroundDark: boolean | undefined

@@ -52,7 +52,10 @@ const removeMarker = (line: Line, marker: DiffMarker | undefined) => {
   const firstText = getFirstText(line.children[0])
   if (!firstText) return 0
 
-  // Remove the diff marker: "+  fn main() {" -> "  fn main() {".
+  // remove "+" or "-"
+  // e.g. "+  fn main() {"
+  //       ^
+  //       remove this "+" char
   const value = firstText.value.trimStart().slice(1)
   if (value) {
     firstText.value = value
@@ -65,8 +68,10 @@ const removeMarker = (line: Line, marker: DiffMarker | undefined) => {
 const removeIndent = (line: Line, indentSize: number) => {
   let remaining = indentSize
 
-  // "  fn main() {" -> "fn main() {" when indentSize is 2.
-  // Shiki may split the leading spaces across spans, so consume them left to right.
+  // remove unnecessary spaces
+  // e.g. "+  fn main() {"
+  //        ^^
+  //        this is unnecessary spaces
   for (const span of line.children) {
     if (remaining === 0) return
 
@@ -120,7 +125,7 @@ export const transformerMetaDiff = (): ShikiTransformer => ({
     for (const line of hast.children.filter(isLine)) {
       const marker = normalizeLine(line, diffIndentSize)
       if (marker) {
-        // Mark "+" as an added line and "-" as a removed line.
+        // add "diff" and "add" or "remove" class to line
         this.addClassToHast(
           line,
           marker === "+" ? ["diff", "add"] : ["diff", "remove"]

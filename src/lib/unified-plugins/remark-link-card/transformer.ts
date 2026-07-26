@@ -118,8 +118,8 @@ const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => {
   const openGraph = getOpenGraphCandidate(metadata)
   const twitterCard = getTwitterCardCandidate(metadata)
 
-  // Prefer Open Graph, then document metadata, then Twitter Card metadata.
-  // Images have no document-level candidate, so they use Open Graph then Twitter.
+  // title, description: Open Graph -> <head> -> Twitter Card
+  // image:              Open Graph ----------> Twitter Card
   return {
     url: openGraph.url ?? url.href,
     title: firstPresent([openGraph.title, metadata.title, twitterCard.title]),
