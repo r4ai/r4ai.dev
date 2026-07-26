@@ -1,9 +1,30 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
-import { build, type Metafile, type Plugin as ESBuildPlugin } from "esbuild"
+import {
+  build,
+  type Loader,
+  type Metafile,
+  type Plugin as ESBuildPlugin,
+} from "esbuild"
 import { genString } from "knitwork"
 import { type Plugin } from "vite"
+
+const loadersByExtension: Readonly<Record<string, Loader>> = {
+  ".js": "js",
+  ".ts": "ts",
+  ".jsx": "jsx",
+  ".tsx": "tsx",
+}
+
+const getLoader = (filePath: string): Loader => {
+  const extension = path.extname(filePath)
+  const loader = loadersByExtension[extension]
+  if (!loader) {
+    throw new Error(`Unsupported source extension: ${extension}`)
+  }
+  return loader
+}
 
 const constantFoldingPlugin = ({
   platform,
@@ -14,8 +35,6 @@ const constantFoldingPlugin = ({
     name: "constant-folding",
     setup(build) {
       build.onLoad({ filter: /\.(js|ts|jsx|tsx)$/ }, async (args) => {
-        const ext = path.extname(args.path).slice(1) as
-          "js" | "ts" | "jsx" | "tsx"
         let source = await readFile(args.path, "utf-8")
 
         // Replace `typeof window === "undefined"` with `true` or `false` depending on the platform
@@ -26,13 +45,15 @@ const constantFoldingPlugin = ({
 
         return {
           contents: source,
-          loader: ext,
+          loader: getLoader(args.path),
         }
       })
     },
   }
 }
 
+// esbuild names the virtual entry "<stdin>". Only local source dependencies
+// belong in Vite's watch graph; node_modules would add redundant rebuilds.
 const getWatchFiles = (metafile: Metafile) =>
   Object.keys(metafile.inputs)
     .filter((input) => input !== "<stdin>")
@@ -87,6 +108,7 @@ export const rawTransformPlugin = (): Plugin => {
       if (!buildResult.metafile) {
         throw new Error("esbuild did not return the requested metafile")
       }
+      // Rebuild the ?transform module when an imported local source changes.
       for (const watchFile of getWatchFiles(buildResult.metafile)) {
         this.addWatchFile(watchFile)
       }

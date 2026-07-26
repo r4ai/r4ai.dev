@@ -2,28 +2,20 @@ import rangeParser from "parse-numeric-range"
 
 type Range = number[]
 
-type RequiredMeta = {
-  range?: Range
+export type Meta = {
+  range: Range
+  [key: string]: string | boolean | Range | undefined
 }
 
-type OptionalMeta = Record<string, string | boolean | Range | undefined>
-
-export type Meta = Omit<OptionalMeta, keyof RequiredMeta> & RequiredMeta
-
-export const defaultMeta: Required<Meta> = {
+export const defaultMeta: Meta = {
   range: [],
 }
 
-type Group = {
-  range?: string
-  kvKey?: string
-  kvValue?: string
-  kvDoubleQuoteKey?: string
-  kvDoubleQuoteValue?: string
-  kvSingleQuoteKey?: string
-  kvSingleQuoteValue?: string
-  boolValue?: string
-}
+type Group = NonNullable<RegExpMatchArray["groups"]>
+type PropertyCapture = readonly [
+  key: string | undefined,
+  value: string | undefined,
+]
 
 type MetaEntry =
   | { type: "range"; value: Range }
@@ -50,19 +42,28 @@ const PARSE_REGEX = new RegExp(
   "g"
 )
 
+const isCompleteProperty = (
+  capture: PropertyCapture
+): capture is readonly [key: string, value: string] =>
+  capture[0] != null &&
+  capture[0] !== "" &&
+  capture[1] != null &&
+  capture[1] !== ""
+
 const toMetaEntry = (groups: Group): MetaEntry | undefined => {
   if (groups.range) {
     return { type: "range", value: rangeParser(groups.range) }
   }
 
-  const property = [
+  const properties: PropertyCapture[] = [
     [groups.kvKey, groups.kvValue],
     [groups.kvDoubleQuoteKey, groups.kvDoubleQuoteValue],
     [groups.kvSingleQuoteKey, groups.kvSingleQuoteValue],
-  ].find(([key, value]) => key && value)
+  ]
+  const property = properties.find(isCompleteProperty)
 
   if (property) {
-    const [key, value] = property as [string, string]
+    const [key, value] = property
     return {
       type: "property",
       key,
@@ -82,15 +83,16 @@ const toMetaEntry = (groups: Group): MetaEntry | undefined => {
  * @param meta meta string
  * @returns meta object
  */
-export const parseMeta = <M extends Meta = Meta>(
-  meta: string | undefined
-): M => {
-  const metaObj = { ...defaultMeta }
-  if (!meta) return metaObj as M
+export const parseMeta = (meta: string | undefined): Meta => {
+  const metaObj: Meta = { ...defaultMeta }
+  if (!meta) return metaObj
 
   const matches = meta.matchAll(PARSE_REGEX)
   for (const match of matches) {
-    const entry = toMetaEntry(match.groups as Group)
+    if (!match.groups) {
+      throw new Error("Meta parser did not return named groups")
+    }
+    const entry = toMetaEntry(match.groups)
     if (!entry) continue
 
     if (entry.type === "range") {
@@ -102,7 +104,7 @@ export const parseMeta = <M extends Meta = Meta>(
   }
   metaObj.range = removeDuplicateAndSort(metaObj.range)
 
-  return metaObj as M
+  return metaObj
 }
 
 export const retrieveEscapedString = (str: string) =>

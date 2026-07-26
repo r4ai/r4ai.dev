@@ -1,7 +1,6 @@
 import type { JSXElement } from "solid-js"
 import { For } from "solid-js"
-
-import { cn } from "@/lib/utils"
+import { tv } from "tailwind-variants"
 
 import { LinkButton } from "../link-button"
 export type ProjectCardProps = {
@@ -17,38 +16,43 @@ export type ProjectCardProps = {
 
 type ProjectCardAppearance = "plain" | "dark-image" | "light-image"
 
-const APPEARANCE_STYLES = {
-  plain: {
-    container: "bg-card flex flex-col items-center",
-    panel: "h-full rounded-xl",
-    title: "text-card-foreground",
-    metadata: "text-muted-foreground",
-    description: "text-muted-foreground",
+// Collapse the two input flags into the only three visual states.
+// `hasImage: false` always selects "plain", regardless of the background tone.
+const projectCard = tv({
+  slots: {
+    root: "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
+    panel:
+      "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl px-8 py-4 text-lg font-bold backdrop-blur-xl",
+    title: "mr-2 inline-block text-xl font-bold",
+    metadata: "inline-block text-sm",
+    description: "text-sm",
   },
-  "dark-image": {
-    container: "relative",
-    panel: "absolute bottom-0 rounded-b-xl border-t border-zinc-700",
-    title: "text-white",
-    metadata: "text-zinc-400",
-    description: "text-zinc-400",
+  variants: {
+    appearance: {
+      plain: {
+        root: "bg-card flex flex-col items-center",
+        panel: "h-full rounded-xl",
+        title: "text-card-foreground",
+        metadata: "text-muted-foreground",
+        description: "text-muted-foreground",
+      },
+      "dark-image": {
+        root: "relative",
+        panel: "absolute bottom-0 rounded-b-xl border-t border-zinc-700",
+        title: "text-white",
+        metadata: "text-zinc-400",
+        description: "text-zinc-400",
+      },
+      "light-image": {
+        root: "relative",
+        panel: "absolute bottom-0 rounded-b-xl border-t border-zinc-300",
+        title: "text-black",
+        metadata: "text-zinc-500",
+        description: "text-zinc-600",
+      },
+    },
   },
-  "light-image": {
-    container: "relative",
-    panel: "absolute bottom-0 rounded-b-xl border-t border-zinc-300",
-    title: "text-black",
-    metadata: "text-zinc-500",
-    description: "text-zinc-600",
-  },
-} as const satisfies Record<
-  ProjectCardAppearance,
-  {
-    container: string
-    panel: string
-    title: string
-    metadata: string
-    description: string
-  }
->
+})
 
 const getAppearance = (
   hasImage: boolean,
@@ -60,36 +64,19 @@ const getAppearance = (
 
 export const ProjectCard = (props: ProjectCardProps) => {
   const styles = () =>
-    APPEARANCE_STYLES[
-      getAppearance(props.hasImage, props.isImageBackgroundDark)
-    ]
+    projectCard({
+      appearance: getAppearance(props.hasImage, props.isImageBackgroundDark),
+    })
 
   return (
-    <div
-      class={cn(
-        "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
-        styles().container,
-        props.class
-      )}
-    >
-      <div
-        class={cn(
-          "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl px-8 py-4 text-lg font-bold backdrop-blur-xl",
-          styles().panel
-        )}
-      >
+    <div class={styles().root({ class: props.class })}>
+      <div class={styles().panel()}>
         <div class="flex flex-col gap-2">
           <div>
-            <h2
-              class={cn("mr-2 inline-block text-xl font-bold", styles().title)}
-            >
-              {props.title}
-            </h2>
-            <span class={cn("inline-block text-sm", styles().metadata)}>
-              {props.year}
-            </span>
+            <h2 class={styles().title()}>{props.title}</h2>
+            <span class={styles().metadata()}>{props.year}</span>
           </div>
-          <p class={cn("text-sm", styles().description)}>{props.description}</p>
+          <p class={styles().description()}>{props.description}</p>
         </div>
         <div class="ml-auto flex flex-row flex-wrap items-center justify-end gap-3">
           <For each={props.links}>

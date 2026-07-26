@@ -12,15 +12,15 @@ type Line = Omit<Element, "children"> & { children: Element[] }
 
 type DiffMarker = "+" | "-"
 
-const getFirstText = (element: Element): Text | undefined => {
-  const firstChild = element.children[0]
+const getFirstText = (element: Element | undefined): Text | undefined => {
+  const firstChild = element?.children[0]
   return firstChild && isText(firstChild) ? firstChild : undefined
 }
 
 const isLine = (node: ElementContent): node is Line => {
   if (!isElement(node)) return false
   return (
-    node.children.every(isElement) && getFirstText(node.children[0]!) != null
+    node.children.every(isElement) && getFirstText(node.children[0]) != null
   )
 }
 
@@ -49,9 +49,10 @@ const getDiffIndentSize = (hast: Element) => {
 const removeMarker = (line: Line, marker: DiffMarker | undefined) => {
   if (!marker) return 0
 
-  const firstText = getFirstText(line.children[0]!)
+  const firstText = getFirstText(line.children[0])
   if (!firstText) return 0
 
+  // Remove the diff marker: "+  fn main() {" -> "  fn main() {".
   const value = firstText.value.trimStart().slice(1)
   if (value) {
     firstText.value = value
@@ -64,6 +65,8 @@ const removeMarker = (line: Line, marker: DiffMarker | undefined) => {
 const removeIndent = (line: Line, indentSize: number) => {
   let remaining = indentSize
 
+  // "  fn main() {" -> "fn main() {" when indentSize is 2.
+  // Shiki may split the leading spaces across spans, so consume them left to right.
   for (const span of line.children) {
     if (remaining === 0) return
 
@@ -82,7 +85,7 @@ const removeIndent = (line: Line, indentSize: number) => {
 }
 
 const normalizeLine = (line: Line, indentSize: number) => {
-  const firstText = getFirstText(line.children[0]!)
+  const firstText = getFirstText(line.children[0])
   if (!firstText || !firstText.value.trim()) return
 
   const marker = getDiffMarker(firstText.value)
@@ -117,6 +120,7 @@ export const transformerMetaDiff = (): ShikiTransformer => ({
     for (const line of hast.children.filter(isLine)) {
       const marker = normalizeLine(line, diffIndentSize)
       if (marker) {
+        // Mark "+" as an added line and "-" as a removed line.
         this.addClassToHast(
           line,
           marker === "+" ? ["diff", "add"] : ["diff", "remove"]

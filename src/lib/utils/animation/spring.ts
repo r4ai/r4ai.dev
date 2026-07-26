@@ -21,11 +21,9 @@ export const defaultSpringOptions = {
   stiffness: 0.15, // ばね定数
   damping: 0.8, // 減衰係数
   precision: 0.01, // しきい値
-} as const satisfies Required<SpringOptions>
+} satisfies Required<SpringOptions>
 
-export type SpringedSignal<T extends Interpolatable> = T extends number
-  ? Signal<number>
-  : Signal<T>
+export type SpringedSignal<T extends Interpolatable> = Signal<T>
 
 /**
  * Creates a spring signal.
@@ -38,10 +36,18 @@ export type SpringedSignal<T extends Interpolatable> = T extends number
  * const [springValue, setSpringValue] = createSpring(0, { stiffness: 0.3 })
  * ```
  */
-export const createSpring = <T extends Interpolatable>(
+export function createSpring(
+  value: number,
+  options?: Partial<SpringOptions>
+): Signal<number>
+export function createSpring<T extends Interpolatable>(
+  value: T,
+  options?: Partial<SpringOptions>
+): SpringedSignal<T>
+export function createSpring<T extends Interpolatable>(
   value: T,
   options: Partial<SpringOptions> = defaultSpringOptions
-): SpringedSignal<T> => {
+): SpringedSignal<T> {
   const mergedOptions = mergeProps(defaultSpringOptions, options)
   const zeroVelocity = createZeroValue(value)
 
@@ -95,5 +101,5 @@ export const createSpring = <T extends Interpolatable>(
     )
   )
 
-  return [current, setTarget] as SpringedSignal<T>
+  return [current, setTarget]
 }

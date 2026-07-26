@@ -1,8 +1,10 @@
 import {
-  getInterpolatableKind,
+  getArrayValue,
+  getRecordValue,
   haveSameKeys,
   type Interpolatable,
   type InterpolatableRecord,
+  isInterpolatableRecord,
   ownEnumerableKeys,
 } from "./interpolatable"
 
@@ -26,6 +28,37 @@ type SpringedValue<T> = {
   settled: boolean
 }
 
+type SpringInputs = readonly [
+  currentVelocity: Interpolatable,
+  currentValue: Interpolatable,
+  targetValue: Interpolatable,
+]
+
+type NumberInputs = readonly [number, number, number]
+type ArrayInputs = readonly [
+  Interpolatable[],
+  Interpolatable[],
+  Interpolatable[],
+]
+type RecordInputs = readonly [
+  InterpolatableRecord,
+  InterpolatableRecord,
+  InterpolatableRecord,
+]
+
+const areNumbers = (values: SpringInputs): values is NumberInputs =>
+  values.every((value) => typeof value === "number")
+
+const isInterpolatableArray = (
+  value: Interpolatable
+): value is Interpolatable[] => Array.isArray(value)
+
+const areArrays = (values: SpringInputs): values is ArrayInputs =>
+  values.every(isInterpolatableArray)
+
+const areRecords = (values: SpringInputs): values is RecordInputs =>
+  values.every(isInterpolatableRecord)
+
 const calculateNumber = (
   options: SpringOptions,
   currentVelocity: number,
@@ -48,47 +81,34 @@ const calculateNumber = (
   }
 }
 
-export const calculateSpring = <T extends Interpolatable>(
+export function calculateSpring<T extends Interpolatable>(
   options: SpringOptions,
   currentVelocity: T,
   currentValue: T,
   targetValue: T,
   deltaTime: number
-): SpringedValue<T> => {
-  const kind = getInterpolatableKind(currentVelocity)
-  if (
-    kind !== getInterpolatableKind(currentValue) ||
-    kind !== getInterpolatableKind(targetValue)
-  ) {
-    throw new Error("Given values are not interpolatable")
-  }
+): SpringedValue<T>
+export function calculateSpring(
+  options: SpringOptions,
+  currentVelocity: Interpolatable,
+  currentValue: Interpolatable,
+  targetValue: Interpolatable,
+  deltaTime: number
+): SpringedValue<Interpolatable> {
+  const values: SpringInputs = [currentVelocity, currentValue, targetValue]
 
-  switch (kind) {
-    case "number":
-      return calculateNumber(
-        options,
-        currentVelocity as number,
-        currentValue as number,
-        targetValue as number,
-        deltaTime
-      ) as SpringedValue<T>
-    case "array":
-      return calculateArray(
-        options,
-        currentVelocity as Interpolatable[],
-        currentValue as Interpolatable[],
-        targetValue as Interpolatable[],
-        deltaTime
-      ) as SpringedValue<T>
-    case "record":
-      return calculateRecord(
-        options,
-        currentVelocity as InterpolatableRecord,
-        currentValue as InterpolatableRecord,
-        targetValue as InterpolatableRecord,
-        deltaTime
-      ) as SpringedValue<T>
+  // Apply scalar spring physics to numeric leaves while preserving the shape:
+  // { x: 1, scale: [1, 2] } stays { x: number, scale: number[] }.
+  if (areNumbers(values)) {
+    return calculateNumber(options, ...values, deltaTime)
   }
+  if (areArrays(values)) {
+    return calculateArray(options, ...values, deltaTime)
+  }
+  if (areRecords(values)) {
+    return calculateRecord(options, ...values, deltaTime)
+  }
+  throw new Error("Given values are not interpolatable")
 }
 
 const calculateArray = (
@@ -111,8 +131,8 @@ const calculateArray = (
     calculateSpring(
       options,
       velocity,
-      currentValue[index]!,
-      targetValue[index]!,
+      getArrayValue(currentValue, index),
+      getArrayValue(targetValue, index),
       deltaTime
     )
   )
@@ -138,43 +158,52 @@ const calculateRecord = (
     throw new Error("Given values are not interpolatable")
   }
 
-  const springedEntries = ownEnumerableKeys(currentVelocity).map(
-    (key) =>
-      [
-        key,
-        calculateSpring(
-          options,
-          currentVelocity[key]!,
-          currentValue[key]!,
-          targetValue[key]!,
-          deltaTime
-        ),
-      ] as const
-  )
+  type SpringedEntry = readonly [
+    key: PropertyKey,
+    value: SpringedValue<Interpolatable>,
+  ]
+  const springedEntries: SpringedEntry[] = ownEnumerableKeys(
+    currentVelocity
+  ).map((key): SpringedEntry => [
+    key,
+    calculateSpring(
+      options,
+      getRecordValue(currentVelocity, key),
+      getRecordValue(currentValue, key),
+      getRecordValue(targetValue, key),
+      deltaTime
+    ),
+  ])
+
+  const velocity: InterpolatableRecord = {}
+  const value: InterpolatableRecord = {}
+  // Rebuild both outputs with the source keys:
+  // { x: springX } -> velocity.x and value.x.
+  for (const [key, springed] of springedEntries) {
+    velocity[key] = springed.velocity
+    value[key] = springed.value
+  }
 
   return {
-    velocity: Object.fromEntries(
-      springedEntries.map(([key, { velocity }]) => [key, velocity])
-    ),
-    value: Object.fromEntries(
-      springedEntries.map(([key, { value }]) => [key, value])
-    ),
+    velocity,
+    value,
     settled: springedEntries.every(([, { settled }]) => settled),
   }
 }
 
-export const createZeroValue = <T extends Interpolatable>(value: T): T => {
-  switch (getInterpolatableKind(value)) {
-    case "number":
-      return 0 as T
-    case "array":
-      return (value as Interpolatable[]).map(createZeroValue) as T
-    case "record":
-      return Object.fromEntries(
-        ownEnumerableKeys(value as InterpolatableRecord).map((key) => [
-          key,
-          createZeroValue((value as InterpolatableRecord)[key]!),
-        ])
-      ) as T
+export function createZeroValue<T extends Interpolatable>(value: T): T
+export function createZeroValue(value: Interpolatable): Interpolatable {
+  // Mirror the input shape with zero-valued numeric leaves:
+  // { x: 1, scale: [1, 2] } -> { x: 0, scale: [0, 0] }.
+  if (typeof value === "number") return 0
+  if (Array.isArray(value)) return value.map(createZeroValue)
+  if (!isInterpolatableRecord(value)) {
+    throw new Error("Given values are not interpolatable")
   }
+
+  const zeroValue: InterpolatableRecord = {}
+  for (const key of ownEnumerableKeys(value)) {
+    zeroValue[key] = createZeroValue(getRecordValue(value, key))
+  }
+  return zeroValue
 }

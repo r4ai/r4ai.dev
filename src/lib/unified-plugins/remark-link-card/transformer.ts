@@ -7,11 +7,6 @@ import type { unfurl } from "unfurl.js"
 
 export type LinkMetadata = Partial<Awaited<ReturnType<typeof unfurl>>>
 
-type OpenGraph = NonNullable<LinkMetadata["open_graph"]>
-type TwitterCard = NonNullable<LinkMetadata["twitter_card"]>
-type OpenGraphImage = NonNullable<OpenGraph["images"]>[number]
-type TwitterCardImage = NonNullable<TwitterCard["images"]>[number]
-
 export type LinkMetadataLoader = (
   url: URL,
   signal: AbortSignal
@@ -84,14 +79,47 @@ const firstPresent = <T>(
   values: readonly (T | null | undefined)[]
 ): T | undefined => values.find((value): value is T => value != null)
 
-const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => {
-  const openGraph = (metadata.open_graph ?? {}) as Partial<OpenGraph>
-  const twitterCard = (metadata.twitter_card ?? {}) as Partial<TwitterCard>
-  const [openGraphImage = {} as Partial<OpenGraphImage>] =
-    openGraph.images ?? []
-  const [twitterCardImage = {} as Partial<TwitterCardImage>] =
-    twitterCard.images ?? []
+type MetadataCandidate = {
+  url?: string
+  title?: string
+  description?: string
+  imageUrl?: string
+  imageAlt?: string
+}
 
+const getOpenGraphCandidate = (metadata: LinkMetadata): MetadataCandidate => {
+  const openGraph = metadata.open_graph
+  if (!openGraph) return {}
+
+  const image = openGraph.images?.at(0)
+  return {
+    url: openGraph.url,
+    title: openGraph.title,
+    description: openGraph.description,
+    imageUrl: image?.url,
+    imageAlt: image?.alt,
+  }
+}
+
+const getTwitterCardCandidate = (metadata: LinkMetadata): MetadataCandidate => {
+  const twitterCard = metadata.twitter_card
+  if (!twitterCard) return {}
+
+  const image = twitterCard.images?.at(0)
+  return {
+    title: twitterCard.title,
+    description: twitterCard.description,
+    imageUrl: image?.url,
+    imageAlt: image?.alt,
+  }
+}
+
+const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => {
+  const openGraph = getOpenGraphCandidate(metadata)
+  const twitterCard = getTwitterCardCandidate(metadata)
+
+  // Prefer Open Graph, then document metadata, then Twitter Card metadata.
+  // Images have no document-level candidate, so they use Open Graph then Twitter.
   return {
     url: openGraph.url ?? url.href,
     title: firstPresent([openGraph.title, metadata.title, twitterCard.title]),
@@ -102,8 +130,8 @@ const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => {
     ]),
     favicon: metadata.favicon,
     image: {
-      src: firstPresent([openGraphImage.url, twitterCardImage.url]),
-      alt: firstPresent([openGraphImage.alt, twitterCardImage.alt]),
+      src: firstPresent([openGraph.imageUrl, twitterCard.imageUrl]),
+      alt: firstPresent([openGraph.imageAlt, twitterCard.imageAlt]),
     },
   }
 }

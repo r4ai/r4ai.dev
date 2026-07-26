@@ -4,14 +4,10 @@ export type InterpolatableRecord = {
 
 export type Interpolatable = number | InterpolatableRecord | Interpolatable[]
 
-export type InterpolatableKind = "number" | "array" | "record"
-
-export const getInterpolatableKind = (
+export const isInterpolatableRecord = (
   value: Interpolatable
-): InterpolatableKind => {
-  if (typeof value === "number") return "number"
-  return Array.isArray(value) ? "array" : "record"
-}
+): value is InterpolatableRecord =>
+  typeof value === "object" && !Array.isArray(value)
 
 export const ownEnumerableKeys = (value: InterpolatableRecord): PropertyKey[] =>
   Reflect.ownKeys(value).filter((key) =>
@@ -29,4 +25,26 @@ export const haveSameKeys = (
     leftKeys.length === rightKeys.length &&
     leftKeys.every((key) => Object.hasOwn(right, key))
   )
+}
+
+export const getArrayValue = (
+  values: Interpolatable[],
+  index: number
+): Interpolatable => {
+  const value = values[index]
+  if (value === undefined) {
+    throw new Error("Given values are not interpolatable")
+  }
+  return value
+}
+
+export const getRecordValue = (
+  record: InterpolatableRecord,
+  key: PropertyKey
+): Interpolatable => {
+  const value = record[key]
+  if (value === undefined) {
+    throw new Error("Given values are not interpolatable")
+  }
+  return value
 }
