@@ -75,23 +75,39 @@ export const createLinkCardTransformer = (
   }
 }
 
-const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => ({
-  url: metadata.open_graph?.url ?? url.href,
-  title:
-    metadata.open_graph?.title ??
-    metadata.title ??
-    metadata.twitter_card?.title,
-  description:
-    metadata.open_graph?.description ??
-    metadata.description ??
-    metadata.twitter_card?.description,
-  favicon: metadata.favicon,
-  image: {
-    src:
-      metadata.open_graph?.images?.at(0)?.url ??
-      metadata.twitter_card?.images?.at(0)?.url,
-    alt:
-      metadata.open_graph?.images?.at(0)?.alt ??
-      metadata.twitter_card?.images?.at(0)?.alt,
-  },
-})
+const firstPresent = <T>(...values: (T | null | undefined)[]) =>
+  values.find((value): value is T => value != null)
+
+const getMetadataCandidate = (
+  metadata: LinkMetadata["open_graph"] | LinkMetadata["twitter_card"]
+) => {
+  const image = metadata?.images?.at(0)
+  return {
+    title: metadata?.title,
+    description: metadata?.description,
+    imageUrl: image?.url,
+    imageAlt: image?.alt,
+  }
+}
+
+const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => {
+  const openGraph = getMetadataCandidate(metadata.open_graph)
+  const twitterCard = getMetadataCandidate(metadata.twitter_card)
+
+  // title, description: Open Graph -> <head> -> Twitter Card
+  // image:              Open Graph ----------> Twitter Card
+  return {
+    url: metadata.open_graph?.url ?? url.href,
+    title: firstPresent(openGraph.title, metadata.title, twitterCard.title),
+    description: firstPresent(
+      openGraph.description,
+      metadata.description,
+      twitterCard.description
+    ),
+    favicon: metadata.favicon,
+    image: {
+      src: firstPresent(openGraph.imageUrl, twitterCard.imageUrl),
+      alt: firstPresent(openGraph.imageAlt, twitterCard.imageAlt),
+    },
+  }
+}

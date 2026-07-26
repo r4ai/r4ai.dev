@@ -2,31 +2,20 @@ import rangeParser from "parse-numeric-range"
 
 type Range = number[]
 
-type RequiredMeta = {
-  range?: Range
+export type Meta = {
+  range: Range
+  [key: string]: string | boolean | Range | undefined
 }
 
-type OptionalMeta = Record<string, string | boolean | Range | undefined>
-
-export type Meta = Omit<OptionalMeta, keyof RequiredMeta> & RequiredMeta
-
-export const defaultMeta: Required<Meta> = {
+export const defaultMeta: Meta = {
   range: [],
 }
 
-type Group = {
-  range?: string
-  kv?: string
-  kvKey?: string
-  kvValue?: string
-  kvDoubleQuote?: string
-  kvDoubleQuoteKey?: string
-  kvDoubleQuoteValue?: string
-  kvSingleQuote?: string
-  kvSingleQuoteKey?: string
-  kvSingleQuoteValue?: string
-  boolValue?: string
-}
+type Group = NonNullable<RegExpMatchArray["groups"]>
+
+type MetaEntry =
+  | { type: "range"; value: Range }
+  | { type: "property"; key: string; value: string | true }
 
 // meta = "{" range ("," range)* "}"             // -> range
 //      | string "=" string                      // -> kv
@@ -39,59 +28,65 @@ type Group = {
 const PARSE_REGEX = new RegExp(
   [
     /\{(?<range>.*?)\}/.source,
-    /|(?<kv>(?<kvKey>[^\s]+?)\s*=\s*(?<kvValue>[^\s"']+?))(?=\s|$)/.source,
-    /|(?<kvDoubleQuote>(?<kvDoubleQuoteKey>[^\s]+?)\s*=\s*"(?<kvDoubleQuoteValue>.*?)(?<!\\)")/
-      .source,
-    /|(?<kvSingleQuote>(?<kvSingleQuoteKey>[^\s]+?)\s*=\s*'(?<kvSingleQuoteValue>.*?)(?<!\\)')/
+    /|(?<key>[^\s]+?)\s*=\s*(?:"(?<doubleQuoteValue>.*?)(?<!\\)"|'(?<singleQuoteValue>.*?)(?<!\\)'|(?<value>[^\s"']+?)(?=\s|$))/
       .source,
     /|(?<=\s|^)(?<boolValue>[^\s=]+?)(?=\s|$)/.source,
   ].join(""),
   "g"
 )
 
+const toMetaEntry = (groups: Group): MetaEntry | undefined => {
+  if (groups.range) {
+    return { type: "range", value: rangeParser(groups.range) }
+  }
+
+  const value =
+    groups.value ?? groups.doubleQuoteValue ?? groups.singleQuoteValue
+  if (groups.key && value) {
+    return {
+      type: "property",
+      key: groups.key,
+      value: retrieveEscapedString(value),
+    }
+  }
+
+  if (groups.boolValue) {
+    return { type: "property", key: groups.boolValue, value: true }
+  }
+
+  return undefined
+}
+
 /**
  * Parse meta string to object.
  * @param meta meta string
  * @returns meta object
  */
-export const parseMeta = <M extends Meta = Meta>(
-  meta: string | undefined
-): M => {
-  const metaObj = { ...defaultMeta }
-  if (!meta) return metaObj as M
+export const parseMeta = (meta: string | undefined): Meta => {
+  const metaObj: Meta = { ...defaultMeta }
+  if (!meta) return metaObj
 
-  const matches = meta.matchAll(PARSE_REGEX)
-  for (const match of matches) {
-    const groups = match.groups as Group
-    if (groups.range && Array.isArray(metaObj.range)) {
-      const range = rangeParser(groups.range)
-      metaObj.range = [...metaObj.range, ...range]
+  for (const match of meta.matchAll(PARSE_REGEX)) {
+    if (!match.groups) {
+      throw new Error("Meta parser did not return named groups")
     }
-    if (groups.kvKey && groups.kvValue) {
-      metaObj[groups.kvKey] = retrieveEscapedString(groups.kvValue)
+    const entry = toMetaEntry(match.groups)
+    if (!entry) continue
+
+    if (entry.type === "range") {
+      metaObj.range = [...metaObj.range, ...entry.value]
+      continue
     }
-    if (groups.kvDoubleQuoteKey && groups.kvDoubleQuoteValue) {
-      metaObj[groups.kvDoubleQuoteKey] = retrieveEscapedString(
-        groups.kvDoubleQuoteValue
-      )
-    }
-    if (groups.kvSingleQuoteKey && groups.kvSingleQuoteValue) {
-      metaObj[groups.kvSingleQuoteKey] = retrieveEscapedString(
-        groups.kvSingleQuoteValue
-      )
-    }
-    if (groups.boolValue) {
-      metaObj[groups.boolValue] = true
-    }
+
+    metaObj[entry.key] = entry.value
   }
   metaObj.range = removeDuplicateAndSort(metaObj.range)
 
-  return metaObj as M
+  return metaObj
 }
 
 export const retrieveEscapedString = (str: string) =>
   str.replace(/\\(.)/g, "$1")
 
-export const removeDuplicateAndSort = (arr: number[]) => {
-  return Array.from(new Set(arr)).sort((a, b) => a - b)
-}
+export const removeDuplicateAndSort = (arr: number[]) =>
+  Array.from(new Set(arr)).sort((a, b) => a - b)
