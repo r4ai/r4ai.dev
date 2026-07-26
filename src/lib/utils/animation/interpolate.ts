@@ -1,58 +1,12 @@
 import {
-  getArrayValue,
-  getRecordValue,
-  haveSameKeys,
   type Interpolatable,
-  type InterpolatableRecord,
-  isInterpolatableRecord,
+  INTERPOLATABLE_ERROR,
+  type InterpolatableCollection,
   ownEnumerableKeys,
+  requireValue,
 } from "./interpolatable"
 
 export type { Interpolatable } from "./interpolatable"
-
-const interpolateNumber = (
-  from: number,
-  to: number,
-  ease: (t: number) => number,
-  elapsed: number
-) => (to - from) * ease(elapsed) + from
-
-const interpolateArray = (
-  from: Interpolatable[],
-  to: Interpolatable[],
-  ease: (t: number) => number,
-  elapsed: number
-): Interpolatable[] => {
-  if (from.length !== to.length) {
-    throw new Error("Given values are not interpolatable")
-  }
-
-  return from.map((value, index) =>
-    interpolate(value, getArrayValue(to, index), ease, elapsed)
-  )
-}
-
-const interpolateRecord = (
-  from: InterpolatableRecord,
-  to: InterpolatableRecord,
-  ease: (t: number) => number,
-  elapsed: number
-): InterpolatableRecord => {
-  if (!haveSameKeys(from, to)) {
-    throw new Error("Given values are not interpolatable")
-  }
-
-  const result: InterpolatableRecord = {}
-  for (const key of ownEnumerableKeys(from)) {
-    result[key] = interpolate(
-      getRecordValue(from, key),
-      getRecordValue(to, key),
-      ease,
-      elapsed
-    )
-  }
-  return result
-}
 
 const interpolateValue = (
   from: Interpolatable,
@@ -62,30 +16,37 @@ const interpolateValue = (
 ): Interpolatable => {
   if (typeof from === "number") {
     if (typeof to !== "number") {
-      throw new Error("Given values are not interpolatable")
+      throw new Error(INTERPOLATABLE_ERROR)
     }
-    return interpolateNumber(from, to, ease, elapsed)
+    return (to - from) * ease(elapsed) + from
   }
 
-  if (Array.isArray(from)) {
-    if (!Array.isArray(to)) {
-      throw new Error("Given values are not interpolatable")
-    }
-    return interpolateArray(from, to, ease, elapsed)
+  if (typeof to === "number" || Array.isArray(from) !== Array.isArray(to)) {
+    throw new Error(INTERPOLATABLE_ERROR)
   }
 
-  if (!isInterpolatableRecord(from) || !isInterpolatableRecord(to)) {
-    throw new Error("Given values are not interpolatable")
+  const result: InterpolatableCollection = Array.isArray(from) ? [] : {}
+  for (const key of ownEnumerableKeys(from)) {
+    Reflect.set(
+      result,
+      key,
+      interpolateValue(
+        requireValue(Reflect.get(from, key)),
+        requireValue(Reflect.get(to, key)),
+        ease,
+        elapsed
+      )
+    )
   }
-  return interpolateRecord(from, to, ease, elapsed)
+  return result
 }
 
 /**
  * Interpolates the numeric leaves of two values with the same recursive shape.
  *
  * @remarks
- * Arrays must have equal lengths, and records must have the same own enumerable
- * keys. A shape mismatch throws an error instead of dropping unmatched values.
+ * Every array item and record key in `from` must have a corresponding value in
+ * `to`. A missing value or a different value kind throws an error.
  *
  * @param from The value returned when `elapsed` is `0`.
  * @param to The value returned when `elapsed` is `1`.

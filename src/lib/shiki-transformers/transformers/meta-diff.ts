@@ -6,41 +6,28 @@ import { parseMeta } from "../utils"
 const isElement = (node: ElementContent): node is Element =>
   node.type === "element" && node.children.length > 0
 
-const isText = (node: ElementContent): node is Text => node.type === "text"
-
 type Line = Omit<Element, "children"> & { children: Element[] }
 
 type DiffMarker = "+" | "-"
 
-const getFirstText = (element: Element | undefined): Text | undefined => {
-  const firstChild = element?.children[0]
-  return firstChild && isText(firstChild) ? firstChild : undefined
-}
+const getFirstText = (element: Element | undefined): Text | undefined =>
+  element?.children[0]?.type === "text" ? element.children[0] : undefined
 
-const isLine = (node: ElementContent): node is Line => {
-  if (!isElement(node)) return false
-  return (
-    node.children.every(isElement) && getFirstText(node.children[0]) != null
-  )
-}
-
-const getLineText = (line: Line) =>
-  line.children
-    .flatMap(({ children }) => children)
-    .filter(isText)
-    .map(({ value }) => value)
-    .join("")
-
-const getDiffMarker = (value: string): DiffMarker | undefined => {
-  const firstChar = value.trim()[0]
-  return firstChar === "+" || firstChar === "-" ? firstChar : undefined
-}
+const isLine = (node: ElementContent): node is Line =>
+  isElement(node) &&
+  node.children.every(isElement) &&
+  getFirstText(node.children[0]) != null
 
 const getDiffIndentSize = (hast: Element) => {
   const firstLine = hast.children.find(isLine)
   if (!firstLine) return 0
 
-  const text = getLineText(firstLine)
+  const text = firstLine.children
+    .flatMap(({ children }) => children)
+    .reduce(
+      (line, child) => (child.type === "text" ? line + child.value : line),
+      ""
+    )
   const hasMarker = text.startsWith("+") || text.startsWith("-")
   const content = hasMarker ? text.slice(1) : text
   return content.length - content.trimStart().length + Number(hasMarker)
@@ -93,7 +80,9 @@ const normalizeLine = (line: Line, indentSize: number) => {
   const firstText = getFirstText(line.children[0])
   if (!firstText || !firstText.value.trim()) return
 
-  const marker = getDiffMarker(firstText.value)
+  const firstChar = firstText.value.trim()[0]
+  const marker: DiffMarker | undefined =
+    firstChar === "+" || firstChar === "-" ? firstChar : undefined
   removeIndent(line, indentSize - removeMarker(line, marker))
   return marker
 }
@@ -124,13 +113,13 @@ export const transformerMetaDiff = (): ShikiTransformer => ({
 
     for (const line of hast.children.filter(isLine)) {
       const marker = normalizeLine(line, diffIndentSize)
-      if (marker) {
-        // add "diff" and "add" or "remove" class to line
-        this.addClassToHast(
-          line,
-          marker === "+" ? ["diff", "add"] : ["diff", "remove"]
-        )
-      }
+      if (!marker) continue
+
+      // add "diff" and "add" or "remove" class to line
+      this.addClassToHast(
+        line,
+        marker === "+" ? ["diff", "add"] : ["diff", "remove"]
+      )
     }
   },
 })

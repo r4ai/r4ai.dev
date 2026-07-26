@@ -9,8 +9,8 @@ const invalidPairs: {
 }[] = [
   {
     name: "different array lengths",
-    from: [0],
-    to: [100, 200],
+    from: [0, 0],
+    to: [100],
   },
   {
     name: "different object keys",

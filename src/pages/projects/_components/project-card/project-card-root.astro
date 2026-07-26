@@ -7,14 +7,13 @@ import { ProjectCard, type ProjectCardProps } from "./project-card"
 
 type ImageProps = Parameters<typeof Image>[0]
 
-export type Props = Omit<ProjectCardProps, "image" | "hasImage"> & {
+export type Props = Omit<ProjectCardProps, "hasImage"> & {
   image?: ImageProps
 }
 const { image, ...props } = Astro.props
-const projectCardProps = { ...(props as ProjectCardProps), hasImage: !!image }
 ---
 
-<ProjectCard {...projectCardProps as ProjectCardProps}>
+<ProjectCard {...props} hasImage={Boolean(image)}>
   {
     image && (
       <Image

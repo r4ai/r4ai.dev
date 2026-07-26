@@ -1,12 +1,7 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
-import {
-  build,
-  type Loader,
-  type Metafile,
-  type Plugin as ESBuildPlugin,
-} from "esbuild"
+import { build, type Loader, type Plugin as ESBuildPlugin } from "esbuild"
 import { genString } from "knitwork"
 import { type Plugin } from "vite"
 
@@ -18,46 +13,32 @@ const loadersByExtension: Readonly<Record<string, Loader>> = {
 }
 
 const getLoader = (filePath: string): Loader => {
-  const extension = path.extname(filePath)
-  const loader = loadersByExtension[extension]
-  if (!loader) {
-    throw new Error(`Unsupported source extension: ${extension}`)
-  }
-  return loader
+  const loader = loadersByExtension[path.extname(filePath)]
+  if (loader) return loader
+  throw new Error(`Unsupported source extension: ${path.extname(filePath)}`)
 }
 
 const constantFoldingPlugin = ({
   platform,
 }: {
   platform: "node" | "browser"
-}): ESBuildPlugin => {
-  return {
-    name: "constant-folding",
-    setup(build) {
-      build.onLoad({ filter: /\.(js|ts|jsx|tsx)$/ }, async (args) => {
-        let source = await readFile(args.path, "utf-8")
+}): ESBuildPlugin => ({
+  name: "constant-folding",
+  setup(build) {
+    build.onLoad({ filter: /\.(js|ts|jsx|tsx)$/ }, async (args) => {
+      const source = await readFile(args.path, "utf-8")
 
-        // Replace `typeof window === "undefined"` with `true` or `false` depending on the platform
-        source =
+      // Replace `typeof window === "undefined"` with `true` or `false` depending on the platform
+      return {
+        contents:
           platform === "node"
             ? source.replaceAll('typeof window === "undefined"', "true")
-            : source.replaceAll('typeof window === "undefined"', "false")
-
-        return {
-          contents: source,
-          loader: getLoader(args.path),
-        }
-      })
-    },
-  }
-}
-
-const getWatchFiles = (metafile: Metafile) =>
-  Object.keys(metafile.inputs)
-    // esbuild uses "<stdin>" for the virtual entry, skip it.
-    .filter((input) => input !== "<stdin>")
-    .map((input) => path.resolve(input))
-    .filter((input) => !input.includes(`${path.sep}node_modules${path.sep}`))
+            : source.replaceAll('typeof window === "undefined"', "false"),
+        loader: getLoader(args.path),
+      }
+    })
+  },
+})
 
 /**
  * A Vite plugin that makes it possible to import transformed raw code from files.
@@ -84,42 +65,48 @@ const getWatchFiles = (metafile: Metafile) =>
  *    console.log(transformedCode)  // var a=1;console.log(a);...
  *    ```
  */
-export const rawTransformPlugin = (): Plugin => {
-  return {
-    name: "raw-transformed",
-    transform: async function (code, id) {
-      if (!id.endsWith("?transform")) return
-      const buildResult = await build({
-        stdin: {
-          contents: code,
-          resolveDir: path.dirname(id),
-          loader: "ts",
-        },
-        platform: "browser",
-        bundle: true,
-        write: false,
-        minify: true,
-        treeShaking: true,
-        metafile: true,
-        plugins: [constantFoldingPlugin({ platform: "browser" })],
-      })
+export const rawTransformPlugin = (): Plugin => ({
+  name: "raw-transformed",
+  transform: async function (code, id) {
+    if (!id.endsWith("?transform")) return
+    const buildResult = await build({
+      stdin: {
+        contents: code,
+        resolveDir: path.dirname(id),
+        loader: "ts",
+      },
+      platform: "browser",
+      bundle: true,
+      write: false,
+      minify: true,
+      treeShaking: true,
+      metafile: true,
+      plugins: [constantFoldingPlugin({ platform: "browser" })],
+    })
 
-      if (!buildResult.metafile) {
-        throw new Error("esbuild did not return the requested metafile")
+    if (!buildResult.metafile) {
+      throw new Error("esbuild did not return the requested metafile")
+    }
+    // Watch actual source deps so ?transform updates when they change.
+    for (const input of Object.keys(buildResult.metafile.inputs)) {
+      const resolvedInput = path.resolve(input)
+      // esbuild uses "<stdin>" for the virtual entry, skip it.
+      if (
+        input === "<stdin>" ||
+        resolvedInput.includes(`${path.sep}node_modules${path.sep}`)
+      ) {
+        continue
       }
-      // Watch actual source deps so ?transform updates when they change.
-      for (const watchFile of getWatchFiles(buildResult.metafile)) {
-        this.addWatchFile(watchFile)
-      }
+      this.addWatchFile(resolvedInput)
+    }
 
-      const outputFile = buildResult.outputFiles[0]
-      if (!outputFile) {
-        throw new Error("esbuild did not emit transformed code")
-      }
+    const outputFile = buildResult.outputFiles[0]
+    if (!outputFile) {
+      throw new Error("esbuild did not emit transformed code")
+    }
 
-      return {
-        code: `export default ${genString(outputFile.text, { singleQuotes: false })}`,
-      }
-    },
-  }
-}
+    return {
+      code: `export default ${genString(outputFile.text, { singleQuotes: false })}`,
+    }
+  },
+})

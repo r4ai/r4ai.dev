@@ -14,8 +14,6 @@ export type ProjectCardProps = {
   isImageBackgroundDark?: boolean
 }
 
-type ProjectCardAppearance = "plain" | "dark-image" | "light-image"
-
 const projectCard = tv({
   slots: {
     root: "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
@@ -59,7 +57,7 @@ const projectCard = tv({
 const getAppearance = (
   hasImage: boolean,
   isImageBackgroundDark: boolean | undefined
-): ProjectCardAppearance => {
+) => {
   if (!hasImage) return "plain"
   return (isImageBackgroundDark ?? true) ? "dark-image" : "light-image"
 }

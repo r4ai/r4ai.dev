@@ -51,19 +51,20 @@ export function createSpring<T extends Interpolatable>(
   const mergedOptions = mergeProps(defaultSpringOptions, options)
   const zeroVelocity = createZeroValue(value)
 
-  let requestAnimationFrameId: number | undefined = undefined
-  let lastTime = performance.now()
+  let requestAnimationFrameId: number | undefined
+  let previousTime: number | undefined
   let currentVelocity = zeroVelocity
-  let isMoving = false // TODO: Refactor not to use mutable variables
 
   const [target, setTarget] = createSignal(value)
   const [current, setCurrent] = createSignal(value)
 
   const updateCurrent = (currentTime: number) => {
-    // TODO: (BUG) アニメーションの途中で裏画面へ移行した場合、isMovingがtrueの状態で時間だけ経過して速度が異常に大きくなる
-    const elapsed = Math.max(0, isMoving ? (currentTime - lastTime) * 10 : 0)
-    const deltaTime = elapsed / 1000
-    lastTime = currentTime
+    // TODO: (BUG) 裏画面から復帰すると前フレームとの差分が大きくなり、速度が異常に大きくなる
+    const deltaTime =
+      previousTime === undefined
+        ? 0
+        : Math.max(0, (currentTime - previousTime) * 10) / 1000
+    previousTime = currentTime
 
     const { velocity, value, settled } = calculateSpring(
       mergedOptions,
@@ -76,12 +77,11 @@ export function createSpring<T extends Interpolatable>(
 
     if (!settled) {
       setCurrent(() => value)
-      isMoving = true
       requestAnimationFrameId = requestAnimationFrame(updateCurrent)
     } else {
       setCurrent(() => target())
       currentVelocity = zeroVelocity
-      isMoving = false
+      previousTime = undefined
     }
   }
 

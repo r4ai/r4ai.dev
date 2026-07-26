@@ -20,12 +20,10 @@ export const defaultTweenedOptions = {
   delay: 0,
   duration: 100,
   ease: (t: number) => t,
-  interpolate: interpolate,
-} as const satisfies Required<TweenedOptions>
+  interpolate,
+} satisfies Required<TweenedOptions>
 
-export type TweenedSignal<T extends Interpolatable> = T extends number
-  ? Signal<number>
-  : Signal<T>
+export type TweenedSignal<T extends Interpolatable> = Signal<T>
 
 /**
  * Creates a tweened signal.
@@ -38,13 +36,21 @@ export type TweenedSignal<T extends Interpolatable> = T extends number
  * const [tweenedValue, setTweenedValue] = createTween(0, { duration: 500 });
  * ```
  */
-export const createTween = <T extends Interpolatable>(
+export function createTween(
+  value: number,
+  options?: Partial<TweenedOptions>
+): Signal<number>
+export function createTween<T extends Interpolatable>(
+  value: T,
+  options?: Partial<TweenedOptions>
+): TweenedSignal<T>
+export function createTween<T extends Interpolatable>(
   value: T,
   options: Partial<TweenedOptions> = defaultTweenedOptions
-): TweenedSignal<T> => {
+): TweenedSignal<T> {
   const mergedOptions = mergeProps(defaultTweenedOptions, options)
 
-  let requestAnimationFrameId: number | undefined = undefined
+  let requestAnimationFrameId: number | undefined
   let startTime = performance.now()
 
   const [target, setTarget] = createSignal(value)
@@ -57,8 +63,7 @@ export const createTween = <T extends Interpolatable>(
         ? mergedOptions.duration(current(), target())
         : mergedOptions.duration
     if (elapsed < duration) {
-      setCurrent(
-        // @ts-expect-error safe to call with current and target
+      setCurrent(() =>
         mergedOptions.interpolate(
           current(),
           target(),
@@ -89,5 +94,5 @@ export const createTween = <T extends Interpolatable>(
     )
   )
 
-  return [current, setTarget] as TweenedSignal<T>
+  return [current, setTarget]
 }
