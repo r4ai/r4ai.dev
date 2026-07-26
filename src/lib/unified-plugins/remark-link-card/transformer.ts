@@ -7,6 +7,11 @@ import type { unfurl } from "unfurl.js"
 
 export type LinkMetadata = Partial<Awaited<ReturnType<typeof unfurl>>>
 
+type OpenGraph = NonNullable<LinkMetadata["open_graph"]>
+type TwitterCard = NonNullable<LinkMetadata["twitter_card"]>
+type OpenGraphImage = NonNullable<OpenGraph["images"]>[number]
+type TwitterCardImage = NonNullable<TwitterCard["images"]>[number]
+
 export type LinkMetadataLoader = (
   url: URL,
   signal: AbortSignal
@@ -75,23 +80,30 @@ export const createLinkCardTransformer = (
   }
 }
 
-const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => ({
-  url: metadata.open_graph?.url ?? url.href,
-  title:
-    metadata.open_graph?.title ??
-    metadata.title ??
-    metadata.twitter_card?.title,
-  description:
-    metadata.open_graph?.description ??
-    metadata.description ??
-    metadata.twitter_card?.description,
-  favicon: metadata.favicon,
-  image: {
-    src:
-      metadata.open_graph?.images?.at(0)?.url ??
-      metadata.twitter_card?.images?.at(0)?.url,
-    alt:
-      metadata.open_graph?.images?.at(0)?.alt ??
-      metadata.twitter_card?.images?.at(0)?.alt,
-  },
-})
+const firstPresent = <T>(
+  values: readonly (T | null | undefined)[]
+): T | undefined => values.find((value): value is T => value != null)
+
+const toLinkInfo = (url: URL, metadata: LinkMetadata): LinkInfo => {
+  const openGraph = (metadata.open_graph ?? {}) as Partial<OpenGraph>
+  const twitterCard = (metadata.twitter_card ?? {}) as Partial<TwitterCard>
+  const [openGraphImage = {} as Partial<OpenGraphImage>] =
+    openGraph.images ?? []
+  const [twitterCardImage = {} as Partial<TwitterCardImage>] =
+    twitterCard.images ?? []
+
+  return {
+    url: openGraph.url ?? url.href,
+    title: firstPresent([openGraph.title, metadata.title, twitterCard.title]),
+    description: firstPresent([
+      openGraph.description,
+      metadata.description,
+      twitterCard.description,
+    ]),
+    favicon: metadata.favicon,
+    image: {
+      src: firstPresent([openGraphImage.url, twitterCardImage.url]),
+      alt: firstPresent([openGraphImage.alt, twitterCardImage.alt]),
+    },
+  }
+}

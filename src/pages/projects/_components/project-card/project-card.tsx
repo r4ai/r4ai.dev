@@ -15,66 +15,81 @@ export type ProjectCardProps = {
   isImageBackgroundDark?: boolean
 }
 
+type ProjectCardAppearance = "plain" | "dark-image" | "light-image"
+
+const APPEARANCE_STYLES = {
+  plain: {
+    container: "bg-card flex flex-col items-center",
+    panel: "h-full rounded-xl",
+    title: "text-card-foreground",
+    metadata: "text-muted-foreground",
+    description: "text-muted-foreground",
+  },
+  "dark-image": {
+    container: "relative",
+    panel: "absolute bottom-0 rounded-b-xl border-t border-zinc-700",
+    title: "text-white",
+    metadata: "text-zinc-400",
+    description: "text-zinc-400",
+  },
+  "light-image": {
+    container: "relative",
+    panel: "absolute bottom-0 rounded-b-xl border-t border-zinc-300",
+    title: "text-black",
+    metadata: "text-zinc-500",
+    description: "text-zinc-600",
+  },
+} as const satisfies Record<
+  ProjectCardAppearance,
+  {
+    container: string
+    panel: string
+    title: string
+    metadata: string
+    description: string
+  }
+>
+
+const getAppearance = (
+  hasImage: boolean,
+  isImageBackgroundDark: boolean | undefined
+): ProjectCardAppearance => {
+  if (!hasImage) return "plain"
+  return (isImageBackgroundDark ?? true) ? "dark-image" : "light-image"
+}
+
 export const ProjectCard = (props: ProjectCardProps) => {
-  const isImageBackgroundDark = () => props.isImageBackgroundDark ?? true
+  const styles = () =>
+    APPEARANCE_STYLES[
+      getAppearance(props.hasImage, props.isImageBackgroundDark)
+    ]
 
   return (
     <div
       class={cn(
         "col-span-2 row-span-2 max-h-[400px] rounded-xl border",
-        props.hasImage ? "relative" : "bg-card flex flex-col items-center",
+        styles().container,
         props.class
       )}
     >
       <div
         class={cn(
           "flex w-full flex-row flex-wrap items-center justify-between gap-4 rounded-b-xl px-8 py-4 text-lg font-bold backdrop-blur-xl",
-          props.hasImage &&
-            (isImageBackgroundDark() ? "border-zinc-700" : "border-zinc-300"),
-          props.hasImage
-            ? "absolute bottom-0 rounded-b-xl border-t"
-            : "h-full rounded-xl"
+          styles().panel
         )}
       >
         <div class="flex flex-col gap-2">
           <div>
             <h2
-              class={cn(
-                "mr-2 inline-block text-xl font-bold",
-                props.hasImage
-                  ? isImageBackgroundDark()
-                    ? "text-white"
-                    : "text-black"
-                  : "text-card-foreground"
-              )}
+              class={cn("mr-2 inline-block text-xl font-bold", styles().title)}
             >
               {props.title}
             </h2>
-            <span
-              class={cn(
-                "inline-block text-sm",
-                props.hasImage
-                  ? isImageBackgroundDark()
-                    ? "text-zinc-400"
-                    : "text-zinc-500"
-                  : "text-muted-foreground"
-              )}
-            >
+            <span class={cn("inline-block text-sm", styles().metadata)}>
               {props.year}
             </span>
           </div>
-          <p
-            class={cn(
-              "text-sm",
-              props.hasImage
-                ? isImageBackgroundDark()
-                  ? "text-zinc-400"
-                  : "text-zinc-600"
-                : "text-muted-foreground"
-            )}
-          >
-            {props.description}
-          </p>
+          <p class={cn("text-sm", styles().description)}>{props.description}</p>
         </div>
         <div class="ml-auto flex flex-row flex-wrap items-center justify-end gap-3">
           <For each={props.links}>

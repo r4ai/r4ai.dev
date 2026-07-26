@@ -1,7 +1,52 @@
-export type Interpolatable =
-  | number
-  | { [key: string | number | symbol]: Interpolatable }
-  | Interpolatable[]
+import {
+  getInterpolatableKind,
+  haveSameKeys,
+  type Interpolatable,
+  type InterpolatableRecord,
+  ownEnumerableKeys,
+} from "./interpolatable"
+
+export type { Interpolatable } from "./interpolatable"
+
+const interpolateNumber = (
+  from: number,
+  to: number,
+  ease: (t: number) => number,
+  elapsed: number
+) => (to - from) * ease(elapsed) + from
+
+const interpolateArray = (
+  from: Interpolatable[],
+  to: Interpolatable[],
+  ease: (t: number) => number,
+  elapsed: number
+): Interpolatable[] => {
+  if (from.length !== to.length) {
+    throw new Error("Given values are not interpolatable")
+  }
+
+  return from.map((value, index) =>
+    interpolate(value, to[index]!, ease, elapsed)
+  )
+}
+
+const interpolateRecord = (
+  from: InterpolatableRecord,
+  to: InterpolatableRecord,
+  ease: (t: number) => number,
+  elapsed: number
+): InterpolatableRecord => {
+  if (!haveSameKeys(from, to)) {
+    throw new Error("Given values are not interpolatable")
+  }
+
+  return Object.fromEntries(
+    ownEnumerableKeys(from).map((key) => [
+      key,
+      interpolate(from[key]!, to[key]!, ease, elapsed),
+    ])
+  )
+}
 
 /**
  * Interpolates between two numeric values.
@@ -14,42 +59,36 @@ export type Interpolatable =
  * @returns The interpolated value. the value range is: `from <= value <= to`
  */
 export const interpolate = <T extends Interpolatable>(
-  from: Interpolatable,
-  to: Interpolatable,
+  from: T,
+  to: T,
   ease: (t: number) => number,
   elapsed: number
-): Interpolatable => {
+): T => {
   if (elapsed < 0 || 1 < elapsed) {
     throw new Error("Duration must be between 0 and 1")
   }
 
-  if (typeof from === "number" && typeof to === "number") {
-    const eased = ease(elapsed)
-    const diff = to - from
-    return diff * eased + from
+  const kind = getInterpolatableKind(from)
+  if (kind !== getInterpolatableKind(to)) {
+    throw new Error("Given values are not interpolatable")
   }
 
-  if (Array.isArray(from) && Array.isArray(to)) {
-    const result = from.map((fromItem, index) => {
-      if (to[index] == null)
-        throw new Error("Given values are not interpolatable")
-      return interpolate(fromItem, to[index], ease, elapsed)
-    })
-    return result
+  switch (kind) {
+    case "number":
+      return interpolateNumber(from as number, to as number, ease, elapsed) as T
+    case "array":
+      return interpolateArray(
+        from as Interpolatable[],
+        to as Interpolatable[],
+        ease,
+        elapsed
+      ) as T
+    case "record":
+      return interpolateRecord(
+        from as InterpolatableRecord,
+        to as InterpolatableRecord,
+        ease,
+        elapsed
+      ) as T
   }
-
-  if (typeof from === "object" && typeof to === "object") {
-    const result: { [key: string]: Interpolatable } = {}
-    for (const key in from) {
-      if (
-        Object.prototype.hasOwnProperty.call(from, key) &&
-        Object.prototype.hasOwnProperty.call(to, key)
-      ) {
-        result[key] = interpolate(from[key] as T, to[key] as T, ease, elapsed)
-      }
-    }
-    return result
-  }
-
-  throw new Error("Given values are not interpolatable")
 }

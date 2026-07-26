@@ -16,17 +16,18 @@ export const defaultMeta: Required<Meta> = {
 
 type Group = {
   range?: string
-  kv?: string
   kvKey?: string
   kvValue?: string
-  kvDoubleQuote?: string
   kvDoubleQuoteKey?: string
   kvDoubleQuoteValue?: string
-  kvSingleQuote?: string
   kvSingleQuoteKey?: string
   kvSingleQuoteValue?: string
   boolValue?: string
 }
+
+type MetaEntry =
+  | { type: "range"; value: Range }
+  | { type: "property"; key: string; value: string | true }
 
 // meta = "{" range ("," range)* "}"             // -> range
 //      | string "=" string                      // -> kv
@@ -49,6 +50,33 @@ const PARSE_REGEX = new RegExp(
   "g"
 )
 
+const toMetaEntry = (groups: Group): MetaEntry | undefined => {
+  if (groups.range) {
+    return { type: "range", value: rangeParser(groups.range) }
+  }
+
+  const property = [
+    [groups.kvKey, groups.kvValue],
+    [groups.kvDoubleQuoteKey, groups.kvDoubleQuoteValue],
+    [groups.kvSingleQuoteKey, groups.kvSingleQuoteValue],
+  ].find(([key, value]) => key && value)
+
+  if (property) {
+    const [key, value] = property as [string, string]
+    return {
+      type: "property",
+      key,
+      value: retrieveEscapedString(value),
+    }
+  }
+
+  if (groups.boolValue) {
+    return { type: "property", key: groups.boolValue, value: true }
+  }
+
+  return undefined
+}
+
 /**
  * Parse meta string to object.
  * @param meta meta string
@@ -62,27 +90,15 @@ export const parseMeta = <M extends Meta = Meta>(
 
   const matches = meta.matchAll(PARSE_REGEX)
   for (const match of matches) {
-    const groups = match.groups as Group
-    if (groups.range && Array.isArray(metaObj.range)) {
-      const range = rangeParser(groups.range)
-      metaObj.range = [...metaObj.range, ...range]
+    const entry = toMetaEntry(match.groups as Group)
+    if (!entry) continue
+
+    if (entry.type === "range") {
+      metaObj.range = [...metaObj.range, ...entry.value]
+      continue
     }
-    if (groups.kvKey && groups.kvValue) {
-      metaObj[groups.kvKey] = retrieveEscapedString(groups.kvValue)
-    }
-    if (groups.kvDoubleQuoteKey && groups.kvDoubleQuoteValue) {
-      metaObj[groups.kvDoubleQuoteKey] = retrieveEscapedString(
-        groups.kvDoubleQuoteValue
-      )
-    }
-    if (groups.kvSingleQuoteKey && groups.kvSingleQuoteValue) {
-      metaObj[groups.kvSingleQuoteKey] = retrieveEscapedString(
-        groups.kvSingleQuoteValue
-      )
-    }
-    if (groups.boolValue) {
-      metaObj[groups.boolValue] = true
-    }
+
+    metaObj[entry.key] = entry.value
   }
   metaObj.range = removeDuplicateAndSort(metaObj.range)
 

@@ -84,6 +84,58 @@ test("reuses metadata after the first successful request", async () => {
   })
 })
 
+test("maps link metadata using the documented precedence", async () => {
+  let receivedInfo: unknown
+  const transformer = createLinkCardTransformer(
+    {
+      timeoutMs: 1_000,
+      timeoutStrategy: "shared",
+      tagName: () => "link-card",
+      properties: (info) => {
+        receivedInfo = info
+        return {}
+      },
+      children: () => [],
+    },
+    {
+      loadMetadata: async () => ({
+        title: "Document title",
+        description: "Document description",
+        favicon: "https://example.com/favicon.ico",
+        open_graph: {
+          title: "Open Graph title",
+          type: "website",
+          url: "https://canonical.example.com/article",
+          description: "Open Graph description",
+        },
+        twitter_card: {
+          title: "Twitter title",
+          description: "Twitter description",
+          images: [
+            {
+              url: "https://example.com/twitter.png",
+              alt: "Twitter image",
+            },
+          ],
+        },
+      }),
+    }
+  )
+
+  await transformer.properties(new URL("https://example.com/article"))
+
+  assert.deepEqual(receivedInfo, {
+    url: "https://canonical.example.com/article",
+    title: "Open Graph title",
+    description: "Open Graph description",
+    favicon: "https://example.com/favicon.ico",
+    image: {
+      src: "https://example.com/twitter.png",
+      alt: "Twitter image",
+    },
+  })
+})
+
 test("shares an in-flight request for duplicate links", async () => {
   let requestCount = 0
   let resolveRequest: ((metadata: LinkMetadata) => void) | undefined

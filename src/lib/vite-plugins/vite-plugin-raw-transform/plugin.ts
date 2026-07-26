@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
-import { build, type Plugin as ESBuildPlugin } from "esbuild"
+import { build, type Metafile, type Plugin as ESBuildPlugin } from "esbuild"
 import { genString } from "knitwork"
 import { type Plugin } from "vite"
 
@@ -32,6 +32,12 @@ const constantFoldingPlugin = ({
     },
   }
 }
+
+const getWatchFiles = (metafile: Metafile) =>
+  Object.keys(metafile.inputs)
+    .filter((input) => input !== "<stdin>")
+    .map((input) => path.resolve(input))
+    .filter((input) => !input.includes(`${path.sep}node_modules${path.sep}`))
 
 /**
  * A Vite plugin that makes it possible to import transformed raw code from files.
@@ -77,18 +83,21 @@ export const rawTransformPlugin = (): Plugin => {
         metafile: true,
         plugins: [constantFoldingPlugin({ platform: "browser" })],
       })
-      for (const input of Object.keys(buildResult.metafile?.inputs ?? {})) {
-        // esbuild uses "<stdin>" for the virtual entry, skip it.
-        if (input === "<stdin>") continue
-        const resolvedInput = path.resolve(input)
-        if (resolvedInput.includes(`${path.sep}node_modules${path.sep}`))
-          continue
-        // Watch actual source deps so ?transform updates when they change.
-        this.addWatchFile(resolvedInput)
+
+      if (!buildResult.metafile) {
+        throw new Error("esbuild did not return the requested metafile")
       }
-      const transformed = buildResult.outputFiles[0]?.text ?? ""
+      for (const watchFile of getWatchFiles(buildResult.metafile)) {
+        this.addWatchFile(watchFile)
+      }
+
+      const outputFile = buildResult.outputFiles[0]
+      if (!outputFile) {
+        throw new Error("esbuild did not emit transformed code")
+      }
+
       return {
-        code: `export default ${genString(transformed, { singleQuotes: false })}`,
+        code: `export default ${genString(outputFile.text, { singleQuotes: false })}`,
       }
     },
   }
