@@ -15,6 +15,13 @@ type checking, unit tests, coverage, the production build, and Storybook visual
 comparisons. Review major updates and potentially breaking 0.x updates
 separately.
 
+The Vitest coverage command explicitly includes `src/lib/**/*.ts`, including
+untested library files, and excludes type declarations, so generated reports
+cannot change the measured scope.
+The version-specific override for `vitest-matchmedia-mock` removes its unused
+Vitest 3 runtime dependency; its published JavaScript and declarations do not
+import Vitest. Recheck this override when updating that package.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
