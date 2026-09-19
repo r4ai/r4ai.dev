@@ -1,4 +1,6 @@
 import type { Root } from "mdast"
+// Register remark-rehype's hName and other mdast data extensions.
+import type {} from "remark-rehype"
 import { type Plugin } from "unified"
 import { visit } from "unist-util-visit"
 

@@ -1,7 +1,17 @@
 minimumReleaseAge: 4320
 trustPolicy: no-downgrade
+# Legacy transitive versions already present on main; npm SHA-512 integrity
+# verified against the existing lockfile. Keep exceptions version-specific.
+trustPolicyExclude:
+  - chokidar@4.0.3
+  - semver@6.3.1
+  - undici-types@6.21.0
 blockExoticSubdeps: true
 strictDepBuilds: true
+
+overrides:
+  # This version uses Vitest only for its own tests, not its published runtime.
+  "vitest-matchmedia-mock@2.0.3>vitest": "-"
 
 allowBuilds:
   "@parcel/watcher": true
