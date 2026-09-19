@@ -29,6 +29,11 @@ The version-specific override for `vitest-matchmedia-mock` removes its unused
 Vitest 3 runtime dependency; its published JavaScript and declarations do not
 import Vitest. Recheck this override when updating that package.
 
+KaTeX 0.18 prefixes its internal CSS classes. The version-specific
+`rehype-katex` override uses the direct `katex` dependency so the Markdown
+renderer and imported stylesheet stay aligned. Recheck `renderToString`
+compatibility and inline/block math rendering when updating either package.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
