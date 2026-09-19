@@ -1,5 +1,20 @@
 # r4ai.dev
 
+## Dependency updates
+
+Use the Node.js version in `.tool-versions` and the pnpm version in
+`package.json`. Dependency resolution waits three days after publication and
+rejects trust downgrades. The exact legacy versions listed in
+`pnpm-workspace.yaml` were already present in the main branch's lockfile; their
+npm SHA-512 integrity values were verified before allowing them to be resolved
+again. Remove an exception when no dependency needs that version, and do not
+replace these entries with package-wide or age-based exemptions.
+
+After updating dependencies, verify a frozen-lockfile install, lint, formatting,
+type checking, unit tests, coverage, the production build, and Storybook visual
+comparisons. Review major updates and potentially breaking 0.x updates
+separately.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
