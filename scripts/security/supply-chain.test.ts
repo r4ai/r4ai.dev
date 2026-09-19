@@ -136,7 +136,7 @@ test("trust exceptions only permit verified legacy package versions", async () =
       .trim()
       .split("\n")
       .map((line) => line.trim().slice(2)),
-    ["chokidar@4.0.3", "semver@6.3.1", "undici-types@6.21.0"]
+    ["chokidar@4.0.3", "semver@6.3.1"]
   )
   assert.doesNotMatch(config, /^trustPolicyIgnoreAfter:/m)
 })
