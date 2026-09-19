@@ -104,7 +104,7 @@
     "remark-rehype": "11.1.2",
     "rollup-plugin-visualizer": "7.1.1",
     "sass": "1.104.1",
-    "satori": "0.18.4",
+    "satori": "0.33.4",
     "sharp": "0.35.4",
     "sirv": "3.0.2",
     "storybook": "10.6.0",

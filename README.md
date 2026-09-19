@@ -34,6 +34,9 @@ KaTeX 0.18 prefixes its internal CSS classes. The version-specific
 renderer and imported stylesheet stay aligned. Recheck `renderToString`
 compatibility and inline/block math rendering when updating either package.
 
+Satori 0.33.4 pins a vulnerable `fflate` version. Its scoped override selects
+the 0.7.5 security backport; remove it when Satori declares a patched release.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
