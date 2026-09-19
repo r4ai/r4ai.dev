@@ -17,11 +17,11 @@ jobs:
       contents: read
     steps:
       - name: Checkout respository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Setup Node.js
-        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -33,7 +33,7 @@ jobs:
           tar --create --file dist.tar --format=posix dist
           sha256sum dist.tar >dist.tar.sha256
       - name: Upload build output
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: cloudflare-pages-build
           path: |
@@ -50,13 +50,17 @@ jobs:
       deployments: write
     steps:
       - name: Download build output
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: cloudflare-pages-build
       - name: Verify and extract build output
         run: |
           sha256sum --check dist.tar.sha256
           tar --extract --file dist.tar
+      - name: Setup Node.js for deployment
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+        with:
+          tool_versions: "nodejs 24.16.0"
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
         with:
@@ -67,5 +71,5 @@ jobs:
             --project-name=r4ai-dev
             --branch=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
             --commit-hash=${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-          wranglerVersion: "3.90.0"
+          wranglerVersion: "4.132.0"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
