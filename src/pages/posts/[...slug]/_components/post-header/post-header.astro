@@ -52,14 +52,12 @@ const iconHtml = await getIconHtml(fluentEmojiIcons, icon)
     {tags.length > 0 && <Tags {tags} />}
     <div class="text-muted-foreground mx-auto flex flex-row gap-1">
       <PublishedAt {publishedAt} />
-      {
-        updatedAt && (
-          <>
-            <span>・</span>
-            <UpdatedAt {updatedAt} client:load />
-          </>
-        )
-      }
+      {updatedAt && (
+        <>
+          <span>・</span>
+          <UpdatedAt {updatedAt} client:load />
+        </>
+      )}
     </div>
     <MdxFileLink {slug} />
   </div>

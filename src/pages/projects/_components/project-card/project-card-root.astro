@@ -14,12 +14,10 @@ const { image, ...props } = Astro.props
 ---
 
 <ProjectCard {...props} hasImage={Boolean(image)}>
-  {
-    image && (
-      <Image
-        {...image}
-        class={cn("size-full rounded-xl object-cover object-top", image.class)}
-      />
-    )
-  }
+  {image && (
+    <Image
+      {...image}
+      class={cn("size-full rounded-xl object-cover object-top", image.class)}
+    />
+  )}
 </ProjectCard>

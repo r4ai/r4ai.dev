@@ -48,13 +48,17 @@ const {
       {twitter}
       {url}
     />
-    <script is:inline set:html={initColorSchemeScript} data-cfasync="false" />
+    <script
+      is:inline
+      set:html={initColorSchemeScript}
+      data-cfasync="false"
+    ></script>
   </head>
   <body class="bg-background text-foreground flex min-h-full flex-col">
     <Header />
     <main
       class={cn("flex-1", className)}
-      {...pagefindBody ? { "data-pagefind-body": true } : {}}
+      {...(pagefindBody ? { "data-pagefind-body": true } : {})}
     >
       <slot />
     </main>
