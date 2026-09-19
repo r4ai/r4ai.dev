@@ -121,6 +121,26 @@ test("pnpm enforces dependency freshness, trust, and build-script policy", async
   assert.match(config, /^allowBuilds:/m)
 })
 
+test("trust exceptions only permit verified legacy package versions", async () => {
+  const config = await readFile(
+    new URL("../../pnpm-workspace.yaml", import.meta.url),
+    "utf8"
+  )
+  const exceptions = config.match(
+    /^trustPolicyExclude:\n((?: {2}- .+\n)+)/m
+  )?.[1]
+
+  assert.ok(exceptions)
+  assert.deepEqual(
+    exceptions
+      .trim()
+      .split("\n")
+      .map((line) => line.trim().slice(2)),
+    ["chokidar@4.0.3", "semver@6.3.1", "undici-types@6.21.0"]
+  )
+  assert.doesNotMatch(config, /^trustPolicyIgnoreAfter:/m)
+})
+
 test("security tests run on the Node release with native type stripping", async () => {
   const toolVersions = await readFile(
     new URL("../../.tool-versions", import.meta.url),
