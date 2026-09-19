@@ -9,6 +9,8 @@ blockExoticSubdeps: true
 strictDepBuilds: true
 
 overrides:
+  # Keep Markdown's generated classes aligned with the directly imported CSS.
+  "rehype-katex@7.0.1>katex": "$katex"
   # This version uses Vitest only for its own tests, not its published runtime.
   "vitest-matchmedia-mock@2.0.3>vitest": "-"
 
