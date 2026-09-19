@@ -110,12 +110,14 @@ jobs:
           fi
       - name: Install base revision dependencies
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: pnpm --dir .vrt/base install --frozen-lockfile
+        working-directory: .vrt/base
+        run: pnpm install --frozen-lockfile
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Build base Storybook
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: pnpm --dir .vrt/base run build-storybook
+        working-directory: .vrt/base
+        run: pnpm run build-storybook
       - name: Capture reference snapshots
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: pnpm run test:vrt:update
