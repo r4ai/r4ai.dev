@@ -28,7 +28,16 @@ test("builds the VRT baseline with base revision dependencies", () => {
   )?.groups?.body
 
   assert.ok(vrtJob, "missing storybook-vrt job")
-  assert.match(vrtJob, /pnpm --dir \.vrt\/base install --frozen-lockfile/)
-  assert.match(vrtJob, /pnpm --dir \.vrt\/base run build-storybook/)
+  for (const [name, command] of [
+    ["Install base revision dependencies", "install --frozen-lockfile"],
+    ["Build base Storybook", "run build-storybook"],
+  ]) {
+    const step = vrtJob
+      .split(/\n {6}- name:/)
+      .find((entry) => entry.trimStart().startsWith(`${name}\n`))
+    assert.ok(step, `missing baseline command: ${command}`)
+    assert.match(step, /working-directory: \.vrt\/base/)
+    assert.ok(step.includes(`run: pnpm ${command}`))
+  }
   assert.doesNotMatch(vrtJob, /cp -R \.storybook/)
 })

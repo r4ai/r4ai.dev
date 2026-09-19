@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Setup Node.js
-        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -36,11 +36,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Setup Node.js
-        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -53,11 +53,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Setup Node.js
-        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         env:
           MISE_NODE_COREPACK: true
       - name: Install dependencies
@@ -80,19 +80,19 @@ jobs:
       VRT_APPROVED: ${{ github.event.action == 'labeled' && github.event.label.name == 'vrt-approved' }}
     steps:
       - name: Checkout pull request
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
       - name: Checkout base revision
         if: env.VRT_APPROVED != 'true'
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: .vrt/base
           persist-credentials: false
       - name: Setup Node.js
-        uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         env:
           MISE_NODE_COREPACK: true
       - name: Install pull request dependencies
@@ -110,12 +110,14 @@ jobs:
           fi
       - name: Install base revision dependencies
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: pnpm --dir .vrt/base install --frozen-lockfile
+        working-directory: .vrt/base
+        run: pnpm install --frozen-lockfile
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Build base Storybook
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
-        run: pnpm --dir .vrt/base run build-storybook
+        working-directory: .vrt/base
+        run: pnpm run build-storybook
       - name: Capture reference snapshots
         if: env.VRT_APPROVED != 'true' && steps.vrt-baseline.outputs.available == 'true'
         run: pnpm run test:vrt:update
@@ -131,7 +133,7 @@ jobs:
         run: pnpm run test:vrt:update
       - name: Upload visual regression report
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: storybook-vrt-report
           path: |
