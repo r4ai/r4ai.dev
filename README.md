@@ -15,6 +15,13 @@ type checking, unit tests, coverage, the production build, and Storybook visual
 comparisons. Review major updates and potentially breaking 0.x updates
 separately.
 
+Keep ESLint on 9 while `eslint-plugin-jsx-a11y` 6.10.2 supports only ESLint 3–9;
+`eslint-plugin-astro` 2 and 3 require ESLint 10, so update them together once
+the accessibility plugin supports it. TypeScript stays on 6 while
+`@astrojs/check` 0.9.10 requires TypeScript 5 or 6 and `typescript-eslint`
+8.70.0 requires TypeScript below 6.1. Recheck these peer ranges before the
+corresponding major upgrades.
+
 The Vitest coverage command explicitly includes `src/lib/**/*.ts`, including
 untested library files, and excludes type declarations, so generated reports
 cannot change the measured scope.
