@@ -71,5 +71,5 @@ jobs:
             --project-name=r4ai-dev
             --branch=${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
             --commit-hash=${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-          wranglerVersion: "4.132.0"
+          wranglerVersion: "4.134.0"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
