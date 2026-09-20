@@ -10,7 +10,7 @@ strictDepBuilds: true
 
 overrides:
   # Satori pins an older fflate; use the patched release from the same minor line.
-  "satori@0.33.4>fflate": "0.7.5"
+  "satori@0.33.4>fflate": "0.8.3"
   # Keep Markdown's generated classes aligned with the directly imported CSS.
   "rehype-katex@7.0.1>katex": "$katex"
   # This version uses Vitest only for its own tests, not its published runtime.
