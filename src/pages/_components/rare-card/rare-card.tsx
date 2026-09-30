@@ -28,7 +28,9 @@ export const RareCard: Component<RareCardProps> = (props) => {
           "--ratio-y": posY(),
           "--angle": "50deg",
         }}
-        ref={wrapper}
+        ref={(element) => {
+          wrapper = element
+        }}
         onMouseMove={(e) => {
           if (!wrapper) return
           const rect = wrapper.getBoundingClientRect()

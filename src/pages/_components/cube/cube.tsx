@@ -77,26 +77,27 @@ export const Cube: Component<CubeProps> = (props) => {
   const renderer = new THREE.WebGLRenderer({ alpha: true })
 
   onMount(() => {
-    if (!ref) return
+    const element = ref
+    if (!element) return
 
     // Set up controls
-    const controls = new OrbitControls(camera, ref)
+    const controls = new OrbitControls(camera, element)
     controls.enableDamping = true
     controls.dampingFactor = 0.25
 
     // Initial render
     renderer.setAnimationLoop(animate(scene, camera, controls, renderer, cube))
-    rerender(camera, renderer, ref)
-    ref.appendChild(renderer.domElement)
+    rerender(camera, renderer, element)
+    element.appendChild(renderer.domElement)
 
     // Rerender on resize
     const resizeObserver = new ResizeObserver(() =>
-      rerender(camera, renderer, ref)
+      rerender(camera, renderer, element)
     )
-    resizeObserver.observe(ref)
+    resizeObserver.observe(element)
 
     return () => {
-      ref.removeChild(renderer.domElement)
+      element.removeChild(renderer.domElement)
       renderer.dispose()
       resizeObserver.disconnect()
     }
@@ -105,7 +106,9 @@ export const Cube: Component<CubeProps> = (props) => {
   return (
     <div
       class={cn("*:bg-background aspect-square", local.class)}
-      ref={ref}
+      ref={(element) => {
+        ref = element
+      }}
       {...rest}
     />
   )
