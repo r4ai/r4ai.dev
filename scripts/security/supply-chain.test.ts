@@ -151,7 +151,10 @@ test("security tests run on the Node release with native type stripping", async 
   ) as { engines?: { node?: string } }
 
   assert.match(toolVersions, /^nodejs 24\.\d+\.\d+$/m)
-  assert.equal(packageJson.engines?.node, ">=24.16.0")
+  assert.equal(
+    packageJson.engines?.node,
+    `>=${toolVersions.trim().split(" ")[1]}`
+  )
 })
 
 test("Renovate batches dependency updates into a weekly window", async () => {

@@ -32,7 +32,6 @@ export type SearchProps = ComponentProps<"div"> & {
 }
 
 export const Search: Component<SearchProps> = (props) => {
-  let rootRef: HTMLDivElement | undefined
   const [local, rest] = splitProps(props, [
     "class",
     "resultTransformer",
@@ -43,11 +42,7 @@ export const Search: Component<SearchProps> = (props) => {
     <Suspense>
       <PagefindProvider>
         <SearchProvider>
-          <div
-            class={cn("flex h-full flex-col", local.class)}
-            {...rest}
-            ref={rootRef}
-          >
+          <div class={cn("flex h-full flex-col", local.class)} {...rest}>
             <SearchInput />
             <Suspense fallback={<LoadingSearchResults />}>
               <SearchResults
