@@ -1,5 +1,5 @@
 # 使用する基本イメージ
-FROM debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+FROM debian:12@sha256:854dd8ab51d62866dbd8f5431d15ce77b12983a2a4a1e1fe43a2395dc7ef9f61
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
